@@ -1,4 +1,4 @@
-package org.example;
+package it.polimi;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
