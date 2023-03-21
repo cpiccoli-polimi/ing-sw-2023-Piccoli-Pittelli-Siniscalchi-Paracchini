@@ -12,7 +12,7 @@ public class Game extends Observable{
     private LivingRoomBoard board;
     private CardsBag bag;
     private PersonalGoalCard[] personalGoalsDeck;
-    private commonGoalCard[] commonGoalsDeck;
+    private CommonGoalCard[] commonGoalsDeck;
     private PointCard[] pointsDeck;
     private int currentPlayer;
     private Player[] leaderboard;
@@ -78,11 +78,11 @@ public class Game extends Observable{
         this.personalGoalsDeck = personalGoalsDeck;
     }
 
-    public commonGoalCard[] getCommonGoalsDeck() {
+    public CommonGoalCard[] getCommonGoalsDeck() {
         return commonGoalsDeck;
     }
 
-    public void setCommonGoalsDeck(commonGoalCard[] commonGoalsDeck) {
+    public void setCommonGoalsDeck(CommonGoalCard[] commonGoalsDeck) {
         this.commonGoalsDeck = commonGoalsDeck;
     }
 
