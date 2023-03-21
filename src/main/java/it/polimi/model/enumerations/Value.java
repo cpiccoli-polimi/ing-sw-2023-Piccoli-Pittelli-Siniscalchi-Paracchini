@@ -1,6 +1,6 @@
 package it.polimi.model.enumerations;
 
-public enum value {
+public enum Value {
     two(2),
     four(4),
     six(6),
@@ -8,7 +8,7 @@ public enum value {
 
     int i;
 
-    value(int i) {
+    Value(int i) {
         this.i = i;
     }
 }
