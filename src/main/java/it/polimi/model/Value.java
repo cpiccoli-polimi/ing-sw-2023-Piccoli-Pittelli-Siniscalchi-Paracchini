@@ -1,4 +1,4 @@
-package it.polimi.model.enumerations;
+package it.polimi.model;
 
 public enum Value {
     two(2),

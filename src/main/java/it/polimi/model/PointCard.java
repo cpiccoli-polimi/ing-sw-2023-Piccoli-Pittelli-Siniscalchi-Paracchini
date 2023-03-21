@@ -1,8 +1,5 @@
 package it.polimi.model;
 
-import it.polimi.model.enumerations.RomanNumeral;
-import it.polimi.model.enumerations.Value;
-
 public class PointCard {
     Value value;
     RomanNumeral backNumber;

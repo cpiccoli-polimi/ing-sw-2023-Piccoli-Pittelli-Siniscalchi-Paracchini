@@ -1,6 +1,6 @@
 package it.polimi.model;
 
-public class PersonalGoalCard extends GoalCard{
-    Bookshelf goal;
-    //map?
+public abstract class PersonalGoalCard extends GoalCard{
+    private static Bookshelf goal;
+    private static Map<int,int> points;
 }
