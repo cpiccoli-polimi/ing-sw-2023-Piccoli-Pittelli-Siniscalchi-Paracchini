@@ -1,6 +1,6 @@
 package it.polimi.model.enumerations;
 
-public enum type {
+public enum Type {
     Cats,
     Books,
     Games,
