@@ -1,17 +1,17 @@
 package it.polimi.model;
 
-import it.polimi.model.enumerations.romanNumeral;
-import it.polimi.model.enumerations.value;
+import it.polimi.model.enumerations.RomanNumeral;
+import it.polimi.model.enumerations.Value;
 
 public class PointCard {
-    value value;
-    romanNumeral backNumber;
+    Value value;
+    RomanNumeral backNumber;
 
-    public void pointCard(value value,romanNumeral backNumber){};
-    public value getValue(){
+    public void pointCard(Value value, RomanNumeral backNumber){};
+    public Value getValue(){
         return value;
     };
-    public romanNumeral getBackNumber(){
+    public RomanNumeral getBackNumber(){
         return backNumber;
     };
 }
