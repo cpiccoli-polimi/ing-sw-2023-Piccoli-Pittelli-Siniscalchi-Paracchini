@@ -1,10 +1,10 @@
 package it.polimi.model.enumerations;
 
 public enum value {
-    due(2),
-    quattro(4),
-    sei(6),
-    otto(8);
+    two(2),
+    four(4),
+    six(6),
+    eight(8);
 
     int i;
 
