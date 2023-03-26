@@ -7,12 +7,10 @@ public class PointCard {
         this.value = value;
         this.backNumber = backNumber;
     }
-
-    public void pointCard(Value value, RomanNumeral backNumber){};
     public Value getValue(){
         return value;
-    };
+    }
     public RomanNumeral getBackNumber(){
         return backNumber;
-    };
+    }
 }
