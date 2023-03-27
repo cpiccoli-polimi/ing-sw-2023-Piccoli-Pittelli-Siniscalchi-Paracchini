@@ -1,13 +1,13 @@
 package it.polimi.model;
 
 public class PointCard {
-    Value value;
+    int value;
     RomanNumeral backNumber;
-    protected PointCard(Value value, RomanNumeral backNumber){
+    public PointCard(int value, RomanNumeral backNumber){
         this.value = value;
         this.backNumber = backNumber;
     }
-    public Value getValue(){
+    public int getValue(){
         return value;
     }
     public RomanNumeral getBackNumber(){
