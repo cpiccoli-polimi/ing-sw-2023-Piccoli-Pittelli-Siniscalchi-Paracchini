@@ -1,0 +1,26 @@
+{
+  "1" : {
+    "xCoordinate"  : "SammyShark",
+    "yCoordinate"  : "Indian Ocean",
+    "online"    : true,
+    "followers" : 987
+  },
+  "2" : {
+    "username"  : "JesseOctopus",
+    "location"  : "Pacific Ocean",
+    "online"    : false,
+    "followers" : 432
+  },
+  "3" : {
+    "username"  : "DrewSquid",
+    "location"  : "Atlantic Ocean",
+    "online"    : false,
+    "followers" : 321
+  },
+  "4" : {
+    "username"  : "JamieMantisShrimp",
+    "location"  : "Pacific Ocean",
+    "online"    : true,
+    "followers" : 654
+  }
+}
