@@ -1,0 +1,22 @@
+{
+  "1" : {
+    "xCoordinate"  : 4,
+    "yCoordinate"  : 9,
+    "objectType"   : "Cat"
+  },
+  "2" : {
+    "xCoordinate"  : 4,
+    "yCoordinate"  : 7,
+    "objectType"   : "Cat"
+  },
+  "3" : {
+    "xCoordinate"  : 5,
+    "yCoordinate"  : 9,
+    "objectType"   : "Cat"
+  },
+  "4" : {
+    "xCoordinate"  : 9,
+    "yCoordinate"  : 3,
+    "objectType"   : "Cat"
+  }
+}
