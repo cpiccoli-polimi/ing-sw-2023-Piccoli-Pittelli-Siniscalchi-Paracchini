@@ -12,6 +12,20 @@ public class Player {
     private Bookshelf bookshelf;
     private int chosenColumn;
 
+    public Player(String nickname, int commonGoalsNumber){
+        this.nickname=nickname;
+        this.points=0;
+        this.isFirst=false;
+        this.position=-1;
+        this.hasFinished=false;
+        this.commonGoalsCompleted= new int [commonGoalsNumber];
+        this.chosenColumn=-1;
+        this.chosenObjects=null;
+        this.personalGoal=null;
+        this.bookshelf=new Bookshelf();
+    }
+
+
     public String getNickname(){
         return nickname;
     }
@@ -35,7 +49,8 @@ public class Player {
     public boolean getHasFinished(){return hasFinished;}
     public void setHasFinished(boolean hasFinished){ this.hasFinished=hasFinished;}
     public int[] getCommonGoalsCompleted() { return commonGoalsCompleted;}
-    public void setCommonGoalsCompleted(int [] commonGoalsCompleted){ this.commonGoalsCompleted=commonGoalsCompleted; }
+    public void setCommonGoalsCompleted(int [] commonGoalsCompleted){
+        System.arraycopy(commonGoalsCompleted, 0, this.commonGoalsCompleted, 0, commonGoalsCompleted.length); }
 
     public ObjectCard getChosenObject() {
         return chosenObject;
@@ -63,5 +78,6 @@ public class Player {
     public void setChosenColumn(int chosenColumn) {
         this.chosenColumn = chosenColumn;
     }
+
 
 }
