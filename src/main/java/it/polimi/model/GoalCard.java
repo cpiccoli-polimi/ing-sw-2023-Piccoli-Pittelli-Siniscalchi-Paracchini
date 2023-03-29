@@ -1,6 +1,6 @@
 package it.polimi.model;
 
-public class GoalCard {
+public abstract class GoalCard {
     private object goal;
     private object points;
     public object getGoal(){
