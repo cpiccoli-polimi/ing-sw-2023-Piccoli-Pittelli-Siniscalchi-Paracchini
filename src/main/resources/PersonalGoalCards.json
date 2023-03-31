@@ -1,22 +1,386 @@
 {
-  "1" : {
-    "xCoordinate"  : 4,
-    "yCoordinate"  : 9,
-    "objectType"   : "Cat"
-  },
-  "2" : {
-    "xCoordinate"  : 4,
-    "yCoordinate"  : 7,
-    "objectType"   : "Cat"
-  },
-  "3" : {
-    "xCoordinate"  : 5,
-    "yCoordinate"  : 9,
-    "objectType"   : "Cat"
-  },
-  "4" : {
-    "xCoordinate"  : 9,
-    "yCoordinate"  : 3,
-    "objectType"   : "Cat"
-  }
+  "1" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "1",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "3",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "5",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "4",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "2",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "3",
+      "objectType" : "Trophies"
+    }
+  ],
+  "2" : [
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "2",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "1",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "3",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "5",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "4",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "5",
+      "objectType" : "Frames"
+    }
+  ],
+  "3" : [
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "1",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "4",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "3",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "2",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "5",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "1",
+      "objectType" : "Books"
+    }
+  ],
+  "4" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "5",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "1",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "3",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "4",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "2",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "3",
+      "objectType" : "Cats"
+    }
+  ],
+  "5" : [
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "2",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "2",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "3",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "5",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "1",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "4",
+      "objectType" : "Cats"
+    }
+  ],
+  "6" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "3",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "5",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "4",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "2",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "4",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "1",
+      "objectType" : "Plants"
+    }
+  ],
+  "7" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "1",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "4",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "2",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "1",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "5",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "3",
+      "objectType" : "Books"
+    }
+  ],
+  "8" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "5",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "2",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "3",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "1",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "4",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "4",
+      "objectType" : "Games"
+    }
+  ],
+  "9" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "3",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "3",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "5",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "2",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "5",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "1",
+      "objectType" : "Frames"
+    }
+  ],
+  "10" : [
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "1",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "2",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "1",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "4",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "2",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "4",
+      "objectType" : "Plants"
+    }
+  ],
+   "11" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "3",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "2",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "1",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "3",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "5",
+      "objectType" : "Cats"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "4",
+      "objectType" : "Trophies"
+    }
+  ],
+  "12" : [
+    {
+      "xCoordinate" : "1",
+      "yCoordinate" : "3",
+      "objectType" : "Books"
+    },
+    {
+      "xCoordinate" : "2",
+      "yCoordinate" : "2",
+      "objectType" : "Plants"
+    },
+    {
+      "xCoordinate" : "3",
+      "yCoordinate" : "3",
+      "objectType" : "Frames"
+    },
+    {
+      "xCoordinate" : "4",
+      "yCoordinate" : "4",
+      "objectType" : "Trophies"
+    },
+    {
+      "xCoordinate" : "5",
+      "yCoordinate" : "5",
+      "objectType" : "Games"
+    },
+    {
+      "xCoordinate" : "6",
+      "yCoordinate" : "1",
+      "objectType" : "Cats"
+    }
+  ]
 }
