@@ -27,11 +27,19 @@ public class PersonalGoalCard extends GoalCard{
         //Convert id to String to search for it into JSON
         String idString = Integer.toString(id);
         JsonArray jsonArray = jsonObject.get(idString).getAsJsonArray();
+        // Create card
+        Bookshelf newCard = new Bookshelf();
         for(JsonElement jsonElement : jsonArray){
             JsonObject jObject = jsonElement.getAsJsonObject();
+            // Retrieve attributes
             int xCoordinate = jObject.get("xCoordinate").getAsInt();
             int yCoordinate = jObject.get("yCoordinate").getAsInt();
             String objectType = jObject.get("objectType").getAsString();
+            // Copy them into card
+            newCard.shelf[xCoordinate][yCoordinate].id = id;
+            newCard.shelf[xCoordinate][yCoordinate].xCoordinate = xCoordinate;
+            newCard.shelf[xCoordinate][yCoordinate].yCoordinate = yCoordinate;
+            newCard.shelf[xCoordinate][yCoordinate].type = objectType;
         }
 
         // Initialize Map

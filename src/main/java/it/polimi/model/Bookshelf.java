@@ -2,7 +2,7 @@ package it.polimi.model;
 public class Bookshelf {
 
     private int maxDrawableObjects;
-    private ObjectCard [][] shelf;
+    protected ObjectCard [][] shelf;
     protected Bookshelf{
         this.maxDrawableObjects=3;
         this.shelf= new ObjectCard[5][6];
