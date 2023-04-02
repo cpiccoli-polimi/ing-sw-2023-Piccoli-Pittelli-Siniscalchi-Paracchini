@@ -45,11 +45,11 @@ public class Game extends Observable{
         this.board = new Board(commonGoalsNumber);
         this.bag = new CardsBard();
 
-        LocalTime clock = LocalTime.now();
-        int hours = clock.getHour();
-        int minutes = clock.getMinute();
-        int seconds = clock.getSecond();
-        String clockString = new String();
+        clock = LocalTime.now();
+        hours = clock.getHour();
+        minutes = clock.getMinute();
+        seconds = clock.getSecond();
+        clockString = new String();
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
