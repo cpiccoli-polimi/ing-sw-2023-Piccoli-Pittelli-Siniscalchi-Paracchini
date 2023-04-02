@@ -144,8 +144,8 @@ public class Game extends Observable{
     public Player[] getTable() {
         return table;
     }
-    public void setTable(Player table, int position) {
-        this.table = table;
+    public void setTable(Player player, int position) {
+        this.table[position] = player;
     }
     public LivingRoomBoard getBoard() {
         return board;
@@ -169,7 +169,7 @@ public class Game extends Observable{
         return leaderboard;
     }
     public void setLeaderboard(Player player, int position) {
-        this.leaderboard = leaderboard;
+        this.leaderboard[position] = player;
     }
     public void nextTurn(){    }
     public void updateCommonGoals(CommonGoalCard commonGoal){    }
