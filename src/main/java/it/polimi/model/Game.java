@@ -21,9 +21,6 @@ public class Game extends Observable{
     public int getId(){
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
     public boolean getDone() {
         return done;
     }
@@ -42,7 +39,7 @@ public class Game extends Observable{
     public Player[] getTable() {
         return table;
     }
-    public void setTable(Player[] table) {
+    public void setTable(Player table, int position) {
         this.table = table;
     }
     public LivingRoomBoard getBoard() {
@@ -60,13 +57,13 @@ public class Game extends Observable{
     public int getCurrentPlayer(){
         return currentPlayer;
     }
-    public void setCurrentPlayer(int currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    public void setCurrentPlayer(int position) {
+        this.currentPlayer = position;
     }
     public Player[] getLeaderboard(){
         return leaderboard;
     }
-    public void setLeaderboard(Player[] leaderboard) {
+    public void setLeaderboard(Player player, int position) {
         this.leaderboard = leaderboard;
     }
     public void nextTurn(){    }
