@@ -7,7 +7,7 @@ public class Player {
     private int position;
     private boolean hasFinished;
     private int [] commonGoalsCompleted;
-    private ObjectCard chosenObject;
+    private ObjectCard [] chosenObject; // is now an array
     private PersonalGoalCard personalGoal;
     private Bookshelf bookshelf;
     private int chosenColumn;
@@ -20,7 +20,7 @@ public class Player {
         this.hasFinished=false;
         this.commonGoalsCompleted= new int [commonGoalsNumber];
         this.chosenColumn=-1;
-        this.chosenObjects=null;
+        this.chosenObjects=new ObjectCard [3];
         this.personalGoal=null;
         this.bookshelf=new Bookshelf();
     }
@@ -52,10 +52,9 @@ public class Player {
     public void setCommonGoalsCompleted(int [] commonGoalsCompleted){
         System.arraycopy(commonGoalsCompleted, 0, this.commonGoalsCompleted, 0, commonGoalsCompleted.length); }
 
-    public ObjectCard getChosenObject() {
-        return chosenObject;
-    }
-    public void setChosenObject(ObjectCard chosenObject){ this.chosenObject=chosenObject;}
+    public ObjectCard[] getChosenObject() {return chosenObject;}
+    public void setChosenObject(ObjectCard [] chosenObject){
+        System.arraycopy(chosenObject, 0, this.chosenObject, 0, chosenObject.length);}
 
     public PersonalGoalCard getPersonalGoal() {
         return personalGoal;
