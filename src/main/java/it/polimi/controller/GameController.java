@@ -113,7 +113,6 @@ public class GameController {
         }
     }
     private void DeclareWinner() {
-        // TODO: to be finished
         Player[] table = model.getTable();
         CountPersonalGoalsPoints();
         // Common goals points already calculated?
@@ -123,9 +122,32 @@ public class GameController {
         // It contains [points][playerNumberInArray]
         int[][] points = new int[table.length][2];
         for(int i=0;i< table.length;i++){
-            points[i][1] = table[i].getPoints();
-            points[i][2] = i;
+            points[i][0] = table[i].getPoints();
+            points[i][1] = i;
         }
+        // Reorder array
+        for (int k = 0; k < points.length; k++) {
+            for (int i= 0; i < points[k].length; i++) {
+                for (int j = 0; j < points[k].length; j++) {
+                    if (points[k][i] < points[k][j]) {
+                        int temp = points[k][i];
+                        points[k][i] = points[k][j];
+                        points[k][j] = temp;
+                    }
+                }
+            }
+        }
+        // Copy in order into leaderboard
+        // First
+        model.setLeaderboard(table[points[0][1]],0);
+        // Second
+        model.setLeaderboard(table[points[1][1]],1);
+        // Third
+        model.setLeaderboard(table[points[2][1]],2);
+        // Fourth
+        model.setLeaderboard(table[points[3][1]],3);
+
+        // TODO: How to notify view?
     }
 
 }
