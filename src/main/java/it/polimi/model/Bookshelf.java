@@ -3,7 +3,7 @@ public class Bookshelf {
 
     private int maxDrawableObjects;
     protected ObjectCard [][] shelf;
-    protected Bookshelf{
+    protected Bookshelf(){
         this.maxDrawableObjects=3;
         this.shelf= new ObjectCard[5][6];
     }
