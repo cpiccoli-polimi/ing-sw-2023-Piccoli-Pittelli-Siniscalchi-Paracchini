@@ -1,12 +1,12 @@
 package it.polimi.controller;
 
-import it.polimi.model.Bookshelf;
-import it.polimi.model.Game;
-import it.polimi.model.PersonalGoalCard;
-import it.polimi.model.Player;
+import it.polimi.model.*;
 
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import static java.lang.Long.parseLong;
 
 public class GameController {
     public final Game model;
@@ -26,6 +26,155 @@ public class GameController {
             }
         }
     }
+
+    private void setup(){
+        setupBoardObjects();
+        setupCommonGoals();
+        setupPersonalGoals();
+        setupFirstPlayer();
+    }
+
+    private void setupBoardObjects(){
+        LivingroomBoard board = model.getBoard();
+        Tile[][] tiles = board.getTiles();
+        CardsBag bag = model.getBag();
+        int cardId;
+        int freeSidesCounter;
+
+        for(int i = 0; i < tiles.length; i++){
+            for(int j = 0; j < tiles[i].length; j++){
+                if(model.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
+                    cardId = bag.getCard();
+                    ObjectCard drawnCard = new ObjectCard( cardId, i, j);
+                    board.placeObject(drawnCard);
+                }
+            }
+        }
+
+        for(int i = 0; i < tiles.length; i++){
+            for(int j = 0; j < tiles[i].length; j++){
+                if(model.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
+                    freeSidesCounter = 0;
+                    if(tiles[i+1][j].getObject()!=null){
+                        freeSidesCounter += 1;
+                    }
+                    else{
+                        freeSidesCounter = freeSidesCounter;
+                    }
+                    if(tiles[i-1][j].getObject()!=null){
+                        freeSidesCounter += 1;
+                    }
+                    else{
+                        freeSidesCounter = freeSidesCounter;
+                    }
+                    if(tiles[i][j+1].getObject()!=null){
+                        freeSidesCounter += 1;
+                    }
+                    else{
+                        freeSidesCounter = freeSidesCounter;
+                    }
+                    if(tiles[i][j-1].getObject()!=null){
+                        freeSidesCounter += 1;
+                    }
+                    else{
+                        freeSidesCounter = freeSidesCounter;
+                    }
+                    tiles[i][j].setFreeSides(freeSidesCounter);
+                }
+            }
+        }
+    }
+
+    private void setupCommonGoals(){
+        LivingroomBoard board = model.getBoard();
+        CommonGoalCard[] drawnCommonGoals = new CommonGoalCard[model.getCommonGoalsNumber()];
+
+        for(int i = 0; i < model.getCommonGoalsNumber(); i++){
+            drawnCommonGoals[i] = model.getCommonGoalsDeck()[i];
+
+            PointCard[] pointsDeck = new PointCard[model.getPlayersNumber()];
+            switch(model.getPlayersNumber()){
+                case 2:
+                    if(i == 0){
+                        pointsDeck[1] = new PointCard(Value.four, RomanNumeral.I);
+                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.I);
+                    }
+                    else{
+                        pointsDeck[1] = new PointCard(Value.four, RomanNumeral.II);
+                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
+                    }
+                case 3:
+                    if(i == 0){
+                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.I);
+                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.I);
+                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.I);
+                    }
+                    else{
+                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.II);
+                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.II);
+                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
+                    }
+                case 4:
+                    if(i == 0){
+                        pointsDeck[3] = new PointCard(Value.two, RomanNumeral.I);
+                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.I);
+                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.I);
+                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.I);
+
+                    }
+                    else{
+                        pointsDeck[3] = new PointCard(Value.two, RomanNumeral.II);
+                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.II);
+                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.II);
+                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
+                    }
+            }
+            drawnCommonGoals[i].setPoints(pointsDeck);
+        }
+
+        board.setCommonGoals(drawnCommonGoals);
+    }
+
+    private void setupPersonalGoals(){
+        Player[] playersTable = model.getTable();
+        PersonalGoalCard[] personalGoalsDeck = model.getPersonalGoalsDeck();
+        for(int i = 0; i < model.getPlayersNumber(); i++){
+            playersTable[i].setPersonalGoal(personalGoalsDeck[i]);
+        }
+    }
+
+    private void setupFirstPlayer(){
+        LocalTime clock = LocalTime.now();
+        int hours = clock.getHour();
+        int minutes = clock.getMinute();
+        int seconds = clock.getSecond();
+        String clockString = new String();
+        clockString += hours;
+        clockString += minutes;
+        clockString += seconds;
+        long seed = parseLong(clockString);
+        Random generator = new Random(seed);
+        int firstPlayerIndex = generator.nextInt(0, 4);
+
+        Player[] playersTable = model.getTable();
+        for(int i = 0; i < model.getPlayersNumber(); i++){
+            if(i == firstPlayerIndex){
+                playersTable[i].setIsFirst(true);
+                playersTable[i].setPosition(0);
+                model.setCurrentPlayer(0);
+            }
+            else{
+                playersTable[i].setIsFirst(false);
+                if(i - firstPlayerIndex > 0){
+                    playersTable[i].setPosition(i - firstPlayerIndex);
+                }
+                else{
+                    playersTable[i].setPosition(playersTable.length - firstPlayerIndex + i);
+                }
+            }
+        }
+    }
+
     private void CountPersonalGoalsPoints() {
         // Get all the players
         Player[] table = model.getTable();
@@ -138,14 +287,9 @@ public class GameController {
             }
         }
         // Copy in order into leaderboard
-        // First
-        model.setLeaderboard(table[points[0][1]],0);
-        // Second
-        model.setLeaderboard(table[points[1][1]],1);
-        // Third
-        model.setLeaderboard(table[points[2][1]],2);
-        // Fourth
-        model.setLeaderboard(table[points[3][1]],3);
+        for (int i = 0; i < table.length; i++) {
+            model.setLeaderboard(table[points[i][1]],i);
+        }
 
         // TODO: How to notify view?
     }

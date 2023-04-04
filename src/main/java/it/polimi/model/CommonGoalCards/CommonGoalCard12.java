@@ -9,4 +9,50 @@ public class CommonGoalCard12 extends CommonGoalCard {
         // Deck creation
         points = new PointCard[playersNumber];
     }
+
+    public boolean check(ObjectCard[][] bookshelf){
+        boolean flag = true;
+
+        if(bookshelf[0][0].getType() != null){
+            for(int i = 0; i < bookshelf.length - 1 && flag == true; i++) {
+                if(bookshelf[i][i].getType() == null){
+                    flag = false;
+                }
+                if(i - 1 >= 0){
+                    if(bookshelf[i - 1][i].getType() != null){
+                        flag = false;
+                    }
+                }
+            }
+        }
+        else if(bookshelf[1][0].getType() != null){
+            for(int i = 0; i < bookshelf.length - 1 && flag == true; i++) {
+                if(bookshelf[i+1][i].getType() == null && bookshelf[i][i].getType() != null){
+                    flag = false;
+                }
+            }
+        }
+        else if(bookshelf[0][bookshelf[0].length].getType() != null){
+            for(int i = 0; i < bookshelf.length - 1 && flag == true){
+                if(bookshelf[i][bookshelf.length - 1 - i].getType() == null){
+                    flag = false;
+                }
+                if(i - 1 >= 0){
+                    if(bookshelf[i - 1][bookshelf.length - 1 - i].getType() != null){
+                        flag = false;
+                    }
+                }
+            }
+
+        }
+        else if(bookshelf[1][bookshelf[4].length].getType() != null){
+            for(int i = 0; i < bookshelf.length - 1 && flag == true; i++) {
+                if(bookshelf[i+1][bookshelf.length - 1 - i].getType() == null && bookshelf[i][bookshelf.length - 1 - i].getType() !=null){
+                    flag = false;
+                }
+            }
+        }
+
+        return flag;
+    }
 }
