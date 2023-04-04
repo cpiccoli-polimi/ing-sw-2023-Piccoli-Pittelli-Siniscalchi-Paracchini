@@ -49,10 +49,12 @@ public class Game extends Observable{
         hours = clock.getHour();
         minutes = clock.getMinute();
         seconds = clock.getSecond();
+        int nanoseconds = clock.getNano()
         clockString = new String();
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
+        clockString += nanoseconds;
         long seed = parseLong(clockString);
         Random generator = new Random(seed);
         List<Integer> list = new ArrayList<Integer>();
@@ -69,10 +71,12 @@ public class Game extends Observable{
         hours = clock.getHour();
         minutes = clock.getMinute();
         seconds = clock.getSecond();
+        nanoseconds = clock.getNano();
         clockString = new String();
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
+        clockString += nanoseconds;
         seed = parseLong(clockString);
         generator = new Random(seed);
         shuffle(list, generator);
