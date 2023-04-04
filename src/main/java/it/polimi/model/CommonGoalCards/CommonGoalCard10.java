@@ -11,6 +11,7 @@ public class CommonGoalCard10 extends CommonGoalCard {
         points = new PointCard[playersNumber];
     }
 
+    @Override
     public boolean check(ObjectCard[][] bookshelf) {
         boolean flag = false;
 
