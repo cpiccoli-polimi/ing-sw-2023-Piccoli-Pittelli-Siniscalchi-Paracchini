@@ -43,7 +43,7 @@ public class Game extends Observable{
         this.commonGoalsNumber = commonGoalsNumber;
         this.table = new Player[playersNumber];
         this.board = new Board(commonGoalsNumber);
-        this.bag = new CardsBard();
+        this.bag = new CardsBag();
 
         clock = LocalTime.now();
         hours = clock.getHour();
