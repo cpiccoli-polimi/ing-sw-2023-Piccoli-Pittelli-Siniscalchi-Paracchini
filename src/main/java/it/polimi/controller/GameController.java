@@ -287,14 +287,9 @@ public class GameController {
             }
         }
         // Copy in order into leaderboard
-        // First
-        model.setLeaderboard(table[points[0][1]],0);
-        // Second
-        model.setLeaderboard(table[points[1][1]],1);
-        // Third
-        model.setLeaderboard(table[points[2][1]],2);
-        // Fourth
-        model.setLeaderboard(table[points[3][1]],3);
+        for (int i = 0; i < table.length; i++) {
+            model.setLeaderboard(table[points[i][1]],i);
+        }
 
         // TODO: How to notify view?
     }

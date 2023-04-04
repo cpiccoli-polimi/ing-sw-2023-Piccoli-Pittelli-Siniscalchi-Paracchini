@@ -10,4 +10,4 @@ public class CommonGoalCard1 extends CommonGoalCard {
         points = new PointCard[playersNumber];
     }
 
-    }
+}
