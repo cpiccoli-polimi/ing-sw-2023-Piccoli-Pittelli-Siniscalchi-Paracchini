@@ -1,11 +1,14 @@
 package it.polimi.controller;
 
+import it.polimi.controller.exception.AlreadyPickedException;
+import it.polimi.controller.exception.MaxDrawableObjectsException;
+import it.polimi.controller.exception.NoAdjacentException;
+import it.polimi.controller.exception.NoStraightLineException;
 import it.polimi.model.*;
 
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+
 import static java.lang.Long.parseLong;
 
 public class GameController {
@@ -292,6 +295,54 @@ public class GameController {
         }
 
         // TODO: How to notify view?
+    }
+
+    private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
+        int p=-1;
+        List<Integer> sortX = new ArrayList<Integer>();
+        sortX.add(pickedObject[0].getXCoordinate());
+        List<Integer> sortY = new ArrayList<Integer>();
+        sortY.add(pickedObject[0].getYCoordinate());
+        if (model.getCurrentPlayer().getBookshelf().maxDrawableObjects() < pickedObject.length) {
+            throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
+            return false;
+        }
+        for (int i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
+            if (sortX.contains(pickedObject[i].getXCoordinate()) && sortY.contains(pickedObject[i].getYCoordinate())) {
+                throw new AlreadyPickedException();
+                return false;
+            } else {
+                if (!sortY.contains(pickedObject[i].getYCoordinate())) {
+                    sortY.add(pickedObject[i].getYCoordinate());
+                }
+                if (!sortX.contains(pickedObject[i].getXCoordinate())) {
+                    sortX.add(pickedObject[i].getXCoordinate());
+                }
+            }
+            if (sortX.size() == 1 && sortY.size() == pickedObject.length) {//le tessere sono state scelte su una linea orizzontale
+                for( int j=0; j<sortY.size();j++){
+                    p= sortY.get(j);
+                    if(!sortY.contains(p-1) && !sortY.contains(p+1)){
+                        throw new NoAdjacentException();
+                        return false;
+                    }
+                }
+            }
+            else if (sortY.size() == 1 && sortX.size() == pickedObject.length) {// le tessere sono state scelte su una linea verticale
+                for( int k=0; k<sortX.size();k++){
+                    p= sortX.get(k);
+                    if(!sortX.contains(p-1) && !sortX.contains(p+1)){
+                        throw new NoAdjacentException();
+                        return false;
+                    }
+                }
+            }
+            else{
+                throw new NoStraightLineException();
+                return false;
+            }
+        }
+        return true;
     }
 
 }
