@@ -1,9 +1,6 @@
 package it.polimi.controller;
 
-import it.polimi.controller.exception.AlreadyPickedException;
-import it.polimi.controller.exception.MaxDrawableObjectsException;
-import it.polimi.controller.exception.NoAdjacentException;
-import it.polimi.controller.exception.NoStraightLineException;
+import it.polimi.controller.exception.*;
 import it.polimi.model.*;
 
 import java.time.LocalTime;
@@ -297,7 +294,7 @@ public class GameController {
         // TODO: How to notify view?
     }
 
-    private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
+    private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
         int p=-1;
         List<Integer> sortX = new ArrayList<Integer>();
         sortX.add(pickedObject[0].getXCoordinate());
@@ -306,6 +303,12 @@ public class GameController {
         if (model.getCurrentPlayer().getBookshelf().maxDrawableObjects() < pickedObject.length) {
             throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
             return false;
+        }
+        for(int l=0;l< pickedObject.length;l++){
+            if(model.getBoard().getTiles()[pickedObject[l].getXCoordinate()][pickedObject[l].getYCoordinate()].getFreeSides()==0){
+                throw new NoFreeSidesException();
+                return false;
+            }
         }
         for (int i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
             if (sortX.contains(pickedObject[i].getXCoordinate()) && sortY.contains(pickedObject[i].getYCoordinate())) {
