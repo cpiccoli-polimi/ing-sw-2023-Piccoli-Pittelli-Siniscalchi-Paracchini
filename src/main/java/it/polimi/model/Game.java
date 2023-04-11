@@ -49,7 +49,7 @@ public class Game extends Observable{
         hours = clock.getHour();
         minutes = clock.getMinute();
         seconds = clock.getSecond();
-        int nanoseconds = clock.getNano()
+        int nanoseconds = clock.getNano();
         clockString = new String();
         clockString += hours;
         clockString += minutes;
