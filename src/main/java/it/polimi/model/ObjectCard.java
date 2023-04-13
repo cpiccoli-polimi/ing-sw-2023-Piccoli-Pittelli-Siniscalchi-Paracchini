@@ -1,10 +1,10 @@
 package it.polimi.model;
 
 public class ObjectCard {
-    private int id;
-    private Type type;
-    private int xCoordinate;
-    private int yCoordinate;
+    protected int id;
+    protected String type;
+    protected int xCoordinate;
+    protected int yCoordinate;
 
     protected ObjectCard(int id, int xCoordinate, int yCoordinate) {
         this.id = id;
@@ -13,24 +13,24 @@ public class ObjectCard {
 
         if (id < 5) {
             this.type = "Cats";
-        }if else (5 < id < 10) {
+        }else if (5 < id && id < 10) {
             this.type = "Trophies";
-        }if else (10 < id < 15) {
+        }else if (10 < id && id < 15) {
             this.type = "Plants";
-        }if else (15 < id < 20) {
+        }else if (15 < id && id < 20) {
             this.type = "Books";
-        }if else (20 < id < 25) {
+        }else if (20 < id && id < 25) {
             this.type = "Frames";
-        }if else (25 < id < 30) {
+        }else if (25 < id && id < 30) {
             this.type = "Games";
         }
     };
 
-    public Type getType() {
+    public String getType() {
         return type;
     };
 
-    public void getXCoordinate() {
+    public int getXCoordinate() {
         return xCoordinate;
     };
 
