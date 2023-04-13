@@ -296,16 +296,21 @@ public class GameController {
 
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
         int p=-1;
+        int x;
+        int y;
         List<Integer> sortX = new ArrayList<Integer>();
         sortX.add(pickedObject[0].getXCoordinate());
         List<Integer> sortY = new ArrayList<Integer>();
         sortY.add(pickedObject[0].getYCoordinate());
+        //sotto deve arrivargli un player
         if (model.getCurrentPlayer().getBookshelf().maxDrawableObjects() < pickedObject.length) {
             throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
             return false;
         }
         for(int l=0;l< pickedObject.length;l++){
-            if(model.getBoard().getTiles()[pickedObject[l].getXCoordinate()][pickedObject[l].getYCoordinate()].getFreeSides()==0){
+            x=pickedObject[l].getXCoordinate();
+            y=pickedObject[l].getYCoordinate();
+            if(model.getBoard().getTiles()[x][y].getFreeSides()==0){
                 throw new NoFreeSidesException();
                 return false;
             }
@@ -348,5 +353,28 @@ public class GameController {
         return true;
     }
 
+    private void updateFreeSides(ObjectCard [] pickedObject){
+        int x=-1;
+        int y=-1;
+        int fs=-1;
+        Tile tile=null;
+        for(int i=0;i<pickedObject.length;i++){
+            x=pickedObject[i].getXCoordinate();
+            y=pickedObject[i].getYCoordinate();
+            tile=model.getBoard().getTiles()[x-1][y]; //up
+            fs= tile.getFreeSides();
+            tile.setFreeSides(fs-1);
+            tile=model.getBoard().getTiles()[x+1][y]; //down
+            fs= tile.getFreeSides();
+            tile.setFreeSides(fs-1);
+            tile=model.getBoard().getTiles()[x][y-1]; //left
+            fs= tile.getFreeSides();
+            tile.setFreeSides(fs-1);
+            tile=model.getBoard().getTiles()[x][y+1]; //right
+            fs= tile.getFreeSides();
+            tile.setFreeSides(fs-1);
+        }
+
+    }
 }
 
