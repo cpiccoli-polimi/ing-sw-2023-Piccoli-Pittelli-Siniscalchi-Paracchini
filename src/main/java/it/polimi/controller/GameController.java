@@ -358,23 +358,36 @@ public class GameController {
         int y=-1;
         int fs=-1;
         Tile tile=null;
-        for(int i=0;i<pickedObject.length;i++){
-            x=pickedObject[i].getXCoordinate();
-            y=pickedObject[i].getYCoordinate();
-            tile=model.getBoard().getTiles()[x-1][y]; //up
-            fs= tile.getFreeSides();
-            tile.setFreeSides(fs-1);
-            tile=model.getBoard().getTiles()[x+1][y]; //down
-            fs= tile.getFreeSides();
-            tile.setFreeSides(fs-1);
-            tile=model.getBoard().getTiles()[x][y-1]; //left
-            fs= tile.getFreeSides();
-            tile.setFreeSides(fs-1);
-            tile=model.getBoard().getTiles()[x][y+1]; //right
-            fs= tile.getFreeSides();
-            tile.setFreeSides(fs-1);
+        for (ObjectCard objectCard : pickedObject) {
+            x = objectCard.getXCoordinate();
+            y = objectCard.getYCoordinate();
+            tile = model.getBoard().getTiles()[x - 1][y]; //up
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
+            tile = model.getBoard().getTiles()[x + 1][y]; //down
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
+            tile = model.getBoard().getTiles()[x][y - 1]; //left
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
+            tile = model.getBoard().getTiles()[x][y + 1]; //right
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
         }
 
+    }
+
+    private void savePickedObject(ObjectCard [] pickedObject){
+        int x=-1;
+        int g=-1;
+        int y=-1;
+        for (ObjectCard objectCard : pickedObject) {
+            x = objectCard.getXCoordinate();
+            y = objectCard.getYCoordinate();
+            model.getBoard().removeObject(x, y);
+        }
+        g=model.getCurrentPlayer();
+        model.getTable()[g].setChosenObjects(pickedObject);
     }
 }
 
