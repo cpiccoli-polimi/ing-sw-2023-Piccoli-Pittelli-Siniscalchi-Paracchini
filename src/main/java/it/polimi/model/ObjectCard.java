@@ -6,7 +6,7 @@ public class ObjectCard {
     private int xCoordinate;
     private int yCoordinate;
 
-    protected objectCard(int id, int xCoordinate, int yCoordinate) {
+    protected ObjectCard(int id, int xCoordinate, int yCoordinate) {
         this.id = id;
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
