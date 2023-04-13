@@ -2,7 +2,11 @@ package it.polimi.model;
 
 import java.lang.Object;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import static java.lang.Long.parseLong;
 import static java.util.Collections.shuffle;
 
 public class CardsBag {
@@ -34,7 +38,7 @@ public class CardsBag {
 
     public int getCard(){
         id = cards[0];
-        cards = ArrayUtils.removeElement(cards, id)
+        cards = ArrayUtils.removeElement(cards, id);
         return id;
     };
 
