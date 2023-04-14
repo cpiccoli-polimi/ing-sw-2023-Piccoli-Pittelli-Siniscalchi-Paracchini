@@ -30,7 +30,7 @@ public class LivingRoomBoard {
         this.commonGoals = commonGoals;
     };
 
-    public Tile[] getTiles() {
+    public Tile[][] getTiles() {
         return tile;
     };
 
