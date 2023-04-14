@@ -1,7 +1,6 @@
 package it.polimi.model.CommonGoalCards;
 
-import it.polimi.model.CommonGoalCard;
-import it.polimi.model.PointCard;
+import it.polimi.model.*;
 
 public class CommonGoalCard1 extends CommonGoalCard {
     public CommonGoalCard1(int playersNumber) {
@@ -34,7 +33,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
                 }
                 if(alreadyCounted == false) {
                     // Same type on the right (if exists)
-                    if (col + 1 < max && bookshelf[row][col].getType == bookshelf[row][col + 1].getType) {
+                    if (col + 1 < max && bookshelf[row][col].getType() == bookshelf[row][col + 1].getType()) {
                         for (int i = 0; i < counted.length; i++) {
                             if (counted[i][1] == -1) {
                                 counted[i][1] = row;
@@ -45,7 +44,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
                         }
                     }
                     // Same type on the bottom (if exists)
-                    else if (row - 1 >= 0 && bookshelf[row][col].getType == bookshelf[row - 1][col].getType) {
+                    else if (row - 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row - 1][col].getType()) {
                         for (int i = 0; i < counted.length; i++) {
                             if (counted[i][1] == -1) {
                                 counted[i][1] = row;
@@ -55,8 +54,8 @@ public class CommonGoalCard1 extends CommonGoalCard {
                             }
                         }
                     }
-                    // Same type on the right (if exists)
-                    else if (col - 1 >= 0 && bookshelf[row][col].getType == bookshelf[row][col - 1].getType) {
+                    // Same type on the left (if exists)
+                    else if (col - 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row][col - 1].getType()) {
                         for (int i = 0; i < counted.length; i++) {
                             if (counted[i][1] == -1) {
                                 counted[i][1] = row;
@@ -67,7 +66,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
                         }
                     }
                     // Same type above (if exists)
-                    else if (row + 1 < max && bookshelf[row][col].getType == bookshelf[row + 1][col].getType) {
+                    else if (row + 1 < max && bookshelf[row][col].getType() == bookshelf[row + 1][col].getType()) {
                         for (int i = 0; i < counted.length; i++) {
                             if (counted[i][1] == -1) {
                                 counted[i][1] = row;

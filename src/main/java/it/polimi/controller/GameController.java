@@ -1,9 +1,13 @@
 package it.polimi.controller;
 
+import it.polimi.controller.exception.*;
 import it.polimi.model.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
+
 
 public class GameController {
     public final Game model;
@@ -149,5 +153,100 @@ public class GameController {
         // TODO: How to notify view?
     }
 
+    private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
+        int p=-1;
+        int x;
+        int y;
+        List<Integer> sortX = new ArrayList<Integer>();
+        sortX.add(pickedObject[0].getXCoordinate());
+        List<Integer> sortY = new ArrayList<Integer>();
+        sortY.add(pickedObject[0].getYCoordinate());
+        //sotto deve arrivargli un player
+        if (model.getCurrentPlayer().getBookshelf().maxDrawableObjects() < pickedObject.length) {
+            throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
+            return false;
+        }
+        for(int l=0;l< pickedObject.length;l++){
+            x=pickedObject[l].getXCoordinate();
+            y=pickedObject[l].getYCoordinate();
+            if(model.getBoard().getTiles()[x][y].getFreeSides()==0){
+                throw new NoFreeSidesException();
+                return false;
+            }
+        }
+        for (int i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
+            if (sortX.contains(pickedObject[i].getXCoordinate()) && sortY.contains(pickedObject[i].getYCoordinate())) {
+                throw new AlreadyPickedException();
+                return false;
+            } else {
+                if (!sortY.contains(pickedObject[i].getYCoordinate())) {
+                    sortY.add(pickedObject[i].getYCoordinate());
+                }
+                if (!sortX.contains(pickedObject[i].getXCoordinate())) {
+                    sortX.add(pickedObject[i].getXCoordinate());
+                }
+            }
+            if (sortX.size() == 1 && sortY.size() == pickedObject.length) {//le tessere sono state scelte su una linea orizzontale
+                for( int j=0; j<sortY.size();j++){
+                    p= sortY.get(j);
+                    if(!sortY.contains(p-1) && !sortY.contains(p+1)){
+                        throw new NoAdjacentException();
+                        return false;
+                    }
+                }
+            }
+            else if (sortY.size() == 1 && sortX.size() == pickedObject.length) {// le tessere sono state scelte su una linea verticale
+                for( int k=0; k<sortX.size();k++){
+                    p= sortX.get(k);
+                    if(!sortX.contains(p-1) && !sortX.contains(p+1)){
+                        throw new NoAdjacentException();
+                        return false;
+                    }
+                }
+            }
+            else{
+                throw new NoStraightLineException();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void updateFreeSides(ObjectCard [] pickedObject){
+        int x=-1;
+        int y=-1;
+        int fs=-1;
+        Tile tile=null;
+        for (ObjectCard objectCard : pickedObject) {
+            x = objectCard.getXCoordinate();
+            y = objectCard.getYCoordinate();
+            tile = model.getBoard().getTiles()[x - 1][y]; //up
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
+            tile = model.getBoard().getTiles()[x + 1][y]; //down
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
+            tile = model.getBoard().getTiles()[x][y - 1]; //left
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
+            tile = model.getBoard().getTiles()[x][y + 1]; //right
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs - 1);
+        }
+
+    }
+
+    private void savePickedObject(ObjectCard [] pickedObject){
+        int x=-1;
+        int g=-1;
+        int y=-1;
+        for (ObjectCard objectCard : pickedObject) {
+            x = objectCard.getXCoordinate();
+            y = objectCard.getYCoordinate();
+            model.getBoard().removeObject(x, y);
+        }
+        g=model.getCurrentPlayer();
+        model.getTable()[g].setChosenObjects(pickedObject);
+    }
 }
 

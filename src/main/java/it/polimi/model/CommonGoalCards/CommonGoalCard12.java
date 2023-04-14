@@ -1,6 +1,7 @@
 package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
+import it.polimi.model.ObjectCard;
 import it.polimi.model.PointCard;
 
 public class CommonGoalCard12 extends CommonGoalCard {
@@ -34,7 +35,7 @@ public class CommonGoalCard12 extends CommonGoalCard {
             }
         }
         else if(bookshelf[0][bookshelf[0].length].getType() != null){
-            for(int i = 0; i < bookshelf.length - 1 && flag == true){
+            for(int i = 0; i < bookshelf.length - 1 && flag == true;i++){
                 if(bookshelf[i][bookshelf.length - 1 - i].getType() == null){
                     flag = false;
                 }
