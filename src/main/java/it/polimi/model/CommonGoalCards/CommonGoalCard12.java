@@ -1,6 +1,7 @@
 package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
+import it.polimi.model.ObjectCard;
 import it.polimi.model.PointCard;
 
 public class CommonGoalCard12 extends CommonGoalCard {
