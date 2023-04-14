@@ -10,7 +10,8 @@ import static java.lang.Long.parseLong;
 import static java.util.Collections.shuffle;
 
 public class CardsBag {
-    private int[] cards;
+    private List<Integer> cards;
+
 
     protected void CardsBag() {
         LocalTime clock = LocalTime.now();
@@ -31,18 +32,18 @@ public class CardsBag {
 
         shuffle(list, generator);
 
+        cards = new ArrayList<Integer>();
         for(int i = 0; i < 132; i++) {
-            cards[i] = list.get(i);
+            cards.add(list.get(i));
         }
     };
 
     public int getCard(){
-        id = cards[0];
-        cards = ArrayUtils.removeElement(cards, id);
+        int id = cards.remove(0);
         return id;
     };
 
-    private void setCards(int[] cards){
+    private void setCards(List<Integer> cards){
         this.cards = cards;
     };
 }
