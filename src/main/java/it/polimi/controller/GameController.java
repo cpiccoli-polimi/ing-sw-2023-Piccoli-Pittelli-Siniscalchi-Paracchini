@@ -161,8 +161,8 @@ public class GameController {
         sortX.add(pickedObject[0].getXCoordinate());
         List<Integer> sortY = new ArrayList<Integer>();
         sortY.add(pickedObject[0].getYCoordinate());
-        //sotto deve arrivargli un player
-        if (model.getCurrentPlayer().getBookshelf().maxDrawableObjects() < pickedObject.length) {
+        p= model.getCurrentPlayer();
+        if (model.getTable()[p].getBookshelf().getMaxDrawableObjects() < pickedObject.length) {
             throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
             return false;
         }
