@@ -137,7 +137,7 @@ public class Game extends Observable{
                 if(playersNumber >= tiles[i][j].getMinPlayers()){
                     cardId = bag.getCard();
                     ObjectCard drawnCard = new ObjectCard( cardId, i, j);
-                    board.placeObject(drawnCard);
+                    board.placeObject(drawnCard, drawnCard.getXCoordinate(), drawnCard.getYCoordinate());
                 }
             }
         }
