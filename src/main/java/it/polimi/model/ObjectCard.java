@@ -1,10 +1,10 @@
 package it.polimi.model;
 
 public class ObjectCard {
-    protected int id;
-    protected Type type;
-    protected int xCoordinate;
-    protected int yCoordinate;
+    private int id;
+    private Type type;
+    private int xCoordinate;
+    private int yCoordinate;
 
     protected ObjectCard(int id, int xCoordinate, int yCoordinate) {
         this.id = id;
