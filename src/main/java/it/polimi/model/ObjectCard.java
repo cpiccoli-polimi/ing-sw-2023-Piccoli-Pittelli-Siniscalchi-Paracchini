@@ -2,7 +2,7 @@ package it.polimi.model;
 
 public class ObjectCard {
     protected int id;
-    protected String type;
+    protected Type type;
     protected int xCoordinate;
     protected int yCoordinate;
 
@@ -12,21 +12,21 @@ public class ObjectCard {
         this.yCoordinate = yCoordinate;
 
         if (id < 5) {
-            this.type = "Cats";
+            this.type = Type.Cats;
         }else if (5 < id && id < 10) {
-            this.type = "Trophies";
+            this.type = Type.Trophies;
         }else if (10 < id && id < 15) {
-            this.type = "Plants";
+            this.type = Type.Plants;
         }else if (15 < id && id < 20) {
-            this.type = "Books";
+            this.type = Type.Books;
         }else if (20 < id && id < 25) {
-            this.type = "Frames";
+            this.type = Type.Frames;
         }else if (25 < id && id < 30) {
-            this.type = "Games";
+            this.type = Type.Games;
         }
     };
 
-    public String getType() {
+    public Type getType() {
         return type;
     };
 
