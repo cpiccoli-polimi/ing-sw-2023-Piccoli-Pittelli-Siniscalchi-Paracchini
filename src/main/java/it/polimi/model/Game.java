@@ -42,7 +42,7 @@ public class Game extends Observable{
         this.playersNumber = playersNumber;
         this.commonGoalsNumber = commonGoalsNumber;
         this.table = new Player[playersNumber];
-        this.board = new Board(commonGoalsNumber);
+        this.board = new LivingRoomBoard(commonGoalsNumber);
         this.bag = new CardsBag();
 
         clock = LocalTime.now();
