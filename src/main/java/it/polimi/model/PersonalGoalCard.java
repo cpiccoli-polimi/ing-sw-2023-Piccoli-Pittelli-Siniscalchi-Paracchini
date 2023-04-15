@@ -32,11 +32,11 @@ public class PersonalGoalCard extends GoalCard{
         for(JsonElement jsonElement : jsonArray){
             JsonObject jObject = jsonElement.getAsJsonObject();
             // Retrieve attributes
-            int cardId;
             int xCoordinate = jObject.get("xCoordinate").getAsInt();
             int yCoordinate = jObject.get("yCoordinate").getAsInt();
             String objectType = jObject.get("objectType").getAsString();
 
+            int cardId;
             switch (objectType){
                 case("Cats"):
                     cardId = 0;
@@ -50,6 +50,9 @@ public class PersonalGoalCard extends GoalCard{
                     cardId = 89;
                 case("Games"):
                     cardId = 101;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + objectType);
             }
             // Create a new ObjectCard
             ObjectCard newCard = new ObjectCard(cardId, xCoordinate, yCoordinate);
