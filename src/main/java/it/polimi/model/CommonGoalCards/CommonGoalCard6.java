@@ -2,7 +2,7 @@ package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.PointCard;
-
+import it.polimi.model.ObjectCard
 public class CommonGoalCard6 extends CommonGoalCard {
 
     public CommonGoalCard6(int playersNumber) {
@@ -28,7 +28,7 @@ public class CommonGoalCard6 extends CommonGoalCard {
                         if (columnsCounter == 2) {
                             return true;
                         }
-                    }if else (bookshelf[i][j].getType() == bookshelf[i][k].getType()) {
+                    }else if (bookshelf[i][j].getType() == bookshelf[i][k].getType()) {
                         return false;
                     }
                 }

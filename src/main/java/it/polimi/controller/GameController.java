@@ -164,20 +164,17 @@ public class GameController {
         p= model.getCurrentPlayer();
         if (model.getTable()[p].getBookshelf().getMaxDrawableObjects() < pickedObject.length) {
             throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
-            return false;
         }
-        for(int l=0;l< pickedObject.length;l++){
-            x=pickedObject[l].getXCoordinate();
-            y=pickedObject[l].getYCoordinate();
-            if(model.getBoard().getTiles()[x][y].getFreeSides()==0){
+        for (ObjectCard objectCard : pickedObject) {
+            x = objectCard.getXCoordinate();
+            y = objectCard.getYCoordinate();
+            if (model.getBoard().getTiles()[x][y].getFreeSides() == 0) {
                 throw new NoFreeSidesException();
-                return false;
             }
         }
         for (int i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
             if (sortX.contains(pickedObject[i].getXCoordinate()) && sortY.contains(pickedObject[i].getYCoordinate())) {
                 throw new AlreadyPickedException();
-                return false;
             } else {
                 if (!sortY.contains(pickedObject[i].getYCoordinate())) {
                     sortY.add(pickedObject[i].getYCoordinate());
@@ -191,7 +188,6 @@ public class GameController {
                     p= sortY.get(j);
                     if(!sortY.contains(p-1) && !sortY.contains(p+1)){
                         throw new NoAdjacentException();
-                        return false;
                     }
                 }
             }
@@ -200,13 +196,11 @@ public class GameController {
                     p= sortX.get(k);
                     if(!sortX.contains(p-1) && !sortX.contains(p+1)){
                         throw new NoAdjacentException();
-                        return false;
                     }
                 }
             }
             else{
                 throw new NoStraightLineException();
-                return false;
             }
         }
         return true;
