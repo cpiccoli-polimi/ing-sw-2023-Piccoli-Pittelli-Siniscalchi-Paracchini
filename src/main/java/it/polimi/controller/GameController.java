@@ -60,12 +60,12 @@ public class GameController {
             // Get bookshelf from each player
             ObjectCard[][] bookshelf = table[i].getBookshelf().getShelf();
             // Create hashmap to track which types has already been counted
-            Map<String, Integer> countedTypes = new HashMap<>();
+            Map<Type, Integer> countedTypes = new HashMap<>();
             // Cycle through every row and column
             for (int row = 0; row < bookshelf.length; row++) {
                 for (int col = 0; col < bookshelf[row].length; col++) {
                     ObjectCard currentCard = bookshelf[row][col];
-                    String currentType = currentCard.getType();
+                    Type currentType = currentCard.getType();
                     // If currentType has not been counted yet, we start counting from 0
                     if (!countedTypes.containsKey(currentType)) {
                         int adjacentCount = 0; // Counter for adjacent cards
