@@ -15,6 +15,9 @@ public class Bookshelf {
     public void setMaxDrawableObjects(int maxDrawableObjects) {this.maxDrawableObjects = maxDrawableObjects;}
     public int getMaxDrawableObjects(){return maxDrawableObjects;}
     public ObjectCard[][] getShelf(){return shelf;}
+    public void setShelf(ObjectCard card){
+        shelf[card.getXCoordinate()][card.getYCoordinate()]=card;
+    }
     public boolean isFull(){
         return maxDrawableObjects == 0;
     }

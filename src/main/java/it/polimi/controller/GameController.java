@@ -46,7 +46,7 @@ public class GameController {
             // Scan through every row and columns: if two cells match, add one point
             for (int row = 0; row < 9; row++) {
                 for (int col = 0; col < 9; col++) {
-                    if (bookshelf[row][col].type == personalGoal[row][col].type) {
+                    if (bookshelf[row][col].getType() == personalGoal.getGoal().getShelf()[row][col].getType()) {
                         points++;
                     }
                 }
@@ -243,4 +243,3 @@ public class GameController {
         model.getTable()[g].setChosenObjects(pickedObject);
     }
 }
-

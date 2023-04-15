@@ -27,19 +27,34 @@ public class PersonalGoalCard extends GoalCard{
         //Convert id to String to search for it into JSON
         String idString = Integer.toString(id);
         JsonArray jsonArray = jsonObject.get(idString).getAsJsonArray();
-        // Create card
-        Bookshelf newCard = new Bookshelf();
+        // Create Bookshelf
+        Bookshelf goal = new Bookshelf();
         for(JsonElement jsonElement : jsonArray){
             JsonObject jObject = jsonElement.getAsJsonObject();
             // Retrieve attributes
+            int cardId;
             int xCoordinate = jObject.get("xCoordinate").getAsInt();
             int yCoordinate = jObject.get("yCoordinate").getAsInt();
             String objectType = jObject.get("objectType").getAsString();
+
+            switch (objectType){
+                case("Cats"):
+                    cardId = 0;
+                case("Trophies"):
+                    cardId = 23;
+                case("Plants"):
+                    cardId = 45;
+                case("Books"):
+                    cardId = 67;
+                case("Frames"):
+                    cardId = 89;
+                case("Games"):
+                    cardId = 101;
+            }
+            // Create a new ObjectCard
+            ObjectCard newCard = new ObjectCard(cardId, xCoordinate, yCoordinate);
             // Copy them into card
-            newCard.shelf[xCoordinate][yCoordinate].id = id;
-            newCard.shelf[xCoordinate][yCoordinate].xCoordinate = xCoordinate;
-            newCard.shelf[xCoordinate][yCoordinate].yCoordinate = yCoordinate;
-            newCard.shelf[xCoordinate][yCoordinate].type = objectType;
+            goal.setShelf(newCard);
         }
 
         // Initialize Map
@@ -51,6 +66,10 @@ public class PersonalGoalCard extends GoalCard{
                 Map.entry(5, 9),
                 Map.entry(6, 12)
         );
-        };
+    };
+    public Bookshelf getGoal(){
+        return goal;
+    }
+
 }
 
