@@ -239,7 +239,7 @@ public class Game extends Observable{
         clockString += seconds;
         long seed = parseLong(clockString);
         Random generator = new Random(seed);
-        int firstPlayerIndex = generator.nextInt(0, 4);
+        int firstPlayerIndex = generator.nextInt(playersNumber);
 
         for(int i = 0; i < playersNumber; i++){
             if(i == firstPlayerIndex){
