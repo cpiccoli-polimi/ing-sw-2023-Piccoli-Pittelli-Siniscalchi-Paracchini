@@ -19,7 +19,7 @@ public class LivingRoomBoard {
             }   
         }
 
-        commonGoals = CommonGoalCard(CommonGoalsNumber);
+        commonGoals = new CommonGoalCard[commonGoalsNumber];
     };
 
     public CommonGoalCard[] getCommonGoals() {
