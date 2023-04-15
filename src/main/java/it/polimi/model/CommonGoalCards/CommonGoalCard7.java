@@ -3,8 +3,7 @@ package it.polimi.model.CommonGoalCards;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.PointCard;
 import it.polimi.model.Type;
-
-import java.util.Arrays;
+import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard7 extends CommonGoalCard {
 

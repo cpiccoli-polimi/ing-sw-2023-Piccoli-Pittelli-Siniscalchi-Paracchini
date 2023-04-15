@@ -5,6 +5,7 @@ import it.polimi.model.PointCard;
 import it.polimi.model.Type;
 import java.util.ArrayList;
 import java.util.List;
+import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard9 extends CommonGoalCard {
     public CommonGoalCard9(int playersNumber) {
