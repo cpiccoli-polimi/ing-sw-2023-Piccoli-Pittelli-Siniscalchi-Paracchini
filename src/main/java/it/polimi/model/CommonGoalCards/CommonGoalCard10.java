@@ -18,7 +18,10 @@ public class CommonGoalCard10 extends CommonGoalCard {
 
         for(int i = 1; i < bookshelf.length - 1 && flag == false; i++){
             for(int j = 1; j < bookshelf[i].length - 1 && flag == false; j++){
-                if(bookshelf[i-1][j-1].getType() == bookshelf[i-1][j+1].getType() == bookshelf[i][j].getType() == bookshelf[i+1][j-1].getType() == bookshelf[i+1][j+1].getType()){
+                if(bookshelf[i-1][j-1].getType() == bookshelf[i-1][j+1].getType() &&
+                        bookshelf[i-1][j-1].getType()== bookshelf[i][j].getType() &&
+                        bookshelf[i-1][j-1].getType()== bookshelf[i+1][j-1].getType() &&
+                        bookshelf[i-1][j-1].getType()== bookshelf[i+1][j+1].getType()){
                     flag = true;
                 }
             }

@@ -8,11 +8,17 @@ public class CommonGoalCard3 extends CommonGoalCard {
         // Deck creation
         points = new PointCard[playersNumber];
     }
+    @Override
     public boolean check(ObjectCard[][] bookshelf) {
         boolean flag = false;
-        int max = bookshelf.length;
-        if(bookshelf[0][0].getType == bookshelf[0][max].getType == bookshelf[max][0].getType ==  bookshelf[max][max].getType){
-            flag = true;
+        int maxR = bookshelf.length-1;
+        int maxC=bookshelf[0].length-1;
+        if(bookshelf[0][0].getType()!=null && bookshelf[0][maxC].getType()!=null && bookshelf[maxR][0].getType()!=null && bookshelf[maxR][maxC].getType()!=null){
+            if(bookshelf[0][0].getType() == bookshelf[0][maxC].getType()
+                    && bookshelf[0][0].getType() == bookshelf[maxR][0].getType()
+                    && bookshelf[0][0].getType() ==  bookshelf[maxR][maxC].getType()){
+                flag = true;
+            }
         }
         return flag;
     }

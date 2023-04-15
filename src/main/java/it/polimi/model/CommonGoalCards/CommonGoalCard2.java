@@ -2,6 +2,7 @@ package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.PointCard;
+import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard2 extends CommonGoalCard {
 
@@ -10,7 +11,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
         // Deck creation
         points = new PointCard[playersNumber];
     }
-
+    @Override
     public boolean check(ObjectCard[][] bookshelf) {
 
         for(int i = 0; i < bookshelf.length; i++){

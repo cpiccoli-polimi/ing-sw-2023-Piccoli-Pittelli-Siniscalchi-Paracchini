@@ -39,7 +39,7 @@ public class LivingRoomBoard {
     };
 
     public ObjectCard removeObject(int xCoordinate, int yCoordinate) {
-        ObjectCard object = tile[xCoordinate][yCoordinate];
+        ObjectCard object = tile[xCoordinate][yCoordinate].getObject();
         tile[xCoordinate][yCoordinate] = null;
 
         return object;
