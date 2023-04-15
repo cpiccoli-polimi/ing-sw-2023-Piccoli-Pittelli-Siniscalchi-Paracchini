@@ -43,7 +43,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
                             }
                         }
                     }
-                    // Same type on the bottom (if exists)
+                    // Same type below (if exists)
                     else if (row - 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row - 1][col].getType()) {
                         for (int i = 0; i < counted.length; i++) {
                             if (counted[i][1] == -1) {
