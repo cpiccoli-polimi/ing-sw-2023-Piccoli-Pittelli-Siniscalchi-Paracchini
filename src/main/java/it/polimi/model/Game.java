@@ -1,6 +1,8 @@
 package it.polimi.model;
 
 import it.polimi.model.CommonGoalCards.*;
+import it.polimi.model.exception.CommonGoalsNumberException;
+import it.polimi.model.exception.PlayersNumberException;
 
 import java.util.Observable;
 import java.time.LocalTime;
@@ -26,7 +28,7 @@ public class Game extends Observable{
     private int currentPlayer;
     private Player[] leaderboard;
 
-    public Game(int playersNumber, int commonGoalsNumber){
+    public Game(int playersNumber, int commonGoalsNumber) throws PlayersNumberException, CommonGoalsNumberException {
         LocalTime clock = LocalTime.now();
         int hours = clock.getHour();
         int minutes = clock.getMinute();
@@ -39,8 +41,18 @@ public class Game extends Observable{
 
         this.done = false;
         this.endGamePoints = 1;
-        this.playersNumber = playersNumber;
-        this.commonGoalsNumber = commonGoalsNumber;
+        if(playersNumber > 0 && playersNumber <= 4){
+            this.playersNumber = playersNumber;
+        }
+        else{
+            throw new PlayersNumberException("Wrong players number");
+        }
+        if(commonGoalsNumber == 1 || commonGoalsNumber == 2){
+            this.commonGoalsNumber = commonGoalsNumber;
+        }
+        else{
+            throw new CommonGoalsNumberException("Wrong common goals number");
+        }
         this.table = new Player[playersNumber];
         this.board = new LivingRoomBoard(commonGoalsNumber);
         this.bag = new CardsBag();
