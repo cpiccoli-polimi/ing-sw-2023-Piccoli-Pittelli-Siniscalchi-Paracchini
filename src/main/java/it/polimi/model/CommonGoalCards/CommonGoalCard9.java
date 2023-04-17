@@ -22,11 +22,13 @@ public class CommonGoalCard9 extends CommonGoalCard {
         for(int i=0; i<bookshelf[0].length;i++){
             tess=0;
             for(int j=0; j<bookshelf.length;j++){
-                objectType=bookshelf[j][i].getType();
-                if(objectType!=null) {
-                    tess++;
-                    if (!typeList.contains(objectType)) {
-                        typeList.add(objectType);
+                if(bookshelf[j][i]!=null){
+                    objectType=bookshelf[j][i].getType();
+                    if(objectType!=null) {
+                        tess++;
+                        if (!typeList.contains(objectType)) {
+                            typeList.add(objectType);
+                        }
                     }
                 }
             }

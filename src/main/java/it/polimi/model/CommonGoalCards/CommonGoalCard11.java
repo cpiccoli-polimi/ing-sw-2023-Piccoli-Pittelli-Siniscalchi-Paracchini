@@ -22,14 +22,14 @@ public class CommonGoalCard11 extends CommonGoalCard {
         a= new int[Type.values().length];
         Arrays.fill(a,0);
         for(int i=0;i<bookshelf.length;i++){
-            for(int j=0;j<bookshelf[0].length && bookshelf[i][j].getType()!=null;j++){
+            for(int j=0;j<bookshelf[0].length;j++){
+                if(bookshelf[i][j]!=null){
                 objectType=bookshelf[i][j].getType();
-                if(objectType!=null){
-                    k=objectType.ordinal();
-                    a[k]++;
-                    if(a[k]==8){
-                        return true;
-                    }
+                k=objectType.ordinal();
+                a[k]++;
+                if(a[k]==8){
+                    return true;
+                }
                 }
             }
         }
