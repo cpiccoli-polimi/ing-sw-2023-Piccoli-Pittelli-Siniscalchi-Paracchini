@@ -247,11 +247,11 @@ public class GameController {
         int currentPlayer = model.getCurrentPlayer();
         Player[] table = model.getTable();
         // Get chosen column and counter of empty slot for checking 
-        int column = table.getChosenColumn()
+        int column = table[currentPlayer].getChosenColumn();
         int nullCounter = 0;
         // Get current player's bookshelf and chosen object size
         ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
-        int size = table[currentPlayer].getChosenObject().size();
+        int size = table[currentPlayer].getChosenObjects().length;
         // Count empty slots
         for (int row = 0; row < bookshelf[column].length; row++) {
             if (bookshelf[column][row] == null) {
@@ -267,11 +267,11 @@ public class GameController {
         // Get the current player info
         int currentPlayer = model.getCurrentPlayer();
         Player[] table = model.getTable();
-        int column = table.getChosenColumn();
-        ObjectCard[][] chosenObject = table[currentPlayer].getChosenObject();
+        int column = table[currentPlayer].getChosenColumn();
+        ObjectCard[][] chosenObject = table[currentPlayer].getChosenObjects();
         ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
         // Insert chosen object into the bookshelf
-        for (row = table[currentPlayer].getChosenObject().size() - 1; reverse >= 0; reverse--) {
+        for (int reverse = table[currentPlayer].getChosenObjects().length - 1; reverse >= 0; reverse--) {
             bookshelf[column][reverse] = chosenObject[reverse];
             chosenObject[reverse] = null;
         }
@@ -288,7 +288,7 @@ public class GameController {
     }
 
     private void updateBoard() {
-        LivingroomBoard board = model.getBoard();
+        LivingRoomBoard board = model.getBoard();
         Tile[][] tiles = board.getTiles();
         boolean free = true;
 
