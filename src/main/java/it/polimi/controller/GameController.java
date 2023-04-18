@@ -242,4 +242,83 @@ public class GameController {
         g=model.getCurrentPlayer();
         model.getTable()[g].setChosenObjects(pickedObject);
     }
+
+    private boolean checkChosenColumn() {
+        int currentPlayer = model.getCurrentPlayer();
+        Player[] table = model.getTable();
+        // Get chosen column and counter of empty slot for checking 
+        int column = table.getChosenColumn()
+        int nullCounter = 0;
+        // Get current player's bookshelf and chosen object size
+        ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
+        int size = table[currentPlayer].getChosenObject().size();
+        // Count empty slots
+        for (int row = 0; row < bookshelf[column].length; row++) {
+            if (bookshelf[column][row] == null) {
+                nullCounter += 1;
+            }
+        }
+        // Set a error trigger for insufficient space 
+        if (nullCounter < size) { return false; }
+        else { return true; }
+    }
+
+    private void arrangeChosenObjects() {
+        // Get the current player info
+        int currentPlayer = model.getCurrentPlayer();
+        Player[] table = model.getTable();
+        int column = table.getChosenColumn();
+        ObjectCard[][] chosenObject = table[currentPlayer].getChosenObject();
+        ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
+        // Insert chosen object into the bookshelf
+        for (row = table[currentPlayer].getChosenObject().size() - 1; reverse >= 0; reverse--) {
+            bookshelf[column][reverse] = chosenObject[reverse];
+            chosenObject[reverse] = null;
+        }
+    }
+
+    private void isDone() {
+        // Get the current players
+        int currentPlayer = model.getCurrentPlayer();
+        Player[] table = model.getTable();
+        // Check if the bookshelf is full and end game
+        if (table[currentPlayer].getBookshelf().isFull() == true) {
+            DeclareWinner();
+        }
+    }
+
+    private void updateBoard() {
+        LivingroomBoard board = model.getBoard();
+        Tile[][] tiles = board.getTiles();
+        boolean free = true;
+
+        // Check if each tile has 4 free sides
+        for(int i = 0; i < tiles.length; i++) {
+            for(int j = 0; j < tiles[i].length; j++) {
+                if(model.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
+                    if (tiles[i][j].getFreeSides() != 4) {
+                        free = false;
+                        j = tiles[i].length;
+                        i = tiles.length;
+                    }
+                }
+            }
+        }
+        // Repopulate the board
+        if (free == true) {
+            CardsBag bag = model.getBag();
+            int cardId;
+
+            for(int i = 0; i < tiles.length; i++){
+                for(int j = 0; j < tiles[i].length; j++){
+                    if(tiles[i][j].getMinPlayers() <= model.getPlayersNumber() && tiles[i][j] != null){
+                        cardId = bag.getCard();
+                        ObjectCard drawnCard = new ObjectCard(cardId, i, j);
+                        board.placeObject(drawnCard);
+                    }
+                }
+            }
+        }
+    }
 }
+
