@@ -268,7 +268,7 @@ public class GameController {
         int currentPlayer = model.getCurrentPlayer();
         Player[] table = model.getTable();
         int column = table[currentPlayer].getChosenColumn();
-        ObjectCard[][] chosenObject = table[currentPlayer].getChosenObjects();
+        ObjectCard[] chosenObject = table[currentPlayer].getChosenObjects();
         ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
         // Insert chosen object into the bookshelf
         for (int reverse = table[currentPlayer].getChosenObjects().length - 1; reverse >= 0; reverse--) {
@@ -314,7 +314,7 @@ public class GameController {
                     if(tiles[i][j].getMinPlayers() <= model.getPlayersNumber() && tiles[i][j] != null){
                         cardId = bag.getCard();
                         ObjectCard drawnCard = new ObjectCard(cardId, i, j);
-                        board.placeObject(drawnCard);
+                        board.placeObject(drawnCard,i,j);
                     }
                 }
             }
