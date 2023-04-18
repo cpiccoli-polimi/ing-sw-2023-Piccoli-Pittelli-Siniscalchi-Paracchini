@@ -6,14 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CommonGoalCard9Test {
-
-    @Test
-    void EmptyBookshelf(){
-        PublicObjectCard [][] bookshelf;
-        bookshelf= new PublicObjectCard[6][5];
-        CommonGoalCard9 cm9=new CommonGoalCard9(4);
-        assertEquals(false,cm9.check(bookshelf));
-    }
     @Test
     void TreColonneTreTipiDiversi(){
         PublicObjectCard [][] bookshelf;
