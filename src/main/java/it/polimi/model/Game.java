@@ -205,6 +205,7 @@ public class Game extends Observable{
                         pointsDeck[1] = new PointCard(Value.four, RomanNumeral.II);
                         pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
                     }
+                    break;
                 case 3:
                     if(i == 0){
                         pointsDeck[2] = new PointCard(Value.four, RomanNumeral.I);
@@ -216,6 +217,7 @@ public class Game extends Observable{
                         pointsDeck[1] = new PointCard(Value.six, RomanNumeral.II);
                         pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
                     }
+                    break;
                 case 4:
                     if(i == 0){
                         pointsDeck[3] = new PointCard(Value.two, RomanNumeral.I);
@@ -230,6 +232,7 @@ public class Game extends Observable{
                         pointsDeck[1] = new PointCard(Value.six, RomanNumeral.II);
                         pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
                     }
+                    break;
             }
             drawnCommonGoals[i].setPoints(pointsDeck);
         }
@@ -246,10 +249,12 @@ public class Game extends Observable{
         int hours = clock.getHour();
         int minutes = clock.getMinute();
         int seconds = clock.getSecond();
+        int nanoseconds = clock.getNano();
         String clockString = new String();
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
+        clockString += nanoseconds;
         long seed = parseLong(clockString);
         Random generator = new Random(seed);
         int firstPlayerIndex = generator.nextInt(playersNumber);
