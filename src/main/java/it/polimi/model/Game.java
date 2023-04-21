@@ -25,8 +25,8 @@ public class Game extends Observable{
     private Player[] table;
     private LivingRoomBoard board;
     private CardsBag bag;
-    private PersonalGoalCard[] personalGoalsDeck;
-    private CommonGoalCard[] commonGoalsDeck;
+    private List<PersonalGoalCard> personalGoalsDeck;
+    private List<CommonGoalCard> commonGoalsDeck;
     private int currentPlayer;
     private Player[] leaderboard;
 
@@ -58,7 +58,6 @@ public class Game extends Observable{
         this.table = new Player[playersNumber];
         this.board = new LivingRoomBoard(commonGoalsNumber);
         this.bag = new CardsBag();
-
         clock = LocalTime.now();
         hours = clock.getHour();
         minutes = clock.getMinute();
@@ -76,9 +75,9 @@ public class Game extends Observable{
             list.add(i+1);
         }
         shuffle(list, generator);
-        this.personalGoalsDeck = new PersonalGoalCard[12];
+        this.personalGoalsDeck = new ArrayList<PersonalGoalCard>();
         for(int i = 0; i < 12; i++){
-            personalGoalsDeck[i] = new PersonalGoalCard(list.get(i));
+            personalGoalsDeck.add(new PersonalGoalCard(list.get(i)));
         }
 
         clock = LocalTime.now();
@@ -94,45 +93,45 @@ public class Game extends Observable{
         seed = parseLong(clockString);
         generator = new Random(seed);
         shuffle(list, generator);
-        this.commonGoalsDeck = new CommonGoalCard[12];
+        this.commonGoalsDeck = new ArrayList<CommonGoalCard>();
         int i = 0;
         for(int j = 0; j < 12; j++){
             switch(list.get(j)){
                 case 1:
-                    commonGoalsDeck[i] = new CommonGoalCard1(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard1(playersNumber));
                     break;
                 case 2:
-                    commonGoalsDeck[i] = new CommonGoalCard2(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard2(playersNumber));
                     break;
                 case 3:
-                    commonGoalsDeck[i] = new CommonGoalCard3(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard3(playersNumber));
                     break;
                 case 4:
-                    commonGoalsDeck[i] = new CommonGoalCard4(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard4(playersNumber));
                     break;
                 case 5:
-                    commonGoalsDeck[i] = new CommonGoalCard5(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard5(playersNumber));
                     break;
                 case 6:
-                    commonGoalsDeck[i] = new CommonGoalCard6(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard6(playersNumber));
                     break;
                 case 7:
-                    commonGoalsDeck[i] = new CommonGoalCard7(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard7(playersNumber));
                     break;
                 case 8:
-                    commonGoalsDeck[i] = new CommonGoalCard8(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard8(playersNumber));
                     break;
                 case 9:
-                    commonGoalsDeck[i] = new CommonGoalCard9(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard9(playersNumber));
                     break;
                 case 10:
-                    commonGoalsDeck[i] = new CommonGoalCard10(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard10(playersNumber));
                     break;
                 case 11:
-                    commonGoalsDeck[i] = new CommonGoalCard11(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard11(playersNumber));
                     break;
                 case 12:
-                    commonGoalsDeck[i] = new CommonGoalCard12(playersNumber);
+                    commonGoalsDeck.add(i, new CommonGoalCard12(playersNumber));
                     break;
             }
             i += 1;
@@ -193,7 +192,7 @@ public class Game extends Observable{
         CommonGoalCard[] drawnCommonGoals = new CommonGoalCard[commonGoalsNumber];
 
         for(int i = 0; i < commonGoalsNumber; i++){
-            drawnCommonGoals[i] = commonGoalsDeck[i];
+            drawnCommonGoals[i] = commonGoalsDeck.remove(0);
 
             PointCard[] pointsDeck = new PointCard[playersNumber];
             switch(playersNumber){
@@ -239,7 +238,7 @@ public class Game extends Observable{
     }
     public void setupPersonalGoals(){
         for(int i = 0; i < playersNumber; i++){
-            table[i].setPersonalGoal(personalGoalsDeck[i]);
+            table[i].setPersonalGoal(personalGoalsDeck.remove(0));
         }
     }
     public void setupFirstPlayer(){
@@ -302,10 +301,10 @@ public class Game extends Observable{
     public CardsBag getBag() {
         return bag;
     }
-    public PersonalGoalCard[] getPersonalGoalsDeck() {
+    public List<PersonalGoalCard> getPersonalGoalsDeck() {
         return personalGoalsDeck;
     }
-    public CommonGoalCard[] getCommonGoalsDeck() {
+    public List<CommonGoalCard> getCommonGoalsDeck() {
         return commonGoalsDeck;
     }
     public int getCurrentPlayer(){
