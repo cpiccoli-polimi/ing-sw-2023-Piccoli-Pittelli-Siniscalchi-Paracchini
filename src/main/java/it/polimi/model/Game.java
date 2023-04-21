@@ -4,6 +4,8 @@ import it.polimi.model.CommonGoalCards.*;
 import it.polimi.model.exception.CommonGoalsNumberException;
 import it.polimi.model.exception.PlayersNumberException;
 
+import java.io.FileNotFoundException;
+import java.sql.Array;
 import java.util.Observable;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class Game extends Observable{
     private int currentPlayer;
     private Player[] leaderboard;
 
-    public Game(int playersNumber, int commonGoalsNumber) throws PlayersNumberException, CommonGoalsNumberException {
+    public Game(int playersNumber, int commonGoalsNumber) throws PlayersNumberException, CommonGoalsNumberException, FileNotFoundException {
         LocalTime clock = LocalTime.now();
         int hours = clock.getHour();
         int minutes = clock.getMinute();

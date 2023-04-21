@@ -1,22 +1,35 @@
 package it.polimi.model;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public class LivingRoomBoard {
     private CommonGoalCard[] commonGoals;
     private Tile[][] tile;
 
-    protected LivingRoomBoard(int commonGoalsNumber) {
+    protected LivingRoomBoard(int commonGoalsNumber) throws FileNotFoundException {
         this.tile = new Tile[9][9];
 
-        for (int i = 0; i < tile.length; i++) {
-            for (int j = 0; j < tile[0].length; j++) {
-            
-            }   
+        Gson gson = new Gson();
+        File tilesJsonFile = new File("src/main/resources/Tiles.json");
+        try {
+            FileReader tilesJsonFileReader = new FileReader(tilesJsonFile);
+            JsonArray tiles = gson.fromJson( tilesJsonFileReader, JsonArray.class);
+            for(JsonElement tileJsonElement:tiles){
+                JsonObject tileJsonObject = tileJsonElement.getAsJsonObject();
+                int row = tileJsonObject.get("row").getAsInt();
+                int column = tileJsonObject.get("column").getAsInt();
+                int minPlayers = tileJsonObject.get("minPlayers").getAsInt();
+
+                this.tile[row][column] = new Tile(minPlayers);
+            }
+
+        } catch (FileNotFoundException e) {
+            throw e;
         }
 
         commonGoals = new CommonGoalCard[commonGoalsNumber];
