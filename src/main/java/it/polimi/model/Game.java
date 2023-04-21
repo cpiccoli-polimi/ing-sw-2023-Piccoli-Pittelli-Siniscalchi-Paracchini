@@ -158,27 +158,35 @@ public class Game extends Observable{
         for(int i = 0; i < tiles.length; i++){
             for(int j = 0; j < tiles[i].length; j++){
                 if(playersNumber >= tiles[i][j].getMinPlayers()){
-                    freeSidesCounter = 0;
-                    if(tiles[i+1][j].getObject()!=null){
-                        freeSidesCounter += 1;
+                    freeSidesCounter = 4;
+                    if(i != tiles.length - 1){
+                        if(tiles[i+1][j].getObject()!=null){
+                            freeSidesCounter -= 1;
+                        }
                     }
                     else{
                         freeSidesCounter = freeSidesCounter;
                     }
-                    if(tiles[i-1][j].getObject()!=null){
-                        freeSidesCounter += 1;
+                    if(i != 0){
+                        if(tiles[i-1][j].getObject()!=null){
+                            freeSidesCounter -= 1;
+                        }
                     }
                     else{
                         freeSidesCounter = freeSidesCounter;
                     }
-                    if(tiles[i][j+1].getObject()!=null){
-                        freeSidesCounter += 1;
+                    if(j != tiles[i].length - 1){
+                        if(tiles[i][j+1].getObject()!=null) {
+                            freeSidesCounter -= 1;
+                        }
                     }
                     else{
                         freeSidesCounter = freeSidesCounter;
                     }
-                    if(tiles[i][j-1].getObject()!=null){
-                        freeSidesCounter += 1;
+                    if(j != 0){
+                        if(tiles[i][j-1].getObject()!=null) {
+                            freeSidesCounter -= 1;
+                        }
                     }
                     else{
                         freeSidesCounter = freeSidesCounter;
