@@ -26,6 +26,10 @@ public class ObjectCard {
         }
     };
 
+    public int getId() {
+        return id;
+    }
+
     public Type getType() {
         return type;
     };
