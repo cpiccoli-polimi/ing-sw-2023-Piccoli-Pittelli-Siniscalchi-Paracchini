@@ -35,44 +35,44 @@ public class CommonGoalCard1 extends CommonGoalCard {
                     // Same type on the right (if exists)
                     if (col + 1 < max && bookshelf[row][col].getType() == bookshelf[row][col + 1].getType()) {
                         for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][1] == -1) {
-                                counted[i][1] = row;
-                                counted[i][2] = col;
-                                counted[i + 1][1] = row;
-                                counted[i + 1][2] = col + 1;
+                            if (counted[i][0] == -1) {
+                                counted[i][0] = row;
+                                counted[i][1] = col;
+                                counted[i + 1][0] = row;
+                                counted[i + 1][1] = col + 1;
                             }
                         }
                     }
                     // Same type below (if exists)
                     else if (row - 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row - 1][col].getType()) {
                         for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][1] == -1) {
-                                counted[i][1] = row;
-                                counted[i][2] = col;
-                                counted[i + 1][1] = row - 1;
-                                counted[i + 1][2] = col;
+                            if (counted[i][0] == -1) {
+                                counted[i][0] = row;
+                                counted[i][1] = col;
+                                counted[i + 1][0] = row - 1;
+                                counted[i + 1][1] = col;
                             }
                         }
                     }
                     // Same type on the left (if exists)
                     else if (col - 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row][col - 1].getType()) {
                         for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][1] == -1) {
-                                counted[i][1] = row;
-                                counted[i][2] = col;
-                                counted[i + 1][1] = row;
-                                counted[i + 1][2] = col - 1;
+                            if (counted[i][0] == -1) {
+                                counted[i][0] = row;
+                                counted[i][1] = col;
+                                counted[i + 1][0] = row;
+                                counted[i + 1][1] = col - 1;
                             }
                         }
                     }
                     // Same type above (if exists)
                     else if (row + 1 < max && bookshelf[row][col].getType() == bookshelf[row + 1][col].getType()) {
                         for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][1] == -1) {
-                                counted[i][1] = row;
-                                counted[i][2] = col;
-                                counted[i + 1][1] = row + 1;
-                                counted[i + 1][2] = col;
+                            if (counted[i][0] == -1) {
+                                counted[i][0] = row;
+                                counted[i][1] = col;
+                                counted[i + 1][0] = row + 1;
+                                counted[i + 1][1] = col;
                             }
                         }
                     }

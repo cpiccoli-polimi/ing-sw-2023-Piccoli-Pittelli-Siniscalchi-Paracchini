@@ -37,15 +37,15 @@ public class CommonGoalCard5 extends CommonGoalCard {
                         if (col + 2 < max && bookshelf[row][col].getType() == bookshelf[row][col + 2].getType()) {
                             if (col + 3 < max && bookshelf[row][col].getType() == bookshelf[row][col + 3].getType()) {
                                 for (int i = 0; i < counted.length; i++) {
-                                    if (counted[i][1] == -1) {
-                                        counted[i][1] = row;
-                                        counted[i][2] = col;
-                                        counted[i + 1][1] = row;
-                                        counted[i + 1][2] = col + 1;
-                                        counted[i + 2][1] = row;
-                                        counted[i + 2][2] = col + 2;
-                                        counted[i + 3][1] = row;
-                                        counted[i + 3][2] = col + 3;
+                                    if (counted[i][0] == -1) {
+                                        counted[i][0] = row;
+                                        counted[i][1] = col;
+                                        counted[i + 1][0] = row;
+                                        counted[i + 1][1] = col + 1;
+                                        counted[i + 2][0] = row;
+                                        counted[i + 2][1] = col + 2;
+                                        counted[i + 3][0] = row;
+                                        counted[i + 3][1] = col + 3;
                                     }
                                 }
                             }
@@ -56,15 +56,15 @@ public class CommonGoalCard5 extends CommonGoalCard {
                         if (row + 2 >= 0 && bookshelf[row][col].getType() == bookshelf[row + 2][col].getType()) {
                             if (row + 3 >= 0 && bookshelf[row][col].getType() == bookshelf[row + 3][col].getType()) {
                                 for (int i = 0; i < counted.length; i++) {
-                                    if (counted[i][1] == -1) {
-                                        counted[i][1] = row;
-                                        counted[i][2] = col;
-                                        counted[i + 1][1] = row + 1;
-                                        counted[i + 1][2] = col;
-                                        counted[i + 2][1] = row + 2;
-                                        counted[i + 2][2] = col;
-                                        counted[i + 3][1] = row + 3;
-                                        counted[i + 3][2] = col;
+                                    if (counted[i][0] == -1) {
+                                        counted[i][0] = row;
+                                        counted[i][1] = col;
+                                        counted[i + 1][0] = row + 1;
+                                        counted[i + 1][1] = col;
+                                        counted[i + 2][0] = row + 2;
+                                        counted[i + 2][1] = col;
+                                        counted[i + 3][0] = row + 3;
+                                        counted[i + 3][1] = col;
                                     }
                                 }
                             }

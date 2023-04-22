@@ -26,8 +26,8 @@ class CommonGoalCard1Test {
         bookshelf[3][3]=new PublicObjectCard(67,3,3);
         bookshelf[3][4]=new PublicObjectCard(67,3,4);
 
-        bookshelf[4][5]=new PublicObjectCard(101,4,5);
-        bookshelf[5][5]=new PublicObjectCard(101,5,5);
+        bookshelf[4][4]=new PublicObjectCard(101,4,4);
+        bookshelf[5][4]=new PublicObjectCard(101,5,4);
 
         assertTrue(cm1.check(bookshelf));
     }
