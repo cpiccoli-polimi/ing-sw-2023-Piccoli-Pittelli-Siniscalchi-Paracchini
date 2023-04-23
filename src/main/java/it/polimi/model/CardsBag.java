@@ -12,8 +12,7 @@ import static java.util.Collections.shuffle;
 public class CardsBag {
     private List<Integer> cards;
 
-
-    protected void CardsBag() {
+    protected CardsBag() {
         LocalTime clock = LocalTime.now();
         int hours = clock.getHour();
         int minutes = clock.getMinute();
@@ -44,6 +43,8 @@ public class CardsBag {
     };
 
     private void setCards(List<Integer> cards){
-        this.cards = cards;
+        for(int i = 0; i < cards.size(); i++){
+            this.cards.add(cards.remove(0));
+        }
     };
 }
