@@ -1,0 +1,1711 @@
+{
+  "2PlayersCase" : [
+    {
+      "row": 0,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 3,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 4,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 5,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 1,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 1,
+      "column": 5,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 2,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 2,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 3,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 3,
+      "column": 7,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 3,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 1,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 4,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 7,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 4,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 1,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 5,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 5,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 5,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 6,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 6,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 3,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 7,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 7,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 3,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 4,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 5,
+      "objectCard": false,
+      "minPlayers": 3,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    }
+  ],
+  "3PlayersCase" : [
+    {
+      "row": 0,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 3
+    },
+    {
+      "row": 0,
+      "column": 4,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 5,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 1,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 1,
+      "column": 5,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 2,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 2,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 2,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 3,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 7,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 3,
+      "column": 8,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 3
+    },
+    {
+      "row": 4,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 1,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 4,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 7,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 4,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 0,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 3
+    },
+    {
+      "row": 5,
+      "column": 1,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 5,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 5,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 6,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 6,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 6,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 3,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 7,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 7,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 3,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 4,
+      "objectCard": false,
+      "minPlayers": 4,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 3
+    },
+    {
+      "row": 8,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    }
+  ],
+  "4PlayersCase" : [
+    {
+      "row": 0,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 0,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 0,
+      "column": 5,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 0,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 1,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 1,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 1,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 2,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 2,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 2,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 1,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 3,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 3,
+      "column": 7,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 3,
+      "column": 8,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 4,
+      "column": 0,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 4,
+      "column": 1,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 7,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 4,
+      "column": 8,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 5,
+      "column": 0,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 5,
+      "column": 1,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 5,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 5,
+      "column": 7,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 5,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 2,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 6,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 6,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 6,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 6,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 3,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 7,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 2,
+      "freeSidesCounter": 1
+    },
+    {
+      "row": 7,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 7,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 0,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 1,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 2,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 3,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 4,
+      "objectCard": true,
+      "minPlayers": 4,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 8,
+      "column": 5,
+      "objectCard": true,
+      "minPlayers": 3,
+      "freeSidesCounter": 2
+    },
+    {
+      "row": 8,
+      "column": 6,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 7,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    },
+    {
+      "row": 8,
+      "column": 8,
+      "objectCard": false,
+      "minPlayers": 9999,
+      "freeSidesCounter": 0
+    }
+  ]
+}
+
+
