@@ -84,7 +84,6 @@ public class PersonalGoalCard extends GoalCard{
     @Override
     public boolean equals(Object object) {
         if((object instanceof PersonalGoalCard) == false){
-            System.out.println("le due personalgoalcard confrontate non sono della stessa classe");
             return false;
         }
         PersonalGoalCard goalCard = (PersonalGoalCard) object;

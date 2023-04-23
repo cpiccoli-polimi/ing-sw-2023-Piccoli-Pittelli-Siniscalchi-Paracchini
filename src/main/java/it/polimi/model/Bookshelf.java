@@ -26,7 +26,6 @@ public class Bookshelf {
     public boolean equals(Object object) {
         boolean result = true;
         if((object instanceof Bookshelf) == false){
-            System.out.println("le due bookshelf confrontate non sono della stessa classe");
             return false;
         }
         Bookshelf bookshelf = (Bookshelf) object;

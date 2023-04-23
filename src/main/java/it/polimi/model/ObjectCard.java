@@ -53,7 +53,6 @@ public class ObjectCard {
     @Override
     public boolean equals(Object object) {
         if((object instanceof ObjectCard) == false){
-            System.out.println("le due objectcard confrontate non sono della stessa classe");
             return false;
         }
         ObjectCard objectCard = (ObjectCard) object;
