@@ -28,26 +28,33 @@ public class PersonalGoalCard extends GoalCard{
         String idString = Integer.toString(id);
         JsonArray jsonArray = jsonObject.get(idString).getAsJsonArray();
         // Create Bookshelf
-        Bookshelf goal = new Bookshelf();
+        goal = new Bookshelf();
         for(JsonElement jsonElement : jsonArray){
             JsonObject jObject = jsonElement.getAsJsonObject();
             // Retrieve attributes
             int xCoordinate = jObject.get("xCoordinate").getAsInt();
+            xCoordinate -=1;
             int yCoordinate = jObject.get("yCoordinate").getAsInt();
+            yCoordinate -=1;
             String objectType = jObject.get("objectType").getAsString();
 
             int cardId;
             switch (objectType){
                 case("Cats"):
                     cardId = 0;
+                    break;
                 case("Trophies"):
                     cardId = 23;
+                    break;
                 case("Plants"):
                     cardId = 45;
+                    break;
                 case("Books"):
                     cardId = 67;
+                    break;
                 case("Frames"):
                     cardId = 89;
+                    break;
                 case("Games"):
                     cardId = 101;
                     break;
