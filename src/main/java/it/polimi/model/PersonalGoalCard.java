@@ -14,9 +14,9 @@ import java.nio.charset.StandardCharsets;
 
 
 public class PersonalGoalCard extends GoalCard{
-    private static Bookshelf goal;
-    private static Map<Integer,Integer> points;
-    public PersonalGoalCard(int id) {
+    private Bookshelf goal;
+    private Map<Integer,Integer> points;
+    public PersonalGoalCard(int id){
 
         // Read file from JSON file and copy it into Personal Goal Card
         InputStream stream = PersonalGoalCard.class.getResourceAsStream("/PersonalGoalCards.json");
