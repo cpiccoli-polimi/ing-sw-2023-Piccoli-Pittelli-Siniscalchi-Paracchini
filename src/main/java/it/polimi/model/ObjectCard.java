@@ -49,4 +49,14 @@ public class ObjectCard {
     public void setYCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
     };
+
+    @Override
+    public boolean equals(Object object) {
+        if((object instanceof ObjectCard) == false){
+            System.out.println("le due objectcard confrontate non sono della stessa classe");
+            return false;
+        }
+        ObjectCard objectCard = (ObjectCard) object;
+        return(this.id == objectCard.getId() && this.type == objectCard.getType() && this.xCoordinate == objectCard.getXCoordinate() && this.yCoordinate == objectCard.getYCoordinate());
+    }
 }

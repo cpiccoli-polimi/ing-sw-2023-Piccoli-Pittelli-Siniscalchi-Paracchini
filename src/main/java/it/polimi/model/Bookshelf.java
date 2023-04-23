@@ -22,5 +22,33 @@ public class Bookshelf {
         return maxDrawableObjects == 0;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        boolean result = true;
+        if((object instanceof Bookshelf) == false){
+            System.out.println("le due bookshelf confrontate non sono della stessa classe");
+            return false;
+        }
+        Bookshelf bookshelf = (Bookshelf) object;
 
+        for(int i = 0; i < shelf.length && result == true; i++){
+            for(int j = 0; j < shelf[i].length && result == true; j++){
+                if(shelf[i][j] != null && bookshelf.getShelf()[i][j] != null){
+                    if(shelf[i][j].equals(bookshelf.getShelf()[i][j])){
+                        result = true;
+                    }
+                    else{
+                        result = false;
+                    }
+                }
+                else if(shelf[i][j] == null && bookshelf.getShelf()[i][j] == null){
+                    result = true;
+                }
+                else{
+                    result = false;
+                }
+            }
+        }
+        return result;
+    }
 }
