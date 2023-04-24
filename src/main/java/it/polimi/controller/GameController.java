@@ -2,6 +2,7 @@ package it.polimi.controller;
 
 import it.polimi.controller.exception.*;
 import it.polimi.model.*;
+import it.polimi.view.GameView;
 
 
 import java.util.HashMap;
@@ -150,7 +151,7 @@ public class GameController {
             model.setLeaderboard(table[points[i][1]],i);
         }
 
-        // TODO: How to notify view?
+        GameView.showLeaderboard(model.getLeaderboard());
     }
 
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
