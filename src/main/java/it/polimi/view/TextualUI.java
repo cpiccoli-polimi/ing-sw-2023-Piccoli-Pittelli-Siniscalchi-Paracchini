@@ -14,6 +14,24 @@ import java.util.Scanner;
 import it.polimi.model.*;
 
 public class TextualUI {
+
+    public void showBookshelf(Bookshelf bookshelf){
+        char squareCharacter = 9632;
+        ObjectCard[][] shelf = bookshelf.getShelf();
+
+        for(int i = 0; i < shelf.length; i++){
+            for(int j = 0; j < shelf[i].length; j++){
+                System.out.print("|");
+                if(shelf[i][j] == null){
+                    System.out.print(" ");
+                }
+                else{
+                    System.out.print(shelf[i][j].getType().getColor() + squareCharacter + Type.RESET);
+                }
+            }
+            System.out.println("|");
+        }
+    }
     void showCommonGoal(int id){
         // Read file from JSON file and copy it into Personal Goal Card
         InputStream stream = TextualUI.class.getResourceAsStream("/CommonGoals.json");
