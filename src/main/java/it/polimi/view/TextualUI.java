@@ -38,6 +38,25 @@ public class TextualUI {
         System.out.println(nickname + "'s bookshelf");
         showBookshelf(player.getBookshelf());
     }
+    public void showBoard(LivingRoomBoard board, int playersNumber){
+        char squareCharacter = 9632;
+        Tile[][] tiles = board.getTiles();
+
+        for(int i = 0; i < tiles.length; i++){
+            for(int j = 0; j < tiles[i].length; j++){
+                if(tiles[i][j].getMinPlayers() != 9999){
+                    System.out.print("|");
+                    if(playersNumber >= tiles[i][j].getMinPlayers()){
+                        System.out.print(tiles[i][j].getObject().getType().getColor() + squareCharacter + Type.RESET);
+                    }
+                    else{
+                        System.out.print(tiles[i][j].getMinPlayers());
+                    }
+                }
+            }
+            System.out.println("|");
+        }
+    }
     void showCommonGoal(int id){
         // Read file from JSON file and copy it into Personal Goal Card
         InputStream stream = TextualUI.class.getResourceAsStream("/CommonGoals.json");
