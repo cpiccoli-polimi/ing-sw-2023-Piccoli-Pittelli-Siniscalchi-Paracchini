@@ -2,7 +2,7 @@ package it.polimi.model;
 
 public abstract class GoalCard {
     private Object goal;
-    private int points;
+    private Object points;
     public Object getGoal(){return goal;};
-    public int getPoints(){return points;};
+    public Object getPoints(){return points;};
 }

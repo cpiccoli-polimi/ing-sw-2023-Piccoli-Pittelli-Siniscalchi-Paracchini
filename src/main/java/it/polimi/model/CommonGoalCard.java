@@ -15,6 +15,7 @@ public abstract class CommonGoalCard extends GoalCard{
             this.points.addAll(points);
         }
     }
+    public List<PointCard> getPoints(){ return this.points;}
     public boolean check(ObjectCard[][] bookshelf){return false;}
     @Override
     public boolean equals(Object object) {
