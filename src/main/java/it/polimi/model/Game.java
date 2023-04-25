@@ -332,7 +332,18 @@ public class Game extends Observable{
     public void setLeaderboard(Player player, int position) {
         this.leaderboard[position] = player;
     }
-    public void nextTurn(){    }
+    public void nextTurn(){
+        int i = 0;
+        while(this.table[i].getPosition() != this.currentPlayer){
+            i += 1;
+        }
+        if(this.table[i].getPosition() == 4){
+            this.currentPlayer = 0;
+        }
+        else{
+            this.currentPlayer += 1;
+        }
+    }
     public void updateCommonGoals(CommonGoalCard commonGoal){    }
     public void updateBoard(){    }
 }
