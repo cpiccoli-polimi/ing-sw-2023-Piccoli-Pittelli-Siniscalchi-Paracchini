@@ -45,16 +45,34 @@ public class TextualUI {
         for(int i = 0; i < tiles.length; i++){
             for(int j = 0; j < tiles[i].length; j++){
                 if(tiles[i][j].getMinPlayers() != 9999){
+                    int k = j;
+                    k += 1;
                     System.out.print("|");
                     if(playersNumber >= tiles[i][j].getMinPlayers()){
-                        System.out.print(tiles[i][j].getObject().getType().getColor() + squareCharacter + Type.RESET);
+                        if(tiles[i][j].getObject() == null){
+                            System.out.print(" ");
+                        }
+                        else{
+                            System.out.print(tiles[i][j].getObject().getType().getColor() + squareCharacter + Type.RESET);
+                        }
                     }
                     else{
                         System.out.print(tiles[i][j].getMinPlayers());
                     }
+                    if(k <= tiles[i].length - 1){
+                        if(tiles[i][k].getMinPlayers() == 9999){
+                            System.out.print("|");
+                        }
+                    }
+                    else{
+                        System.out.print("|");
+                    }
+                }
+                else{
+                    System.out.print("  ");
                 }
             }
-            System.out.println("|");
+            System.out.println();
         }
     }
     void showCommonGoal(int id){
