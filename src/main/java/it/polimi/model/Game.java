@@ -343,6 +343,17 @@ public class Game extends Observable{
             this.currentPlayer += 1;
         }
     }
-    public void updateCommonGoals(CommonGoalCard commonGoal){    }
-    public void updateBoard(){    }
+    public void updateCommonGoals(CommonGoalCard commonGoal){
+        int i = 0;
+        int points;
+        while(this.table[i].getPosition() != this.currentPlayer){
+            i += 1;
+        }
+        if(commonGoal.getPoints().isEmpty() == false){
+            points = this.table[i].getPoints();
+            points += commonGoal.getPoints().remove(0).getValue().i;
+            this.table[i].setPoints(points);
+        }
+    }
+    public void updateBoard(){}
 }
