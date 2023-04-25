@@ -8,7 +8,7 @@ public enum Type {
     Trophies("\u001B[36m"),
     Plants("\u001B[35m");
 
-    static final String RESET = "\u001B[0m";
+    public static final String RESET = "\u001B[0m";
 
     private String color;
 
