@@ -147,7 +147,7 @@ public class Game extends Observable{
 
         for(int i = 0; i < tiles.length; i++){
             for(int j = 0; j < tiles[i].length; j++){
-                if(playersNumber >= tiles[i][j].getMinPlayers()){
+                if(playersNumber >= tiles[i][j].getMinPlayers() && tiles[i][j].getObject() == null){
                     cardId = bag.getCard();
                     ObjectCard drawnCard = new ObjectCard( cardId, i, j);
                     board.placeObject(drawnCard, drawnCard.getXCoordinate(), drawnCard.getYCoordinate());
@@ -355,5 +355,7 @@ public class Game extends Observable{
             this.table[i].setPoints(points);
         }
     }
-    public void updateBoard(){}
+    public void updateBoard(){
+        setupBoardObjects();
+    }
 }
