@@ -32,6 +32,12 @@ public class TextualUI {
             System.out.println("|");
         }
     }
+    public void showPlayer(Player player){
+        String nickname = player.getNickname();
+
+        System.out.println(nickname + "'s bookshelf");
+        showBookshelf(player.getBookshelf());
+    }
     void showCommonGoal(int id){
         // Read file from JSON file and copy it into Personal Goal Card
         InputStream stream = TextualUI.class.getResourceAsStream("/CommonGoals.json");
