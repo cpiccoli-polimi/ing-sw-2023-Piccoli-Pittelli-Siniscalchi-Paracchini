@@ -5,11 +5,13 @@ import it.polimi.model.ObjectCard;
 import it.polimi.model.PointCard;
 import it.polimi.model.Type;
 
+import java.util.ArrayList;
+
 public class CommonGoalCard10 extends CommonGoalCard {
     public CommonGoalCard10(int playersNumber) {
         goalID = 10;
         // Deck creation
-        points = new PointCard[playersNumber];
+        points = new ArrayList<PointCard>();
     }
 
     @Override

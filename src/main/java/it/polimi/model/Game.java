@@ -202,43 +202,42 @@ public class Game extends Observable{
         for(int i = 0; i < commonGoalsNumber; i++){
             drawnCommonGoals[i] = commonGoalsDeck.remove(0);
 
-            PointCard[] pointsDeck = new PointCard[playersNumber];
+            List<PointCard> pointsDeck = new ArrayList<PointCard>();
             switch(playersNumber){
                 case 2:
                     if(i == 0){
-                        pointsDeck[1] = new PointCard(Value.four, RomanNumeral.I);
-                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.I);
+                        pointsDeck.add(1, new PointCard(Value.four, RomanNumeral.I));
+                        pointsDeck.add(0, new PointCard(Value.eight, RomanNumeral.I));
                     }
                     else{
-                        pointsDeck[1] = new PointCard(Value.four, RomanNumeral.II);
-                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
+                        pointsDeck.add(1, new PointCard(Value.four, RomanNumeral.II));
+                        pointsDeck.add(0, new PointCard(Value.eight, RomanNumeral.II));
                     }
                     break;
                 case 3:
                     if(i == 0){
-                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.I);
-                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.I);
-                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.I);
+                        pointsDeck.add(2, new PointCard(Value.four, RomanNumeral.I));
+                        pointsDeck.add(1, new PointCard(Value.six, RomanNumeral.I));
+                        pointsDeck.add(0, new PointCard(Value.eight, RomanNumeral.I));
                     }
                     else{
-                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.II);
-                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.II);
-                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
+                        pointsDeck.add(2, new PointCard(Value.four, RomanNumeral.II));
+                        pointsDeck.add(1, new PointCard(Value.six, RomanNumeral.II));
+                        pointsDeck.add(0, new PointCard(Value.eight, RomanNumeral.II));
                     }
                     break;
                 case 4:
                     if(i == 0){
-                        pointsDeck[3] = new PointCard(Value.two, RomanNumeral.I);
-                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.I);
-                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.I);
-                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.I);
-
+                        pointsDeck.add(3, new PointCard(Value.two, RomanNumeral.I));
+                        pointsDeck.add(2, new PointCard(Value.four, RomanNumeral.I));
+                        pointsDeck.add(1, new PointCard(Value.six, RomanNumeral.I));
+                        pointsDeck.add(0, new PointCard(Value.eight, RomanNumeral.I));
                     }
                     else{
-                        pointsDeck[3] = new PointCard(Value.two, RomanNumeral.II);
-                        pointsDeck[2] = new PointCard(Value.four, RomanNumeral.II);
-                        pointsDeck[1] = new PointCard(Value.six, RomanNumeral.II);
-                        pointsDeck[0] = new PointCard(Value.eight, RomanNumeral.II);
+                        pointsDeck.add(3, new PointCard(Value.two, RomanNumeral.II));
+                        pointsDeck.add(2, new PointCard(Value.four, RomanNumeral.II));
+                        pointsDeck.add(1, new PointCard(Value.six, RomanNumeral.II));
+                        pointsDeck.add(0, new PointCard(Value.eight, RomanNumeral.II));
                     }
                     break;
             }

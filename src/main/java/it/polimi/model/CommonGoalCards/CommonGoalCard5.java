@@ -2,11 +2,13 @@ package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.*;
 
+import java.util.ArrayList;
+
 public class CommonGoalCard5 extends CommonGoalCard {
     public CommonGoalCard5(int playersNumber) {
         goalID = 5;
         // Deck creation
-        points = new PointCard[playersNumber];
+        points = new ArrayList<PointCard>();
     }
     public boolean check(ObjectCard[][] bookshelf) {
         boolean flag = false;

@@ -11,7 +11,7 @@ public class CommonGoalCard9 extends CommonGoalCard {
     public CommonGoalCard9(int playersNumber) {
         goalID = 9;
         // Deck creation
-        points = new PointCard[playersNumber];
+        points = new ArrayList<PointCard>();
     }
     @Override
     public boolean check(ObjectCard[][] bookshelf) {

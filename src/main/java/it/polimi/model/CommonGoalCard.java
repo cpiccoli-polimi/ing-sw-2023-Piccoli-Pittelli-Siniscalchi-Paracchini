@@ -1,15 +1,19 @@
 package it.polimi.model;
 
+import java.util.List;
+
 public abstract class CommonGoalCard extends GoalCard{
 
     protected int goalID;
-    protected PointCard[] points;
+    protected List<PointCard> points;
 
     public int getGoalID(){
         return this.goalID;
     }
-    protected void setPoints(PointCard[] points){
-        this.points = points;
+    protected void setPoints(List<PointCard> points){
+        for(int i = 0; i < points.size(); i++){
+            this.points.addAll(points);
+        }
     }
     public boolean check(ObjectCard[][] bookshelf){return false;}
     @Override
