@@ -94,5 +94,17 @@ public class Player {
         this.chosenColumn = chosenColumn;
     }
 
+    private void CountPersonalGoalsPoints() {
+        // Get bookshelf, personalGoal and actual points from Player
+        ObjectCard[][] shelf = bookshelf.getShelf();
+        // Scan through every row and columns: if two cells match, add one point
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (shelf[row][col].getType() == personalGoal.getGoal().getShelf()[row][col].getType()) {
+                    points++;
+                }
+            }
+        }
+    }
 
 }

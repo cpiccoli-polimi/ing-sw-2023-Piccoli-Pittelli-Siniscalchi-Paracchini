@@ -2,7 +2,7 @@ package it.polimi.controller;
 
 import it.polimi.controller.exception.*;
 import it.polimi.model.*;
-import it.polimi.view.GameView;
+import it.polimi.view.TextualUI;
 
 
 import java.util.HashMap;
@@ -35,26 +35,7 @@ public class GameController {
         model.setupPersonalGoals();
         model.setupFirstPlayer();
     }
-    private void CountPersonalGoalsPoints() {
-        // Get all the players
-        Player[] table = model.getTable();
-        // For each of them count points
-        for(int i=0;i< table.length;i++) {
-            // Get bookshelf, personalGoal and actual points from Player
-            ObjectCard[][] bookshelf = table[i].getBookshelf().getShelf();
-            PersonalGoalCard personalGoal = table[i].getPersonalGoal();
-            int points = table[i].getPoints();
-            // Scan through every row and columns: if two cells match, add one point
-            for (int row = 0; row < 9; row++) {
-                for (int col = 0; col < 9; col++) {
-                    if (bookshelf[row][col].getType() == personalGoal.getGoal().getShelf()[row][col].getType()) {
-                        points++;
-                    }
-                }
-            }
-            table[i].setPoints(points);
-        }
-    }
+
     private void CountAdjacentItemsPoints() {
         Player[] table = model.getTable();
         for(int i=0;i< table.length;i++) {
@@ -151,7 +132,7 @@ public class GameController {
             model.setLeaderboard(table[points[i][1]],i);
         }
 
-        GameView.showLeaderboard(model.getLeaderboard());
+        TextualUI.showLeaderboard(model.getLeaderboard());
     }
 
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
