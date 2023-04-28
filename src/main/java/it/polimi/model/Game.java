@@ -16,6 +16,14 @@ import static java.lang.Long.parseLong;
 import static java.util.Collections.shuffle;
 
 public class Game extends Observable{
+    public enum Event{
+        GAME_START,
+        DUPLICATE_USERNAME,
+        SHOW_GAME, //(board, tutte le librerie, i common goal, e il proprio personal goal)
+        TILE_ERROR,
+        COLUMN_ERROR,
+        FINAL_LEADERBOARD
+    }
 
     private int id;
     private boolean done;
