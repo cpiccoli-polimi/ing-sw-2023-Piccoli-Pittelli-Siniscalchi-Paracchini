@@ -9,12 +9,80 @@ import com.google.gson.stream.JsonReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import it.polimi.model.*;
+import it.polimi.util.Observable;
 
-public class TextualUI {
+public class TextualUI extends Observable<TextualUI.Event> implements Runnable {
+    public enum Event{
+        NICKNAME,
+        GAME_PARAMETERS,
+        OBJECT_CARDS_CHOICE, //(board, tutte le librerie, i common goal, e il proprio personal goal)
+        COLUMN_CHOICE,
+        INSERTION_ORDER_CHOICE,
+        END_GAME
+    }
 
+    private int playersNumber;
+    private int commonGoalsNumber;
+    private String nickname;
+    private List<Integer[]> objectCardsChoice;
+    private int columnChoice;
+    private List<Integer> insertionOrderChoice;
+
+    public TextualUI(){
+        this.objectCardsChoice = new ArrayList<Integer[]>();
+        this.insertionOrderChoice = new ArrayList<Integer>();
+    }
+    public int getPlayersNumber() {
+        return playersNumber;
+    }
+
+    public void setPlayersNumber(int playersNumber) {
+        this.playersNumber = playersNumber;
+    }
+
+    public int getCommonGoalsNumber() {
+        return commonGoalsNumber;
+    }
+
+    public void setCommonGoalsNumber(int commonGoalsNumber) {
+        this.commonGoalsNumber = commonGoalsNumber;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public List<Integer[]> getObjectCardsChoice() {
+        return objectCardsChoice;
+    }
+
+    public void setObjectCardsChoice(Integer[] objectCardCoordinates) {
+        this.objectCardsChoice.add(objectCardCoordinates);
+    }
+
+    public int getColumnChoice() {
+        return columnChoice;
+    }
+    public void setColumnChoice(int columnChoice) {
+        this.columnChoice = columnChoice;
+    }
+
+    public List<Integer> getInsertionOrderChoice() {
+        return insertionOrderChoice;
+    }
+
+    public void setInsertionOrderChoice(Integer insertionOrderChoice) {
+        this.insertionOrderChoice.add(insertionOrderChoice);
+    }
     public void showBookshelf(Bookshelf bookshelf){
         char squareCharacter = 9632;
         ObjectCard[][] shelf = bookshelf.getShelf();
@@ -98,21 +166,32 @@ public class TextualUI {
             System.out.println("Position " + i + ": " + leaderboard[i-1]);
         }
     }
-    int[] askGameParameters(){
+    public void askGameParameters(){
         Scanner userInput = new Scanner(System.in);
-        int[] parameters = new int[2];
         System.out.println("How many players will play? (2 to 4):");
-        String numberOfPlayers = userInput.nextLine();
-        parameters[0] = Integer.parseInt(numberOfPlayers);
+        String numberOfPlayersString = userInput.nextLine();
+        setPlayersNumber(Integer.parseInt(numberOfPlayersString));
         System.out.println("How many common goals cards to use? (1 or 2):");
-        String commonGoalsNumber = userInput.nextLine();
-        parameters[1] = Integer.parseInt(commonGoalsNumber);
-        return parameters;
+        String commonGoalsNumberString = userInput.nextLine();
+        setCommonGoalsNumber(Integer.parseInt(commonGoalsNumberString));
         //TODO: Exceptions
     }
-    String askNickname(){
+    public void askNickname(){
         Scanner userInput = new Scanner(System.in);
         System.out.println("Please enter your nickname:");
-        return userInput.nextLine();
+        setNickname(userInput.nextLine());
+    }
+    public void update(GameView model, Game.Event arg){
+        switch(arg){
+
+        }
+    }
+    @Override
+    public void run() {
+
+    }
+    private void setChangedAndNotifyObservers(TextualUI.Event arg) {
+        setChanged();
+        notifyObservers(arg);
     }
 }
