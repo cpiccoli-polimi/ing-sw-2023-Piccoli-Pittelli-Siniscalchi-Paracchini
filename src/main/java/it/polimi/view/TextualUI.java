@@ -181,6 +181,27 @@ public class TextualUI extends Observable<TextualUI.Event> implements Runnable {
         System.out.println("Please enter your nickname:");
         setNickname(userInput.nextLine());
     }
+    ObjectCard[] askObjectCard() {
+        Scanner userInput = new Scanner(System.in);
+        Integer[] objectCardCoordinates = new Integer[3];
+        System.out.println("Which tiles do you choose to include in the bookshelf? (1 to 81):");
+        for (int i = 0; i < 3; i++) {
+            String position = userInput.nextLine();
+            objectCardCoordinates[i] = Integer.parseInt(position);
+        }
+        setObjectCardsChoice(objectCardCoordinates);
+    }
+    int askColumn() {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println("Choose the column of the bookshelf in which to place the tiles (1 to 5):");
+        String column = userInput.nextLine();
+        setColumnChoice(Integer.parseInt(column));
+        return columnChoice;
+    }
+    ObjectCard[] askCardsOrder() {
+        Scanner userInput = new Scanner(System.in);
+        // completare
+    }
     public void update(GameView model, Game.Event arg){
         switch(arg){
 
