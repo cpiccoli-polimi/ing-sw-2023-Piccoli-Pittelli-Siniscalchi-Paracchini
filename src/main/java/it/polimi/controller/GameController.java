@@ -200,7 +200,7 @@ public class GameController {
         Player[] table = model.getTable();
         // Check if the bookshelf is full and end game
         if (table[currentPlayer].getBookshelf().isFull() == true) {
-            DeclareWinner();
+            model.setDone(true);
         }
     }
 
@@ -223,17 +223,25 @@ public class GameController {
         }
         // Repopulate the board
         if (free == true) {
-            CardsBag bag = model.getBag();
-            int cardId;
+            model.updateBoard();
+        }
+    }
 
-            for(int i = 0; i < tiles.length; i++){
-                for(int j = 0; j < tiles[i].length; j++){
-                    if(tiles[i][j].getMinPlayers() <= model.getPlayersNumber() && tiles[i][j] != null){
-                        cardId = bag.getCard();
-                        ObjectCard drawnCard = new ObjectCard(cardId, i, j);
-                        board.placeObject(drawnCard,i,j);
-                    }
-                }
+    private void verifyCommonGoals() {
+        int currentPlayer = model.getCurrentPlayer();
+        Player[] table = model.getTable();
+        LivingRoomBoard board = model.getBoard();
+
+        for(int i = 0; i < model.getCommonGoalsNumber(); i++) {
+            drawnCommonGoals[i] = board.getCommonGoals()[i];
+            if (drawnCommonGoals[i].check() == true) {
+
+                List<PointCard> listPoints = new List<PointCard>();
+                listPoints = drawnCommonGoals[i].getPoints();
+                PointCard lastPoint = listPoints.get(listPoints.size());
+                int valuePoint = lastPoint.getValue();
+                //rimuovi lastpoint; listPoints.remove(lastPoint)
+                table[currentPlayer].setPoints(valuePoint);
             }
         }
     }
