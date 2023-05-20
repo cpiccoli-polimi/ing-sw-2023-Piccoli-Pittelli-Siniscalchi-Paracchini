@@ -53,8 +53,51 @@ public class LivingRoomBoard {
 
     public ObjectCard removeObject(int xCoordinate, int yCoordinate) {
         ObjectCard object = tile[xCoordinate][yCoordinate].getObject();
-        tile[xCoordinate][yCoordinate] = null;
+        tile[xCoordinate][yCoordinate].setObject(null);
 
         return object;
-    };
+    }
+
+    public void showBoard( int playersNumber){
+        char squareCharacter = 9632;
+        Tile[][] tiles = this.getTiles();
+
+        for(int i = 0; i < tiles.length; i++){
+            for(int j = 0; j < tiles[i].length; j++){
+                if(tiles[i][j]==null){System.out.print(" ");}
+                if(tiles[i][j].getMinPlayers() != 9999){
+                    int k = j;
+                    k += 1;
+                    System.out.print("|");
+                    if(playersNumber >= tiles[i][j].getMinPlayers()){
+                        if(tiles[i][j].getObject() == null){
+                            System.out.print(" ");
+                        }
+                        else{
+                            if(tiles[i][j].getObject().getType()==null){ System.out.print("p");}
+                            else{
+                                if(tiles[i][j].getObject().getType().getColor()==null){System.out.print("l");}
+                                else System.out.print(tiles[i][j].getObject().getType().getColor() + squareCharacter + Type.RESET);
+                            }}
+                    }
+                    else{
+                        System.out.print(tiles[i][j].getMinPlayers());
+                    }
+                    if(k <= tiles[i].length - 1){
+                        if(tile[i][k]==null || tiles[i][k].getMinPlayers() == 9999){
+                            System.out.print("|");
+                        }
+                    }
+                    else{
+                        System.out.print("|");
+                    }
+                }
+                else{
+                    System.out.print("  ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
+

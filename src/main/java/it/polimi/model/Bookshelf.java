@@ -50,4 +50,33 @@ public class Bookshelf {
         }
         return result;
     }
+    public void setShelf(ObjectCard card,int column){
+        int i=0;
+        for( i=0; i< shelf.length;i++){
+            if(shelf[i][column]!=null){
+                break;
+            }
+        }
+        shelf[i-1][column]=card;
+    }
+
+    public void showBookshelf(){
+        char squareCharacter = 9632;
+        ObjectCard[][] shelf = this.getShelf();
+
+        for(int i = 0; i < shelf.length; i++){
+            for(int j = 0; j < shelf[i].length; j++){
+                System.out.print("|");
+                if(shelf[i][j] == null){
+                    System.out.print(" ");
+                }
+                else{
+                    System.out.print(shelf[i][j].getType().getColor());
+                    System.out.print( squareCharacter + Type.RESET);
+                }
+            }
+            System.out.println("|");
+        }
+    }
+
 }
