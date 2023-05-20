@@ -54,9 +54,13 @@ public class Player {
         return position;
     }
     public void setPosition(int position){this.position=position;}
+
     public boolean getHasFinished(){return hasFinished;}
+
     public void setHasFinished(boolean hasFinished){ this.hasFinished=hasFinished;}
+
     public int[] getCommonGoalsCompleted() { return commonGoalsCompleted;}
+
     public void setCommonGoalsCompleted (int [] commonGoalsCompleted, int newGoals)throws AllCommonGoalsCompletedException, CommonGoalAlreadyCompletedException {
         if(commonGoalsCompleted[commonGoalsCompleted.length-1]!=-1){
             throw new AllCommonGoalsCompletedException();
@@ -86,9 +90,11 @@ public class Player {
     public Bookshelf getBookshelf() {
         return bookshelf;
     }
+
     public void setBookshelf(Bookshelf bookshelf) {
         this.bookshelf = bookshelf;
     }
+
     public int getChosenColumn() {
         return chosenColumn;
     }
