@@ -6,7 +6,7 @@ import it.polimi.model.exception.PlayersNumberException;
 
 import java.io.FileNotFoundException;
 import java.sql.Array;
-import java.util.Observable;
+import it.polimi.observer.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.util.Collections.shuffle;
 
-public class Game extends Observable{
+public class Game extends Observable<GameView>{
     public enum Event{
         GAME_START,
         DUPLICATE_USERNAME,
@@ -278,7 +278,7 @@ public class Game extends Observable{
             if(i == firstPlayerIndex){
                 table[i].setIsFirst(true);
                 table[i].setPosition(0);
-                setCurrentPlayer(0);
+                setCurrentPlayer(i);
             }
             else{
                 table[i].setIsFirst(false);
@@ -327,11 +327,9 @@ public class Game extends Observable{
     public List<CommonGoalCard> getCommonGoalsDeck() {
         return commonGoalsDeck;
     }
-    public int getCurrentPlayer(){
-        return currentPlayer;
-    }
-    public void setCurrentPlayer(int position) {
-        this.currentPlayer = position;
+    public int getCurrentPlayer(){return currentPlayer;}
+    public void setCurrentPlayer(int array_position) {
+        this.currentPlayer = array_position;
     }
     public Player[] getLeaderboard(){
         return leaderboard;
@@ -366,4 +364,33 @@ public class Game extends Observable{
     public void updateBoard(){
         setupBoardObjects();
     }
+
+    public void handleTurn(String m) {
+        notify(new GameView(1L,getTable(),getLeaderboard(),getBoard(),m,getCurrentPlayer()));
+
+    }
+    public void insertInOrder(int [] order){
+        ObjectCard [] objectCard=getTable()[getCurrentPlayer()].getChosenObjects();
+        ObjectCard [] objectCardsOrdered=new ObjectCard[order.length];
+        int column=getTable()[getCurrentPlayer()].getChosenColumn();
+        Bookshelf bookshelf=getTable()[getCurrentPlayer()].getBookshelf();
+        for(int i=0;i<order.length;i++){
+            objectCardsOrdered[order[i]]=objectCard[i];
+        }
+        for(int i=0;i< order.length;i++){
+            bookshelf.setShelf(objectCardsOrdered[i],column);
+        }
+        uptadeFreeSides;
+    }
+
+    public void endTurnChecks(){
+        updateBoard();
+        board.updateCommonGoals();
+        checkCurrentPlayerBookshelfFullness();
+        updateTurn();
+        String m="Choose the object cards from the board";
+        handleTurn(m);
+    }
+
+
 }

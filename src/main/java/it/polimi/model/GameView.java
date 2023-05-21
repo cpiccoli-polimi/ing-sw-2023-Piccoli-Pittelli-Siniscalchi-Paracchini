@@ -1,16 +1,40 @@
 package it.polimi.model;
 
 public class GameView {
-    private long serialVersionUID;
+    private final String message;
 
-    public GameView(long serialVersionUID) {
-        this.serialVersionUID = serialVersionUID;
+    private final long serialVersionUID;
+    private final Player[] table;
+    private final Player[] leaderboard;
+    private final LivingRoomBoard board;
+    private final int currPlayer;
+    public GameView(long serialVersionUID,Player[] table,Player[] leaderboard,LivingRoomBoard board,String message, int currPlayer ) {
+        this.serialVersionUID=serialVersionUID;
+        this.table=table;
+        this.message = message;
+        this.board=board;
+        this.currPlayer=currPlayer;
+        this.leaderboard=leaderboard;
     }
 
-    public void PlayerChoice(Game game){};
-    public Player[] getTable(){};
-    public Player[] getLeaderboard(){};
-    public LivingRoomBoard getBoard(){};
+    public String getMessage() {
+        return message;
+    }
+
+    public Player[] getTable () {
+        return table;
+    }
+
+    public Player[] getLeaderboard(){
+        return leaderboard;
+    }
+
+    public LivingRoomBoard getBoard(){
+        return board;
+    }
+    public int getCurrPlayer(){
+        return currPlayer;
+    }
 
 
 }
