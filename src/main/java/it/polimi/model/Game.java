@@ -278,7 +278,7 @@ public class Game extends Observable{
             if(i == firstPlayerIndex){
                 table[i].setIsFirst(true);
                 table[i].setPosition(0);
-                setCurrentPlayer(0);
+                setCurrentPlayer(i);
             }
             else{
                 table[i].setIsFirst(false);
@@ -327,11 +327,9 @@ public class Game extends Observable{
     public List<CommonGoalCard> getCommonGoalsDeck() {
         return commonGoalsDeck;
     }
-    public int getCurrentPlayer(){
-        return currentPlayer;
-    }
-    public void setCurrentPlayer(int position) {
-        this.currentPlayer = position;
+    public int getCurrentPlayer(){return currentPlayer;}
+    public void setCurrentPlayer(int array_position) {
+        this.currentPlayer = array_position;
     }
     public Player[] getLeaderboard(){
         return leaderboard;
