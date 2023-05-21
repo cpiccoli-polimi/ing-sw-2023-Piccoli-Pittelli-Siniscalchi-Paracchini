@@ -1,7 +1,6 @@
 
 package it.polimi.model;
-
-        import it.polimi.view.View;
+import it.polimi.view.View;
 
 public class PlayerChoice {
     private final Player player;
