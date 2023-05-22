@@ -217,7 +217,7 @@ public class GameController implements Observer<PlayerChoice> {
         return true;
     }
 
-    private void updateFreeSides(ObjectCard [] pickedObject){
+    /*private void updateFreeSides(ObjectCard [] pickedObject){
         int x=-1;
         int y=-1;
         int fs=-1;
@@ -239,12 +239,13 @@ public class GameController implements Observer<PlayerChoice> {
             tile.setFreeSides(fs - 1);
         }
 
-    }
+    }*/
 
     private void savePickedObject(ObjectCard [] pickedObject){
         int x=-1;
         int g=-1;
         int y=-1;
+        model.getBoard().updateFreeSides(pickedObject);
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
