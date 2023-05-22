@@ -9,6 +9,7 @@ import java.sql.Array;
 import it.polimi.observer.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import static java.lang.Integer.parseInt;
@@ -390,7 +391,10 @@ public class Game extends Observable<GameView>{
             this.setDone(true);
         }
         updateBoard();
-        board.updateCommonGoals();
+        List<CommonGoalCard>commonGoalsDeck=getCommonGoalsDeck();
+        for(CommonGoalCard e: commonGoalsDeck){
+            updateCommonGoals(e);
+        }
         updateTurn();
         String m="Choose the object cards from the board";
         handleTurn(m);
