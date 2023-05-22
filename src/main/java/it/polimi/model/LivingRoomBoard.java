@@ -99,5 +99,29 @@ public class LivingRoomBoard {
             System.out.println();
         }
     }
+
+    public void updateFreeSides(ObjectCard [] pickedObject){
+        int x=-1;
+        int y=-1;
+        int fs=-1;
+        Tile tile=null;
+        for (ObjectCard objectCard : pickedObject) {
+            x = objectCard.getXCoordinate();
+            y = objectCard.getYCoordinate();
+            tile = getTiles()[x - 1][y]; //up
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs + 1);
+            tile = getTiles()[x + 1][y]; //down
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs + 1);
+            tile = getTiles()[x][y - 1]; //left
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs + 1);
+            tile = getTiles()[x][y + 1]; //right
+            fs = tile.getFreeSides();
+            tile.setFreeSides(fs + 1);
+        }
+
+    }
 }
 
