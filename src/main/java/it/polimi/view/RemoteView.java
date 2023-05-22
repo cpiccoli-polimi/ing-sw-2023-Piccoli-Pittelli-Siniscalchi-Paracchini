@@ -2,6 +2,7 @@ package it.polimi.view;
 import it.polimi.model.GameView;
 import it.polimi.model.Player;
 import it.polimi.observer.Observer;
+import it.polimi.server.ClientConnection;
 
 public class RemoteView extends View {
     private ClientConnection clientConnection;

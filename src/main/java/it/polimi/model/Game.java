@@ -361,9 +361,9 @@ public class Game extends Observable<GameView>{
             this.table[i].setPoints(points);
         }
     }
-    public void updateBoard(){
+    /*public void updateBoard(){
         setupBoardObjects();
-    }
+    }*/
 
     public void handleTurn(String m) {
         notify(new GameView(1L,getTable(),getLeaderboard(),getBoard(),m,getCurrentPlayer()));
@@ -375,22 +375,58 @@ public class Game extends Observable<GameView>{
         int column=getTable()[getCurrentPlayer()].getChosenColumn();
         Bookshelf bookshelf=getTable()[getCurrentPlayer()].getBookshelf();
         for(int i=0;i<order.length;i++){
-            objectCardsOrdered[order[i]]=objectCard[i];
+            objectCardsOrdered[order[i]-1]=objectCard[i];
         }
         for(int i=0;i< order.length;i++){
             bookshelf.setShelf(objectCardsOrdered[i],column);
         }
-        uptadeFreeSides;
+        bookshelf.updateMaxDrawableObjects();
+
     }
 
     public void endTurnChecks(){
+        Bookshelf bookshelf=this.getTable()[this.getCurrentPlayer()].getBookshelf();
+        if(bookshelf.isFull()==true){
+            this.setDone(true);
+        }
         updateBoard();
         board.updateCommonGoals();
-        checkCurrentPlayerBookshelfFullness();
         updateTurn();
         String m="Choose the object cards from the board";
         handleTurn(m);
     }
+    private void updateBoard() {
+        LivingRoomBoard board = this.getBoard();
+        Tile[][] tiles = board.getTiles();
+        boolean free = true;
 
+        // Check if each tile has 4 free sides
+        for(int i = 0; i < tiles.length; i++) {
+            for(int j = 0; j < tiles[i].length; j++) {
+                if(this.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
+                    if (tiles[i][j].getFreeSides() != 4) {
+                        free = false;
+                        j = tiles[i].length;
+                        i = tiles.length;
+                    }
+                }
+            }
+        }
+        // Repopulate the board
+        if (free == true) {
+            CardsBag bag = this.getBag();
+            int cardId;
+
+            for(int i = 0; i < tiles.length; i++){
+                for(int j = 0; j < tiles[i].length; j++){
+                    if(tiles[i][j].getMinPlayers() <= this.getPlayersNumber() && tiles[i][j] != null){
+                        cardId = bag.getCard();
+                        ObjectCard drawnCard = new ObjectCard(cardId, i, j);
+                        board.placeObject(drawnCard,i,j);
+                    }
+                }
+            }
+        }
+    }
 
 }

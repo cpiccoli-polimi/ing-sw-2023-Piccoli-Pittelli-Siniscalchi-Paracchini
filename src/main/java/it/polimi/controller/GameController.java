@@ -4,10 +4,6 @@ import it.polimi.controller.exception.*;
 import it.polimi.model.*;
 import it.polimi.observer.Observer;
 import it.polimi.view.TextualUI;
-
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.*;
 
 
@@ -94,7 +90,7 @@ public class GameController implements Observer<PlayerChoice> {
             b=checkChosenColumn(chosenColumn);
             if(b==true){
                 model.getTable()[model.getCurrentPlayer()].setChosenColumn(chosenColumn);
-                String m="In which order do you want to insert the cards in that bookshelf column?"
+                String m="In which order do you want to insert the cards in that bookshelf column?";
                 model.handleTurn(m);
             }
         } else if(input[0]=="INSERTIONORDERCHOICE"){//TODO checkMessageCorrectness
