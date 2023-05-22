@@ -1,4 +1,9 @@
 package it.polimi.model;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class Bookshelf {
 
     private int maxDrawableObjects;
@@ -76,6 +81,25 @@ public class Bookshelf {
                 }
             }
             System.out.println("|");
+        }
+    }
+    public void updateMaxDrawableObjects(){
+        int maxDrawableObjects=this.getMaxDrawableObjects();
+        int i=0;
+        int max;
+        List<Integer> list = new ArrayList<Integer>();
+        for(int c=0;c<shelf[0].length;c++){
+            for(int r=0;r<shelf.length;r++){
+                if(shelf[r][c]==null){
+                    i=r+1;
+                }
+            }
+            list.add(i);
+            i=0;
+        }
+        max=list.stream().max(Comparator.comparing(a->a)).get();
+        if(max<maxDrawableObjects){
+            setMaxDrawableObjects(max);
         }
     }
 
