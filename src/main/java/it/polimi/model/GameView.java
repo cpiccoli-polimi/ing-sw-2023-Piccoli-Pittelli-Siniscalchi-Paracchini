@@ -2,19 +2,16 @@ package it.polimi.model;
 
 public class GameView {
     private final String message;
-
-    private final long serialVersionUID;
     private final Player[] table;
     private final Player[] leaderboard;
     private final LivingRoomBoard board;
     private final int currPlayer;
-    public GameView(long serialVersionUID,Player[] table,Player[] leaderboard,LivingRoomBoard board,String message, int currPlayer ) {
-        this.serialVersionUID=serialVersionUID;
-        this.table=table;
+    public GameView(Game game, String message) {
+        this.table=game.getTable();
         this.message = message;
-        this.board=board;
-        this.currPlayer=currPlayer;
-        this.leaderboard=leaderboard;
+        this.board=game.getBoard();
+        this.currPlayer=game.getCurrentPlayer();
+        this.leaderboard=game.getLeaderboard();
     }
 
     public String getMessage() {

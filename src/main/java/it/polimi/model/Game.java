@@ -367,7 +367,7 @@ public class Game extends Observable<GameView>{
     }*/
 
     public void handleTurn(String m) {
-        notify(new GameView(1L,getTable(),getLeaderboard(),getBoard(),m,getCurrentPlayer()));
+        notify(new GameView(this,m));
 
     }
     public void insertInOrder(int [] order){

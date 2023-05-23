@@ -102,7 +102,7 @@ public class Server {
                 }
                 waitingConnection.clear();
                 for(Player player : model.getTable()){
-                    clientConnections.get(player).asyncSend(new GameView(model));
+                    clientConnections.get(player).asyncSend(new GameView(model, ""));
                     if(player == model.getTable()[model.getCurrentPlayer()]){
                         clientConnections.get(player).asyncSend("Choose up to 3 object cards from the board that you want to put in a column of your own library");
                     }
