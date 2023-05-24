@@ -39,8 +39,8 @@ public class LivingRoomBoard {
         return commonGoals;
     };
 
-    public void setCommonGoals(CommonGoalCard[] commonGoals) {
-        this.commonGoals = commonGoals;
+    public void setCommonGoals(CommonGoalCard[] drawnCommonGoals) {
+        System.arraycopy(drawnCommonGoals, 0, this.commonGoals, 0, drawnCommonGoals.length);
     };
 
     public Tile[][] getTiles() {
