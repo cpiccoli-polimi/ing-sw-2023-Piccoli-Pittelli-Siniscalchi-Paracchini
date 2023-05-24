@@ -2,19 +2,113 @@ package it.polimi.controller;
 
 import it.polimi.controller.exception.*;
 import it.polimi.model.*;
+import it.polimi.observer.Observer;
 import it.polimi.view.TextualUI;
-
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.*;
 
 
-public class GameController {
+public class GameController implements Observer<PlayerChoice> {
     public final Game model;
     public GameController(Game model){
         this.model=model;
     }
+
+    @Override
+    public void update(PlayerChoice message) {
+        handleMessage(message);
+    }
+
+    private synchronized void handleMessage(PlayerChoice message){
+        if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){//getPosition deve restituire il numero della posizione in base al primo giocatore che ha iniziato il gioco, non rispetto al primo entrato
+            message.getView().reportError("It is not your turn");
+            return;
+        }
+        boolean b=false;
+        String mes= message.getMessage();
+        String[] input=mes.split(":");
+        ObjectCard [] chosenObjectCards=null;
+        if(input[0]=="OBJECTCARDSCHOICE"){//TODO checkMessageCorrectness
+            String [] space=input[1].split(" ");
+            if(space.length==1){
+                int [] coordinate= new int[2];
+                String [] comma=space[0].split(",");
+                coordinate[0]=Integer.parseInt(comma[0]);
+                coordinate[1]=Integer.parseInt(comma[1]);
+                chosenObjectCards= new ObjectCard[1];
+                chosenObjectCards[0] = model.getBoard().getTiles()[coordinate[0]][coordinate[1]].getObject();
+
+            } else if(space.length==2){
+                int [] coordinate = new int [4];
+                String [] comma=space[0].split(",");
+                coordinate[0]=Integer.parseInt(comma[0]);
+                coordinate[1]=Integer.parseInt(comma[1]);
+                comma=space[1].split(",");
+                coordinate[2]=Integer.parseInt(comma[0]);
+                coordinate[3]=Integer.parseInt(comma[1]);
+                chosenObjectCards= new ObjectCard[2];
+                chosenObjectCards[0] = model.getBoard().getTiles()[coordinate[0]][coordinate[1]].getObject();
+                chosenObjectCards[1] = model.getBoard().getTiles()[coordinate[2]][coordinate[3]].getObject();
+            }else if(space.length==3){
+                int [] coordinate = new int [6];
+                String [] comma=space[0].split(",");
+                coordinate[0]=Integer.parseInt(comma[0]);
+                coordinate[1]=Integer.parseInt(comma[1]);
+                comma=space[1].split(",");
+                coordinate[2]=Integer.parseInt(comma[0]);
+                coordinate[3]=Integer.parseInt(comma[1]);
+                comma=space[2].split(",");
+                coordinate[4]=Integer.parseInt(comma[0]);
+                coordinate[5]=Integer.parseInt(comma[1]);
+                chosenObjectCards= new ObjectCard[3];
+                chosenObjectCards[0] = model.getBoard().getTiles()[coordinate[0]][coordinate[1]].getObject();
+                chosenObjectCards[1] = model.getBoard().getTiles()[coordinate[2]][coordinate[3]].getObject();
+                chosenObjectCards[2] = model.getBoard().getTiles()[coordinate[4]][coordinate[5]].getObject();
+            }else{}
+            if(chosenObjectCards!=null){
+                try {
+                    b=checkPickedObject(chosenObjectCards);
+                } catch (MaxDrawableObjectsException e) {
+                    message.getView().reportError("Troppi oggetti selezionati");
+                } catch (NoAdjacentException e) {
+                    message.getView().reportError("Oggetti non adiacenti");
+                } catch (NoFreeSidesException e) {
+                    message.getView().reportError("Gli oggetti devono avere almeno un lato libero");
+                } catch (AlreadyPickedException e) {
+                    message.getView().reportError("Hai selezionato lo stesso oggetto");
+                } catch (NoStraightLineException e) {
+                    message.getView().reportError("Gli oggetti devono essere in linea retta");
+                }
+                if(b==true){
+                    savePickedObject(chosenObjectCards);
+                    String m="In which bookshelf column do you want to insert those cards?";
+                    model.handleTurn(m);
+                    }
+                }
+            }
+        else if(input[0]=="BOOKSHELFCOLUMNCHOICE"){//TODO checkMessageCorrectness
+            int chosenColumn=Integer.parseInt(input[1]);
+            b=checkChosenColumn(chosenColumn);
+            if(b==true){
+                model.getTable()[model.getCurrentPlayer()].setChosenColumn(chosenColumn);
+                String m="In which order do you want to insert the cards in that bookshelf column?";
+                model.handleTurn(m);
+            }
+        } else if(input[0]=="INSERTIONORDERCHOICE"){//TODO checkMessageCorrectness
+            String [] space;
+            space= input[1].split(" ");
+            int [] chosenInsertionOrder;
+            chosenInsertionOrder=new int[space.length];
+            for(int i=0;i<space.length;i++){
+                chosenInsertionOrder[i]=Integer.parseInt(space[i]);
+                model.insertInOrder(chosenInsertionOrder);
+                model.endTurnChecks();
+            }
+
+        } else if(input[0]=="LEADERBOARD"){
+
+        }
+    }
+
     private Game GetModel() {
         return this.model;
     }
@@ -123,7 +217,7 @@ public class GameController {
         return true;
     }
 
-    private void updateFreeSides(ObjectCard [] pickedObject){
+    /*private void updateFreeSides(ObjectCard [] pickedObject){
         int x=-1;
         int y=-1;
         int fs=-1;
@@ -145,12 +239,13 @@ public class GameController {
             tile.setFreeSides(fs - 1);
         }
 
-    }
+    }*/
 
     private void savePickedObject(ObjectCard [] pickedObject){
         int x=-1;
         int g=-1;
         int y=-1;
+        model.getBoard().updateFreeSides(pickedObject);
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
@@ -158,13 +253,15 @@ public class GameController {
         }
         g=model.getCurrentPlayer();
         model.getTable()[g].setChosenObjects(pickedObject);
+        //model.getBoard().removeObject(chosenObjectCards[i].getXCoordinate(),chosenObjectCards[i].getYCoordinate());
+        //model.getTable()[message.getPlayer().getPosition()].setChosenObjects(chosenObjectCards);
     }
 
-    private boolean checkChosenColumn() {
+    private boolean checkChosenColumn(int column) {
         int currentPlayer = model.getCurrentPlayer();
         Player[] table = model.getTable();
         // Get chosen column and counter of empty slot for checking 
-        int column = table[currentPlayer].getChosenColumn();
+        //int column = table[currentPlayer].getChosenColumn();
         int nullCounter = 0;
         // Get current player's bookshelf and chosen object size
         ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
@@ -204,7 +301,7 @@ public class GameController {
         }
     }
 
-    private void updateBoard() {
+    /*private void updateBoard() {
         LivingRoomBoard board = model.getBoard();
         Tile[][] tiles = board.getTiles();
         boolean free = true;
@@ -244,6 +341,6 @@ public class GameController {
                 table[currentPlayer].setPoints(valuePoint);
             }
         }
-    }
+    }*/
 }
 

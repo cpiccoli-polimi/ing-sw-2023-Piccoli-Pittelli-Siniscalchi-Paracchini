@@ -1,21 +1,24 @@
 package it.polimi.model;
 
 import it.polimi.model.CommonGoalCards.*;
+import it.polimi.model.exception.AllCommonGoalsCompletedException;
+import it.polimi.model.exception.CommonGoalAlreadyCompletedException;
 import it.polimi.model.exception.CommonGoalsNumberException;
 import it.polimi.model.exception.PlayersNumberException;
 
 import java.io.FileNotFoundException;
 import java.sql.Array;
-import java.util.Observable;
+import it.polimi.observer.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.util.Collections.shuffle;
 
-public class Game extends Observable{
+public class Game extends Observable<GameView>{
     public enum Event{
         GAME_START,
         DUPLICATE_USERNAME,
@@ -278,7 +281,7 @@ public class Game extends Observable{
             if(i == firstPlayerIndex){
                 table[i].setIsFirst(true);
                 table[i].setPosition(0);
-                setCurrentPlayer(0);
+                setCurrentPlayer(i);
             }
             else{
                 table[i].setIsFirst(false);
@@ -327,11 +330,9 @@ public class Game extends Observable{
     public List<CommonGoalCard> getCommonGoalsDeck() {
         return commonGoalsDeck;
     }
-    public int getCurrentPlayer(){
-        return currentPlayer;
-    }
-    public void setCurrentPlayer(int position) {
-        this.currentPlayer = position;
+    public int getCurrentPlayer(){return currentPlayer;}
+    public void setCurrentPlayer(int array_position) {
+        this.currentPlayer = array_position;
     }
     public Player[] getLeaderboard(){
         return leaderboard;
@@ -363,7 +364,98 @@ public class Game extends Observable{
             this.table[i].setPoints(points);
         }
     }
-    public void updateBoard(){
+    /*public void updateBoard(){
         setupBoardObjects();
+    }*/
+
+    public void handleTurn(String m) {
+        notify(new GameView(this,m));
+
     }
+    public void insertInOrder(int [] order){
+        ObjectCard [] objectCard=getTable()[getCurrentPlayer()].getChosenObjects();
+        ObjectCard [] objectCardsOrdered=new ObjectCard[order.length];
+        int column=getTable()[getCurrentPlayer()].getChosenColumn();
+        Bookshelf bookshelf=getTable()[getCurrentPlayer()].getBookshelf();
+        for(int i=0;i<order.length;i++){
+            objectCardsOrdered[order[i]-1]=objectCard[i];
+        }
+        for(int i=0;i< order.length;i++){
+            bookshelf.setShelf(objectCardsOrdered[i],column);
+        }
+        bookshelf.updateMaxDrawableObjects();
+
+    }
+
+    public void endTurnChecks()  {
+        boolean b=true;
+        Bookshelf bookshelf=this.getTable()[this.getCurrentPlayer()].getBookshelf();
+        if(bookshelf.isFull()==true){
+            this.setDone(true);
+        }
+        updateBoard();
+        CommonGoalCard [] commonGoalCard= board.getCommonGoals();
+        for(int i=0;i<commonGoalCard.length;i++) {
+            for (int j = 0; j < commonGoalCard.length; j++) {
+                if (table[getCurrentPlayer()].getCommonGoalsCompleted()[j] == commonGoalCard[i].getGoalID()) {
+                    b = false;
+                }
+            }
+            if (b && commonGoalCard[i].check(bookshelf.getShelf()) == true) {
+                try {
+                    table[getCurrentPlayer()].setCommonGoalsCompleted(table[getCurrentPlayer()].getCommonGoalsCompleted(), commonGoalCard[i].getGoalID());
+                } catch (CommonGoalAlreadyCompletedException e) {
+                    throw new RuntimeException(e);
+                } catch (AllCommonGoalsCompletedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                updateCommonGoals(commonGoalCard[i]);
+            }
+        }
+        updateTurn();
+        String m="Choose the object cards from the board";
+        handleTurn(m);
+    }
+
+    public void updateTurn(){
+        if(getCurrentPlayer()==playersNumber-1){
+            setCurrentPlayer(0);
+        }
+        else setCurrentPlayer(getCurrentPlayer()+1);
+    }
+    private void updateBoard() {
+        LivingRoomBoard board = this.getBoard();
+        Tile[][] tiles = board.getTiles();
+        boolean free = true;
+
+        // Check if each tile has 4 free sides
+        for(int i = 0; i < tiles.length; i++) {
+            for(int j = 0; j < tiles[i].length; j++) {
+                if(this.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
+                    if (tiles[i][j].getFreeSides() != 4) {
+                        free = false;
+                        j = tiles[i].length;
+                        i = tiles.length;
+                    }
+                }
+            }
+        }
+        // Repopulate the board
+        if (free == true) {
+            CardsBag bag = this.getBag();
+            int cardId;
+
+            for(int i = 0; i < tiles.length; i++){
+                for(int j = 0; j < tiles[i].length; j++){
+                    if(tiles[i][j].getMinPlayers() <= this.getPlayersNumber() && tiles[i][j] != null){
+                        cardId = bag.getCard();
+                        ObjectCard drawnCard = new ObjectCard(cardId, i, j);
+                        board.placeObject(drawnCard,i,j);
+                    }
+                }
+            }
+        }
+    }
+
 }

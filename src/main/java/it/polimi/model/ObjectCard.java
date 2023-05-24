@@ -11,18 +11,19 @@ public class ObjectCard {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
 
-        if (id < 23) {
+        if (id>=1 && id<= 22) {
             this.type = Type.Cats;
-        }else if (23 >= id && id < 45) {
+        }else if (id >= 23 && id <=45) {
             this.type = Type.Trophies;
-        }else if (45 >= id && id < 67) {
+        }else if (id >= 46 && id <= 67) {
             this.type = Type.Plants;
-        }else if (67 >= id && id < 89) {
+        }else if (id >= 68 && id <= 89) {
             this.type = Type.Books;
-        }else if (89 >= id && id < 101) {
+        }else if (id >= 90 && id <= 111) {
             this.type = Type.Frames;
-        }else if (101 >= id && id < 123) {
+        }else if (id >= 112 && id <= 132) {
             this.type = Type.Games;
+
         }
     };
 
