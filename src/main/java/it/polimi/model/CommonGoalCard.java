@@ -11,9 +11,7 @@ public abstract class CommonGoalCard extends GoalCard{
         return this.goalID;
     }
     protected void setPoints(List<PointCard> points){
-        for(int i = 0; i < points.size(); i++){
-            this.points.addAll(points);
-        }
+        this.points.addAll(points);
     }
     public List<PointCard> getPoints(){ return this.points;}
     public boolean check(ObjectCard[][] bookshelf){return false;}
