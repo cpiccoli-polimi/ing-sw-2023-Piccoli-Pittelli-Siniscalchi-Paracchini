@@ -1,6 +1,8 @@
 package it.polimi.model;
 
-public class Tile {
+import java.io.Serializable;
+
+public class Tile implements Serializable {
     private int minPlayers;
     private int freeSides;
     private ObjectCard object;

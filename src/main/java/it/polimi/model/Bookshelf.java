@@ -1,10 +1,11 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Bookshelf {
+public class Bookshelf implements Serializable {
 
     private int maxDrawableObjects;
     protected ObjectCard [][] shelf;

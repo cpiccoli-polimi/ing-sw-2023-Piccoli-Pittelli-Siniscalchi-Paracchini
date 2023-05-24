@@ -1,8 +1,9 @@
 package it.polimi.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class CommonGoalCard extends GoalCard{
+public abstract class CommonGoalCard extends GoalCard implements Serializable {
 
     protected int goalID;
     protected List<PointCard> points;

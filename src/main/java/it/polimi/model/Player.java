@@ -2,10 +2,11 @@ package it.polimi.model;
 import it.polimi.model.exception.AllCommonGoalsCompletedException;
 import it.polimi.model.exception.CommonGoalAlreadyCompletedException;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Player {
+public class Player implements Serializable {
     private String nickname;
     private int points;
     private boolean isFirst;

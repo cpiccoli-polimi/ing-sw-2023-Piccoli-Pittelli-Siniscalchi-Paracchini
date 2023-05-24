@@ -1,6 +1,8 @@
 package it.polimi.model;
 
-public class ObjectCard {
+import java.io.Serializable;
+
+public class ObjectCard implements Serializable {
     private int id;
     private Type type;
     private int xCoordinate;

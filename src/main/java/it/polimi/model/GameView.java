@@ -1,6 +1,8 @@
 package it.polimi.model;
 
-public class GameView {
+import java.io.Serializable;
+
+public class GameView implements Serializable{
     private final String message;
     private final Player[] table;
     private final Player[] leaderboard;

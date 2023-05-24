@@ -6,8 +6,9 @@ import com.google.gson.stream.JsonReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.Serializable;
 
-public class LivingRoomBoard {
+public class LivingRoomBoard implements Serializable {
     private CommonGoalCard[] commonGoals;
     private Tile[][] tile;
 

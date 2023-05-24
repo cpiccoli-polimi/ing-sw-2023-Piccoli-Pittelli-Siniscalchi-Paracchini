@@ -1,6 +1,8 @@
 package it.polimi.model;
 
-public class PointCard {
+import java.io.Serializable;
+
+public class PointCard implements Serializable {
     Value value;
     RomanNumeral backNumber;
     public PointCard(Value value, RomanNumeral backNumber){
