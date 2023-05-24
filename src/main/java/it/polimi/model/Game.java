@@ -1,6 +1,8 @@
 package it.polimi.model;
 
 import it.polimi.model.CommonGoalCards.*;
+import it.polimi.model.exception.AllCommonGoalsCompletedException;
+import it.polimi.model.exception.CommonGoalAlreadyCompletedException;
 import it.polimi.model.exception.CommonGoalsNumberException;
 import it.polimi.model.exception.PlayersNumberException;
 
@@ -385,19 +387,42 @@ public class Game extends Observable<GameView>{
 
     }
 
-    public void endTurnChecks(){
+    public void endTurnChecks()  {
+        boolean b=true;
         Bookshelf bookshelf=this.getTable()[this.getCurrentPlayer()].getBookshelf();
         if(bookshelf.isFull()==true){
             this.setDone(true);
         }
         updateBoard();
-        List<CommonGoalCard>commonGoalsDeck=getCommonGoalsDeck();
-        for(CommonGoalCard e: commonGoalsDeck){
-            updateCommonGoals(e);
+        CommonGoalCard [] commonGoalCard= board.getCommonGoals();
+        for(int i=0;i<commonGoalCard.length;i++) {
+            for (int j = 0; j < commonGoalCard.length; j++) {
+                if (table[getCurrentPlayer()].getCommonGoalsCompleted()[j] == commonGoalCard[i].getGoalID()) {
+                    b = false;
+                }
+            }
+            if (b && commonGoalCard[i].check(bookshelf.getShelf()) == true) {
+                try {
+                    table[getCurrentPlayer()].setCommonGoalsCompleted(table[getCurrentPlayer()].getCommonGoalsCompleted(), commonGoalCard[i].getGoalID());
+                } catch (CommonGoalAlreadyCompletedException e) {
+                    throw new RuntimeException(e);
+                } catch (AllCommonGoalsCompletedException e) {
+                    throw new RuntimeException(e);
+                }
+
+                updateCommonGoals(commonGoalCard[i]);
+            }
         }
         updateTurn();
         String m="Choose the object cards from the board";
         handleTurn(m);
+    }
+
+    public void updateTurn(){
+        if(getCurrentPlayer()==playersNumber-1){
+            setCurrentPlayer(0);
+        }
+        else setCurrentPlayer(getCurrentPlayer()+1);
     }
     private void updateBoard() {
         LivingRoomBoard board = this.getBoard();

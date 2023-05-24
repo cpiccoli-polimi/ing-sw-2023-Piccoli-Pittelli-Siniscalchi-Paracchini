@@ -301,7 +301,7 @@ public class GameController implements Observer<PlayerChoice> {
         }
     }
 
-    private void updateBoard() {
+    /*private void updateBoard() {
         LivingRoomBoard board = model.getBoard();
         Tile[][] tiles = board.getTiles();
         boolean free = true;
@@ -333,6 +333,6 @@ public class GameController implements Observer<PlayerChoice> {
                 }
             }
         }
-    }
+    }*/
 }
 
