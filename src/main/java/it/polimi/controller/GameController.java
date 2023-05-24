@@ -3,7 +3,6 @@ package it.polimi.controller;
 import it.polimi.controller.exception.*;
 import it.polimi.model.*;
 import it.polimi.observer.Observer;
-import it.polimi.view.TextualUI;
 import java.util.*;
 
 
@@ -123,14 +122,14 @@ public class GameController implements Observer<PlayerChoice> {
         }
     }
 
-    private void setup(){
+    public void setup(){
         model.setupBoardObjects();
         model.setupCommonGoals();
         model.setupPersonalGoals();
         model.setupFirstPlayer();
     }
 
-    private void DeclareWinner() {
+    /*private void DeclareWinner() {
         Player[] table = model.getTable();
         for(int i=0; i< table.length;i++){
             table[i].countPersonalGoalsPoints();
@@ -162,7 +161,7 @@ public class GameController implements Observer<PlayerChoice> {
         }
 
         TextualUI.showLeaderboard(model.getLeaderboard());
-    }
+    }*/
 
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
         int p=-1;
