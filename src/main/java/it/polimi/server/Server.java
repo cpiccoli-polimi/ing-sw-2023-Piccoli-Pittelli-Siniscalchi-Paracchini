@@ -28,7 +28,8 @@ public class Server {
 
     Game model;
     GameController controller;
-
+    int playersNumber = -1;
+    int commonGoalsNumber = -1;
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     };
@@ -41,8 +42,6 @@ public class Server {
         }
     }
     public void lobby(ClientConnection c, String nickname, Socket socket){
-        int playersNumber = -1;
-        int commonGoalsNumber = -1;
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
         for(int i = 0; i < keys.size(); i++){
             ClientConnection connection = waitingConnection.get(keys.get(i));
@@ -75,43 +74,40 @@ public class Server {
                     c.asyncSend("With how many common goals do you want to play this game?");
                     message = in.nextLine();
                     commonGoalsNumber = Integer.valueOf(message);
-                    if(commonGoalsNumber != 1 || commonGoalsNumber != 2){
+                    if(commonGoalsNumber != 1 && commonGoalsNumber != 2){
                         commonGoalsNumber = -1;
                     }
                 }
+                model = new Game(playersNumber, commonGoalsNumber);
             }
-            catch(IOException e){
+            catch(IOException | PlayersNumberException | CommonGoalsNumberException e){
                 throw new RuntimeException(e);
             }
         }
         keys = new ArrayList<>(waitingConnection.keySet());
         if(waitingConnection.size() == playersNumber){
-            try {
-                model = new Game(playersNumber, commonGoalsNumber);
-                controller = new GameController(model);
-                int i = 0;
-                for(ClientConnection connection : waitingConnection.values()) {
-                    model.setTable(new Player(keys.get(i), model.getCommonGoalsNumber()), i);
-                    Player player = model.getTable()[i];
-                    RemoteView playerView = new RemoteView(player, connection);
-                    playerView.addObserver(controller);
-                    model.addObserver(playerView);
-                    clientConnections.put(player, connection);
-                    playerRemoteViews.put(player, playerView);
-                    i++;
+            controller = new GameController(model);
+            int i = 0;
+            for(ClientConnection connection : waitingConnection.values()) {
+                model.setTable(new Player(keys.get(i), model.getCommonGoalsNumber()), i);
+                Player player = model.getTable()[i];
+                RemoteView playerView = new RemoteView(player, connection);
+                playerView.addObserver(controller);
+                model.addObserver(playerView);
+                clientConnections.put(player, connection);
+                playerRemoteViews.put(player, playerView);
+                i++;
+            }
+            controller.setup();
+            waitingConnection.clear();
+            for(Player player : model.getTable()){
+                clientConnections.get(player).asyncSend(new GameView(model, ""));
+                if(player == model.getTable()[model.getCurrentPlayer()]){
+                    clientConnections.get(player).asyncSend("Choose up to 3 object cards from the board that you want to put in a column of your own library");
                 }
-                waitingConnection.clear();
-                for(Player player : model.getTable()){
-                    clientConnections.get(player).asyncSend(new GameView(model, ""));
-                    if(player == model.getTable()[model.getCurrentPlayer()]){
-                        clientConnections.get(player).asyncSend("Choose up to 3 object cards from the board that you want to put in a column of your own library");
-                    }
-                    else{
-                        clientConnections.get(player).asyncSend("Now it's " + model.getTable()[model.getCurrentPlayer()].getNickname() + "'s turn. Wait your turn");
-                    }
+                else{
+                    clientConnections.get(player).asyncSend("Now it's " + model.getTable()[model.getCurrentPlayer()].getNickname() + "'s turn. Wait your turn");
                 }
-            } catch (PlayersNumberException | CommonGoalsNumberException | FileNotFoundException e) {
-                throw new RuntimeException(e);
             }
 
         }
