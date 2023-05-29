@@ -215,6 +215,8 @@ public class GameController implements Observer<PlayerChoice> {
                     sortX.add(pickedObject[i].getXCoordinate());
                 }
             }
+        }
+
             if (sortX.size() == 1 && sortY.size() == pickedObject.length) {//le tessere sono state scelte su una linea orizzontale
                 for( int j=0; j<sortY.size();j++){
                     p= sortY.get(j);
@@ -234,7 +236,7 @@ public class GameController implements Observer<PlayerChoice> {
             else{
                 throw new NoStraightLineException();
             }
-        }
+
         return true;
     }
 
