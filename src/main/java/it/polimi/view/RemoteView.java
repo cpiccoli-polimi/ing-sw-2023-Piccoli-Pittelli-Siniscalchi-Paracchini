@@ -6,7 +6,6 @@ import it.polimi.server.ClientConnection;
 
 public class RemoteView extends View {
     private ClientConnection clientConnection;
-    private Player player;
     public RemoteView(Player player, ClientConnection c){
         super(player);
         this.clientConnection=c;
@@ -22,7 +21,7 @@ public class RemoteView extends View {
         System.out.println("received: "+message);
         try{
             clientConnection.asyncSend(message);
-            if(message.getCurrPlayer()==player.getPosition()){
+            if(message.getCurrPlayer()==super.getPlayer().getPosition()){
                 clientConnection.asyncSend(message.getMessage());
             }
         }catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e){
