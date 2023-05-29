@@ -6,9 +6,7 @@ import java.util.ArrayList;
 
 public class CommonGoalCard3 extends CommonGoalCard {
     public CommonGoalCard3(int playersNumber) {
-        goalID = 3;
-        // Deck creation
-        points = new ArrayList<PointCard>();
+        super(3);
     }
     @Override
     public boolean check(ObjectCard[][] bookshelf) {

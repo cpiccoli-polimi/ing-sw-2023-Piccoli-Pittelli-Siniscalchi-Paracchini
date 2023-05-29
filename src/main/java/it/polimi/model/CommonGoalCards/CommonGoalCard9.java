@@ -9,9 +9,7 @@ import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard9 extends CommonGoalCard {
     public CommonGoalCard9(int playersNumber) {
-        goalID = 9;
-        // Deck creation
-        points = new ArrayList<PointCard>();
+        super(9);
     }
     @Override
     public boolean check(ObjectCard[][] bookshelf) {
