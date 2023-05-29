@@ -445,8 +445,6 @@ public class Game extends Observable<GameView>{
                 if(this.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
                     if (tiles[i][j].getFreeSides() != 4) {
                         free = false;
-                        j = tiles[i].length;
-                        i = tiles.length;
                     }
                 }
             }
