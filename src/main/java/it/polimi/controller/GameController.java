@@ -18,6 +18,11 @@ public class GameController implements Observer<PlayerChoice> {
     }
 
     private synchronized void handleMessage(PlayerChoice message){
+        int i = 0;
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){//getPosition deve restituire il numero della posizione in base al primo giocatore che ha iniziato il gioco, non rispetto al primo entrato
             message.getView().reportError("It is not your turn");
             return;
@@ -88,7 +93,7 @@ public class GameController implements Observer<PlayerChoice> {
             int chosenColumn=Integer.parseInt(input[1]);
             b=checkChosenColumn(chosenColumn);
             if(b==true){
-                model.getTable()[model.getCurrentPlayer()].setChosenColumn(chosenColumn);
+                currentPlayer.setChosenColumn(chosenColumn);
                 String m="In which order do you want to insert the cards in that bookshelf column?";
                 model.handleTurn(m);
             }
@@ -97,7 +102,7 @@ public class GameController implements Observer<PlayerChoice> {
             space= input[1].split(" ");
             int [] chosenInsertionOrder;
             chosenInsertionOrder=new int[space.length];
-            for(int i=0;i<space.length;i++){
+            for(i=0;i<space.length;i++){
                 chosenInsertionOrder[i]=Integer.parseInt(space[i]);
                 model.insertInOrder(chosenInsertionOrder);
                 model.endTurnChecks();
@@ -164,15 +169,19 @@ public class GameController implements Observer<PlayerChoice> {
     }*/
 
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
-        int p=-1;
         int x;
         int y;
+        int i = 0;
+        int p;
         List<Integer> sortX = new ArrayList<Integer>();
         sortX.add(pickedObject[0].getXCoordinate());
         List<Integer> sortY = new ArrayList<Integer>();
         sortY.add(pickedObject[0].getYCoordinate());
-        p= model.getCurrentPlayer();
-        if (model.getTable()[p].getBookshelf().getMaxDrawableObjects() < pickedObject.length) {
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
+        if (currentPlayer.getBookshelf().getMaxDrawableObjects() < pickedObject.length) {
             throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
         }
         for (ObjectCard objectCard : pickedObject) {
@@ -182,7 +191,7 @@ public class GameController implements Observer<PlayerChoice> {
                 throw new NoFreeSidesException();
             }
         }
-        for (int i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
+        for (i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
             if (sortX.contains(pickedObject[i].getXCoordinate()) && sortY.contains(pickedObject[i].getYCoordinate())) {
                 throw new AlreadyPickedException();
             } else {
@@ -242,29 +251,35 @@ public class GameController implements Observer<PlayerChoice> {
 
     private void savePickedObject(ObjectCard [] pickedObject){
         int x=-1;
-        int g=-1;
         int y=-1;
+        int i = 0;
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
         model.getBoard().updateFreeSides(pickedObject);
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
             model.getBoard().removeObject(x, y);
         }
-        g=model.getCurrentPlayer();
-        model.getTable()[g].setChosenObjects(pickedObject);
+        currentPlayer.setChosenObjects(pickedObject);
         //model.getBoard().removeObject(chosenObjectCards[i].getXCoordinate(),chosenObjectCards[i].getYCoordinate());
         //model.getTable()[message.getPlayer().getPosition()].setChosenObjects(chosenObjectCards);
     }
 
     private boolean checkChosenColumn(int column) {
-        int currentPlayer = model.getCurrentPlayer();
-        Player[] table = model.getTable();
-        // Get chosen column and counter of empty slot for checking 
+        int i = 0;
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
+        // Get chosen column and counter of empty slot for checking
         //int column = table[currentPlayer].getChosenColumn();
         int nullCounter = 0;
         // Get current player's bookshelf and chosen object size
-        ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
-        int size = table[currentPlayer].getChosenObjects().length;
+        ObjectCard[][] bookshelf = currentPlayer.getBookshelf().getShelf();
+        int size = currentPlayer.getChosenObjects().length;
         // Count empty slots
         for (int row = 0; row < bookshelf[column].length; row++) {
             if (bookshelf[column][row] == null) {
@@ -278,13 +293,16 @@ public class GameController implements Observer<PlayerChoice> {
 
     private void arrangeChosenObjects() {
         // Get the current player info
-        int currentPlayer = model.getCurrentPlayer();
-        Player[] table = model.getTable();
-        int column = table[currentPlayer].getChosenColumn();
-        ObjectCard[] chosenObject = table[currentPlayer].getChosenObjects();
-        ObjectCard[][] bookshelf = table[currentPlayer].getBookshelf().getShelf();
+        int i = 0;
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
+        int column = currentPlayer.getChosenColumn();
+        ObjectCard[] chosenObject = currentPlayer.getChosenObjects();
+        ObjectCard[][] bookshelf = currentPlayer.getBookshelf().getShelf();
         // Insert chosen object into the bookshelf
-        for (int reverse = table[currentPlayer].getChosenObjects().length - 1; reverse >= 0; reverse--) {
+        for (int reverse = currentPlayer.getChosenObjects().length - 1; reverse >= 0; reverse--) {
             bookshelf[column][reverse] = chosenObject[reverse];
             chosenObject[reverse] = null;
         }
@@ -292,10 +310,13 @@ public class GameController implements Observer<PlayerChoice> {
 
     private void isDone() {
         // Get the current players
-        int currentPlayer = model.getCurrentPlayer();
-        Player[] table = model.getTable();
+        int i = 0;
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
         // Check if the bookshelf is full and end game
-        if (table[currentPlayer].getBookshelf().isFull() == true) {
+        if (currentPlayer.getBookshelf().isFull() == true) {
             model.setDone(true);
         }
     }

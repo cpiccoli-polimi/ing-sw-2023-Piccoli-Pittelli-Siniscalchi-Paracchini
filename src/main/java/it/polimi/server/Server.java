@@ -100,13 +100,18 @@ public class Server {
             }
             controller.setup();
             waitingConnection.clear();
+            i = 0;
+            while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+                i += 1;
+            }
+            Player currentPlayer = model.getTable()[i];
             for(Player player : model.getTable()){
                 clientConnections.get(player).asyncSend(new GameView(model, ""));
-                if(player == model.getTable()[model.getCurrentPlayer()]){
+                if(player == currentPlayer){
                     clientConnections.get(player).asyncSend("Choose up to 3 object cards from the board that you want to put in a column of your own library");
                 }
                 else{
-                    clientConnections.get(player).asyncSend("Now it's " + model.getTable()[model.getCurrentPlayer()].getNickname() + "'s turn. Wait your turn");
+                    clientConnections.get(player).asyncSend("Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn");
                 }
             }
 

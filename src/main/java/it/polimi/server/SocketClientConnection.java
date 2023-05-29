@@ -1,5 +1,6 @@
 package it.polimi.server;
 
+import it.polimi.model.Player;
 import it.polimi.observer.Observable;
 
 import java.io.IOException;
@@ -80,7 +81,7 @@ public class SocketClientConnection extends Observable<String> implements Client
                 message = "INSERTIONORDERCHOICE:" + message;
                 notify(message);
             }
-            while(isActive() && server.getModel().getTable()[server.getModel().getCurrentPlayer()].getIsFirst() == false){
+            while(isActive() && server.getModel().getCurrentPlayer() != 0){
                 message = in.nextLine();
                 message = "OBJECTCARDSCHOICE:" + message;
                 notify(message);

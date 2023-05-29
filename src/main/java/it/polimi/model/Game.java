@@ -281,7 +281,7 @@ public class Game extends Observable<GameView>{
             if(i == firstPlayerIndex){
                 table[i].setIsFirst(true);
                 table[i].setPosition(0);
-                setCurrentPlayer(i);
+                setCurrentPlayer(0);
             }
             else{
                 table[i].setIsFirst(false);
@@ -345,7 +345,7 @@ public class Game extends Observable<GameView>{
         while(this.table[i].getPosition() != this.currentPlayer){
             i += 1;
         }
-        if(this.table[i].getPosition() == 4){
+        if(this.table[i].getPosition() == playersNumber - 1){
             this.currentPlayer = 0;
         }
         else{
@@ -373,14 +373,19 @@ public class Game extends Observable<GameView>{
 
     }
     public void insertInOrder(int [] order){
-        ObjectCard [] objectCard=getTable()[getCurrentPlayer()].getChosenObjects();
+        int i = 0;
+        while(this.table[i].getPosition() != this.currentPlayer){
+            i += 1;
+        }
+        Player currentPlayer = this.table[i];
+        ObjectCard [] objectCard = currentPlayer.getChosenObjects();
         ObjectCard [] objectCardsOrdered=new ObjectCard[order.length];
-        int column=getTable()[getCurrentPlayer()].getChosenColumn();
-        Bookshelf bookshelf=getTable()[getCurrentPlayer()].getBookshelf();
-        for(int i=0;i<order.length;i++){
+        int column = currentPlayer.getChosenColumn();
+        Bookshelf bookshelf = currentPlayer.getBookshelf();
+        for(i=0;i<order.length;i++){
             objectCardsOrdered[order[i]-1]=objectCard[i];
         }
-        for(int i=0;i< order.length;i++){
+        for(i=0;i< order.length;i++){
             bookshelf.setShelf(objectCardsOrdered[i],column);
         }
         bookshelf.updateMaxDrawableObjects();
@@ -388,22 +393,27 @@ public class Game extends Observable<GameView>{
     }
 
     public void endTurnChecks()  {
+        int i = 0;
+        while(this.table[i].getPosition() != this.currentPlayer){
+            i += 1;
+        }
+        Player currentPlayer = this.table[i];
         boolean b=true;
-        Bookshelf bookshelf=this.getTable()[this.getCurrentPlayer()].getBookshelf();
+        Bookshelf bookshelf = currentPlayer.getBookshelf();
         if(bookshelf.isFull()==true){
             this.setDone(true);
         }
         updateBoard();
         CommonGoalCard [] commonGoalCard= board.getCommonGoals();
-        for(int i=0;i<commonGoalCard.length;i++) {
+        for(i=0;i<commonGoalCard.length;i++) {
             for (int j = 0; j < commonGoalCard.length; j++) {
-                if (table[getCurrentPlayer()].getCommonGoalsCompleted()[j] == commonGoalCard[i].getGoalID()) {
+                if (currentPlayer.getCommonGoalsCompleted()[j] == commonGoalCard[i].getGoalID()) {
                     b = false;
                 }
             }
             if (b && commonGoalCard[i].check(bookshelf.getShelf()) == true) {
                 try {
-                    table[getCurrentPlayer()].setCommonGoalsCompleted(table[getCurrentPlayer()].getCommonGoalsCompleted(), commonGoalCard[i].getGoalID());
+                    currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(), commonGoalCard[i].getGoalID());
                 } catch (CommonGoalAlreadyCompletedException e) {
                     throw new RuntimeException(e);
                 } catch (AllCommonGoalsCompletedException e) {
@@ -413,17 +423,17 @@ public class Game extends Observable<GameView>{
                 updateCommonGoals(commonGoalCard[i]);
             }
         }
-        updateTurn();
+        nextTurn();
         String m="Choose the object cards from the board";
         handleTurn(m);
     }
 
-    public void updateTurn(){
+    /*public void updateTurn(){
         if(getCurrentPlayer()==playersNumber-1){
             setCurrentPlayer(0);
         }
         else setCurrentPlayer(getCurrentPlayer()+1);
-    }
+    }*/
     private void updateBoard() {
         LivingRoomBoard board = this.getBoard();
         Tile[][] tiles = board.getTiles();
