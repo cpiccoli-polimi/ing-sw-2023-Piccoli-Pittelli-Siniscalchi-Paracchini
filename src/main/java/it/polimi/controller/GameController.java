@@ -18,20 +18,17 @@ public class GameController implements Observer<PlayerChoice> {
     }
 
     private synchronized void handleMessage(PlayerChoice message){
-        int i = 0;
-        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
-            i += 1;
-        }
-        Player currentPlayer = model.getTable()[i];
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){//getPosition deve restituire il numero della posizione in base al primo giocatore che ha iniziato il gioco, non rispetto al primo entrato
             message.getView().reportError("It is not your turn");
             return;
         }
+        System.out.println("Tocca a te");
         boolean b=false;
         String mes= message.getMessage();
         String[] input=mes.split(":");
         ObjectCard [] chosenObjectCards=null;
-        if(input[0]=="OBJECTCARDSCHOICE"){//TODO checkMessageCorrectness
+        if(Objects.equals(input[0], "OBJECTCARDSCHOICE")){//TODO checkMessageCorrectness
+            System.out.println("Prima dello split di spazio");
             String [] space=input[1].split(" ");
             if(space.length==1){
                 int [] coordinate= new int[2];
@@ -39,7 +36,13 @@ public class GameController implements Observer<PlayerChoice> {
                 coordinate[0]=Integer.parseInt(comma[0]);
                 coordinate[1]=Integer.parseInt(comma[1]);
                 chosenObjectCards= new ObjectCard[1];
+                System.out.println("Prima del model");
+                System.out.println(coordinate[0]+","+coordinate[1]);
                 chosenObjectCards[0] = model.getBoard().getTiles()[coordinate[0]][coordinate[1]].getObject();
+                if(chosenObjectCards[0]==null){
+                    System.out.println("Oggetto vuoto");
+                }
+                System.out.println(chosenObjectCards[0].getType());
 
             } else if(space.length==2){
                 int [] coordinate = new int [4];
@@ -67,7 +70,10 @@ public class GameController implements Observer<PlayerChoice> {
                 chosenObjectCards[0] = model.getBoard().getTiles()[coordinate[0]][coordinate[1]].getObject();
                 chosenObjectCards[1] = model.getBoard().getTiles()[coordinate[2]][coordinate[3]].getObject();
                 chosenObjectCards[2] = model.getBoard().getTiles()[coordinate[4]][coordinate[5]].getObject();
-            }else{}
+            }else{
+                message.getView().reportError("Troppi oggetti selezionati");
+
+            }
             if(chosenObjectCards!=null){
                 try {
                     b=checkPickedObject(chosenObjectCards);
@@ -84,31 +90,38 @@ public class GameController implements Observer<PlayerChoice> {
                 }
                 if(b==true){
                     savePickedObject(chosenObjectCards);
+                    System.out.println("Oggetti scelti salvati");
                     String m="In which bookshelf column do you want to insert those cards?";
                     model.handleTurn(m);
-                    }
+                }
+                else{
+                    System.out.println("Oggetti non salvati");
                 }
             }
-        else if(input[0]=="BOOKSHELFCOLUMNCHOICE"){//TODO checkMessageCorrectness
+            else{
+                System.out.println("Oggetto vuoto");
+            }
+        }
+        else if(Objects.equals(input[0], "BOOKSHELFCOLUMNCHOICE")){//TODO checkMessageCorrectness
             int chosenColumn=Integer.parseInt(input[1]);
             b=checkChosenColumn(chosenColumn);
             if(b==true){
-                currentPlayer.setChosenColumn(chosenColumn);
+                model.getTable()[model.getCurrentPlayer()].setChosenColumn(chosenColumn);
                 String m="In which order do you want to insert the cards in that bookshelf column?";
                 model.handleTurn(m);
             }
-        } else if(input[0]=="INSERTIONORDERCHOICE"){//TODO checkMessageCorrectness
+        } else if(Objects.equals(input[0], "INSERTIONORDERCHOICE")){//TODO checkMessageCorrectness
             String [] space;
             space= input[1].split(" ");
             int [] chosenInsertionOrder;
             chosenInsertionOrder=new int[space.length];
-            for(i=0;i<space.length;i++){
+            for(int i=0;i<space.length;i++){
                 chosenInsertionOrder[i]=Integer.parseInt(space[i]);
                 model.insertInOrder(chosenInsertionOrder);
                 model.endTurnChecks();
             }
 
-        } else if(input[0]=="LEADERBOARD"){
+        } else if(Objects.equals(input[0], "LEADERBOARD")){
 
         }
     }
@@ -251,22 +264,26 @@ public class GameController implements Observer<PlayerChoice> {
 
     private void savePickedObject(ObjectCard [] pickedObject){
         int x=-1;
+        int g=-1;
         int y=-1;
-        int i = 0;
-        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
-            i += 1;
-        }
-        Player currentPlayer = model.getTable()[i];
+        System.out.println("Prima FreeSides");
         model.getBoard().updateFreeSides(pickedObject);
+        System.out.println("FreeSides aggiornate");
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
+            System.out.println("Prima oggetti ");
             model.getBoard().removeObject(x, y);
+            System.out.println("Oggetti rimossi");
         }
-        currentPlayer.setChosenObjects(pickedObject);
+        g=model.getCurrentPlayer();
+        System.out.println("Prima salvataggio");
+        model.getTable()[g].setChosenObjects(pickedObject);
+        System.out.println("Oggetti salvati!");
         //model.getBoard().removeObject(chosenObjectCards[i].getXCoordinate(),chosenObjectCards[i].getYCoordinate());
         //model.getTable()[message.getPlayer().getPosition()].setChosenObjects(chosenObjectCards);
     }
+
 
     private boolean checkChosenColumn(int column) {
         int i = 0;

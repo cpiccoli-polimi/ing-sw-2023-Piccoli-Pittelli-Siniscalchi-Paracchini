@@ -77,8 +77,17 @@ public class Player implements Serializable {
     }
 
     public ObjectCard[] getChosenObjects() {return chosenObjects;}
-    public void setChosenObjects(ObjectCard [] chosenObjects){
-        System.arraycopy(chosenObjects, 0, this.chosenObjects, 0, chosenObjects.length);}
+    public void setChosenObjects(ObjectCard [] oggettoScelto){
+        System.out.println("Giocatore"+position);
+        chosenObjects= new ObjectCard[oggettoScelto.length];
+        System.out.println(oggettoScelto[0].getType());
+        for(int i=0;i<oggettoScelto.length;i++){
+            this.chosenObjects[i]=oggettoScelto[i];
+        }
+        System.out.println("Oggetto copiato"+getChosenObjects()[0].getType());
+
+    }
+
 
     public PersonalGoalCard getPersonalGoal() {
         return personalGoal;
