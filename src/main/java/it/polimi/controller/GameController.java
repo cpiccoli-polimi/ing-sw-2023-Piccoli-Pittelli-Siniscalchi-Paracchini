@@ -117,9 +117,9 @@ public class GameController implements Observer<PlayerChoice> {
             chosenInsertionOrder=new int[space.length];
             for(int i=0;i<space.length;i++){
                 chosenInsertionOrder[i]=Integer.parseInt(space[i]);
-                model.insertInOrder(chosenInsertionOrder);
-                model.endTurnChecks();
             }
+            model.insertInOrder(chosenInsertionOrder);
+            model.endTurnChecks();
 
         } else if(Objects.equals(input[0], "LEADERBOARD")){
 
