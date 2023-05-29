@@ -383,7 +383,7 @@ public class Game extends Observable<GameView>{
         int column = currentPlayer.getChosenColumn();
         Bookshelf bookshelf = currentPlayer.getBookshelf();
         for(i=0;i<order.length;i++){
-            objectCardsOrdered[order[i]-1]=objectCard[i];
+            objectCardsOrdered[i]=objectCard[order[i] - 1];
         }
         for(i=0;i< order.length;i++){
             bookshelf.setShelf(objectCardsOrdered[i],column);
