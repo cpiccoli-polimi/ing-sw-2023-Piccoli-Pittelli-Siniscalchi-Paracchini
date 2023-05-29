@@ -264,22 +264,19 @@ public class GameController implements Observer<PlayerChoice> {
 
     private void savePickedObject(ObjectCard [] pickedObject){
         int x=-1;
-        int g=-1;
         int y=-1;
-        System.out.println("Prima FreeSides");
+        int i = 0;
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
         model.getBoard().updateFreeSides(pickedObject);
-        System.out.println("FreeSides aggiornate");
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
-            System.out.println("Prima oggetti ");
             model.getBoard().removeObject(x, y);
-            System.out.println("Oggetti rimossi");
         }
-        g=model.getCurrentPlayer();
-        System.out.println("Prima salvataggio");
-        model.getTable()[g].setChosenObjects(pickedObject);
-        System.out.println("Oggetti salvati!");
+        currentPlayer.setChosenObjects(pickedObject);
         //model.getBoard().removeObject(chosenObjectCards[i].getXCoordinate(),chosenObjectCards[i].getYCoordinate());
         //model.getTable()[message.getPlayer().getPosition()].setChosenObjects(chosenObjectCards);
     }
