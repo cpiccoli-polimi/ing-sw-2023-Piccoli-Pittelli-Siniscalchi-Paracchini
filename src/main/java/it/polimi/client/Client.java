@@ -15,7 +15,8 @@ public class Client {
     private String ip;
     private int port;
     private boolean active = true;
-    private String myPlayerName = new String();
+    private String myPlayerName = new String("");
+    Player myPlayer = null;
 
     public Client(String ip, int port){
         this.ip = ip;
@@ -45,10 +46,11 @@ public class Client {
                         }
                         else if(inputObject instanceof GameView){
                             if (((GameView) inputObject).getLeaderboard()[0] == null){
-                                Player myPlayer = null;
-                                for(Player player : ((GameView) inputObject).getTable()){
-                                    if(myPlayerName.equals(player.getNickname())){
-                                        myPlayer = player;
+                                if(myPlayer == null){
+                                    for(Player player : ((GameView) inputObject).getTable()){
+                                        if(myPlayerName.equals(player.getNickname())){
+                                            myPlayer = player;
+                                        }
                                     }
                                 }
                                 System.out.println("GAME BOARD:");
