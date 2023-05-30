@@ -19,7 +19,7 @@ public class GameController implements Observer<PlayerChoice> {
 
     private synchronized void handleMessage(PlayerChoice message){
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){//getPosition deve restituire il numero della posizione in base al primo giocatore che ha iniziato il gioco, non rispetto al primo entrato
-            message.getView().reportError("It is not your turn");
+            message.getView().reportError(new NotYourTurnException("Now it's not your turn. Wait your turn"));
             return;
         }
         System.out.println("Tocca a te");
@@ -70,23 +70,20 @@ public class GameController implements Observer<PlayerChoice> {
                 chosenObjectCards[0] = model.getBoard().getTiles()[coordinate[0]][coordinate[1]].getObject();
                 chosenObjectCards[1] = model.getBoard().getTiles()[coordinate[2]][coordinate[3]].getObject();
                 chosenObjectCards[2] = model.getBoard().getTiles()[coordinate[4]][coordinate[5]].getObject();
-            }else{
-                message.getView().reportError("Troppi oggetti selezionati");
-
             }
             if(chosenObjectCards!=null){
                 try {
                     b=checkPickedObject(chosenObjectCards);
                 } catch (MaxDrawableObjectsException e) {
-                    message.getView().reportError("Troppi oggetti selezionati");
+                    message.getView().reportError(e);
                 } catch (NoAdjacentException e) {
-                    message.getView().reportError("Oggetti non adiacenti");
+                    message.getView().reportError(e);
                 } catch (NoFreeSidesException e) {
-                    message.getView().reportError("Gli oggetti devono avere almeno un lato libero");
+                    message.getView().reportError(e);
                 } catch (AlreadyPickedException e) {
-                    message.getView().reportError("Hai selezionato lo stesso oggetto");
+                    message.getView().reportError(e);
                 } catch (NoStraightLineException e) {
-                    message.getView().reportError("Gli oggetti devono essere in linea retta");
+                    message.getView().reportError(e);
                 }
                 if(b==true){
                     savePickedObject(chosenObjectCards);
@@ -197,18 +194,18 @@ public class GameController implements Observer<PlayerChoice> {
         }
         Player currentPlayer = model.getTable()[i];
         if (currentPlayer.getBookshelf().getMaxDrawableObjects() < pickedObject.length) {
-            throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
+            throw new MaxDrawableObjectsException("Troppi oggetti selezionati"); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
         }
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
             if (model.getBoard().getTiles()[x][y].getFreeSides() == 0) {
-                throw new NoFreeSidesException();
+                throw new NoFreeSidesException("Gli oggetti devono avere almeno un lato libero");
             }
         }
         for (i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
             if (sortX.contains(pickedObject[i].getXCoordinate()) && sortY.contains(pickedObject[i].getYCoordinate())) {
-                throw new AlreadyPickedException();
+                throw new AlreadyPickedException("Hai selezionato lo stesso oggetto");
             } else {
                 if (!sortY.contains(pickedObject[i].getYCoordinate())) {
                     sortY.add(pickedObject[i].getYCoordinate());
@@ -224,18 +221,18 @@ public class GameController implements Observer<PlayerChoice> {
                 for (int j = 0; j < sortY.size(); j++) {
                     p = sortY.get(j);
                     if (!sortY.contains(p - 1) && !sortY.contains(p + 1)) {
-                        throw new NoAdjacentException();
+                        throw new NoAdjacentException("Oggetti non adiacenti");
                     }
                 }
             } else if (sortY.size() == 1 && sortX.size() == pickedObject.length) {// le tessere sono state scelte su una linea verticale
                 for (int k = 0; k < sortX.size(); k++) {
                     p = sortX.get(k);
                     if (!sortX.contains(p - 1) && !sortX.contains(p + 1)) {
-                        throw new NoAdjacentException();
+                        throw new NoAdjacentException("Oggetti non adiacenti");
                     }
                 }
             } else {
-                throw new NoStraightLineException();
+                throw new NoStraightLineException("Gli oggetti devono essere in linea retta");
             }
         }
 

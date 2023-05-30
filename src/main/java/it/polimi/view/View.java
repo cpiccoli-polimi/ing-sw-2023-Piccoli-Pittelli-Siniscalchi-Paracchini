@@ -23,7 +23,7 @@ public abstract class View extends Observable<PlayerChoice> implements Observer<
         notify(new PlayerChoice(player, message, this));
     }
 
-    public void reportError(String message){
+    public void reportError(Exception message){
         showMessage(message);
     }
 

@@ -83,6 +83,9 @@ public class Client {
                                 }
                             }
                         }
+                        else if(inputObject instanceof Exception){
+                            System.out.println(((Exception) inputObject).getMessage());
+                        }
                     }
                 }
                 catch(Exception e){
