@@ -26,7 +26,7 @@ public class Server {
     private Map<Player, ClientConnection> clientConnections = new HashMap<>();
     private Map<Player, RemoteView> playerRemoteViews = new HashMap<>();
 
-    Game model;
+    Game model = null;
     GameController controller;
     int playersNumber = -1;
     int commonGoalsNumber = -1;
@@ -57,6 +57,9 @@ public class Server {
                 throw new RuntimeException(e);
             }
         }
+        if(model != null){
+            ((SocketClientConnection)c).setModel(model);
+        }
         waitingConnection.put(nickname, c);
         if(waitingConnection.size() == 1){
             try{
@@ -79,6 +82,7 @@ public class Server {
                     }
                 }
                 model = new Game(playersNumber, commonGoalsNumber);
+                ((SocketClientConnection)c).setModel(model);
             }
             catch(IOException | PlayersNumberException | CommonGoalsNumberException e){
                 throw new RuntimeException(e);
@@ -117,7 +121,9 @@ public class Server {
                     clientConnections.get(player).asyncSend("Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn");
                 }
             }
-
+            playersNumber = -1;
+            commonGoalsNumber = -1;
+            model = null;
         }
     }
     public void run(){

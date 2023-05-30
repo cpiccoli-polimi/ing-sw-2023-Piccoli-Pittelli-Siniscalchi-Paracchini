@@ -1,6 +1,7 @@
 package it.polimi.server;
 
 import it.polimi.controller.exception.NotYourTurnException;
+import it.polimi.model.Game;
 import it.polimi.model.Player;
 import it.polimi.observer.Observable;
 
@@ -18,6 +19,7 @@ public class SocketClientConnection extends Observable<String> implements Client
     private Server server;
     private boolean notYourTurnFlag = false;
     private int expectedMessageNumber = 0;
+    private Game model;
     public SocketClientConnection(Socket socket, Server server){
         this.socket = socket;
         this.server = server;
@@ -91,7 +93,7 @@ public class SocketClientConnection extends Observable<String> implements Client
             String message = in.nextLine();
             nickname = message;
             server.lobby(this, nickname, socket);
-            while(isActive() && server.getModel().getDone() == false){
+            while(isActive() && model.getDone() == false){
                 message = in.nextLine();
                 if(notYourTurnFlag == false){
                     if(expectedMessageNumber == 0){
@@ -112,7 +114,7 @@ public class SocketClientConnection extends Observable<String> implements Client
                 }
                 notify(message);
             }
-            while(isActive() && server.getModel().getCurrentPlayer() != 0){
+            while(isActive() && model.getCurrentPlayer() != 0){
                 message = in.nextLine();
                 if(notYourTurnFlag == false){
                     if(expectedMessageNumber == 0){
@@ -144,5 +146,8 @@ public class SocketClientConnection extends Observable<String> implements Client
         finally{
             close();
         }
+    }
+    public void setModel(Game model) {
+        this.model = model;
     }
 }
