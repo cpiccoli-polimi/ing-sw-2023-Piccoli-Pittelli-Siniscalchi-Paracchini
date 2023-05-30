@@ -1,5 +1,6 @@
 package it.polimi.server;
 
+import it.polimi.controller.exception.NotYourTurnException;
 import it.polimi.model.Player;
 import it.polimi.observer.Observable;
 
@@ -15,6 +16,8 @@ public class SocketClientConnection extends Observable<String> implements Client
     private ObjectOutputStream out;
     private boolean active = true;
     private Server server;
+    private boolean notYourTurnFlag = false;
+    private int expectedMessageNumber = 0;
     public SocketClientConnection(Socket socket, Server server){
         this.socket = socket;
         this.server = server;
@@ -54,6 +57,24 @@ public class SocketClientConnection extends Observable<String> implements Client
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if(message instanceof Exception){
+                    if(message instanceof NotYourTurnException){
+                        notYourTurnFlag = true;
+                    }
+                    else{
+                        notYourTurnFlag = false;
+                        if(expectedMessageNumber == 0){
+                            expectedMessageNumber = 0;
+                        }
+                        else{
+                            expectedMessageNumber -= 1;
+                        }
+                    }
+                }
+                else if(message.equals("Choose up to 3 object cards from the board that you want to put in a column of your own library")){
+                    notYourTurnFlag = false;
+                    expectedMessageNumber = 0;
+                }
                 send(message);
             }
         }).start();
@@ -72,24 +93,44 @@ public class SocketClientConnection extends Observable<String> implements Client
             server.lobby(this, nickname, socket);
             while(isActive() && server.getModel().getDone() == false){
                 message = in.nextLine();
-                message = "OBJECTCARDSCHOICE:" + message;
-                notify(message);
-                message = in.nextLine();
-                message = "BOOKSHELFCOLUMNCHOICE:" + message;
-                notify(message);
-                message = in.nextLine();
-                message = "INSERTIONORDERCHOICE:" + message;
+                if(notYourTurnFlag == false){
+                    if(expectedMessageNumber == 0){
+                        message = "OBJECTCARDSCHOICE:" + message;
+                    }
+                    else if(expectedMessageNumber == 1){
+                        message = "BOOKSHELFCOLUMNCHOICE:" + message;
+                    }
+                    else if(expectedMessageNumber == 2){
+                        message = "INSERTIONORDERCHOICE:" + message;
+                    }
+                    if(expectedMessageNumber != 2){
+                        expectedMessageNumber += 1;
+                    }
+                    else{
+                        expectedMessageNumber = 0;
+                    }
+                }
                 notify(message);
             }
             while(isActive() && server.getModel().getCurrentPlayer() != 0){
                 message = in.nextLine();
-                message = "OBJECTCARDSCHOICE:" + message;
-                notify(message);
-                message = in.nextLine();
-                message = "BOOKSHELFCOLUMNCHOICE:" + message;
-                notify(message);
-                message = in.nextLine();
-                message = "INSERTIONORDERCHOICE:" + message;
+                if(notYourTurnFlag == false){
+                    if(expectedMessageNumber == 0){
+                        message = "OBJECTCARDSCHOICE:" + message;
+                    }
+                    else if(expectedMessageNumber == 1){
+                        message = "BOOKSHELFCOLUMNCHOICE:" + message;
+                    }
+                    else if(expectedMessageNumber == 2){
+                        message = "INSERTIONORDERCHOICE:" + message;
+                    }
+                    if(expectedMessageNumber != 2){
+                        expectedMessageNumber += 1;
+                    }
+                    else{
+                        expectedMessageNumber = 0;
+                    }
+                }
                 notify(message);
             }
             if(isActive()){
