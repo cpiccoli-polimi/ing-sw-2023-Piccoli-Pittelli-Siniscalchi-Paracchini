@@ -9,9 +9,7 @@ import java.util.ArrayList;
 
 public class CommonGoalCard10 extends CommonGoalCard {
     public CommonGoalCard10(int playersNumber) {
-        goalID = 10;
-        // Deck creation
-        points = new ArrayList<PointCard>();
+        super(10);
     }
 
     @Override

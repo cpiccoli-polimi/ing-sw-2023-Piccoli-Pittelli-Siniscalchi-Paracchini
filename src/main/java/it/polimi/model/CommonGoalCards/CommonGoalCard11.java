@@ -11,9 +11,7 @@ import java.util.Arrays;
 
 public class CommonGoalCard11 extends CommonGoalCard {
     public CommonGoalCard11(int playersNumber) {
-        goalID = 11;
-        // Deck creation
-        points = new ArrayList<PointCard>();
+        super(11);
     }
 
     @Override

@@ -11,9 +11,7 @@ import java.util.List;
 public class CommonGoalCard4 extends CommonGoalCard {
 
     public CommonGoalCard4(int playersNumber) {
-        goalID = 4;
-        // Deck creation
-        points = new ArrayList<PointCard>();
+        super(4);
     }
     @Override
     public boolean check(ObjectCard[][] bookshelf) {

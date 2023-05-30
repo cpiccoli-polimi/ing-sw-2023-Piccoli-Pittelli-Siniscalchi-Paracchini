@@ -42,22 +42,22 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
             int cardId;
             switch (objectType){
                 case("Cats"):
-                    cardId = 0;
+                    cardId = 1;
                     break;
                 case("Trophies"):
                     cardId = 23;
                     break;
                 case("Plants"):
-                    cardId = 45;
+                    cardId = 46;
                     break;
                 case("Books"):
-                    cardId = 67;
+                    cardId = 68;
                     break;
                 case("Frames"):
-                    cardId = 89;
+                    cardId = 90;
                     break;
                 case("Games"):
-                    cardId = 101;
+                    cardId = 112;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + objectType);

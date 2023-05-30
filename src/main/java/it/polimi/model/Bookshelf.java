@@ -66,23 +66,23 @@ public class Bookshelf implements Serializable {
         shelf[i-1][column]=card;
     }
 
-    public void showBookshelf(){
+    public String showBookshelf(int row){
+        String returnString = new String();
         char squareCharacter = 9632;
         ObjectCard[][] shelf = this.getShelf();
 
-        for(int i = 0; i < shelf.length; i++){
-            for(int j = 0; j < shelf[i].length; j++){
-                System.out.print("|");
-                if(shelf[i][j] == null){
-                    System.out.print(" ");
-                }
-                else{
-                    System.out.print(shelf[i][j].getType().getColor());
-                    System.out.print( squareCharacter + Type.RESET);
-                }
+        for(int j = 0; j < shelf[row].length; j++){
+            returnString = returnString.concat("|");
+            if(shelf[row][j] == null){
+                returnString =  returnString.concat(" ");
             }
-            System.out.println("|");
+            else{
+                returnString = returnString.concat(shelf[row][j].getType().getColor());
+                returnString = returnString.concat( squareCharacter + Type.RESET);
+            }
         }
+        returnString = returnString.concat("|");
+        return returnString;
     }
     public void updateMaxDrawableObjects(){
         int maxDrawableObjects=this.getMaxDrawableObjects();

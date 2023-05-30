@@ -106,6 +106,7 @@ public class Server {
             }
             Player currentPlayer = model.getTable()[i];
             for(Player player : model.getTable()){
+                clientConnections.get(player).asyncSend("YOURPLAYERIS:" + player.getNickname());
                 clientConnections.get(player).asyncSend(new GameView(model, ""));
                 if(player == currentPlayer){
                     clientConnections.get(player).asyncSend("Choose up to 3 object cards from the board that you want to put in a column of your own library");

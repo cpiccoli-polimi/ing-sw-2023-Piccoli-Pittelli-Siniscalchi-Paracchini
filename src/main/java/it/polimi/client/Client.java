@@ -15,6 +15,8 @@ public class Client {
     private String ip;
     private int port;
     private boolean active = true;
+    private String myPlayerName = new String();
+
     public Client(String ip, int port){
         this.ip = ip;
         this.port = port;
@@ -33,15 +35,44 @@ public class Client {
                     while(isActive()){
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
-                            System.out.println((String) inputObject);
+                            String[] splitAttempt = ((String) inputObject).split(":");
+                            if(splitAttempt[0].equals("YOURPLAYERIS")){
+                                myPlayerName = myPlayerName.concat(splitAttempt[1]);
+                            }
+                            else{
+                                System.out.println((String) inputObject);
+                            }
                         }
                         else if(inputObject instanceof GameView){
                             if (((GameView) inputObject).getLeaderboard()[0] == null){
+                                Player myPlayer = null;
+                                for(Player player : ((GameView) inputObject).getTable()){
+                                    if(myPlayerName.equals(player.getNickname())){
+                                        myPlayer = player;
+                                    }
+                                }
                                 System.out.println("GAME BOARD:");
                                 ((GameView) inputObject).getBoard().showBoard(((GameView) inputObject).getTable().length);
+                                int j = 0;
+                                for(int i = 0; i < ((GameView) inputObject).getBoard().getCommonGoals().length; i++){
+                                    j += 1;
+                                    System.out.println("Common goal " + j + ": " + ((GameView) inputObject).getBoard().getCommonGoals()[i].getGoalDescription());
+                                }
                                 for(Player player : ((GameView) inputObject).getTable()){
-                                    System.out.println(player.getNickname() + "'s BOOKSHELF:");
-                                    player.getBookshelf().showBookshelf();
+                                    System.out.print(player.getNickname() + "'s BOOKSHELF: \t ");
+                                }
+                                System.out.println("YOUR PERSONAL GOAL:");
+                                System.out.println();
+                                for(int i = 0; i < ((GameView) inputObject).getTable()[0].getBookshelf().getShelf().length; i++){
+                                    for(Player player : ((GameView) inputObject).getTable()){
+                                        System.out.print(player.getBookshelf().showBookshelf(i));
+                                        for(char character : player.getNickname().toCharArray()){
+                                            System.out.print(" ");
+                                        }
+                                        System.out.print("    \t ");
+                                    }
+                                    System.out.print(myPlayer.getPersonalGoal().getGoal().showBookshelf(i));
+                                    System.out.println();
                                 }
                             }
                             else{
