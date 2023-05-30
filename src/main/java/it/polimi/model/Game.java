@@ -382,11 +382,11 @@ public class Game extends Observable<GameView>{
         ObjectCard [] objectCardsOrdered=new ObjectCard[order.length];
         int column = currentPlayer.getChosenColumn();
         Bookshelf bookshelf = currentPlayer.getBookshelf();
-        for(i=0;i<order.length;i++){
-            objectCardsOrdered[i]=objectCard[order[i] - 1];
+        for(int j=0;j<order.length;j++){
+            objectCardsOrdered[order[j]-1]=objectCard[j];
         }
-        for(i=0;i< order.length;i++){
-            bookshelf.setShelf(objectCardsOrdered[i],column);
+        for(int j=0;j< order.length;j++){
+            bookshelf.setShelf(objectCardsOrdered[j],column);
         }
         bookshelf.updateMaxDrawableObjects();
 
@@ -464,6 +464,39 @@ public class Game extends Observable<GameView>{
                 }
             }
         }
+    }
+    public void DeclareWinner() {
+        Player[] table = getTable();
+        for(int i=0; i< table.length;i++){
+            table[i].countPersonalGoalsPoints();
+            table[i].countAdjacentItemsPoints();
+        }
+        // *** CREATE LEADERBOARD ***
+        // Create support int array to check points
+        // It contains [points][playerNumberInArray]
+        int[][] points = new int[table.length][2];
+        for(int i=0;i< table.length;i++){
+            points[i][0] = table[i].getPoints();
+            points[i][1] = i;
+        }
+        // Reorder array
+        for (int k = 0; k < points.length; k++) {
+            for (int i= 0; i < points[k].length; i++) {
+                for (int j = 0; j < points[k].length; j++) {
+                    if (points[k][i] < points[k][j]) {
+                        int temp = points[k][i];
+                        points[k][i] = points[k][j];
+                        points[k][j] = temp;
+                    }
+                }
+            }
+        }
+        // Copy in order into leaderboard
+        for (int i = 0; i < table.length; i++) {
+            setLeaderboard(table[points[i][1]],i);
+        }
+        handleTurn("");
+        //TextualUI.showLeaderboard(model.getLeaderboard());
     }
 
 }

@@ -38,7 +38,7 @@ public class RemoteView extends View {
             try{
                 handleMove(message);
             }catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e){
-                clientConnection.asyncSend("Error!");
+                clientConnection.asyncSend(e.getMessage());
             }
 
         }

@@ -122,6 +122,7 @@ public class GameController implements Observer<PlayerChoice> {
             model.endTurnChecks();
 
         } else if(Objects.equals(input[0], "LEADERBOARD")){
+            model.DeclareWinner();
 
         }
     }
@@ -178,7 +179,7 @@ public class GameController implements Observer<PlayerChoice> {
             model.setLeaderboard(table[points[i][1]],i);
         }
 
-        TextualUI.showLeaderboard(model.getLeaderboard());
+        //TextualUI.showLeaderboard(model.getLeaderboard());
     }*/
 
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
