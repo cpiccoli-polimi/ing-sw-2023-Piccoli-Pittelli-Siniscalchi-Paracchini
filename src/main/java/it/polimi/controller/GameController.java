@@ -216,26 +216,26 @@ public class GameController implements Observer<PlayerChoice> {
                 }
             }
         }
+        if(pickedObject.length!=1) {
 
             if (sortX.size() == 1 && sortY.size() == pickedObject.length) {//le tessere sono state scelte su una linea orizzontale
-                for( int j=0; j<sortY.size();j++){
-                    p= sortY.get(j);
-                    if(!sortY.contains(p-1) && !sortY.contains(p+1)){
+                for (int j = 0; j < sortY.size(); j++) {
+                    p = sortY.get(j);
+                    if (!sortY.contains(p - 1) && !sortY.contains(p + 1)) {
                         throw new NoAdjacentException();
                     }
                 }
-            }
-            else if (sortY.size() == 1 && sortX.size() == pickedObject.length) {// le tessere sono state scelte su una linea verticale
-                for( int k=0; k<sortX.size();k++){
-                    p= sortX.get(k);
-                    if(!sortX.contains(p-1) && !sortX.contains(p+1)){
+            } else if (sortY.size() == 1 && sortX.size() == pickedObject.length) {// le tessere sono state scelte su una linea verticale
+                for (int k = 0; k < sortX.size(); k++) {
+                    p = sortX.get(k);
+                    if (!sortX.contains(p - 1) && !sortX.contains(p + 1)) {
                         throw new NoAdjacentException();
                     }
                 }
-            }
-            else{
+            } else {
                 throw new NoStraightLineException();
             }
+        }
 
         return true;
     }
