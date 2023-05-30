@@ -368,8 +368,8 @@ public class Game extends Observable<GameView>{
         setupBoardObjects();
     }*/
 
-    public void handleTurn(String m) {
-        notify(new GameView(this,m));
+    public void handleTurn(String turnPlayerMessage, String otherPlayersMessage) {
+        notify(new GameView(this, turnPlayerMessage, otherPlayersMessage));
 
     }
     public void insertInOrder(int [] order){
@@ -424,8 +424,14 @@ public class Game extends Observable<GameView>{
             }
         }
         nextTurn();
-        String m="Choose the object cards from the board";
-        handleTurn(m);
+        i = 0;
+        while(this.table[i].getPosition() != this.currentPlayer){
+            i += 1;
+        }
+        currentPlayer = this.table[i];
+        String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
+        String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn";
+        handleTurn(turnPlayerMessage, otherPlayersMessage);
     }
 
     /*public void updateTurn(){

@@ -22,7 +22,10 @@ public class RemoteView extends View {
         try{
             clientConnection.asyncSend(message);
             if(message.getCurrPlayer()==super.getPlayer().getPosition()){
-                clientConnection.asyncSend(message.getMessage());
+                clientConnection.asyncSend(message.getTurnPlayerMessage());
+            }
+            else{
+                clientConnection.asyncSend(message.getOtherPlayersMessage());
             }
         }catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e){
             clientConnection.asyncSend("Error!");

@@ -91,8 +91,9 @@ public class GameController implements Observer<PlayerChoice> {
                 if(b==true){
                     savePickedObject(chosenObjectCards);
                     System.out.println("Oggetti scelti salvati");
-                    String m="In which bookshelf column do you want to insert those cards?";
-                    model.handleTurn(m);
+                    String turnPlayerMessage="In which bookshelf column do you want to insert those cards?";
+                    String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn. Wait your turn";
+                    model.handleTurn(turnPlayerMessage, otherPlayersMessage);
                 }
                 else{
                     System.out.println("Oggetti non salvati");
@@ -107,8 +108,9 @@ public class GameController implements Observer<PlayerChoice> {
             b=checkChosenColumn(chosenColumn);
             if(b==true){
                 model.getTable()[model.getCurrentPlayer()].setChosenColumn(chosenColumn);
-                String m="In which order do you want to insert the cards in that bookshelf column?";
-                model.handleTurn(m);
+                String turnPlayerMessage = "In which order do you want to insert the cards in that bookshelf column?";
+                String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn. Wait your turn";
+                model.handleTurn(turnPlayerMessage, otherPlayersMessage);
             }
         } else if(Objects.equals(input[0], "INSERTIONORDERCHOICE")){//TODO checkMessageCorrectness
             String [] space;
