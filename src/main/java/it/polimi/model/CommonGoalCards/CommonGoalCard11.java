@@ -25,11 +25,14 @@ public class CommonGoalCard11 extends CommonGoalCard {
             for(int j=0;j<bookshelf[0].length;j++){
                 if(bookshelf[i][j]!=null){
                 objectType=bookshelf[i][j].getType();
+                if(objectType!=null){
                 k=objectType.ordinal();
                 a[k]++;
                 if(a[k]==8){
                     return true;
                 }
+                }
+
                 }
             }
         }
