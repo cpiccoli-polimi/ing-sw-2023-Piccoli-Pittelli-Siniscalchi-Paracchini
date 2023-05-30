@@ -53,9 +53,26 @@ public class Client {
                                 }
                                 System.out.println("GAME BOARD:");
                                 ((GameView) inputObject).getBoard().showBoard(((GameView) inputObject).getTable().length);
+                                int j = 0;
+                                for(int i = 0; i < ((GameView) inputObject).getBoard().getCommonGoals().length; i++){
+                                    j += 1;
+                                    System.out.println("Common goal " + j + ": " + ((GameView) inputObject).getBoard().getCommonGoals()[i].getGoalDescription());
+                                }
                                 for(Player player : ((GameView) inputObject).getTable()){
-                                    System.out.println(player.getNickname() + "'s BOOKSHELF:");
-                                    player.getBookshelf().showBookshelf();
+                                    System.out.print(player.getNickname() + "'s BOOKSHELF: \t ");
+                                }
+                                System.out.println("YOUR PERSONAL GOAL:");
+                                System.out.println();
+                                for(int i = 0; i < ((GameView) inputObject).getTable()[0].getBookshelf().getShelf().length; i++){
+                                    for(Player player : ((GameView) inputObject).getTable()){
+                                        System.out.print(player.getBookshelf().showBookshelf(i));
+                                        for(char character : player.getNickname().toCharArray()){
+                                            System.out.print(" ");
+                                        }
+                                        System.out.print("    \t ");
+                                    }
+                                    System.out.print(myPlayer.getPersonalGoal().getGoal().showBookshelf(i));
+                                    System.out.println();
                                 }
                             }
                             else{
