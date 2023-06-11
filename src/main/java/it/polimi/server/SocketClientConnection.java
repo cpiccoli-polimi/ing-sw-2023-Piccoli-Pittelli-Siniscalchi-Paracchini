@@ -93,47 +93,49 @@ public class SocketClientConnection extends Observable<String> implements Client
             String message = in.nextLine();
             nickname = message;
             server.lobby(this, nickname, socket);
-            while(isActive() && model.getDone() == false){
-                message = in.nextLine();
-                if(notYourTurnFlag == false){
-                    if(expectedMessageNumber == 0){
-                        message = "OBJECTCARDSCHOICE:" + message;
+            while(isActive()){
+                while(model.getDone() == false){
+                    message = in.nextLine();
+                    if(notYourTurnFlag == false){
+                        if(expectedMessageNumber == 0){
+                            message = "OBJECTCARDSCHOICE:" + message;
+                        }
+                        else if(expectedMessageNumber == 1){
+                            message = "BOOKSHELFCOLUMNCHOICE:" + message;
+                        }
+                        else if(expectedMessageNumber == 2){
+                            message = "INSERTIONORDERCHOICE:" + message;
+                        }
+                        if(expectedMessageNumber != 2){
+                            expectedMessageNumber += 1;
+                        }
+                        else{
+                            expectedMessageNumber = 0;
+                        }
                     }
-                    else if(expectedMessageNumber == 1){
-                        message = "BOOKSHELFCOLUMNCHOICE:" + message;
-                    }
-                    else if(expectedMessageNumber == 2){
-                        message = "INSERTIONORDERCHOICE:" + message;
-                    }
-                    if(expectedMessageNumber != 2){
-                        expectedMessageNumber += 1;
-                    }
-                    else{
-                        expectedMessageNumber = 0;
-                    }
+                    notify(message);
                 }
-                notify(message);
-            }
-            while(isActive() && model.getCurrentPlayer() != 0){
-                message = in.nextLine();
-                if(notYourTurnFlag == false){
-                    if(expectedMessageNumber == 0){
-                        message = "OBJECTCARDSCHOICE:" + message;
+                while(model.getCurrentPlayer() != 0){
+                    message = in.nextLine();
+                    if(notYourTurnFlag == false){
+                        if(expectedMessageNumber == 0){
+                            message = "OBJECTCARDSCHOICE:" + message;
+                        }
+                        else if(expectedMessageNumber == 1){
+                            message = "BOOKSHELFCOLUMNCHOICE:" + message;
+                        }
+                        else if(expectedMessageNumber == 2){
+                            message = "INSERTIONORDERCHOICE:" + message;
+                        }
+                        if(expectedMessageNumber != 2){
+                            expectedMessageNumber += 1;
+                        }
+                        else{
+                            expectedMessageNumber = 0;
+                        }
                     }
-                    else if(expectedMessageNumber == 1){
-                        message = "BOOKSHELFCOLUMNCHOICE:" + message;
-                    }
-                    else if(expectedMessageNumber == 2){
-                        message = "INSERTIONORDERCHOICE:" + message;
-                    }
-                    if(expectedMessageNumber != 2){
-                        expectedMessageNumber += 1;
-                    }
-                    else{
-                        expectedMessageNumber = 0;
-                    }
+                    notify(message);
                 }
-                notify(message);
             }
             if(isActive()){
                 message = "LEADERBOARD:";
