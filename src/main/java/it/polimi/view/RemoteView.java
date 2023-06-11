@@ -21,12 +21,6 @@ public class RemoteView extends View {
         System.out.println("received: "+message);
         try{
             clientConnection.asyncSend(message);
-            if(message.getCurrPlayer()==super.getPlayer().getPosition()){
-                clientConnection.asyncSend(message.getTurnPlayerMessage());
-            }
-            else{
-                clientConnection.asyncSend(message.getOtherPlayersMessage());
-            }
         }catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e){
             clientConnection.asyncSend("Error!");
         }

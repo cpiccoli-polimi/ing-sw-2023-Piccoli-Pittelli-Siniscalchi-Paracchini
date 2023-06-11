@@ -75,6 +75,12 @@ public class Client {
                                     System.out.print(myPlayer.getPersonalGoal().getGoal().showBookshelf(i));
                                     System.out.println();
                                 }
+                                if(myPlayer.getPosition() == ((GameView) inputObject).getCurrPlayer()){
+                                    System.out.println(((GameView) inputObject).getTurnPlayerMessage());
+                                }
+                                else{
+                                    System.out.println(((GameView) inputObject).getOtherPlayersMessage());
+                                }
                             }
                             else{
                                 System.out.println("LEADERBOARD:");
