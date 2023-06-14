@@ -60,7 +60,11 @@ public class SocketClientConnection extends Observable<String> implements Client
             @Override
             public void run() {
                 if(message instanceof Exception){
-                    if(message instanceof NotYourTurnException){
+                    if( message instanceof NumberFormatException){
+                        notYourTurnFlag = false;
+                        expectedMessageNumber-=1;
+                    }
+                    else if(message instanceof NotYourTurnException){
                         notYourTurnFlag = true;
                     }
                     else{
