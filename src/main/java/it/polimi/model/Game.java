@@ -501,7 +501,7 @@ public class Game extends Observable<GameView>{
         for (int i = 0; i < table.length; i++) {
             setLeaderboard(table[points[i][1]],i);
         }
-        handleTurn("");
+        handleTurn("", "");
         //TextualUI.showLeaderboard(model.getLeaderboard());
     }
 

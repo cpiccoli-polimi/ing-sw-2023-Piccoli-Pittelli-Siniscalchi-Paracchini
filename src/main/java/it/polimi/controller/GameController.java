@@ -131,58 +131,12 @@ public class GameController implements Observer<PlayerChoice> {
     private Game GetModel() {
         return this.model;
     }
-    private void SaveNickname(String nickname, int commonGoalsNumber) {
-        Player player = new Player(nickname,commonGoalsNumber);
-        Player[] table = model.getTable();
-        for(int i=0;i<4;i++){
-            if (table[i] == null){
-                model.setTable(player,i);
-                break;
-            }
-        }
-    }
-
     public void setup(){
         model.setupBoardObjects();
         model.setupCommonGoals();
         model.setupPersonalGoals();
         model.setupFirstPlayer();
     }
-
-    /*private void DeclareWinner() {
-        Player[] table = model.getTable();
-        for(int i=0; i< table.length;i++){
-            table[i].countPersonalGoalsPoints();
-            table[i].countAdjacentItemsPoints();
-        }
-        // *** CREATE LEADERBOARD ***
-        // Create support int array to check points
-        // It contains [points][playerNumberInArray]
-        int[][] points = new int[table.length][2];
-        for(int i=0;i< table.length;i++){
-            points[i][0] = table[i].getPoints();
-            points[i][1] = i;
-        }
-        // Reorder array
-        for (int k = 0; k < points.length; k++) {
-            for (int i= 0; i < points[k].length; i++) {
-                for (int j = 0; j < points[k].length; j++) {
-                    if (points[k][i] < points[k][j]) {
-                        int temp = points[k][i];
-                        points[k][i] = points[k][j];
-                        points[k][j] = temp;
-                    }
-                }
-            }
-        }
-        // Copy in order into leaderboard
-        for (int i = 0; i < table.length; i++) {
-            model.setLeaderboard(table[points[i][1]],i);
-        }
-
-        //TextualUI.showLeaderboard(model.getLeaderboard());
-    }*/
-
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
         int x;
         int y;
@@ -241,31 +195,6 @@ public class GameController implements Observer<PlayerChoice> {
 
         return true;
     }
-
-    /*private void updateFreeSides(ObjectCard [] pickedObject){
-        int x=-1;
-        int y=-1;
-        int fs=-1;
-        Tile tile=null;
-        for (ObjectCard objectCard : pickedObject) {
-            x = objectCard.getXCoordinate();
-            y = objectCard.getYCoordinate();
-            tile = model.getBoard().getTiles()[x - 1][y]; //up
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs - 1);
-            tile = model.getBoard().getTiles()[x + 1][y]; //down
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs - 1);
-            tile = model.getBoard().getTiles()[x][y - 1]; //left
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs - 1);
-            tile = model.getBoard().getTiles()[x][y + 1]; //right
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs - 1);
-        }
-
-    }*/
-
     private void savePickedObject(ObjectCard [] pickedObject){
         int x=-1;
         int y=-1;
@@ -311,24 +240,6 @@ public class GameController implements Observer<PlayerChoice> {
         if (nullCounter < size) { return false; }
         else { return true; }
     }
-
-    private void arrangeChosenObjects() {
-        // Get the current player info
-        int i = 0;
-        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
-            i += 1;
-        }
-        Player currentPlayer = model.getTable()[i];
-        int column = currentPlayer.getChosenColumn();
-        ObjectCard[] chosenObject = currentPlayer.getChosenObjects();
-        ObjectCard[][] bookshelf = currentPlayer.getBookshelf().getShelf();
-        // Insert chosen object into the bookshelf
-        for (int reverse = currentPlayer.getChosenObjects().length - 1; reverse >= 0; reverse--) {
-            bookshelf[column][reverse] = chosenObject[reverse];
-            chosenObject[reverse] = null;
-        }
-    }
-
     private void isDone() {
         // Get the current players
         int i = 0;
@@ -341,47 +252,5 @@ public class GameController implements Observer<PlayerChoice> {
             model.setDone(true);
         }
     }
-
-    /*private void updateBoard() {
-        LivingRoomBoard board = model.getBoard();
-        Tile[][] tiles = board.getTiles();
-        boolean free = true;
-
-        // Check if each tile has 4 free sides
-        for(int i = 0; i < tiles.length; i++) {
-            for(int j = 0; j < tiles[i].length; j++) {
-                if(model.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
-                    if (tiles[i][j].getFreeSides() != 4) {
-                        free = false;
-                        j = tiles[i].length;
-                        i = tiles.length;
-                    }
-                }
-            }
-        }
-        // Repopulate the board
-        if (free == true) {
-            model.updateBoard();
-        }
-    }
-
-    private void verifyCommonGoals() {
-        int currentPlayer = model.getCurrentPlayer();
-        Player[] table = model.getTable();
-        LivingRoomBoard board = model.getBoard();
-
-        for(int i = 0; i < model.getCommonGoalsNumber(); i++) {
-            drawnCommonGoals[i] = board.getCommonGoals()[i];
-            if (drawnCommonGoals[i].check() == true) {
-
-                List<PointCard> listPoints = new List<PointCard>();
-                listPoints = drawnCommonGoals[i].getPoints();
-                PointCard lastPoint = listPoints.get(listPoints.size());
-                int valuePoint = lastPoint.getValue();
-                //rimuovi lastpoint; listPoints.remove(lastPoint)
-                table[currentPlayer].setPoints(valuePoint);
-            }
-        }
-    }*/
 }
 

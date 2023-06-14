@@ -57,6 +57,7 @@ public class Server {
                 throw new RuntimeException(e);
             }
         }
+        c.asyncSend("YOURPLAYERIS:" + nickname);
         if(model != null){
             ((SocketClientConnection)c).setModel(model);
         }
@@ -112,14 +113,7 @@ public class Server {
             String turnPlayerMessage = new String("Choose up to 3 object cards from the board that you want to put in a column of your own library");
             String otherPlayersMessage = new String("Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn");
             for(Player player : model.getTable()){
-                clientConnections.get(player).asyncSend("YOURPLAYERIS:" + player.getNickname());
                 clientConnections.get(player).asyncSend(new GameView(model, turnPlayerMessage, otherPlayersMessage));
-                if(player == currentPlayer){
-                    clientConnections.get(player).asyncSend("Choose up to 3 object cards from the board that you want to put in a column of your own library");
-                }
-                else{
-                    clientConnections.get(player).asyncSend("Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn");
-                }
             }
             playersNumber = -1;
             commonGoalsNumber = -1;

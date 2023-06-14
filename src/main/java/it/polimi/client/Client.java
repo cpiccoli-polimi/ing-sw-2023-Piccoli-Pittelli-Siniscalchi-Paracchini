@@ -15,7 +15,7 @@ public class Client {
     private String ip;
     private int port;
     private boolean active = true;
-    private String myPlayerName = new String("");
+    private String myPlayerName;
     Player myPlayer = null;
 
     public Client(String ip, int port){
@@ -36,9 +36,8 @@ public class Client {
                     while(isActive()){
                         Object inputObject = socketIn.readObject();
                         if(inputObject instanceof String){
-                            String[] splitAttempt = ((String) inputObject).split(":");
-                            if(splitAttempt[0].equals("YOURPLAYERIS")){
-                                myPlayerName = myPlayerName.concat(splitAttempt[1]);
+                            if(((String)inputObject).startsWith("YOURPLAYERIS:")){
+                                myPlayerName = new String(((String)inputObject).substring(13));
                             }
                             else{
                                 System.out.println((String) inputObject);
@@ -75,6 +74,12 @@ public class Client {
                                     }
                                     System.out.print(myPlayer.getPersonalGoal().getGoal().showBookshelf(i));
                                     System.out.println();
+                                }
+                                if(myPlayer.getPosition() == ((GameView) inputObject).getCurrPlayer()){
+                                    System.out.println(((GameView) inputObject).getTurnPlayerMessage());
+                                }
+                                else{
+                                    System.out.println(((GameView) inputObject).getOtherPlayersMessage());
                                 }
                             }
                             else{
