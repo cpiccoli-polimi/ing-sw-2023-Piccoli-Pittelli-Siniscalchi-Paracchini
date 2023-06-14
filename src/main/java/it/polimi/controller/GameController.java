@@ -30,8 +30,9 @@ public class GameController implements Observer<PlayerChoice> {
             ObjectCard [] chosenObjectCards=null;
             try {
                 chosenObjectCards=convert(input[1]);
-            }catch (EmptyTileException e){
+            }catch (EmptyTileException | NumberFormatException | CoordinateException e){
                 message.getView().reportError(e);
+
             }
 
             if(chosenObjectCards!=null){
@@ -89,8 +90,7 @@ public class GameController implements Observer<PlayerChoice> {
 
         }
     }
-
-    public ObjectCard [] convert(String s) throws EmptyTileException{
+    public ObjectCard [] convert(String s) throws EmptyTileException, IntFormatException, CoordinateException {
         String [] space;
         String [] comma;
         ObjectCard [] chosenObjectCards;
@@ -100,10 +100,16 @@ public class GameController implements Observer<PlayerChoice> {
         int [] outputInt=new int[space.length*2];
         for(int i=0; i<space.length;i++){
             comma=space[i].split(",");
-            output[j]=comma[0];
+            System.out.println(comma.length);
+            if(comma.length!=2){
+                throw new CoordinateException("Errore nelle coordinate");
+            }
+
+            output[j] = comma[0];
             j++;
-            output[j]=comma[1];
+            output[j] = comma[1];
             j++;
+
         }
         for (int i=0;i< output.length;i++){
             outputInt[i]=Integer.parseInt(output[i]);
