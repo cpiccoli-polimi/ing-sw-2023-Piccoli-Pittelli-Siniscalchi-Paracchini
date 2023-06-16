@@ -29,5 +29,12 @@ public class ClientApp {
         else{
             throw new IllegalArgumentException();
         }
+
+        try{
+            client.run();
+        }
+        catch(IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 }
