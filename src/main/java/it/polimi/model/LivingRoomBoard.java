@@ -109,20 +109,37 @@ public class LivingRoomBoard implements Serializable {
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
-            tile = getTiles()[x - 1][y]; //up
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs + 1);
-            tile = getTiles()[x + 1][y]; //down
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs + 1);
-            tile = getTiles()[x][y - 1]; //left
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs + 1);
-            tile = getTiles()[x][y + 1]; //right
-            fs = tile.getFreeSides();
-            tile.setFreeSides(fs + 1);
+            tile=getTiles()[x][y];
+            tile.setFreeSides(4);
+            if (x > 0) {
+                tile = getTiles()[x - 1][y]; //up
+                if (tile != null) {
+                    fs = tile.getFreeSides();
+                    tile.setFreeSides(fs + 1);
+                }
+            }
+            if (x < this.tile.length) {
+                tile = getTiles()[x + 1][y]; //down
+                if (tile != null) {
+                    fs = tile.getFreeSides();
+                    tile.setFreeSides(fs + 1);
+                }
+            }
+            if (y > 0) {
+                tile = getTiles()[x][y - 1]; //left
+                if (tile != null) {
+                    fs = tile.getFreeSides();
+                    tile.setFreeSides(fs + 1);
+                }
+            }
+            if (y < this.tile[0].length) {
+                tile = getTiles()[x][y + 1]; //right
+                if (tile != null) {
+                    fs = tile.getFreeSides();
+                    tile.setFreeSides(fs + 1);
+                }
+            }
         }
-
     }
 }
 
