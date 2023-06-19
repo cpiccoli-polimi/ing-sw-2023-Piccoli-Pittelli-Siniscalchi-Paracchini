@@ -3,6 +3,7 @@ package it.polimi.model;
 import java.io.Serializable;
 
 public class GameView implements Serializable{
+    static final long serialVersionUID = 1L;
     private final String turnPlayerMessage;
     private final String otherPlayersMessage;
     private final Player[] table;

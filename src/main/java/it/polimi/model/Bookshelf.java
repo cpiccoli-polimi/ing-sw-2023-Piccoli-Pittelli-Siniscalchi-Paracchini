@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Bookshelf implements Serializable {
-
+    static final long serialVersionUID = 1L;
     private int maxDrawableObjects;
     protected ObjectCard [][] shelf;
     protected Bookshelf(){

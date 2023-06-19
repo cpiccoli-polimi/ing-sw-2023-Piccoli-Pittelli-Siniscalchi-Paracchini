@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CommonGoalCard extends GoalCard implements Serializable {
-
+    static final long serialVersionUID = 1L;
     protected int goalID;
     protected List<PointCard> points;
     private String goalDescription;
