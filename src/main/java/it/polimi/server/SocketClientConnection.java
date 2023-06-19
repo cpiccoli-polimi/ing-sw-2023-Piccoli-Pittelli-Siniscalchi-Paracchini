@@ -2,16 +2,18 @@ package it.polimi.server;
 
 import it.polimi.controller.exception.NotYourTurnException;
 import it.polimi.model.Game;
+import it.polimi.model.GameView;
 import it.polimi.model.Player;
 import it.polimi.observer.Observable;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class SocketClientConnection extends Observable<String> implements ClientConnection, Runnable{
+public class SocketClientConnection extends Observable<String> implements ClientConnection, Runnable {
 
     private Socket socket;
     private ObjectOutputStream out;
@@ -60,11 +62,7 @@ public class SocketClientConnection extends Observable<String> implements Client
             @Override
             public void run() {
                 if(message instanceof Exception){
-                    if( message instanceof NumberFormatException){
-                        notYourTurnFlag = false;
-                        expectedMessageNumber-=1;
-                    }
-                    else if(message instanceof NotYourTurnException){
+                    if(message instanceof NotYourTurnException){
                         notYourTurnFlag = true;
                     }
                     else{
@@ -77,9 +75,11 @@ public class SocketClientConnection extends Observable<String> implements Client
                         }
                     }
                 }
-                else if(message.equals("Choose up to 3 object cards from the board that you want to put in a column of your own library")){
-                    notYourTurnFlag = false;
-                    expectedMessageNumber = 0;
+                else if(message instanceof GameView){
+                    if(((GameView) message).getTurnPlayerMessage().equals("Choose up to 3 object cards from the board that you want to put in a column of your own library")){
+                        notYourTurnFlag = false;
+                        expectedMessageNumber = 0;
+                    }
                 }
                 send(message);
             }
@@ -101,41 +101,42 @@ public class SocketClientConnection extends Observable<String> implements Client
                 while(model.getDone() == false){
                     message = in.nextLine();
                     if(notYourTurnFlag == false){
-                        if(expectedMessageNumber == 0){
+                        if(expectedMessageNumber==3){
+                            expectedMessageNumber=0;
+                        }
+                        else if(expectedMessageNumber == 0){
                             message = "OBJECTCARDSCHOICE:" + message;
+                            expectedMessageNumber++;
                         }
                         else if(expectedMessageNumber == 1){
                             message = "BOOKSHELFCOLUMNCHOICE:" + message;
+                            expectedMessageNumber++;
                         }
                         else if(expectedMessageNumber == 2){
                             message = "INSERTIONORDERCHOICE:" + message;
+                            expectedMessageNumber++;
                         }
-                        if(expectedMessageNumber != 2){
-                            expectedMessageNumber += 1;
-                        }
-                        else{
-                            expectedMessageNumber = 0;
-                        }
+
                     }
                     notify(message);
                 }
                 while(model.getCurrentPlayer() != 0){
                     message = in.nextLine();
                     if(notYourTurnFlag == false){
-                        if(expectedMessageNumber == 0){
+                        if(expectedMessageNumber==3){
+                            expectedMessageNumber=0;
+                        }
+                        else if(expectedMessageNumber == 0){
                             message = "OBJECTCARDSCHOICE:" + message;
+                            expectedMessageNumber++;
                         }
                         else if(expectedMessageNumber == 1){
                             message = "BOOKSHELFCOLUMNCHOICE:" + message;
+                            expectedMessageNumber++;
                         }
                         else if(expectedMessageNumber == 2){
                             message = "INSERTIONORDERCHOICE:" + message;
-                        }
-                        if(expectedMessageNumber != 2){
-                            expectedMessageNumber += 1;
-                        }
-                        else{
-                            expectedMessageNumber = 0;
+                            expectedMessageNumber++;
                         }
                     }
                     notify(message);
