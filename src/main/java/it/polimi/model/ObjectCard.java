@@ -3,6 +3,7 @@ package it.polimi.model;
 import java.io.Serializable;
 
 public class ObjectCard implements Serializable {
+    static final long serialVersionUID = 1L;
     private int id;
     private Type type;
     private int xCoordinate;

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Player implements Serializable {
+    static final long serialVersionUID = 1L;
     private String nickname;
     private int points;
     private boolean isFirst;

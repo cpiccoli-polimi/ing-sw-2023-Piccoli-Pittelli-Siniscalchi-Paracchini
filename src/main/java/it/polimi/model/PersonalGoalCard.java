@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 
 
 public class PersonalGoalCard extends GoalCard implements Serializable {
+    static final long serialVersionUID = 1L;
     private Bookshelf goal;
     private Map<Integer,Integer> points;
     public PersonalGoalCard(int id){

@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.Serializable;
 
 public class LivingRoomBoard implements Serializable {
+    static final long serialVersionUID = 1L;
     private CommonGoalCard[] commonGoals;
     private Tile[][] tile;
 
