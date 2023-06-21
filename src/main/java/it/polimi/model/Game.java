@@ -103,6 +103,8 @@ public class Game extends Observable<GameView>{
         clockString += nanoseconds;
         seed = parseLong(clockString);
         generator = new Random(seed);
+        /*this.commonGoalsDeck=new ArrayList<>(); // AGGIUNTO
+        commonGoalsDeck.add(new CommonGoalCard3(playersNumber)); //AGGIUNTO*/
         shuffle(list, generator);
         this.commonGoalsDeck = new ArrayList<CommonGoalCard>();
         int i = 0;
@@ -382,11 +384,13 @@ public class Game extends Observable<GameView>{
         ObjectCard [] objectCardsOrdered=new ObjectCard[order.length];
         int column = currentPlayer.getChosenColumn();
         Bookshelf bookshelf = currentPlayer.getBookshelf();
+        System.out.println("COLONNA SCELTA:"+column);
         for(int j=0;j<order.length;j++){
+            System.out.println("ORDINE:"+order[j]);
             objectCardsOrdered[order[j]-1]=objectCard[j];
         }
-        for(int j=0;j< order.length;j++){
-            bookshelf.setShelf(objectCardsOrdered[j],column);
+        for(int k=0;k< order.length;k++){
+            bookshelf.setShelf(objectCardsOrdered[k],column);
         }
         bookshelf.updateMaxDrawableObjects();
 
@@ -404,23 +408,21 @@ public class Game extends Observable<GameView>{
             this.setDone(true);
         }
         updateBoard();
-        CommonGoalCard [] commonGoalCard= board.getCommonGoals();
-        for(i=0;i<commonGoalCard.length;i++) {
-            for (int j = 0; j < commonGoalCard.length; j++) {
-                if (currentPlayer.getCommonGoalsCompleted()[j] == commonGoalCard[i].getGoalID()) {
+        for(i=0;i<commonGoalsDeck.size();i++) {
+            for (int j = 0; j < commonGoalsDeck.size(); j++) {
+                if (currentPlayer.getCommonGoalsCompleted()[j] == commonGoalsDeck.get(i).getGoalID()) {
                     b = false;
                 }
             }
-            if (b && commonGoalCard[i].check(bookshelf.getShelf()) == true) {
+            if (b && commonGoalsDeck.get(i).check(bookshelf.getShelf()) == true) {
                 try {
-                    currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(), commonGoalCard[i].getGoalID());
+                    currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(), commonGoalsDeck.get(i).getGoalID());
                 } catch (CommonGoalAlreadyCompletedException e) {
                     throw new RuntimeException(e);
                 } catch (AllCommonGoalsCompletedException e) {
                     throw new RuntimeException(e);
                 }
-
-                updateCommonGoals(commonGoalCard[i]);
+                updateCommonGoals(commonGoalsDeck.get(i));
             }
         }
         nextTurn();
@@ -444,28 +446,71 @@ public class Game extends Observable<GameView>{
         LivingRoomBoard board = this.getBoard();
         Tile[][] tiles = board.getTiles();
         boolean free = true;
-
+        int freeSidesCounter=0;
         // Check if each tile has 4 free sides
         for(int i = 0; i < tiles.length; i++) {
             for(int j = 0; j < tiles[i].length; j++) {
                 if(this.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
-                    if (tiles[i][j].getFreeSides() != 4) {
+                    System.out.print(tiles[i][j].getFreeSides()+"("+tiles[i][j].getMinPlayers()+")");
+                    if (tiles[i][j].getFreeSides() < 4) {
                         free = false;
                     }
                 }
-            }
+            }System.out.println();
         }
+        System.out.println(free);
         // Repopulate the board
         if (free == true) {
             CardsBag bag = this.getBag();
             int cardId;
-
             for(int i = 0; i < tiles.length; i++){
                 for(int j = 0; j < tiles[i].length; j++){
-                    if(tiles[i][j].getMinPlayers() <= this.getPlayersNumber() && tiles[i][j] != null){
-                        cardId = bag.getCard();
-                        ObjectCard drawnCard = new ObjectCard(cardId, i, j);
-                        board.placeObject(drawnCard,i,j);
+                    if(tiles[i][j].getMinPlayers() <= this.getPlayersNumber()){
+                        if(tiles[i][j].getObject()==null) {
+                            cardId = bag.getCard();
+                            ObjectCard drawnCard = new ObjectCard(cardId, i, j);
+                            board.placeObject(drawnCard, i, j);
+                        }
+                    }
+                }
+            }
+            for(int i = 0; i < tiles.length; i++){
+                for(int j = 0; j < tiles[i].length; j++){
+                    if(playersNumber >= tiles[i][j].getMinPlayers()){
+                        freeSidesCounter = 4;
+                        if(i != tiles.length - 1){
+                            if(tiles[i+1][j].getObject()!=null){
+                                freeSidesCounter -= 1;
+                            }
+                        }
+                        else{
+                            freeSidesCounter = freeSidesCounter;
+                        }
+                        if(i != 0){
+                            if(tiles[i-1][j].getObject()!=null){
+                                freeSidesCounter -= 1;
+                            }
+                        }
+                        else{
+                            freeSidesCounter = freeSidesCounter;
+                        }
+                        if(j != tiles[i].length - 1){
+                            if(tiles[i][j+1].getObject()!=null) {
+                                freeSidesCounter -= 1;
+                            }
+                        }
+                        else{
+                            freeSidesCounter = freeSidesCounter;
+                        }
+                        if(j != 0){
+                            if(tiles[i][j-1].getObject()!=null) {
+                                freeSidesCounter -= 1;
+                            }
+                        }
+                        else{
+                            freeSidesCounter = freeSidesCounter;
+                        }
+                        tiles[i][j].setFreeSides(freeSidesCounter);
                     }
                 }
             }
