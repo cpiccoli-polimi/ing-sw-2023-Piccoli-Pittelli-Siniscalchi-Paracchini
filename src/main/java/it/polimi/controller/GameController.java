@@ -248,24 +248,25 @@ public class GameController implements Observer<PlayerChoice> {
 
 
     private boolean checkChosenColumn(int column) throws OutOfBookshelfException {
-
-        if(column<0 || column>model.getTable()[0].getBookshelf().getShelf()[0].length){
-            throw new OutOfBookshelfException("Fuori dalla libreria");
-        }
         int i = 0;
         while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
             i += 1;
         }
         Player currentPlayer = model.getTable()[i];
+
+        if(column<0 || column>currentPlayer.getBookshelf().getShelf()[0].length){
+            throw new OutOfBookshelfException("Fuori dalla libreria");
+        }
         // Get chosen column and counter of empty slot for checking
         //int column = table[currentPlayer].getChosenColumn();
         int nullCounter = 0;
         // Get current player's bookshelf and chosen object size
         ObjectCard[][] bookshelf = currentPlayer.getBookshelf().getShelf();
         int size = currentPlayer.getChosenObjects().length;
+        System.out.println(size);
         // Count empty slots
-        for (int row = 0; row < bookshelf[column].length; row++) {
-            if (bookshelf[column][row] == null) {
+        for (int row = 0; row < bookshelf.length; row++) {
+            if (bookshelf[row][column] == null) {
                 nullCounter += 1;
             }
         }
