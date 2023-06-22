@@ -19,7 +19,6 @@ public class GameController implements Observer<PlayerChoice> {
 
     private synchronized void handleMessage(PlayerChoice message){
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){
-            System.out.println("NON TUO TURNO");
             message.getView().reportError(new NotYourTurnException("Now it's not your turn. Wait your turn"));
         }
         else {
@@ -82,12 +81,19 @@ public class GameController implements Observer<PlayerChoice> {
 
             } else if (Objects.equals(input[0], "INSERTIONORDERCHOICE")) {//TODO checkMessageCorrectness
                 int[] chosenInsertionOrder = null;
+                boolean c=false;
                 try {
                     chosenInsertionOrder = convertOrder(input[1]);
                 } catch (NumberFormatException e) {
                     message.getView().reportError(e);
                 }
-                if (chosenInsertionOrder != null) {
+                try {
+                    c=checkOrder(chosenInsertionOrder);
+                }
+                catch (DifferentLengthException | OrderException e){
+                    message.getView().reportError(e);
+                }
+                if (c==true) {
                     int i = 0;
                     while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
                         i += 1;
@@ -103,7 +109,10 @@ public class GameController implements Observer<PlayerChoice> {
 
             } else if (Objects.equals(input[0], "LEADERBOARD")) {
                 model.DeclareWinner();
-
+                System.out.println("il giocatore è: "+model.getCurrentPlayer());
+            }
+            else if (Objects.equals(input[0],"LEADERBOARD1")){
+                model.handleTurn("","");
             }
         }
     }
@@ -112,8 +121,8 @@ public class GameController implements Observer<PlayerChoice> {
         space= s.split(" ");
         int [] chosenInsertionOrder;
         chosenInsertionOrder=new int[space.length];
-        for(int i=0;i<space.length;i++){
-            chosenInsertionOrder[i]=Integer.parseInt(space[i]);
+        for(int j=0;j<space.length;j++){
+            chosenInsertionOrder[j]=Integer.parseInt(space[j]);
         }
         return chosenInsertionOrder;
     }
@@ -168,6 +177,36 @@ public class GameController implements Observer<PlayerChoice> {
         model.setupCommonGoals();
         model.setupPersonalGoals();
         model.setupFirstPlayer();
+    }
+    private boolean checkOrder(int [] chosenInsertionOrder) throws DifferentLengthException, OrderException{
+        int i = 0;
+        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+            i += 1;
+        }
+        Player currentPlayer = model.getTable()[i];
+        if(chosenInsertionOrder.length!=currentPlayer.getChosenObjects().length){
+            throw new DifferentLengthException("You have to order "+currentPlayer.getChosenObjects().length+" objects");
+        }
+        int [] order=new int[chosenInsertionOrder.length];
+        for(int k=0;k<chosenInsertionOrder.length;k++){
+            order[k]=k+1;
+        }
+        for(int k=0;k<chosenInsertionOrder.length;k++) {
+            for (int o = 0; o < chosenInsertionOrder.length; o++) {
+                if (chosenInsertionOrder[k] > chosenInsertionOrder.length || chosenInsertionOrder[k]<=0) {
+                    throw new OrderException(chosenInsertionOrder[k] + " is not a valid number");
+                }
+                if(chosenInsertionOrder[k]==order[o]){
+                    order[o]=-1;
+                }
+            }
+        }
+        for(int o=0;o<chosenInsertionOrder.length;o++){
+            if(order[o]!=-1){
+                throw new OrderException("You have to choose different order for each object");
+            }
+        }
+        return true;
     }
     private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
         int x;
