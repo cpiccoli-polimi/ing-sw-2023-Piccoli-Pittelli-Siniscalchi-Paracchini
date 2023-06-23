@@ -17,7 +17,7 @@ class CommonGoalCard9Test {
             bookshelf[i][1]=new PublicObjectCard(k+23,i,1);
             bookshelf[i][2]=new PublicObjectCard(k+46,i,2);
         }
-        assertEquals(true,cm9.check(bookshelf));
+        assertTrue(cm9.check(bookshelf));
     }
     @Test
     void TreColonneStessoTipo(){
@@ -30,7 +30,7 @@ class CommonGoalCard9Test {
             bookshelf[i][1]=new PublicObjectCard(k,i,1);
             bookshelf[i][2]=new PublicObjectCard(k,i,2);
         }
-        assertEquals(true,cm9.check(bookshelf));
+        assertTrue(cm9.check(bookshelf));
     }
     @Test
     void SoloDueColonne(){
