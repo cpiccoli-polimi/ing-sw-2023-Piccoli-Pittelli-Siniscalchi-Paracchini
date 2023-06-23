@@ -17,7 +17,11 @@ import java.nio.charset.StandardCharsets;
 public class PersonalGoalCard extends GoalCard implements Serializable {
     private Bookshelf goal;
     private Map<Integer,Integer> points;
+
+    private int id;
     public PersonalGoalCard(int id){
+
+        this.id = id;
 
         // Read file from JSON file and copy it into Personal Goal Card
         InputStream stream = PersonalGoalCard.class.getResourceAsStream("/PersonalGoalCards.json");
@@ -82,6 +86,9 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
         return goal;
     }
 
+    public int getId(){
+        return this.id;
+    }
     @Override
     public boolean equals(Object object) {
         if((object instanceof PersonalGoalCard) == false){

@@ -11,4 +11,8 @@ public enum Value {
     Value(int i) {
         this.i = i;
     }
+
+    public int getI() {
+        return i;
+    }
 }
