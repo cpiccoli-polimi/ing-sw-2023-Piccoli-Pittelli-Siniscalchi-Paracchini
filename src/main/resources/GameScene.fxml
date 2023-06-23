@@ -11,7 +11,6 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-
 <StackPane fx:id="scenePane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.client.GameSceneController">
    <children>
       <FlowPane fx:id="gamePane" alignment="TOP_LEFT" prefHeight="791.0" prefWidth="1216.0">
@@ -122,11 +121,11 @@
                   </StackPane>
                </top>
             </BorderPane>
-            <StackPane fx:id="myBookshelfPane">
+            <StackPane fx:id="myPane">
                <children>
-                  <TextFlow fx:id="myBookshelfTextPane">
+                  <TextFlow fx:id="myTextPane">
                      <children>
-                        <Text fx:id="myBookshelfText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="myText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </TextFlow>
                   <GridPane fx:id="myBookshelfItemsPane">
@@ -151,13 +150,13 @@
                   <ImageView fx:id="myEndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </StackPane>
-            <FlowPane fx:id="othersBookshelvesPane" prefHeight="200.0" prefWidth="200.0">
+            <FlowPane fx:id="opponentsPane" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <StackPane fx:id="opponent1BookshelfPane">
+                  <StackPane fx:id="opponent1Pane">
                      <children>
-                        <TextFlow fx:id="opponent1BookshelfTextPane">
+                        <TextFlow fx:id="opponent1TextPane">
                            <children>
-                              <Text fx:id="opponent1BookshelfText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="opponent1Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                            </children>
                         </TextFlow>
                         <GridPane fx:id="opponent1BookshelfItemsPane">
@@ -182,11 +181,11 @@
                         <ImageView fx:id="opponent1EndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </StackPane>
-                  <StackPane fx:id="opponent2BookshelfPane">
+                  <StackPane fx:id="opponent2Pane">
                      <children>
-                        <TextFlow fx:id="opponent2BookshelfTextPane">
+                        <TextFlow fx:id="opponent2TextPane">
                            <children>
-                              <Text fx:id="opponent2BookshelfText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="opponent2Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                            </children>
                         </TextFlow>
                         <ImageView fx:id="opponent2BookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
@@ -211,11 +210,11 @@
                         <ImageView fx:id="opponent2EndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </StackPane>
-                  <StackPane fx:id="opponent3BookshelfPane">
+                  <StackPane fx:id="opponent3Pane">
                      <children>
-                        <TextFlow fx:id="opponent3BookshelfTextPane">
+                        <TextFlow fx:id="opponent3TextPane">
                            <children>
-                              <Text fx:id="opponent3BookshelfText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Text fx:id="opponent3Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                            </children>
                         </TextFlow>
                         <GridPane fx:id="opponent3BookshelfItemsPane">
