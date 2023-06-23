@@ -18,27 +18,20 @@ public class CommonGoalCard4 extends CommonGoalCard {
         List<Type> typeList= new ArrayList<Type>();
         int rowsCounter = 0;
 
-        for (int i = 0; i < bookshelf[0].length; i++) {
-            for (int j = 0; j < bookshelf.length; j++) {
-
-                if (bookshelf[j][i].getType() != null) {
-
-                    if (!typeList.contains(bookshelf[j][i].getType())) {
-                        typeList.add(bookshelf[j][i].getType());
+        for (int i = 0; i < bookshelf.length; i++) {
+            for (int j = 0; j < bookshelf[i].length; j++) {
+                if (bookshelf[i][j] != null) {
+                    if (!typeList.contains(bookshelf[i][j].getType())) {
+                        typeList.add(bookshelf[i][j].getType());
                     }
-                }else {
-                    continue;
                 }
             }
-
-            if (typeList.size() <= 3) {
+            if (typeList.size() <= 3 && typeList.size() != 0) {
                 rowsCounter += 1;
+                if (rowsCounter == 4){ return true;}
             }
-
             typeList.clear();
         }
-
-        if (rowsCounter < 4){ return false; }
-        else { return true; }
+        return false;
     }
 }
