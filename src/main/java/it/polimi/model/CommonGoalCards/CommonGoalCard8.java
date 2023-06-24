@@ -34,10 +34,12 @@ public class CommonGoalCard8 extends CommonGoalCard {
                             flag = false;
                         }
                     }
+                    else if(bookshelf[i][k] == null){
+                        flag = false;
+                    }
                 }
                 if(flag == true){
                     rowsCounter += 1;
-                    flag = false;
                 }
                 else{
                     flag = true;
@@ -45,7 +47,7 @@ public class CommonGoalCard8 extends CommonGoalCard {
             }
         }
 
-        if(rowsCounter == 2){
+        if(rowsCounter >= 2){
             return true;
         }
         else{
