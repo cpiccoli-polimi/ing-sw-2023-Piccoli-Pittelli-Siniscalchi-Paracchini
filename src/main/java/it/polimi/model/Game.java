@@ -1,32 +1,21 @@
 package it.polimi.model;
 
 import it.polimi.model.CommonGoalCards.*;
-import it.polimi.model.exception.AllCommonGoalsCompletedException;
-import it.polimi.model.exception.CommonGoalAlreadyCompletedException;
 import it.polimi.model.exception.CommonGoalsNumberException;
 import it.polimi.model.exception.PlayersNumberException;
+import it.polimi.observer.Observable;
 
 import java.io.FileNotFoundException;
-import java.sql.Array;
-import it.polimi.observer.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.util.Collections.shuffle;
 
 public class Game extends Observable<GameView>{
-    public enum Event{
-        GAME_START,
-        DUPLICATE_USERNAME,
-        SHOW_GAME, //(board, tutte le librerie, i common goal, e il proprio personal goal)
-        TILE_ERROR,
-        COLUMN_ERROR,
-        FINAL_LEADERBOARD
-    }
 
     private int id;
     private boolean done;
@@ -46,7 +35,7 @@ public class Game extends Observable<GameView>{
         int hours = clock.getHour();
         int minutes = clock.getMinute();
         int seconds = clock.getSecond();
-        String clockString = new String();
+        String clockString = "";
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
@@ -74,19 +63,19 @@ public class Game extends Observable<GameView>{
         minutes = clock.getMinute();
         seconds = clock.getSecond();
         int nanoseconds = clock.getNano();
-        clockString = new String();
+        clockString = "";
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
         clockString += nanoseconds;
         long seed = parseLong(clockString);
         Random generator = new Random(seed);
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         for(int i = 0; i<12; i++){
             list.add(i+1);
         }
         shuffle(list, generator);
-        this.personalGoalsDeck = new ArrayList<PersonalGoalCard>();
+        this.personalGoalsDeck = new ArrayList<>();
         for(int i = 0; i < 12; i++){
             personalGoalsDeck.add(new PersonalGoalCard(list.get(i)));
         }
@@ -96,7 +85,7 @@ public class Game extends Observable<GameView>{
         minutes = clock.getMinute();
         seconds = clock.getSecond();
         nanoseconds = clock.getNano();
-        clockString = new String();
+        clockString = "";
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
@@ -106,7 +95,7 @@ public class Game extends Observable<GameView>{
         //this.commonGoalsDeck=new ArrayList<CommonGoalCard>(); // AGGIUNTO
         //commonGoalsDeck.add(0,new CommonGoalCard3(playersNumber)); //AGGIUNTO
         shuffle(list, generator);
-        this.commonGoalsDeck = new ArrayList<CommonGoalCard>();
+        this.commonGoalsDeck = new ArrayList<>();
         int i = 0;
         for(int j = 0; j < 12; j++){
             switch(list.get(j)){
@@ -177,32 +166,20 @@ public class Game extends Observable<GameView>{
                             freeSidesCounter -= 1;
                         }
                     }
-                    else{
-                        freeSidesCounter = freeSidesCounter;
-                    }
                     if(i != 0){
                         if(tiles[i-1][j].getObject()!=null){
                             freeSidesCounter -= 1;
                         }
-                    }
-                    else{
-                        freeSidesCounter = freeSidesCounter;
                     }
                     if(j != tiles[i].length - 1){
                         if(tiles[i][j+1].getObject()!=null) {
                             freeSidesCounter -= 1;
                         }
                     }
-                    else{
-                        freeSidesCounter = freeSidesCounter;
-                    }
                     if(j != 0){
                         if(tiles[i][j-1].getObject()!=null) {
                             freeSidesCounter -= 1;
                         }
-                    }
-                    else{
-                        freeSidesCounter = freeSidesCounter;
                     }
                     tiles[i][j].setFreeSides(freeSidesCounter);
                 }
@@ -215,7 +192,7 @@ public class Game extends Observable<GameView>{
         for(int i = 0; i < commonGoalsNumber; i++){
             drawnCommonGoals[i] = commonGoalsDeck.remove(0);
 
-            List<PointCard> pointsDeck = new ArrayList<PointCard>();
+            List<PointCard> pointsDeck = new ArrayList<>();
             switch(playersNumber){
                 case 2:
                     if(i == 0){
@@ -270,7 +247,7 @@ public class Game extends Observable<GameView>{
         int minutes = clock.getMinute();
         int seconds = clock.getSecond();
         int nanoseconds = clock.getNano();
-        String clockString = new String();
+        String clockString = "";
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
@@ -363,7 +340,7 @@ public class Game extends Observable<GameView>{
         while(this.table[i].getPosition() != this.currentPlayer){
             i += 1;
         }
-        if(commonGoal.getPoints().isEmpty() == false){
+        if(!commonGoal.getPoints().isEmpty()){
             points = this.table[i].getPoints();
             points += commonGoal.getPoints().remove(0).getValue().i;
             this.table[i].setPoints(points);
@@ -407,7 +384,7 @@ public class Game extends Observable<GameView>{
         Player currentPlayer = this.table[i];
         boolean b=true;
         Bookshelf bookshelf = currentPlayer.getBookshelf();
-        if(bookshelf.isFull()==true){
+        if(bookshelf.isFull()){
             this.setDone(true);
         }
         updateBoard();
@@ -420,7 +397,7 @@ public class Game extends Observable<GameView>{
             }
             System.out.println("b vale: "+b);
             System.out.println("ID COMMON GOAL: "+board.getCommonGoals()[i].getGoalID());
-            if(b==true && board.getCommonGoals()[i].check(bookshelf.getShelf())==true){
+            if(b && board.getCommonGoals()[i].check(bookshelf.getShelf())){
                 System.out.println("DENTRO IF");
                 currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(),board.getCommonGoals()[i].getGoalID());
                 updateCommonGoals(board.getCommonGoals()[i]);
@@ -462,7 +439,7 @@ public class Game extends Observable<GameView>{
         }
         System.out.println(free);
         // Repopulate the board
-        if (free == true) {
+        if (free) {
             CardsBag bag = this.getBag();
             int cardId;
             for(int i = 0; i < tiles.length; i++){
@@ -485,32 +462,20 @@ public class Game extends Observable<GameView>{
                                 freeSidesCounter -= 1;
                             }
                         }
-                        else{
-                            freeSidesCounter = freeSidesCounter;
-                        }
                         if(i != 0){
                             if(tiles[i-1][j].getObject()!=null){
                                 freeSidesCounter -= 1;
                             }
-                        }
-                        else{
-                            freeSidesCounter = freeSidesCounter;
                         }
                         if(j != tiles[i].length - 1){
                             if(tiles[i][j+1].getObject()!=null) {
                                 freeSidesCounter -= 1;
                             }
                         }
-                        else{
-                            freeSidesCounter = freeSidesCounter;
-                        }
                         if(j != 0){
                             if(tiles[i][j-1].getObject()!=null) {
                                 freeSidesCounter -= 1;
                             }
-                        }
-                        else{
-                            freeSidesCounter = freeSidesCounter;
                         }
                         tiles[i][j].setFreeSides(freeSidesCounter);
                     }

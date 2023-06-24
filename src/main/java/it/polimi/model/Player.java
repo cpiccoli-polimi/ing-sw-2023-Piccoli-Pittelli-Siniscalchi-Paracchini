@@ -1,6 +1,4 @@
 package it.polimi.model;
-import it.polimi.model.exception.AllCommonGoalsCompletedException;
-import it.polimi.model.exception.CommonGoalAlreadyCompletedException;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -90,9 +88,7 @@ public class Player implements Serializable {
         System.out.println("Giocatore"+position);
         chosenObjects= new ObjectCard[oggettoScelto.length];
         System.out.println(oggettoScelto[0].getType());
-        for(int i=0;i<oggettoScelto.length;i++){
-            this.chosenObjects[i]=oggettoScelto[i];
-        }
+        System.arraycopy(oggettoScelto, 0, this.chosenObjects, 0, oggettoScelto.length);
         System.out.println("Oggetto copiato"+getChosenObjects()[0].getType());
 
     }
@@ -147,7 +143,7 @@ public class Player implements Serializable {
             }
             case 1: {
                 p=getPoints();
-                setPoints(p+1);;
+                setPoints(p+1);
                 break;
 
             }

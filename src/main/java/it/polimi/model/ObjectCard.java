@@ -28,7 +28,7 @@ public class ObjectCard implements Serializable {
             this.type = Type.Games;
 
         }
-    };
+    }
 
     public int getId() {
         return id;
@@ -36,27 +36,27 @@ public class ObjectCard implements Serializable {
 
     public Type getType() {
         return type;
-    };
+    }
 
     public int getXCoordinate() {
         return xCoordinate;
-    };
+    }
 
     public void setXCoordinate(int xCoordinate) {
         this.xCoordinate = xCoordinate;
-    };
+    }
 
     public int getYCoordinate() {
         return yCoordinate;
-    };
+    }
 
     public void setYCoordinate(int yCoordinate) {
         this.yCoordinate = yCoordinate;
-    };
+    }
 
     @Override
     public boolean equals(Object object) {
-        if((object instanceof ObjectCard) == false){
+        if(!(object instanceof ObjectCard)){
             return false;
         }
         ObjectCard objectCard = (ObjectCard) object;

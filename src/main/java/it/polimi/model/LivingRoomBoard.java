@@ -1,7 +1,9 @@
 package it.polimi.model;
 
-import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,23 +37,23 @@ public class LivingRoomBoard implements Serializable {
         }
 
         commonGoals = new CommonGoalCard[commonGoalsNumber];
-    };
+    }
 
     public CommonGoalCard[] getCommonGoals() {
         return commonGoals;
-    };
+    }
 
     public void setCommonGoals(CommonGoalCard[] drawnCommonGoals) {
         System.arraycopy(drawnCommonGoals, 0, this.commonGoals, 0, drawnCommonGoals.length);
-    };
+    }
 
     public Tile[][] getTiles() {
         return tile;
-    };
+    }
 
     public void placeObject(ObjectCard object, int xCoordinate, int yCoordinate) {
         tile[xCoordinate][yCoordinate].setObject(object);
-    };
+    }
 
     public ObjectCard removeObject(int xCoordinate, int yCoordinate) {
         ObjectCard object = tile[xCoordinate][yCoordinate].getObject();
