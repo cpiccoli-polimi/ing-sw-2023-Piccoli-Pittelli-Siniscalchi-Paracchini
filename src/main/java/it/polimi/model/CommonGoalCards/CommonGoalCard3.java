@@ -1,8 +1,7 @@
 package it.polimi.model.CommonGoalCards;
 
-import it.polimi.model.*;
-
-import java.util.ArrayList;
+import it.polimi.model.CommonGoalCard;
+import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard3 extends CommonGoalCard {
     public CommonGoalCard3(int playersNumber) {

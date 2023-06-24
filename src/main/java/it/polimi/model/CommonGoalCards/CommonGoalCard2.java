@@ -1,10 +1,7 @@
 package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
-import it.polimi.model.PointCard;
 import it.polimi.model.ObjectCard;
-
-import java.util.ArrayList;
 
 public class CommonGoalCard2 extends CommonGoalCard {
 
@@ -36,7 +33,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
             else satisfied = true;
         }
         // Bottom left
-        if(satisfied == false) {
+        if(!satisfied) {
             for (int i = 0; i < bookshelf[0].length; i++) {
                 if(i == (bookshelf[0].length-1)){
                     if (bookshelf[i][i] == null){ break;}
@@ -48,7 +45,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
             }
         }
         // Second bottom left
-        if(satisfied == false) {
+        if(!satisfied) {
             for (int i = 0; i < bookshelf[0].length; i++) {
                 if(i == (bookshelf[0].length-1)){
                     if (bookshelf[i][i] == null){ break;}

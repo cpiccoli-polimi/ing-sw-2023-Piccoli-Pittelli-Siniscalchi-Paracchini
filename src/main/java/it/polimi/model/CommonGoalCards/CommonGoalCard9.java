@@ -1,11 +1,11 @@
 package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
-import it.polimi.model.PointCard;
+import it.polimi.model.ObjectCard;
 import it.polimi.model.Type;
+
 import java.util.ArrayList;
 import java.util.List;
-import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard9 extends CommonGoalCard {
     public CommonGoalCard9(int playersNumber) {
@@ -13,7 +13,7 @@ public class CommonGoalCard9 extends CommonGoalCard {
     }
     @Override
     public boolean check(ObjectCard[][] bookshelf) {
-        List<Type> typeList= new ArrayList<Type>();
+        List<Type> typeList= new ArrayList<>();
         Type objectType;
         int tess;
         int count=0;
@@ -35,7 +35,6 @@ public class CommonGoalCard9 extends CommonGoalCard {
             }
             typeList.clear();
         }
-        if(count<3){ return false;}
-        else{return true;}
+        return count >= 3;
     }
 }

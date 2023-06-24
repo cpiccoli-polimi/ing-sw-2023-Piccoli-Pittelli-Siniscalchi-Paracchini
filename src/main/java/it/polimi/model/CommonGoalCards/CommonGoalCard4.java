@@ -15,7 +15,7 @@ public class CommonGoalCard4 extends CommonGoalCard {
     }
     @Override
     public boolean check(ObjectCard[][] bookshelf) {
-        List<Type> typeList= new ArrayList<Type>();
+        List<Type> typeList= new ArrayList<>();
         int rowsCounter = 0;
 
         for (int i = 0; i < bookshelf.length; i++) {
