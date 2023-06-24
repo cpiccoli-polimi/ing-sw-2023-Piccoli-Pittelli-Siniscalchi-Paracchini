@@ -62,8 +62,16 @@ public class Player implements Serializable {
     public void setHasFinished(boolean hasFinished){ this.hasFinished=hasFinished;}
 
     public int[] getCommonGoalsCompleted() { return commonGoalsCompleted;}
+    public void setCommonGoalsCompleted(int[] commonGoalsCompleted, int newGoal){
+        int i=0;
+        while(commonGoalsCompleted[i]!=-1){
+            i++;
+        }
+        commonGoalsCompleted[i]=newGoal;
+        System.out.println(newGoal+"completed");
+    }
 
-    public void setCommonGoalsCompleted (int [] commonGoalsCompleted, int newGoals)throws AllCommonGoalsCompletedException, CommonGoalAlreadyCompletedException {
+    /*public void setCommonGoalsCompleted (int [] commonGoalsCompleted, int newGoals)throws AllCommonGoalsCompletedException, CommonGoalAlreadyCompletedException {
         if(commonGoalsCompleted[commonGoalsCompleted.length-1]!=-1){
             throw new AllCommonGoalsCompletedException();
         }
@@ -75,7 +83,7 @@ public class Player implements Serializable {
             i++;
         }
         commonGoalsCompleted[i]=newGoals;
-    }
+    }*/
 
     public ObjectCard[] getChosenObjects() {return chosenObjects;}
     public void setChosenObjects(ObjectCard [] oggettoScelto){
@@ -115,16 +123,61 @@ public class Player implements Serializable {
     }
 
     public void countPersonalGoalsPoints() {
+        int count=0;
+        int p=0;
         // Get bookshelf, personalGoal and actual points from Player
-        ObjectCard[][] shelf = bookshelf.getShelf();
+        Bookshelf bookshelf = this.getBookshelf();
+        for(int i=0;i<5;i++) System.out.println(bookshelf.showBookshelf(i));
         // Scan through every row and columns: if two cells match, add one point
-        for (int row = 0; row < 6; row++) {
-            for (int col = 0; col < 5; col++) {
-                if (shelf[row][col].getType() == personalGoal.getGoal().getShelf()[row][col].getType()) {
-                    points++;
+        for (int row = 0; row < getBookshelf().getShelf().length; row++) {
+            for (int col = 0; col < getBookshelf().getShelf()[0].length; col++) {
+                if (bookshelf.shelf[row][col] != null && personalGoal.getGoal().getShelf()[row][col]!=null) {
+                    if (bookshelf.shelf[row][col].getType() != null && personalGoal.getGoal().getShelf()[row][col].getType() != null) {
+                        if (bookshelf.shelf[row][col].getType() == personalGoal.getGoal().getShelf()[row][col].getType()) {
+                            count++;
+                        }
+                    }
                 }
             }
         }
+        switch (count){
+            case 0 : {
+                getPoints();
+                break;
+            }
+            case 1: {
+                p=getPoints();
+                setPoints(p+1);;
+                break;
+
+            }
+            case 2 : {
+                p=getPoints();
+                setPoints(p+2);
+                break;
+            }
+            case 3: {
+                p=getPoints();
+                setPoints(p+4);
+                break;
+            }
+            case 4 : {
+                p=getPoints();
+                setPoints(p+6);
+                break;
+            }
+            case 5: {
+                p=getPoints();
+                setPoints(p+9);
+                break;
+            }
+            case 6 : {
+                p=getPoints();
+                setPoints(p+12);
+                break;
+            }
+        }
+        System.out.println("Punti"+count);
     }
 
     public void countAdjacentItemsPoints() {
