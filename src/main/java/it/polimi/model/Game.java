@@ -103,8 +103,8 @@ public class Game extends Observable<GameView>{
         clockString += nanoseconds;
         seed = parseLong(clockString);
         generator = new Random(seed);
-        /*this.commonGoalsDeck=new ArrayList<>(); // AGGIUNTO
-        commonGoalsDeck.add(new CommonGoalCard3(playersNumber)); //AGGIUNTO*/
+        //this.commonGoalsDeck=new ArrayList<CommonGoalCard>(); // AGGIUNTO
+        //commonGoalsDeck.add(0,new CommonGoalCard3(playersNumber)); //AGGIUNTO
         shuffle(list, generator);
         this.commonGoalsDeck = new ArrayList<CommonGoalCard>();
         int i = 0;
@@ -339,9 +339,12 @@ public class Game extends Observable<GameView>{
     public Player[] getLeaderboard(){
         return leaderboard;
     }
-    public void setLeaderboard(Player player, int position) {
-        this.leaderboard[position] = player;
+    public void setLeaderboard(Player [] leaderboard) {
+        this.leaderboard = leaderboard;
     }
+    /*public void setLeaderboard(Player player, int position) {
+        this.leaderboard[position] = player;
+      }*/
     public void nextTurn(){
         int i = 0;
         while(this.table[i].getPosition() != this.currentPlayer){
@@ -408,32 +411,32 @@ public class Game extends Observable<GameView>{
             this.setDone(true);
         }
         updateBoard();
-        for(i=0;i<commonGoalsDeck.size();i++) {
-            for (int j = 0; j < commonGoalsDeck.size(); j++) {
-                if (currentPlayer.getCommonGoalsCompleted()[j] == commonGoalsDeck.get(i).getGoalID()) {
-                    b = false;
+        System.out.println("LUNGHEZZA DECK: "+board.getCommonGoals().length);
+        for(i=0;i<board.getCommonGoals().length;i++) {
+            for (int j = 0; j < board.getCommonGoals().length; j++) {
+                if (currentPlayer.getCommonGoalsCompleted()[j] == board.getCommonGoals()[i].getGoalID()) {
+                    b = false; //Già completato
                 }
             }
-            if (b && commonGoalsDeck.get(i).check(bookshelf.getShelf()) == true) {
-                try {
-                    currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(), commonGoalsDeck.get(i).getGoalID());
-                } catch (CommonGoalAlreadyCompletedException e) {
-                    throw new RuntimeException(e);
-                } catch (AllCommonGoalsCompletedException e) {
-                    throw new RuntimeException(e);
-                }
-                updateCommonGoals(commonGoalsDeck.get(i));
+            System.out.println("b vale: "+b);
+            System.out.println("ID COMMON GOAL: "+board.getCommonGoals()[i].getGoalID());
+            if(b==true && board.getCommonGoals()[i].check(bookshelf.getShelf())==true){
+                System.out.println("DENTRO IF");
+                currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(),board.getCommonGoals()[i].getGoalID());
+                updateCommonGoals(board.getCommonGoals()[i]);
             }
+            b=true;
         }
+        System.out.println("PUNTI GIOCATORE: "+currentPlayer.getPoints());
         nextTurn();
         i = 0;
         while(this.table[i].getPosition() != this.currentPlayer){
             i += 1;
         }
         currentPlayer = this.table[i];
-        String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
+        /*String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
         String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn";
-        handleTurn(turnPlayerMessage, otherPlayersMessage);
+        handleTurn(turnPlayerMessage, otherPlayersMessage);*/
     }
 
     /*public void updateTurn(){
@@ -451,12 +454,11 @@ public class Game extends Observable<GameView>{
         for(int i = 0; i < tiles.length; i++) {
             for(int j = 0; j < tiles[i].length; j++) {
                 if(this.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
-                    System.out.print(tiles[i][j].getFreeSides()+"("+tiles[i][j].getMinPlayers()+")");
                     if (tiles[i][j].getFreeSides() < 4) {
                         free = false;
                     }
                 }
-            }System.out.println();
+            }
         }
         System.out.println(free);
         // Repopulate the board
@@ -517,12 +519,31 @@ public class Game extends Observable<GameView>{
         }
     }
     public void DeclareWinner() {
+        int count=0;
         Player[] table = getTable();
         for(int i=0; i< table.length;i++){
             table[i].countPersonalGoalsPoints();
             table[i].countAdjacentItemsPoints();
         }
-        // *** CREATE LEADERBOARD ***
+
+        Player [] leaderboard=new Player[getTable().length];
+        for(int j=0;j<getTable().length;j++){
+            for(int k=0;k<getTable().length;k++){
+                if(table[j].getPoints()<table[k].getPoints()){
+                    if(j<k) {
+                        count++;
+                    }
+                }
+            }
+            leaderboard[count]=table[j];
+            count=0;
+        }
+        for(int j=0;j<getTable().length;j++){
+            System.out.println(j+" "+leaderboard[j].getNickname());
+        }
+        setLeaderboard(leaderboard);
+
+        /*// *** CREATE LEADERBOARD ***
         // Create support int array to check points
         // It contains [points][playerNumberInArray]
         int[][] points = new int[table.length][2];
@@ -545,8 +566,7 @@ public class Game extends Observable<GameView>{
         // Copy in order into leaderboard
         for (int i = 0; i < table.length; i++) {
             setLeaderboard(table[points[i][1]],i);
-        }
-        handleTurn("", "");
+        }*/
         //TextualUI.showLeaderboard(model.getLeaderboard());
     }
 
