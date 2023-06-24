@@ -10,7 +10,9 @@ public class CommonGoalCard1 extends CommonGoalCard {
     }
     public boolean check(ObjectCard[][] bookshelf) {
         boolean flag = false;
-        int max = bookshelf.length;
+        int count = 0;
+        int maxrow = bookshelf.length;
+        int maxcol = bookshelf[0].length;
         // Create an array to track already counted object
         // Array has [xCoordinate][yCoordinate] of counted tiles
         // It is initialized to -1 in every cell
@@ -19,8 +21,9 @@ public class CommonGoalCard1 extends CommonGoalCard {
             counted[j][0] = -1;
             counted[j][1] = -1;
         }
-        for(int row=0;row<max;row++){
-            for(int col=0;col<max;col++){
+        for(int row=0;row<maxrow;row++){
+            count = 0;
+            for(int col=0;col<maxcol;col++){
                 // Has this tile been already counted?
                 boolean alreadyCounted = false;
                 for(int crow=0;crow<counted.length;crow++){
@@ -33,60 +36,78 @@ public class CommonGoalCard1 extends CommonGoalCard {
                 }
                 if(alreadyCounted == false) {
                     // Same type on the right (if exists)
-                    if (col + 1 < max && bookshelf[row][col].getType() == bookshelf[row][col + 1].getType()) {
-                        for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][0] == -1) {
-                                counted[i][0] = row;
-                                counted[i][1] = col;
-                                counted[i + 1][0] = row;
-                                counted[i + 1][1] = col + 1;
+                    if(col+1 < maxcol && bookshelf[row][col] != null && bookshelf[row][col + 1] != null) {
+                        if (bookshelf[row][col].getType() == bookshelf[row][col + 1].getType()) {
+                            for (int i = 0; i < counted.length; i++) {
+                                if (counted[i][0] == -1) {
+                                    counted[i][0] = row;
+                                    counted[i][1] = col;
+                                    counted[i + 1][0] = row;
+                                    counted[i + 1][1] = col + 1;
+                                }
                             }
                         }
                     }
                     // Same type below (if exists)
-                    else if (row - 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row - 1][col].getType()) {
-                        for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][0] == -1) {
-                                counted[i][0] = row;
-                                counted[i][1] = col;
-                                counted[i + 1][0] = row - 1;
-                                counted[i + 1][1] = col;
+                    else if (row-1 >= 0 && bookshelf[row][col] != null && bookshelf[row-1][col] != null) {
+                        if (bookshelf[row][col].getType() == bookshelf[row - 1][col].getType()) {
+                            for (int i = 0; i < counted.length; i++) {
+                                if (counted[i][0] == -1) {
+                                    counted[i][0] = row;
+                                    counted[i][1] = col;
+                                    counted[i + 1][0] = row - 1;
+                                    counted[i + 1][1] = col;
+                                }
                             }
                         }
                     }
                     // Same type on the left (if exists)
-                    else if (col - 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row][col - 1].getType()) {
-                        for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][0] == -1) {
-                                counted[i][0] = row;
-                                counted[i][1] = col;
-                                counted[i + 1][0] = row;
-                                counted[i + 1][1] = col - 1;
+                    else if (col - 1 >= 0 && bookshelf[row][col] != null && bookshelf[row][col - 1] != null) {
+                        if (bookshelf[row][col].getType() == bookshelf[row][col - 1].getType()) {
+                            for (int i = 0; i < counted.length; i++) {
+                                if (counted[i][0] == -1) {
+                                    counted[i][0] = row;
+                                    counted[i][1] = col;
+                                    counted[i + 1][0] = row;
+                                    counted[i + 1][1] = col - 1;
+                                }
                             }
                         }
                     }
                     // Same type above (if exists)
-                    else if (row + 1 < max && bookshelf[row][col].getType() == bookshelf[row + 1][col].getType()) {
-                        for (int i = 0; i < counted.length; i++) {
-                            if (counted[i][0] == -1) {
-                                counted[i][0] = row;
-                                counted[i][1] = col;
-                                counted[i + 1][0] = row + 1;
-                                counted[i + 1][1] = col;
+                    else if (row+1 < maxrow && bookshelf[row][col] != null && bookshelf[row + 1][col] != null) {
+                        if (bookshelf[row][col].getType() == bookshelf[row + 1][col].getType()) {
+                            for (int i = 0; i < counted.length; i++) {
+                                if (counted[i][0] == -1) {
+                                    counted[i][0] = row;
+                                    counted[i][1] = col;
+                                    counted[i + 1][0] = row + 1;
+                                    counted[i + 1][1] = col;
+                                }
                             }
                         }
                     }
                     // If the array is full (found 6 couples): goal completed
-                    if (counted.length == 12) {
-                        flag = true;
-                        return flag;
+                    for(int j=0;j< counted.length;j++) {
+                        if(counted[j][0] != -1){
+                            count += 1;
+                        }
+                        if (count == 12) {
+                            flag = true;
+                            return flag;
+                        }
                     }
                 }
             }
             // If the array is full (found 6 couples): goal completed
-            if(counted.length == 12){
-                flag = true;
-                return flag;
+            for(int j=0;j< counted.length;j++) {
+                if(counted[j][0] != -1){
+                    count += 1;
+                }
+                if (count == 12) {
+                    flag = true;
+                    return flag;
+                }
             }
         }
         return flag;

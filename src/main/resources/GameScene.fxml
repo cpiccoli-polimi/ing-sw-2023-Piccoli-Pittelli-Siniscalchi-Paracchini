@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<StackPane fx:id="scenePane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.client.GameSceneController">
+   <children>
+      <FlowPane fx:id="gamePane" alignment="TOP_LEFT" prefHeight="791.0" prefWidth="1216.0">
+         <children>
+            <BorderPane fx:id="tablePane" prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <BorderPane fx:id="goalsPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <left>
+                        <ImageView fx:id="personalGoal" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <FlowPane fx:id="commonGoalsPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <StackPane fx:id="commonGoal1Pane">
+                                 <children>
+                                    <ImageView fx:id="cardCommonGoal1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="pointsCommonGoal1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="commonGoal2Pane">
+                                 <children>
+                                    <ImageView fx:id="cardCommonGoal2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="pointsCommonGoal2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </FlowPane>
+                     </right>
+                  </BorderPane>
+               </bottom>
+               <top>
+                  <StackPane fx:id="boardPane" BorderPane.alignment="CENTER">
+                     <children>
+                        <ImageView fx:id="boardImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="endGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <GridPane fx:id="boardItemsPane" gridLinesVisible="true">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                              <ToggleButton mnemonicParsing="false" text="ToggleButton" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </StackPane>
+               </top>
+            </BorderPane>
+            <StackPane fx:id="myPane">
+               <children>
+                  <TextFlow fx:id="myTextPane">
+                     <children>
+                        <Text fx:id="myText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                     </children>
+                  </TextFlow>
+                  <GridPane fx:id="myBookshelfItemsPane">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+                  <ImageView fx:id="myBookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="myFirstChairToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="myEndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </StackPane>
+            <FlowPane fx:id="opponentsPane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <StackPane fx:id="opponent1Pane">
+                     <children>
+                        <TextFlow fx:id="opponent1TextPane">
+                           <children>
+                              <Text fx:id="opponent1Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                           </children>
+                        </TextFlow>
+                        <GridPane fx:id="opponent1BookshelfItemsPane">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <ImageView fx:id="opponent1BookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="opponent1FirstChairToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="opponent1EndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </StackPane>
+                  <StackPane fx:id="opponent2Pane">
+                     <children>
+                        <TextFlow fx:id="opponent2TextPane">
+                           <children>
+                              <Text fx:id="opponent2Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                           </children>
+                        </TextFlow>
+                        <ImageView fx:id="opponent2BookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <GridPane fx:id="opponent2BookshelfItemsPane">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <ImageView fx:id="opponent2FirstChairToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="opponent2EndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </StackPane>
+                  <StackPane fx:id="opponent3Pane">
+                     <children>
+                        <TextFlow fx:id="opponent3TextPane">
+                           <children>
+                              <Text fx:id="opponent3Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                           </children>
+                        </TextFlow>
+                        <GridPane fx:id="opponent3BookshelfItemsPane">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <ImageView fx:id="opponent3BookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="opponent3FirstChairToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="opponent3EndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </StackPane>
+               </children>
+            </FlowPane>
+            <TextFlow fx:id="messageTextPane">
+               <children>
+                  <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </TextFlow>
+         </children>
+      </FlowPane>
+      <TextFlow fx:id="leaderboardTextPane" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Text fx:id="leaderboardText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+         </children>
+      </TextFlow>
+   </children>
+</StackPane>

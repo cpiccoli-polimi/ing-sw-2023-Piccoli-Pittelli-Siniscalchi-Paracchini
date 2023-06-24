@@ -32,8 +32,12 @@ class GameTest {
         assertEquals(playersNumber, gameModel.getLeaderboard().length);
         assertEquals(commonGoalsNumber, gameModel.getCommonGoalsNumber());
         assertEquals(commonGoalsNumber, gameModel.getBoard().getCommonGoals().length);
-        assertTrue(gameModel.getDone() == false && gameModel.getEndGamePoints() == 1 && gameModel.getCurrentPlayer() == 0 && gameModel.getCommonGoalsDeck().size() == 12 && gameModel.getPersonalGoalsDeck().size() == 12 && gameModel.getBag() instanceof CardsBag);
-        }
+        assertTrue(gameModel.getDone() == false);
+        assertTrue(gameModel.getEndGamePoints() == 1);
+        assertTrue(gameModel.getCurrentPlayer() == 0);
+        assertTrue(gameModel.getCommonGoalsDeck().size() == 12);
+        assertTrue(gameModel.getPersonalGoalsDeck().size() == 12);
+        assertTrue(gameModel.getBag() instanceof CardsBag);}
         catch (PlayersNumberException | CommonGoalsNumberException | FileNotFoundException exception){
             fail("classConstructionWith2Players1CommonGoal: FAILED due to " + exception.getMessage());
         }
@@ -49,8 +53,12 @@ class GameTest {
         assertEquals(playersNumber, gameModel.getLeaderboard().length);
         assertEquals(commonGoalsNumber, gameModel.getCommonGoalsNumber());
         assertEquals(commonGoalsNumber, gameModel.getBoard().getCommonGoals().length);
-        assertTrue(gameModel.getDone() == false && gameModel.getEndGamePoints() == 1 && gameModel.getCurrentPlayer() == 0 && gameModel.getCommonGoalsDeck().size() == 12 && gameModel.getPersonalGoalsDeck().size() == 12 && gameModel.getBag() instanceof CardsBag);
-        }
+        assertTrue(gameModel.getDone() == false);
+        assertTrue(gameModel.getEndGamePoints() == 1);
+        assertTrue(gameModel.getCurrentPlayer() == 0);
+        assertTrue(gameModel.getCommonGoalsDeck().size() == 12);
+        assertTrue(gameModel.getPersonalGoalsDeck().size() == 12);
+        assertTrue(gameModel.getBag() instanceof CardsBag);}
         catch (PlayersNumberException | CommonGoalsNumberException | FileNotFoundException exception){
             fail("classConstructionWith3Players1CommonGoal: FAILED due to " + exception.getMessage());
         }
@@ -66,7 +74,12 @@ class GameTest {
         assertEquals(playersNumber, gameModel.getLeaderboard().length);
         assertEquals(commonGoalsNumber, gameModel.getCommonGoalsNumber());
         assertEquals(commonGoalsNumber, gameModel.getBoard().getCommonGoals().length);
-        assertTrue(gameModel.getDone() == false && gameModel.getEndGamePoints() == 1 && gameModel.getCurrentPlayer() == 0 && gameModel.getCommonGoalsDeck().size() == 12 && gameModel.getPersonalGoalsDeck().size() == 12 && gameModel.getBag() instanceof CardsBag);
+        assertTrue(gameModel.getDone() == false);
+        assertTrue(gameModel.getEndGamePoints() == 1);
+        assertTrue(gameModel.getCurrentPlayer() == 0);
+        assertTrue(gameModel.getCommonGoalsDeck().size() == 12);
+        assertTrue(gameModel.getPersonalGoalsDeck().size() == 12);
+        assertTrue(gameModel.getBag() instanceof CardsBag);
         }
         catch (PlayersNumberException | CommonGoalsNumberException | FileNotFoundException exception){
             fail("classConstructionWith4Players1CommonGoal: FAILED due to " + exception.getMessage());
@@ -83,8 +96,12 @@ class GameTest {
         assertEquals(playersNumber, gameModel.getLeaderboard().length);
         assertEquals(commonGoalsNumber, gameModel.getCommonGoalsNumber());
         assertEquals(commonGoalsNumber, gameModel.getBoard().getCommonGoals().length);
-        assertTrue(gameModel.getDone() == false && gameModel.getEndGamePoints() == 1 && gameModel.getCurrentPlayer() == 0 && gameModel.getCommonGoalsDeck().size() == 12 && gameModel.getPersonalGoalsDeck().size() == 12 && gameModel.getBag() instanceof CardsBag);
-        }
+        assertTrue(gameModel.getDone() == false);
+        assertTrue(gameModel.getEndGamePoints() == 1);
+        assertTrue(gameModel.getCurrentPlayer() == 0);
+        assertTrue(gameModel.getCommonGoalsDeck().size() == 12);
+        assertTrue(gameModel.getPersonalGoalsDeck().size() == 12);
+        assertTrue(gameModel.getBag() instanceof CardsBag);}
         catch (PlayersNumberException | CommonGoalsNumberException | FileNotFoundException exception){
             fail("classConstructionWith2Players2CommonGoals: FAILED due to " + exception.getMessage());
         }
@@ -100,8 +117,12 @@ class GameTest {
         assertEquals(playersNumber, gameModel.getLeaderboard().length);
         assertEquals(commonGoalsNumber, gameModel.getCommonGoalsNumber());
         assertEquals(commonGoalsNumber, gameModel.getBoard().getCommonGoals().length);
-        assertTrue(gameModel.getDone() == false && gameModel.getEndGamePoints() == 1 && gameModel.getCurrentPlayer() == 0 && gameModel.getCommonGoalsDeck().size() == 12 && gameModel.getPersonalGoalsDeck().size() == 12 && gameModel.getBag() instanceof CardsBag);
-        }
+        assertTrue(gameModel.getDone() == false);
+        assertTrue(gameModel.getEndGamePoints() == 1);
+        assertTrue(gameModel.getCurrentPlayer() == 0);
+        assertTrue(gameModel.getCommonGoalsDeck().size() == 12);
+        assertTrue(gameModel.getPersonalGoalsDeck().size() == 12);
+        assertTrue(gameModel.getBag() instanceof CardsBag);}
         catch (PlayersNumberException | CommonGoalsNumberException | FileNotFoundException exception){
             fail("classConstructionWith3Players2CommonGoals: FAILED due to " + exception.getMessage());
         }
@@ -117,8 +138,12 @@ class GameTest {
         assertEquals(playersNumber, gameModel.getLeaderboard().length);
         assertEquals(commonGoalsNumber, gameModel.getCommonGoalsNumber());
         assertEquals(commonGoalsNumber, gameModel.getBoard().getCommonGoals().length);
-        assertTrue(gameModel.getDone() == false && gameModel.getEndGamePoints() == 1 && gameModel.getCurrentPlayer() == 0 && gameModel.getCommonGoalsDeck().size() == 12 && gameModel.getPersonalGoalsDeck().size() == 12 && gameModel.getBag() instanceof CardsBag);
-        }
+        assertTrue(gameModel.getDone() == false);
+        assertTrue(gameModel.getEndGamePoints() == 1);
+        assertTrue(gameModel.getCurrentPlayer() == 0);
+        assertTrue(gameModel.getCommonGoalsDeck().size() == 12);
+        assertTrue(gameModel.getPersonalGoalsDeck().size() == 12);
+        assertTrue(gameModel.getBag() instanceof CardsBag);}
         catch (PlayersNumberException | CommonGoalsNumberException | FileNotFoundException exception){
             fail("classConstructionWith4Players2CommonGoals test: FAILED due to "+ exception.getMessage());
         }

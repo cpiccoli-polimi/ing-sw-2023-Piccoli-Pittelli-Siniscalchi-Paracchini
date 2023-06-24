@@ -26,12 +26,13 @@ public class CommonGoalCard8 extends CommonGoalCard {
                 typesList.clear();
                 flag = true;
                 for(int k = j; k < j+5 && flag == true; k++){
-                    objectType = bookshelf[i][k].getType();
-                    if(typesList.contains(objectType) == false){
-                        typesList.add(objectType);
-                    }
-                    else{
-                        flag = false;
+                    if(bookshelf[i][k] != null) {
+                        objectType = bookshelf[i][k].getType();
+                        if (typesList.contains(objectType) == false) {
+                            typesList.add(objectType);
+                        } else {
+                            flag = false;
+                        }
                     }
                 }
                 if(flag == true){

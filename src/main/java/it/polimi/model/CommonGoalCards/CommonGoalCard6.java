@@ -14,23 +14,17 @@ public class CommonGoalCard6 extends CommonGoalCard {
     @Override
     public boolean check(ObjectCard[][] bookshelf) {
         int columnsCounter = 0;
-
-        for (int i = 0; i < bookshelf.length; i++) {
-
-            if (bookshelf[i][0] == null) {
-                continue;
-            }
-
-            for (int j = 0; j < bookshelf[0].length - 1; j++) {
-                for (int k = j + 1; k < bookshelf[0].length; k++) {
-
-                    if (bookshelf[i][j].getType() != bookshelf[i][k].getType() && j == bookshelf[0].length - 1) {
-                        columnsCounter += 1;
-                        if (columnsCounter == 2) {
+        for(int col=0;col<bookshelf[0].length-1;col++){
+            for(int row=0;row< bookshelf.length-1;row++){
+                if(bookshelf[row][col] != null && bookshelf[row+1][col] != null){
+                    if(bookshelf[row][col].getType() == bookshelf[row+1][col].getType()){
+                        return false;
+                    }
+                    if(row == bookshelf[0].length-1){
+                        columnsCounter+=1;
+                        if(columnsCounter == 2){
                             return true;
                         }
-                    }else if (bookshelf[i][j].getType() == bookshelf[i][k].getType()) {
-                        return false;
                     }
                 }
             }

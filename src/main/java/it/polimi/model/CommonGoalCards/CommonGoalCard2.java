@@ -13,20 +13,52 @@ public class CommonGoalCard2 extends CommonGoalCard {
     }
     @Override
     public boolean check(ObjectCard[][] bookshelf) {
+        boolean satisfied = false;
 
-        for(int i = 0; i < bookshelf.length; i++){
-
-            if (bookshelf[0][0].getType() != bookshelf[i+1][i+1].getType() || bookshelf[i][i] == null) {
-                return false;
-            }else if (bookshelf[4][0].getType() != bookshelf[4-i][i+1].getType() || bookshelf[4-i][i] == null) {
-                return false;
-            }else if (bookshelf[0][1].getType() != bookshelf[i+1][i+2].getType() || bookshelf[i][i+1] == null) {
-                return false;
-            }else if (bookshelf[4][1].getType() != bookshelf[4-i][i+2].getType() || bookshelf[4-i][i+1] == null) {
-                return false;
+        // Top left
+        for(int i = 0; i < bookshelf[0].length; i++) {
+            if(i == (bookshelf[0].length-1)){
+                if (bookshelf[i][i] == null){ break;}
+            }
+            else if (bookshelf[0][0] != null && bookshelf[0][0].getType() != bookshelf[i + 1][i + 1].getType() || bookshelf[i][i] == null) {
+                break;
+            }
+            else satisfied = true;
+        }
+        // Second row top left
+        for(int i = 0; i < bookshelf[0].length; i++) {
+            if(i == (bookshelf[0].length-1)){
+                if (bookshelf[i+1][i] == null){ break;}
+            }
+            else if (bookshelf[1][0] != null && bookshelf[1][0].getType() != bookshelf[i + 2][i + 1].getType() || bookshelf[i][i] == null) {
+                break;
+            }
+            else satisfied = true;
+        }
+        // Bottom left
+        if(satisfied == false) {
+            for (int i = 0; i < bookshelf[0].length; i++) {
+                if(i == (bookshelf[0].length-1)){
+                    if (bookshelf[i][i] == null){ break;}
+                }
+                else if (bookshelf[5][0] != null && bookshelf[5][0].getType() != bookshelf[5 - i][i + 1].getType() || bookshelf[5 - i][i] == null) {
+                    break;
+                }
+                else satisfied = true;
             }
         }
-
-        return true;
+        // Second bottom left
+        if(satisfied == false) {
+            for (int i = 0; i < bookshelf[0].length; i++) {
+                if(i == (bookshelf[0].length-1)){
+                    if (bookshelf[i][i] == null){ break;}
+                }
+                else if (bookshelf[4][0] != null && bookshelf[4][0].getType() != bookshelf[4 - i][i + 1].getType() || bookshelf[5 - i][i] == null) {
+                    break;
+                }
+                else satisfied = true;
+            }
+        }
+        return satisfied;
     }
 }
