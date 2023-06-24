@@ -53,8 +53,8 @@ class CommonGoalCard7Test {
     void CommonGoal7EmptyTest() {
         PublicObjectCard[][] bookshelf;
         bookshelf= new PublicObjectCard[6][5];
-        CommonGoalCard7 cm7=new CommonGoalCard7(4);
+        CommonGoalCard7 cm7tris=new CommonGoalCard7(4);
 
-        assertFalse(cm7.check(bookshelf));
+        assertFalse(cm7tris.check(bookshelf));
     }
 }
