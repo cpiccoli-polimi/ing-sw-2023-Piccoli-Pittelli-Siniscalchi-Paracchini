@@ -1,23 +1,32 @@
 package it.polimi.client;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Stack;
 
-public class WelcomeSceneController {
+public class WelcomeSceneController{
 
     @FXML
     StackPane welcomePane;
@@ -35,12 +44,12 @@ public class WelcomeSceneController {
     Button confirmButton;
 
     public void showScene(double sceneWidth, double sceneHeight) {
-        welcomePane.setMinWidth(sceneWidth);
-        welcomePane.setMinHeight(sceneHeight);
-        welcomePane.setPrefWidth(welcomePane.getMinWidth());
-        welcomePane.setPrefHeight(welcomePane.getMinHeight());
-        welcomePane.setMaxWidth(welcomePane.getMinWidth());
-        welcomePane.setPrefHeight(welcomePane.getMinHeight());
+        welcomePane.setPrefWidth(sceneWidth);
+        welcomePane.setPrefHeight(sceneHeight);
+        welcomePane.setMinWidth(welcomePane.getPrefWidth());
+        welcomePane.setMinHeight(welcomePane.getPrefHeight());
+        welcomePane.setMaxWidth(welcomePane.getPrefWidth());
+        welcomePane.setMaxHeight(welcomePane.getPrefHeight());
         welcomePane.setBackground(new Background(new BackgroundImage(new Image("/GraphicalResources/Miscellaneous/parquetBackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, false))));
         welcomePane.setAlignment(titleImage, Pos.TOP_CENTER);
         welcomePane.setAlignment(messageTextPane, Pos.CENTER);
@@ -78,6 +87,7 @@ public class WelcomeSceneController {
         separator.setMinHeight(separator.getPrefHeight());
         separator.setMaxWidth(separator.getPrefWidth());
         separator.setMaxHeight(separator.getPrefHeight());
+        separator.setOrientation(Orientation.HORIZONTAL);
         separator.setVisible(false);
 
         confirmButton.setPrefWidth(welcomePane.getPrefWidth()*0.04);
@@ -90,9 +100,12 @@ public class WelcomeSceneController {
     }
 
     public void showMessage(String message){
-
         messageText.setText(message);
-
+    }
+    public String getMessage(){
+        String message = new String(playerTextField.getText());
+        playerTextField.clear();
+        return message;
     }
 
 }

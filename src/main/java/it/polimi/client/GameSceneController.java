@@ -1,10 +1,14 @@
 package it.polimi.client;
 
 import it.polimi.model.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.*;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Separator;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -17,7 +21,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
-public class GameSceneController {
+public class GameSceneController{
     @FXML
     StackPane scenePane;
     @FXML
@@ -47,11 +51,11 @@ public class GameSceneController {
     @FXML
     ImageView pointsCommonGoal2;
     @FXML
-    StackPane myBookshelfPane;
+    StackPane myPane;
     @FXML
-    TextFlow myBookshelfTextPane;
+    TextFlow myTextPane;
     @FXML
-    Text myBookshelfText;
+    Text myText;
     @FXML
     GridPane myBookshelfItemsPane;
     @FXML
@@ -61,11 +65,17 @@ public class GameSceneController {
     @FXML
     ImageView myEndGameToken;
     @FXML
-    FlowPane opponentsBookshelvesPane;
+    FlowPane opponentsPane;
+    @FXML
+    FlowPane messagePane;
     @FXML
     TextFlow messageTextPane;
     @FXML
     Text messageText;
+    @FXML
+    Separator separator;
+    @FXML
+    Button confirmButton;
     @FXML
     TextFlow leaderboardTextPane;
     @FXML
@@ -73,21 +83,21 @@ public class GameSceneController {
 
     public void showScene(double sceneWidth, double sceneHeight){
 
-        scenePane.setMinWidth(sceneWidth);
-        scenePane.setMinHeight(sceneHeight);
-        scenePane.setPrefWidth(scenePane.getMinWidth());
-        scenePane.setPrefHeight(scenePane.getMinHeight());
-        scenePane.setMaxWidth(scenePane.getMinWidth());
-        scenePane.setPrefHeight(scenePane.getMinHeight());
+        scenePane.setPrefWidth(sceneWidth);
+        scenePane.setPrefHeight(sceneHeight);
+        scenePane.setMinWidth(scenePane.getPrefWidth());
+        scenePane.setMinHeight(scenePane.getPrefWidth());
+        scenePane.setMaxWidth(scenePane.getPrefWidth());
+        scenePane.setMaxHeight(scenePane.getPrefHeight());
         scenePane.setBackground(new Background(new BackgroundImage(new Image("/GraphicalResources/Miscellaneous/parquetBackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, false))));
         scenePane.setAlignment(leaderboardTextPane, Pos.CENTER);
 
-        gamePane.setMinWidth(scenePane.getPrefWidth());
-        gamePane.setMinHeight(scenePane.getPrefHeight());
-        gamePane.setPrefWidth(gamePane.getMinWidth());
-        gamePane.setPrefHeight(gamePane.getMinHeight());
-        gamePane.setMaxWidth(gamePane.getMinWidth());
-        gamePane.setPrefHeight(gamePane.getMinHeight());
+        gamePane.setPrefWidth(scenePane.getPrefWidth());
+        gamePane.setPrefHeight(scenePane.getPrefHeight());
+        gamePane.setMinWidth(gamePane.getPrefWidth());
+        gamePane.setMinHeight(gamePane.getPrefHeight());
+        gamePane.setMaxWidth(gamePane.getPrefWidth());
+        gamePane.setMaxHeight(gamePane.getPrefHeight());
         gamePane.setPadding(new Insets(gamePane.getPrefHeight()*0.03, gamePane.getPrefWidth()*0.03, gamePane.getPrefHeight()*0.03, gamePane.getPrefWidth()*0.03));
         gamePane.setHgap(sceneWidth*0.01);
         gamePane.setVgap(sceneHeight*0.01);
@@ -162,57 +172,65 @@ public class GameSceneController {
         commonGoal2Pane.setMaxHeight(commonGoal2Pane.getPrefHeight());
         commonGoal2Pane.setMargin(pointsCommonGoal2, (new Insets(0,0,commonGoal2Pane.getPrefHeight()*0.10,commonGoal2Pane.getPrefWidth()*0.35)));
 
-        myBookshelfPane.setPrefWidth(sceneWidth*0.44);
-        myBookshelfPane.setPrefHeight(sceneHeight*0.84);
-        myBookshelfPane.setMinWidth(myBookshelfPane.getPrefWidth());
-        myBookshelfPane.setMinHeight(myBookshelfPane.getPrefHeight());
-        myBookshelfPane.setMaxWidth(myBookshelfPane.getPrefWidth());
-        myBookshelfPane.setMaxHeight(myBookshelfPane.getPrefHeight());
-        myBookshelfPane.setAlignment(myBookshelfTextPane, Pos.TOP_CENTER);
-        myBookshelfPane.setAlignment(myBookshelfImage, Pos.BOTTOM_CENTER);
-        myBookshelfPane.setAlignment(myBookshelfItemsPane, Pos.CENTER);
-        myBookshelfPane.setAlignment(myFirstChairToken, Pos.BOTTOM_RIGHT);
-        myBookshelfPane.setAlignment(myEndGameToken, Pos.TOP_RIGHT);
-        myBookshelfPane.setMargin(myBookshelfTextPane, new Insets(myBookshelfPane.getPrefHeight()*0.01, 0, 0, 0));
-        myBookshelfPane.setMargin(myFirstChairToken, new Insets(0, myBookshelfPane.getPrefWidth()*0.03, 0, 0));
-        myBookshelfPane.setMargin(myEndGameToken, new Insets(myBookshelfPane.getPrefHeight()*0.03, myBookshelfPane.getPrefWidth()*0.10, 0, 0));
+        myPane.setPrefWidth(sceneWidth*0.44);
+        myPane.setPrefHeight(sceneHeight*0.84);
+        myPane.setMinWidth(myPane.getPrefWidth());
+        myPane.setMinHeight(myPane.getPrefHeight());
+        myPane.setMaxWidth(myPane.getPrefWidth());
+        myPane.setMaxHeight(myPane.getPrefHeight());
+        myPane.setAlignment(myTextPane, Pos.TOP_CENTER);
+        myPane.setAlignment(myBookshelfImage, Pos.BOTTOM_CENTER);
+        myPane.setAlignment(myBookshelfItemsPane, Pos.CENTER);
+        myPane.setAlignment(myFirstChairToken, Pos.BOTTOM_RIGHT);
+        myPane.setAlignment(myEndGameToken, Pos.TOP_RIGHT);
+        myPane.setMargin(myTextPane, new Insets(myPane.getPrefHeight()*0.01, 0, 0, 0));
+        myPane.setMargin(myFirstChairToken, new Insets(0, myPane.getPrefWidth()*0.03, 0, 0));
+        myPane.setMargin(myEndGameToken, new Insets(myPane.getPrefHeight()*0.03, myPane.getPrefWidth()*0.10, 0, 0));
 
-        myBookshelfTextPane.setPrefWidth(myBookshelfPane.getPrefWidth()*0.98);
-        myBookshelfTextPane.setPrefHeight(myBookshelfPane.getPrefHeight()*0.025);
-        myBookshelfTextPane.setMinWidth(myBookshelfTextPane.getPrefWidth());
-        myBookshelfTextPane.setMinHeight(myBookshelfTextPane.getPrefHeight());
-        myBookshelfTextPane.setMaxWidth(myBookshelfTextPane.getPrefWidth());
-        myBookshelfTextPane.setMaxHeight(myBookshelfTextPane.getPrefHeight());
-        myBookshelfTextPane.setTextAlignment(TextAlignment.CENTER);
+        myTextPane.setPrefWidth(myPane.getPrefWidth()*0.98);
+        myTextPane.setPrefHeight(myPane.getPrefHeight()*0.025);
+        myTextPane.setMinWidth(myTextPane.getPrefWidth());
+        myTextPane.setMinHeight(myTextPane.getPrefHeight());
+        myTextPane.setMaxWidth(myTextPane.getPrefWidth());
+        myTextPane.setMaxHeight(myTextPane.getPrefHeight());
+        myTextPane.setTextAlignment(TextAlignment.CENTER);
 
-        myBookshelfText.setText("Your Bookshelf");
-        myBookshelfText.setFont(new Font("Arial Bold", 20));
+        myText.setText("Your Bookshelf");
+        myText.setFont(new Font("Arial Bold", 20));
 
-        myBookshelfItemsPane.setPrefWidth(myBookshelfPane.getPrefWidth()*0.75);
-        myBookshelfItemsPane.setPrefHeight(myBookshelfPane.getPrefHeight()*0.78);
+        myBookshelfItemsPane.setPrefWidth(myPane.getPrefWidth()*0.75);
+        myBookshelfItemsPane.setPrefHeight(myPane.getPrefHeight()*0.78);
         myBookshelfItemsPane.setMinWidth(myBookshelfItemsPane.getPrefWidth());
         myBookshelfItemsPane.setMinHeight(myBookshelfItemsPane.getPrefHeight());
         myBookshelfItemsPane.setMaxWidth(myBookshelfItemsPane.getPrefWidth());
         myBookshelfItemsPane.setMaxHeight(myBookshelfItemsPane.getPrefHeight());
-        myBookshelfItemsPane.setHgap(myBookshelfPane.getPrefWidth()*0.04);
-        myBookshelfItemsPane.setVgap(myBookshelfPane.getPrefHeight()*0.02);
+        myBookshelfItemsPane.setHgap(myPane.getPrefWidth()*0.04);
+        myBookshelfItemsPane.setVgap(myPane.getPrefHeight()*0.02);
         myBookshelfItemsPane.setGridLinesVisible(false);
 
-        myBookshelfImage.setFitWidth(myBookshelfPane.getPrefWidth());
-        myBookshelfImage.setFitHeight(myBookshelfPane.getPrefHeight()*0.95);
+        myBookshelfImage.setFitWidth(myPane.getPrefWidth());
+        myBookshelfImage.setFitHeight(myPane.getPrefHeight()*0.95);
         myBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", myBookshelfImage.getFitWidth(), myBookshelfImage.getFitHeight(), true, false));
         myBookshelfImage.setScaleY(1.01);
 
-        opponentsBookshelvesPane.setPrefWidth(sceneWidth*0.17);
-        opponentsBookshelvesPane.setPrefHeight(sceneHeight*0.84);
-        opponentsBookshelvesPane.setMinWidth(opponentsBookshelvesPane.getPrefWidth());
-        opponentsBookshelvesPane.setMinHeight(opponentsBookshelvesPane.getPrefHeight());
-        opponentsBookshelvesPane.setMaxWidth(opponentsBookshelvesPane.getPrefWidth());
-        opponentsBookshelvesPane.setMaxHeight(opponentsBookshelvesPane.getPrefHeight());
-        opponentsBookshelvesPane.setVgap(opponentsBookshelvesPane.getPrefHeight()*0.02);
+        opponentsPane.setPrefWidth(sceneWidth*0.17);
+        opponentsPane.setPrefHeight(sceneHeight*0.84);
+        opponentsPane.setMinWidth(opponentsPane.getPrefWidth());
+        opponentsPane.setMinHeight(opponentsPane.getPrefHeight());
+        opponentsPane.setMaxWidth(opponentsPane.getPrefWidth());
+        opponentsPane.setMaxHeight(opponentsPane.getPrefHeight());
+        opponentsPane.setVgap(opponentsPane.getPrefHeight()*0.02);
 
-        messageTextPane.setPrefWidth(sceneWidth*0.94);
-        messageTextPane.setPrefHeight(sceneHeight*0.09);
+        messagePane.setPrefWidth(sceneWidth*0.94);
+        messagePane.setPrefHeight(sceneHeight*0.09);
+        messagePane.setMinWidth(messagePane.getPrefWidth());
+        messagePane.setMinHeight(messagePane.getPrefHeight());
+        messagePane.setMaxWidth(messagePane.getPrefWidth());
+        messagePane.setMaxHeight(messagePane.getPrefHeight());
+        messagePane.setOrientation(Orientation.HORIZONTAL);
+
+        messageTextPane.setPrefWidth(messagePane.getPrefWidth()*0.93);
+        messageTextPane.setPrefHeight(messagePane.getPrefHeight());
         messageTextPane.setMinWidth(messageTextPane.getPrefWidth());
         messageTextPane.setMinHeight(messageTextPane.getPrefHeight());
         messageTextPane.setMaxWidth(messageTextPane.getPrefWidth());
@@ -228,6 +246,28 @@ public class GameSceneController {
 
         messageText.setText("");
         messageText.setFont(new Font("Arial Bold", 15));
+
+        separator.setPrefWidth(messagePane.getPrefWidth()*0.01);
+        separator.setPrefHeight(messagePane.getPrefHeight()*0.025);
+        separator.setMinWidth(separator.getPrefWidth());
+        separator.setMinHeight(separator.getPrefHeight());
+        separator.setMaxWidth(separator.getPrefWidth());
+        separator.setMaxHeight(separator.getPrefHeight());
+        separator.setOrientation(Orientation.HORIZONTAL);
+        separator.setVisible(false);
+
+        confirmButton.setPrefWidth(messagePane.getPrefWidth()*0.05);
+        confirmButton.setPrefHeight(messagePane.getPrefHeight()*0.90);
+        confirmButton.setMinWidth(confirmButton.getPrefWidth());
+        confirmButton.setMinHeight(confirmButton.getPrefHeight());
+        confirmButton.setMaxWidth(confirmButton.getPrefWidth());
+        confirmButton.setMaxHeight(confirmButton.getPrefHeight());
+        confirmButton.setText("confirm");
+
+        Rectangle confirmButtonShape = new Rectangle(confirmButton.getPrefWidth(), confirmButton.getPrefHeight());
+        confirmButtonShape.setArcWidth(30);
+        confirmButtonShape.setArcHeight(30);
+        confirmButton.setShape(confirmButtonShape);
 
         leaderboardTextPane.setPrefWidth(sceneWidth*0.25);
         leaderboardTextPane.setPrefHeight(sceneHeight*0.50);
@@ -252,23 +292,35 @@ public class GameSceneController {
 
     public void showBoardItems(LivingRoomBoard board){
 
-        for(Node child : boardItemsPane.getChildren()){
-            ToggleButton button = (ToggleButton) child;
-            button.setText(null);
-            button.setBackground(null);
-            int row = boardItemsPane.getRowIndex(child);
-            int column = boardItemsPane.getColumnIndex(child);
-            if(board.getTiles()[row][column].getObject() != null){
-                String itemPath = new String("/GraphicalResources/ItemTiles/");
-                itemPath = itemPath + board.getTiles()[row][column].getObject().getType().toString().toLowerCase() + ".png";
-                button.setGraphic(new ImageView(new Image(itemPath, boardItemsPane.getPrefWidth()/12, boardItemsPane.getPrefHeight()/12, true, false)));
-                button.setAlignment(Pos.CENTER);
-                button.setContentDisplay(ContentDisplay.CENTER);
+        for(int i = 0; i < board.getTiles().length; i++){
+            for(int j = 0; j < board.getTiles()[i].length; j++) {
+                if (board.getTiles()[i][j].getObject() != null) {
+                    ToggleButton button = new ToggleButton();
+                    button.setText(null);
+                    button.setBackground(null);
+                    String itemPath = new String("/GraphicalResources/ItemTiles/");
+                    itemPath = itemPath + board.getTiles()[i][j].getObject().getType().toString().toLowerCase() + ".png";
+                    button.setGraphic(new ImageView(new Image(itemPath, boardItemsPane.getPrefWidth()/12, boardItemsPane.getPrefHeight()/12, true, false)));
+
+                    button.setPrefWidth(boardItemsPane.getPrefWidth()/9);
+                    button.setPrefHeight(boardItemsPane.getPrefHeight()/9);
+                    button.setMinWidth(button.getPrefWidth());
+                    button.setMinHeight(button.getPrefHeight());
+                    button.setMaxWidth(button.getPrefWidth());
+                    button.setMaxHeight(button.getPrefHeight());
+                    button.setAlignment(Pos.CENTER);
+                    button.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            button.setBorder(new Border(new BorderStroke(Color.SADDLEBROWN, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
+                        }
+                    });
+
+                    boardItemsPane.add(button, j, i, 1, 1);
+                }
             }
         }
-
     }
-
     public void showPersonalGoal(PersonalGoalCard goal){
 
         String goalPath = new String("/GraphicalResources/PersonalGoalCards/personalGoal");
@@ -280,7 +332,6 @@ public class GameSceneController {
         personalGoal.setImage(new Image(goalPath, personalGoal.getFitWidth(), personalGoal.getFitHeight(), true, true));
 
     }
-
     public void showCommonGoals(CommonGoalCard[] goals){
 
         for(int i = 0; i < goals.length; i++){
@@ -307,16 +358,15 @@ public class GameSceneController {
             pointImage.setRotate(-8);
         }
     }
+    public void showPlayer(Player player){
 
-    public void showPlayer(Player player, StackPane playerPane){
+        ImageView firstChairToken = (ImageView) myPane.getChildren().get(3);
+        ImageView endGameToken = (ImageView) myPane.getChildren().get(4);
 
-        ImageView firstChairToken = (ImageView) playerPane.getChildren().get(3);
-        ImageView endGameToken = (ImageView) playerPane.getChildren().get(4);
+        showBookshelf(player.getBookshelf(), (GridPane) myPane.getChildren().get(1));
 
-        showBookshelf(player.getBookshelf(), (GridPane) playerPane.getChildren().get(1));
-
-        firstChairToken.setFitWidth(playerPane.getPrefWidth()*0.15);
-        firstChairToken.setFitHeight(playerPane.getPrefHeight()*0.15);
+        firstChairToken.setFitWidth(myPane.getPrefWidth()*0.15);
+        firstChairToken.setFitHeight(myPane.getPrefHeight()*0.15);
         firstChairToken.setImage(new Image("/GraphicalResources/Miscellaneous/firstPlayerToken.png", firstChairToken.getFitWidth(), firstChairToken.getFitHeight(), true, false));
 
         if(player.getIsFirst() == true){
@@ -326,8 +376,8 @@ public class GameSceneController {
             firstChairToken.setVisible(false);
         }
 
-        endGameToken.setFitWidth(playerPane.getPrefWidth()*0.12);
-        endGameToken.setFitHeight(playerPane.getPrefHeight()*0.12);
+        endGameToken.setFitWidth(myPane.getPrefWidth()*0.12);
+        endGameToken.setFitHeight(myPane.getPrefHeight()*0.12);
         endGameToken.setImage(new Image("/GraphicalResources/ScoringTokens/endGameToken.jpg", endGameToken.getFitWidth(), endGameToken.getFitHeight(), true, false));
         endGameToken.setRotate(15);
 
@@ -351,8 +401,8 @@ public class GameSceneController {
         ImageView opponentFirstChairToken = (ImageView) opponentPane.getChildren().get(3);
         ImageView opponentEndGameToken = (ImageView) opponentPane.getChildren().get(4);
 
-        opponentPane.setPrefWidth(opponentsBookshelvesPane.getPrefWidth());
-        opponentPane.setPrefHeight(opponentsBookshelvesPane.getPrefHeight()*0.32);
+        opponentPane.setPrefWidth(opponentsPane.getPrefWidth());
+        opponentPane.setPrefHeight(opponentsPane.getPrefHeight()*0.32);
         opponentPane.setMinWidth(opponentPane.getPrefWidth());
         opponentPane.setMinHeight(opponentPane.getPrefHeight());
         opponentPane.setMaxWidth(opponentPane.getPrefWidth());
@@ -421,8 +471,8 @@ public class GameSceneController {
     }
     public void showBookshelf(Bookshelf bookshelf, GridPane itemsPane){
 
-        for(int i = 0; i < itemsPane.getColumnCount(); i++){
-            for(int j =0; j < itemsPane.getRowCount(); j++){
+        for(int i = 0; i < itemsPane.getRowCount(); i++){
+            for(int j =0; j < itemsPane.getColumnCount(); j++){
                 if(bookshelf.getShelf()[i][j] != null){
                     String itemPath = new String("/GraphicalResources/ItemTiles/");
                     itemPath = itemPath + bookshelf.getShelf()[i][j].getType().toString().toLowerCase() + ".png";
@@ -437,13 +487,9 @@ public class GameSceneController {
         }
 
     }
-
     public void showMessage(String message){
-
         messageText.setText(message);
-
     }
-
     public void showLeaderboard(Player[] leaderboard, TextFlow leaderboardTextPane){
 
         BoxBlur blurBox = new BoxBlur(12, 12, 1);
