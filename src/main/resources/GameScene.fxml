@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
@@ -102,6 +103,7 @@
                   <ImageView fx:id="myBookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="myFirstChairToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="myEndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <HBox fx:id="columnSelectionPane" prefHeight="100.0" prefWidth="200.0" />
                </children>
             </StackPane>
             <FlowPane fx:id="opponentsPane" prefHeight="200.0" prefWidth="200.0">

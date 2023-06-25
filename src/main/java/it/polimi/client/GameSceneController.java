@@ -6,10 +6,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.*;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Separator;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,6 +61,8 @@ public class GameSceneController{
     ImageView myFirstChairToken;
     @FXML
     ImageView myEndGameToken;
+    @FXML
+    HBox columnSelectionPane;
     @FXML
     FlowPane opponentsPane;
     @FXML
@@ -181,6 +180,7 @@ public class GameSceneController{
         myPane.setAlignment(myTextPane, Pos.TOP_CENTER);
         myPane.setAlignment(myBookshelfImage, Pos.BOTTOM_CENTER);
         myPane.setAlignment(myBookshelfItemsPane, Pos.CENTER);
+        myPane.setAlignment(columnSelectionPane, Pos.CENTER);
         myPane.setAlignment(myFirstChairToken, Pos.BOTTOM_RIGHT);
         myPane.setAlignment(myEndGameToken, Pos.TOP_RIGHT);
         myPane.setMargin(myTextPane, new Insets(myPane.getPrefHeight()*0.01, 0, 0, 0));
@@ -212,6 +212,14 @@ public class GameSceneController{
         myBookshelfImage.setFitHeight(myPane.getPrefHeight()*0.95);
         myBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", myBookshelfImage.getFitWidth(), myBookshelfImage.getFitHeight(), true, false));
         myBookshelfImage.setScaleY(1.01);
+
+        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.75);
+        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.78);
+        columnSelectionPane.setMinWidth(columnSelectionPane.getPrefWidth());
+        columnSelectionPane.setMinHeight(columnSelectionPane.getPrefHeight());
+        columnSelectionPane.setMaxWidth(columnSelectionPane.getPrefWidth());
+        columnSelectionPane.setMaxHeight(columnSelectionPane.getPrefHeight());
+        columnSelectionPane.setSpacing(myPane.getPrefWidth()*0.04);
 
         opponentsPane.setPrefWidth(sceneWidth*0.17);
         opponentsPane.setPrefHeight(sceneHeight*0.84);
@@ -294,30 +302,28 @@ public class GameSceneController{
 
         for(int i = 0; i < board.getTiles().length; i++){
             for(int j = 0; j < board.getTiles()[i].length; j++) {
+                ToggleButton button = new ToggleButton();
+
+                button.setPrefWidth(boardItemsPane.getPrefWidth()/9);
+                button.setPrefHeight(boardItemsPane.getPrefHeight()/9);
+                button.setMinWidth(button.getPrefWidth());
+                button.setMinHeight(button.getPrefHeight());
+                button.setMaxWidth(button.getPrefWidth());
+                button.setMaxHeight(button.getPrefHeight());
+                button.setAlignment(Pos.CENTER);
+                button.setText(null);
+                button.setBackground(null);
+
                 if (board.getTiles()[i][j].getObject() != null) {
-                    ToggleButton button = new ToggleButton();
-                    button.setText(null);
-                    button.setBackground(null);
                     String itemPath = new String("/GraphicalResources/ItemTiles/");
                     itemPath = itemPath + board.getTiles()[i][j].getObject().getType().toString().toLowerCase() + ".png";
                     button.setGraphic(new ImageView(new Image(itemPath, boardItemsPane.getPrefWidth()/12, boardItemsPane.getPrefHeight()/12, true, false)));
-
-                    button.setPrefWidth(boardItemsPane.getPrefWidth()/9);
-                    button.setPrefHeight(boardItemsPane.getPrefHeight()/9);
-                    button.setMinWidth(button.getPrefWidth());
-                    button.setMinHeight(button.getPrefHeight());
-                    button.setMaxWidth(button.getPrefWidth());
-                    button.setMaxHeight(button.getPrefHeight());
-                    button.setAlignment(Pos.CENTER);
-                    button.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            button.setBorder(new Border(new BorderStroke(Color.SADDLEBROWN, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
-                        }
-                    });
-
-                    boardItemsPane.add(button, j, i, 1, 1);
                 }
+                else{
+                    button.setDisable(true);
+                }
+
+                boardItemsPane.add(button, j, i, 1, 1);
             }
         }
     }
