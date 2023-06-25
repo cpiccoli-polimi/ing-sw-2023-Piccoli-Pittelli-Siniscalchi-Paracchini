@@ -411,6 +411,17 @@ public class Game extends Observable<GameView>{
             i += 1;
         }
         currentPlayer = this.table[i];
+
+        if(getDone() == true && currentPlayer.getIsFirst() == true){
+            System.out.println("DAJE");
+            DeclareWinner();
+            handleTurn("", "");
+        }
+        else{
+            String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
+            String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn";
+            handleTurn(turnPlayerMessage, otherPlayersMessage);
+        }
         /*String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
         String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn";
         handleTurn(turnPlayerMessage, otherPlayersMessage);*/
