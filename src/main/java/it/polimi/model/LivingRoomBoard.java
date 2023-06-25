@@ -119,7 +119,7 @@ public class LivingRoomBoard implements Serializable {
                     tile.setFreeSides(fs + 1);
                 }
             }
-            if (x < this.tile.length) {
+            if (x < this.tile.length-1) {
                 tile = getTiles()[x + 1][y]; //down
                 if (tile != null) {
                     fs = tile.getFreeSides();
@@ -133,7 +133,7 @@ public class LivingRoomBoard implements Serializable {
                     tile.setFreeSides(fs + 1);
                 }
             }
-            if (y < this.tile[0].length) {
+            if (y < this.tile[0].length-1) {
                 tile = getTiles()[x][y + 1]; //right
                 if (tile != null) {
                     fs = tile.getFreeSides();
