@@ -10,13 +10,29 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ClientTUI extends Client {
+public class ClientTUI{
 
+    private String ip;
+    private int port;
+    private boolean active = true;
     private String myPlayerName;
     Player myPlayer = null;
 
     public ClientTUI(String ip, int port){
-        super(ip, port);
+        this.ip = ip;
+        this.port = port;
+    }
+    protected String getIP(){
+        return this.ip;
+    }
+    protected int getPort(){
+        return this.port;
+    }
+    public boolean isActive(){
+        return active;
+    }
+    public synchronized void setActive(boolean active){
+        this.active = active;
     }
     public Thread asyncReadFromSocket(ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
@@ -112,9 +128,8 @@ public class ClientTUI extends Client {
         t.start();
         return t;
     }
-    @Override
     public void run() throws IOException {
-        Socket socket = new Socket(super.getIP(), super.getPort());
+        Socket socket = new Socket(getIP(), getPort());
         System.out.println("Connection established");
         ObjectInputStream socketIn = new ObjectInputStream((socket.getInputStream()));
         PrintWriter socketOut = new PrintWriter(socket.getOutputStream());

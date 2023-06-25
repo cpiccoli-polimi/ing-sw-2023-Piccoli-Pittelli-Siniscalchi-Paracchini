@@ -1,6 +1,5 @@
 package it.polimi;
 
-import it.polimi.client.Client;
 import it.polimi.client.ClientGUI;
 import it.polimi.client.ClientTUI;
 
@@ -10,17 +9,27 @@ public class ClientApp {
     public static void main(String[] args){
 
         String ip;
-        Client client;
 
         //the args should be written in this way, otherwise an Exception will be thrown: --server-ip:000.0.0.0 --client-type:tui
 
         if(args.length == 2 && args[0].startsWith("--server-ip") && args[1].startsWith("--client-type")){
             ip = new String(args[0].substring(12));
             if(args[1].equals("--client-type:tui")){
-                client = new ClientTUI(ip, 12345);
+                ClientTUI client = new ClientTUI(ip, 12345);
+                try{
+                    client.run();
+                }
+                catch(IOException e){
+                    System.err.println(e.getMessage());
+                }
             }
             else if(args[1].equals("--client-type:gui")){
-                client = new ClientGUI(ip, 12345);
+
+                ClientGUI client = new ClientGUI();
+                String[] clientArgs = new String[2];
+                clientArgs[0] = new String(ip);
+                clientArgs[1] = new String(String.valueOf(12345));
+                client.main(clientArgs);
             }
             else{
                 throw new IllegalArgumentException();
@@ -30,11 +39,5 @@ public class ClientApp {
             throw new IllegalArgumentException();
         }
 
-        try{
-            client.run();
-        }
-        catch(IOException e){
-            System.err.println(e.getMessage());
-        }
     }
 }
