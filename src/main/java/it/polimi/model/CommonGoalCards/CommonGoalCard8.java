@@ -2,11 +2,9 @@ package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
-import it.polimi.model.PointCard;
 import it.polimi.model.Type;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CommonGoalCard8 extends CommonGoalCard {
@@ -16,19 +14,19 @@ public class CommonGoalCard8 extends CommonGoalCard {
 
     @Override
     public boolean check(ObjectCard[][] bookshelf) {
-        List<Type> typesList = new ArrayList<Type>();
+        List<Type> typesList = new ArrayList<>();
         Type objectType;
         boolean flag = true;
         int rowsCounter = 0;
 
         for(int i = 0; i < bookshelf.length; i++){
-            for(int j = 0; j <= bookshelf[i].length - 5 && flag == true; j++){
+            for(int j = 0; j <= bookshelf[i].length - 5 && flag; j++){
                 typesList.clear();
                 flag = true;
-                for(int k = j; k < j+5 && flag == true; k++){
+                for(int k = j; k < j+5 && flag; k++){
                     if(bookshelf[i][k] != null) {
                         objectType = bookshelf[i][k].getType();
-                        if (typesList.contains(objectType) == false) {
+                        if (!typesList.contains(objectType)) {
                             typesList.add(objectType);
                         } else {
                             flag = false;
@@ -38,7 +36,7 @@ public class CommonGoalCard8 extends CommonGoalCard {
                         flag = false;
                     }
                 }
-                if(flag == true){
+                if(flag){
                     rowsCounter += 1;
                 }
                 else{
@@ -47,11 +45,6 @@ public class CommonGoalCard8 extends CommonGoalCard {
             }
         }
 
-        if(rowsCounter >= 2){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return rowsCounter >= 2;
     }
 }

@@ -2,10 +2,6 @@ package it.polimi.model.CommonGoalCards;
 
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
-import it.polimi.model.PointCard;
-import it.polimi.model.Type;
-
-import java.util.ArrayList;
 
 public class CommonGoalCard10 extends CommonGoalCard {
     public CommonGoalCard10(int playersNumber) {
@@ -16,8 +12,8 @@ public class CommonGoalCard10 extends CommonGoalCard {
     public boolean check(ObjectCard[][] bookshelf) {
         boolean flag = false;
 
-        for(int i = 1; i < bookshelf.length - 1 && flag == false; i++){
-            for(int j = 1; j < bookshelf[i].length - 1 && flag == false; j++) {
+        for(int i = 1; i < bookshelf.length - 1 && !flag; i++){
+            for(int j = 1; j < bookshelf[i].length - 1 && !flag; j++) {
                 if (bookshelf[i - 1][j - 1] != null && bookshelf[i - 1][j + 1] != null &&
                          bookshelf[i][j] != null && bookshelf[i + 1][j - 1] != null &&
                          bookshelf[i + 1][j + 1] != null) {

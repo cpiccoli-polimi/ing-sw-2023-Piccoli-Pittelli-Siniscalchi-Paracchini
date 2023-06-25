@@ -1,6 +1,5 @@
 package it.polimi.model;
 
-import java.lang.Object;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,34 +16,33 @@ public class CardsBag {
         int hours = clock.getHour();
         int minutes = clock.getMinute();
         int seconds = clock.getSecond();
-        String clockString = new String();
+        String clockString = "";
         clockString += hours;
         clockString += minutes;
         clockString += seconds;
         long seed = parseLong(clockString);
         Random generator = new Random(seed);
 
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         for(int i = 0; i < 132; i++) {
             list.add(i+1);
         }
 
         shuffle(list, generator);
 
-        cards = new ArrayList<Integer>();
+        cards = new ArrayList<>();
         for(int i = 0; i < 132; i++) {
             cards.add(list.get(i));
         }
-    };
+    }
 
     public int getCard(){
-        int id = cards.remove(0);
-        return id;
-    };
+        return cards.remove(0);
+    }
 
     private void setCards(List<Integer> cards){
         for(int i = 0; i < cards.size(); i++){
             this.cards.add(cards.remove(0));
         }
-    };
+    }
 }

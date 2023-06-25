@@ -31,34 +31,24 @@ public class Bookshelf implements Serializable {
     @Override
     public boolean equals(Object object) {
         boolean result = true;
-        if((object instanceof Bookshelf) == false){
+        if(!(object instanceof Bookshelf)){
             return false;
         }
         Bookshelf bookshelf = (Bookshelf) object;
 
-        for(int i = 0; i < shelf.length && result == true; i++){
-            for(int j = 0; j < shelf[i].length && result == true; j++){
+        for(int i = 0; i < shelf.length && result; i++){
+            for(int j = 0; j < shelf[i].length && result; j++){
                 if(shelf[i][j] != null && bookshelf.getShelf()[i][j] != null){
-                    if(shelf[i][j].equals(bookshelf.getShelf()[i][j])){
-                        result = true;
-                    }
-                    else{
-                        result = false;
-                    }
+                    result = shelf[i][j].equals(bookshelf.getShelf()[i][j]);
                 }
-                else if(shelf[i][j] == null && bookshelf.getShelf()[i][j] == null){
-                    result = true;
-                }
-                else{
-                    result = false;
-                }
+                else result = shelf[i][j] == null && bookshelf.getShelf()[i][j] == null;
             }
         }
         return result;
     }
     public void setShelf(ObjectCard card,int column){
         int i=0;
-        for( i=0; i< shelf.length;i++){
+        for(i=0; i< shelf.length;i++){
             if(shelf[i][column]!=null){
                 break;
             }
@@ -67,7 +57,7 @@ public class Bookshelf implements Serializable {
     }
 
     public String showBookshelf(int row){
-        String returnString = new String();
+        String returnString = "";
         char squareCharacter = 9632;
         ObjectCard[][] shelf = this.getShelf();
 
@@ -88,7 +78,7 @@ public class Bookshelf implements Serializable {
         int maxDrawableObjects=this.getMaxDrawableObjects();
         int i=0;
         int max;
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         for(int c=0;c<shelf[0].length;c++){
             for(int r=0;r<shelf.length;r++){
                 if(shelf[r][c]==null){

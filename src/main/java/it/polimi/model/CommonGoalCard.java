@@ -18,7 +18,7 @@ public abstract class CommonGoalCard extends GoalCard implements Serializable {
 
     public CommonGoalCard(int goalId){
         this.goalID = goalId;
-        this.points = new ArrayList<PointCard>();
+        this.points = new ArrayList<>();
 
         try {
             Gson gson = new Gson();
@@ -47,7 +47,7 @@ public abstract class CommonGoalCard extends GoalCard implements Serializable {
     public boolean check(ObjectCard[][] bookshelf){return false;}
     @Override
     public boolean equals(Object object) {
-        if((object instanceof CommonGoalCard) == false){
+        if(!(object instanceof CommonGoalCard)){
             return false;
         }
         CommonGoalCard goalCard = (CommonGoalCard) object;

@@ -25,11 +25,24 @@ class CommonGoalCard7Test {
         bookshelf[4][2]=new PublicObjectCard(1,4,2);
         bookshelf[4][3]=new PublicObjectCard(1,4,3);
 
+        //Tiles around with different types
+        bookshelf[2][0]=new PublicObjectCard(23,2,0);
+        bookshelf[2][1]=new PublicObjectCard(23,2,1);
+        bookshelf[2][2]=new PublicObjectCard(46,2,2);
+        bookshelf[1][2]=new PublicObjectCard(68,1,2);
+        bookshelf[0][2]=new PublicObjectCard(90,0,2);
+        bookshelf[1][3]=new PublicObjectCard(90,1,3);
+        bookshelf[1][4]=new PublicObjectCard(90,1,4);
+        bookshelf[3][2]=new PublicObjectCard(112,3,2);
+        bookshelf[4][2]=new PublicObjectCard(1,4,2);
+        bookshelf[4][3]=new PublicObjectCard(23,4,3);
+        bookshelf[4][4]=new PublicObjectCard(1,4,4);
+
         assertTrue(cm7.check(bookshelf));
     }
 
     @Test
-    void CommonGoal7NotSatisfiedTest() {
+    void CommonGoal7SatisfiedTest2() {
         PublicObjectCard[][] bookshelf;
         bookshelf= new PublicObjectCard[6][5];
         CommonGoalCard7 cm7bis=new CommonGoalCard7(4);
@@ -46,7 +59,19 @@ class CommonGoalCard7Test {
         bookshelf[4][2]=new PublicObjectCard(46,4,2);
         bookshelf[4][3]=new PublicObjectCard(46,4,3);
 
-        assertFalse(cm7bis.check(bookshelf));
+        bookshelf[2][0]=new PublicObjectCard(23,2,0);
+        bookshelf[2][1]=new PublicObjectCard(23,2,1);
+        bookshelf[2][2]=new PublicObjectCard(46,2,2);
+        bookshelf[1][2]=new PublicObjectCard(68,1,2);
+        bookshelf[0][2]=new PublicObjectCard(90,0,2);
+        bookshelf[1][3]=new PublicObjectCard(90,1,3);
+        bookshelf[1][4]=new PublicObjectCard(90,1,4);
+        bookshelf[3][2]=new PublicObjectCard(112,3,2);
+        bookshelf[4][2]=new PublicObjectCard(1,4,2);
+        bookshelf[4][3]=new PublicObjectCard(23,4,3);
+        bookshelf[4][4]=new PublicObjectCard(1,4,4);
+
+        assertTrue(cm7bis.check(bookshelf));
     }
 
     @Test

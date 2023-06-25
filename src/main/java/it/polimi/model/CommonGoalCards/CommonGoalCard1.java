@@ -1,8 +1,7 @@
 package it.polimi.model.CommonGoalCards;
 
-import it.polimi.model.*;
-
-import java.util.ArrayList;
+import it.polimi.model.CommonGoalCard;
+import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard1 extends CommonGoalCard {
     public CommonGoalCard1(int playersNumber) {
@@ -34,7 +33,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
                         break;
                     }
                 }
-                if(alreadyCounted == false) {
+                if(!alreadyCounted) {
                     // Same type on the right (if exists)
                     if(col+1 < maxcol && bookshelf[row][col] != null && bookshelf[row][col + 1] != null) {
                         if (bookshelf[row][col].getType() == bookshelf[row][col + 1].getType()) {

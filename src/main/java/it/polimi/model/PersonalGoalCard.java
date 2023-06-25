@@ -82,7 +82,8 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
                 Map.entry(5, 9),
                 Map.entry(6, 12)
         );
-    };
+    }
+
     public Bookshelf getGoal(){
         return goal;
     }
@@ -92,7 +93,7 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
     }
     @Override
     public boolean equals(Object object) {
-        if((object instanceof PersonalGoalCard) == false){
+        if(!(object instanceof PersonalGoalCard)){
             return false;
         }
         PersonalGoalCard goalCard = (PersonalGoalCard) object;

@@ -101,21 +101,18 @@ public class GameController implements Observer<PlayerChoice> {
                         //System.out.println(currentPlayer.getChosenColumn());
                         model.insertInOrder(chosenInsertionOrder);
                         model.endTurnChecks();
-                        String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
-                        String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn";
-                        model.handleTurn(turnPlayerMessage, otherPlayersMessage);
                     } else {
                         System.out.println("Ordine non salvato");
                     }
 
-                } else if (Objects.equals(input[0], "LEADERBOARD")) {
+                }/* else if (Objects.equals(input[0], "LEADERBOARD")) {
                     System.out.println("leaderboard");
                     model.DeclareWinner();
                     System.out.println("il giocatore è: " + model.getCurrentPlayer());
                     model.handleTurn("","");
                 } else if (Objects.equals(input[0], "LEADERBOARD1")) {
                     model.handleTurn("", "");
-                }
+                }*/
             }catch (IndexOutOfBoundsException e){
                 message.getView().reportError(e);
             }

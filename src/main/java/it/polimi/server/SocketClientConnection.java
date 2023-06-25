@@ -120,7 +120,12 @@ public class SocketClientConnection extends Observable<String> implements Client
                     }
                     notify(message);
                 }
-                while(model.getCurrentPlayer() != 0){
+                int i = 0;
+                while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
+                    i += 1;
+                }
+                Player currentPlayer = model.getTable()[i];
+                while(currentPlayer.getIsFirst() == false){
                     message = in.nextLine();
                     if(notYourTurnFlag == false){
                         if(expectedMessageNumber==3){
@@ -141,10 +146,11 @@ public class SocketClientConnection extends Observable<String> implements Client
                     }
                     notify(message);
                 }
-            }
-            if(isActive()){
-                message = "LEADERBOARD:";
-                notify(message);
+                /*if(isActive()){
+                    message = "LEADERBOARD:";
+                    notify(message);
+                    //this.active = false;
+                }*/
             }
         }
         catch(IOException | NoSuchElementException e){

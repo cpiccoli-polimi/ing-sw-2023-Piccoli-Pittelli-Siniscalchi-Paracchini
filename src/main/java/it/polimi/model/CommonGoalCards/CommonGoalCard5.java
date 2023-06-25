@@ -1,8 +1,7 @@
 package it.polimi.model.CommonGoalCards;
 
-import it.polimi.model.*;
-
-import java.util.ArrayList;
+import it.polimi.model.CommonGoalCard;
+import it.polimi.model.ObjectCard;
 
 public class CommonGoalCard5 extends CommonGoalCard {
     public CommonGoalCard5(int playersNumber) {
@@ -33,7 +32,7 @@ public class CommonGoalCard5 extends CommonGoalCard {
                         break;
                     }
                 }
-                if(alreadyCounted == false) {
+                if(!alreadyCounted) {
                     // Same type on the right (if exists)
                     if (bookshelf[row][col] != null && bookshelf[row][col + 1] != null && bookshelf[row][col + 2] != null && bookshelf[row][col + 3] != null){
                         if (col + 1 < maxcol && bookshelf[row][col].getType() == bookshelf[row][col + 1].getType()) {
@@ -57,9 +56,9 @@ public class CommonGoalCard5 extends CommonGoalCard {
                 }
                     // Same type on the bottom (if exists)
                     else if (bookshelf[row][col] != null && bookshelf[row+1][col] != null && bookshelf[row+2][col] != null && bookshelf[row+3][col] != null) {
-                        if (row + 1 >= 0 && bookshelf[row][col].getType() == bookshelf[row + 1][col].getType()) {
-                            if (row + 2 >= 0 && bookshelf[row][col].getType() == bookshelf[row + 2][col].getType()) {
-                                if (row + 3 >= 0 && bookshelf[row][col].getType() == bookshelf[row + 3][col].getType()) {
+                        if (bookshelf[row][col].getType() == bookshelf[row + 1][col].getType()) {
+                            if (bookshelf[row][col].getType() == bookshelf[row + 2][col].getType()) {
+                                if (bookshelf[row][col].getType() == bookshelf[row + 3][col].getType()) {
                                     for (int i = 0; i < counted.length; i++) {
                                         if (counted[i][0] == -1) {
                                             counted[i][0] = row;
