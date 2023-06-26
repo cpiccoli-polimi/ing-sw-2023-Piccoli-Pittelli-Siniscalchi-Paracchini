@@ -507,7 +507,7 @@ public class Game extends Observable<GameView>{
 
         for(int i = 0; i < playersNumber - 1; i++){
             for(int j = 0; j < playersNumber; j++){
-                if(leaderboard[j].getPoints() < leaderboard[i].getPoints() || (leaderboard[j].getPoints() == leaderboard[i].getPoints() && leaderboard[j].getPosition() < leaderboard[i].getPosition())){
+                if(leaderboard[j].getPoints() > leaderboard[i].getPoints() || (leaderboard[j].getPoints() == leaderboard[i].getPoints() && leaderboard[j].getPosition() > leaderboard[i].getPosition())){
                     Player tmpPlayer = leaderboard[j];
                     leaderboard[j] = leaderboard[i];
                     leaderboard[i] = tmpPlayer;
