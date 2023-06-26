@@ -1,7 +1,9 @@
 package it.polimi.client;
 
 import it.polimi.model.GameView;
+import it.polimi.model.ObjectCard;
 import it.polimi.model.Player;
+import it.polimi.model.Type;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -34,6 +36,33 @@ public class ClientTUI{
     public synchronized void setActive(boolean active){
         this.active = active;
     }
+    public void printTurnMessage(String message, ObjectCard[] chosenObjects){
+        char squareCharacter = 9632;
+
+        if(message.startsWith("Choose up to 3")){
+            message = message + "\nThe red numbers above and to the left of the board are the object cards coordinate" +
+                    "\nTo choose an object card you have to type his coordinates written as follows: ROW, COLUMN" +
+                    "\nTo choose multiple object cards you have to type their coordinates separate by a space";
+        }
+        else if(message.startsWith("In which bookshelf column")){
+            message = message + "\nThe columns are numbered from 1 to 5, from left to right" +
+                    "\nTo choose a column you have to type its corresponding number";
+        }
+        else if(message.startsWith("In which order")){
+            String stringToPrecede = new String("These are the object cards you have removed from the board: ");
+            int i = 1;
+            for(ObjectCard card : chosenObjects){
+                stringToPrecede = stringToPrecede + i + " " + card.getType().getColor() + squareCharacter + Type.RESET + ", ";
+                i += 1;
+            }
+            stringToPrecede = stringToPrecede + "\n";
+            stringToPrecede = stringToPrecede + message;
+            stringToPrecede = stringToPrecede + "\nTo choose an order you have to type the numbers corresponding to each card in the desired order (the first card that will be inserted in the column is the one corresponding to the number 1)" +
+                    "\nEach number must be separated by a space";
+            message = new String(stringToPrecede);
+        }
+        System.out.println(message);
+    }
     public Thread asyncReadFromSocket(ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -51,11 +80,10 @@ public class ClientTUI{
                         }
                         else if(inputObject instanceof GameView){
                             if (((GameView) inputObject).getLeaderboard()[0] == null){
-                                if(myPlayer == null){
-                                    for(Player player : ((GameView) inputObject).getTable()){
-                                        if(myPlayerName.equals(player.getNickname())){
-                                            myPlayer = player;
-                                        }
+
+                                for(Player player : ((GameView) inputObject).getTable()){
+                                    if(myPlayerName.equals(player.getNickname())){
+                                        myPlayer = player;
                                     }
                                 }
                                 System.out.println("GAME BOARD:");
@@ -82,7 +110,7 @@ public class ClientTUI{
                                     System.out.println();
                                 }
                                 if(myPlayer.getPosition() == ((GameView) inputObject).getCurrPlayer()){
-                                    System.out.println(((GameView) inputObject).getTurnPlayerMessage());
+                                    printTurnMessage(((GameView) inputObject).getTurnPlayerMessage(), myPlayer.getChosenObjects());
                                 }
                                 else{
                                     System.out.println(((GameView) inputObject).getOtherPlayersMessage());

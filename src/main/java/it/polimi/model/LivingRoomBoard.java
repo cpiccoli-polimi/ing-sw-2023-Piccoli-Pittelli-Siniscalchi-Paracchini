@@ -66,7 +66,15 @@ public class LivingRoomBoard implements Serializable {
         char squareCharacter = 9632;
         Tile[][] tiles = this.getTiles();
 
+        System.out.print("  ");
+        for(int i = 1; i < tiles[0].length+1; i++){
+            System.out.print("\u001B[31m" + " " + i + "\u001B[0m");
+        }
+        System.out.println();
         for(int i = 0; i < tiles.length; i++){
+            int h = i;
+            h += 1;
+            System.out.print("\u001B[31m" + h + " " + "\u001B[0m");
             for(int j = 0; j < tiles[i].length; j++){
                 if(tiles[i][j]==null){System.out.print(" ");}
                 if(tiles[i][j].getMinPlayers() != 9999){

@@ -129,7 +129,7 @@ public class GameController implements Observer<PlayerChoice> {
         return chosenInsertionOrder;
     }
     public int convertColumn(String s) throws IntFormatException{
-        int chosenColumn = Integer.parseInt(s);
+        int chosenColumn = Integer.parseInt(s) - 1;
         return chosenColumn;
     }
     public ObjectCard [] convert(String s) throws EmptyTileException, IntFormatException, CoordinateException {
@@ -154,7 +154,7 @@ public class GameController implements Observer<PlayerChoice> {
 
         }
         for (int i=0;i< output.length;i++){
-            outputInt[i]=Integer.parseInt(output[i]);
+            outputInt[i]=Integer.parseInt(output[i]) - 1;
         }
         j=0;
         chosenObjectCards=new ObjectCard[space.length];

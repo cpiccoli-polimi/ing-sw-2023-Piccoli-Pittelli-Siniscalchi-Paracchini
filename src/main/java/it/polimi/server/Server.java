@@ -28,8 +28,8 @@ public class Server {
 
     Game model = null;
     GameController controller;
-    int playersNumber = -1;
-    int commonGoalsNumber = -1;
+    int playersNumber;
+    int commonGoalsNumber;
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     };
@@ -43,10 +43,10 @@ public class Server {
     }
     public void lobby(ClientConnection c, String nickname, Socket socket){
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
-        for(int i = 0; i < keys.size(); i++){
+        /*for(int i = 0; i < keys.size(); i++){
             ClientConnection connection = waitingConnection.get(keys.get(i));
             connection.asyncSend("Connected user: " + keys.get(i));
-        }
+        }*/
         while(waitingConnection.containsKey(nickname) == true){
             try{
                 c.asyncSend("A player with your same nickname is already present in this game. Please try submitting a different nickname");
@@ -66,22 +66,25 @@ public class Server {
             try{
                 Scanner in = new Scanner(socket.getInputStream());
                 String message;
-                while(playersNumber == -1){
-                    c.asyncSend("How many players will play this game?");
+
+                c.asyncSend("How many players will play this game?");
+                message = in.nextLine();
+                playersNumber = Integer.valueOf(message);
+                while(playersNumber < 2 || playersNumber > 4){
+                    c.asyncSend("The players number can only go from 2 to 4. Please try submitting a different players number");
                     message = in.nextLine();
                     playersNumber = Integer.valueOf(message);
-                    if(playersNumber < 2 || playersNumber > 4){
-                        playersNumber = -1;
-                    }
                 }
-                while(commonGoalsNumber == -1){
-                    c.asyncSend("With how many common goals do you want to play this game?");
+
+                c.asyncSend("With how many common goals do you want to play this game?");
+                message = in.nextLine();
+                commonGoalsNumber = Integer.valueOf(message);
+                while(commonGoalsNumber != 1 && commonGoalsNumber != 2){
+                    c.asyncSend("The common goals number can only go from 1 to 2. Please try submitting a different common goals number");
                     message = in.nextLine();
                     commonGoalsNumber = Integer.valueOf(message);
-                    if(commonGoalsNumber != 1 && commonGoalsNumber != 2){
-                        commonGoalsNumber = -1;
-                    }
                 }
+                c.asyncSend("Waiting for the others players to join the game");
                 model = new Game(playersNumber, commonGoalsNumber);
                 ((SocketClientConnection)c).setModel(model);
             }
