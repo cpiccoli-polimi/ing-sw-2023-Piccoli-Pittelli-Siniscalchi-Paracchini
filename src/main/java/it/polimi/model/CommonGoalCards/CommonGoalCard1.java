@@ -27,7 +27,7 @@ public class CommonGoalCard1 extends CommonGoalCard {
                 boolean alreadyCounted = false;
                 for(int crow=0;crow<counted.length;crow++){
                     // This combination of [row][col] is in the array
-                    if(counted[crow][1] == row && counted[crow][2] == col){
+                    if(counted[crow][0] == row && counted[crow][1] == col){
                         //Skip to next cycle
                         alreadyCounted = true;
                         break;
