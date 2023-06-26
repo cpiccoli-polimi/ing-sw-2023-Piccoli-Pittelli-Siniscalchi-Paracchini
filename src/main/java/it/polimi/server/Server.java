@@ -41,7 +41,7 @@ public class Server {
             }
         }
     }
-    public void lobby(ClientConnection c, String nickname, Socket socket){
+    public synchronized void lobby(ClientConnection c, String nickname, Socket socket){
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
         /*for(int i = 0; i < keys.size(); i++){
             ClientConnection connection = waitingConnection.get(keys.get(i));
@@ -69,22 +69,37 @@ public class Server {
 
                 c.asyncSend("How many players will play this game?");
                 message = in.nextLine();
-                playersNumber = Integer.valueOf(message);
-                while(playersNumber < 2 || playersNumber > 4){
-                    c.asyncSend("The players number can only go from 2 to 4. Please try submitting a different players number");
-                    message = in.nextLine();
+                try {
                     playersNumber = Integer.valueOf(message);
+                } catch (NumberFormatException e) {
+                    playersNumber = 0;
+                }
+                while(playersNumber < 2 || playersNumber > 4){
+                    c.asyncSend("The players number can only go from 2 to 4 and it must contain only digits. Please try submitting a different players number");
+                    message = in.nextLine();
+                    try {
+                        playersNumber = Integer.valueOf(message);
+                    } catch (NumberFormatException e) {
+                        playersNumber = 0;
+                    }
                 }
 
                 c.asyncSend("With how many common goals do you want to play this game?");
                 message = in.nextLine();
-                commonGoalsNumber = Integer.valueOf(message);
-                while(commonGoalsNumber != 1 && commonGoalsNumber != 2){
-                    c.asyncSend("The common goals number can only go from 1 to 2. Please try submitting a different common goals number");
-                    message = in.nextLine();
+                try {
                     commonGoalsNumber = Integer.valueOf(message);
+                } catch (NumberFormatException e) {
+                    commonGoalsNumber = 0;
                 }
-                c.asyncSend("Waiting for the others players to join the game");
+                while(commonGoalsNumber != 1 && commonGoalsNumber != 2){
+                    c.asyncSend("The common goals number can only go from 1 to 2 and it must contain only digits. Please try submitting a different common goals number");
+                    message = in.nextLine();
+                    try {
+                        commonGoalsNumber = Integer.valueOf(message);
+                    } catch (NumberFormatException e) {
+                        commonGoalsNumber = 0;
+                    }
+                }
                 model = new Game(playersNumber, commonGoalsNumber);
                 ((SocketClientConnection)c).setModel(model);
             }
@@ -92,6 +107,7 @@ public class Server {
                 throw new RuntimeException(e);
             }
         }
+        c.asyncSend("Waiting for the others players to join the game");
         keys = new ArrayList<>(waitingConnection.keySet());
         if(waitingConnection.size() == playersNumber){
             controller = new GameController(model);
