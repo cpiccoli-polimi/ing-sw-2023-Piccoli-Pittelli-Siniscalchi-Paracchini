@@ -62,10 +62,10 @@ public class Player implements Serializable {
     public int[] getCommonGoalsCompleted() { return commonGoalsCompleted;}
     public void setCommonGoalsCompleted(int[] commonGoalsCompleted, int newGoal){
         int i=0;
-        while(commonGoalsCompleted[i]!=-1){
+        while(this.commonGoalsCompleted[i]!=-1){
             i++;
         }
-        commonGoalsCompleted[i]=newGoal;
+        this.commonGoalsCompleted[i]=newGoal;
         System.out.println(newGoal+"completed");
     }
 
