@@ -92,9 +92,9 @@ public class Game extends Observable<GameView>{
         clockString += nanoseconds;
         seed = parseLong(clockString);
         generator = new Random(seed);
-        this.commonGoalsDeck=new ArrayList<CommonGoalCard>(); // AGGIUNTO
-        commonGoalsDeck.add(0,new CommonGoalCard3(playersNumber)); //AGGIUNTO
-        /*shuffle(list, generator);
+        //this.commonGoalsDeck=new ArrayList<CommonGoalCard>(); // AGGIUNTO
+        //commonGoalsDeck.add(0,new CommonGoalCard3(playersNumber)); //AGGIUNTO
+        shuffle(list, generator);
         this.commonGoalsDeck = new ArrayList<>();
         int i = 0;
         for(int j = 0; j < 12; j++){
@@ -137,7 +137,7 @@ public class Game extends Observable<GameView>{
                     break;
             }
             i += 1;
-        }*/
+        }
 
         this.currentPlayer = 0;
         this.leaderboard = new Player[playersNumber];
@@ -396,7 +396,7 @@ public class Game extends Observable<GameView>{
                     b = false; //Già completato
                 }
             }
-            if(b==true && board.getCommonGoals()[i].check(bookshelf.getShelf())==true){
+            if(b==true && board.getCommonGoals()[i].check(bookshelf.getShelf())){
                 currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(),board.getCommonGoals()[i].getGoalID());
                 updateCommonGoals(board.getCommonGoals()[i]);
                 System.out.println("player: "+currentPlayer.getNickname()+ " completes "+ board.getCommonGoals()[i].getGoalID() );
@@ -497,25 +497,23 @@ public class Game extends Observable<GameView>{
         Player[] table = getTable();
         for(int i=0; i< table.length;i++){
             table[i].countPersonalGoalsPoints();
-            System.out.println("Player: "+ table[i].getNickname()+" with "+table[i].getPoints()+" points");
-            //table[i].countAdjacentItemsPoints();
+            table[i].countAdjacentItemsPoints();
         }
 
         Player [] leaderboard=new Player[getTable().length];
-        for(int j=0;j<getTable().length;j++){
-            for(int k=0;k<getTable().length;k++){
-                if(table[j].getPoints()<table[k].getPoints()){
-                    if(j<k) {
-                        count++;
-                    }
+        for(int i = 0; i< playersNumber; i++){
+            leaderboard[i] = table[i];
+        }
+
+        for(int i = 0; i < playersNumber - 1; i++){
+            for(int j = 0; j < playersNumber; j++){
+                if(leaderboard[j].getPoints() < leaderboard[i].getPoints() || (leaderboard[j].getPoints() == leaderboard[i].getPoints() && leaderboard[j].getPosition() < leaderboard[i].getPosition())){
+                    Player tmpPlayer = leaderboard[j];
+                    leaderboard[j] = leaderboard[i];
+                    leaderboard[i] = tmpPlayer;
                 }
             }
-            leaderboard[count]=table[j];
-            count=0;
         }
-        /*for(int j=0;j<getTable().length;j++){
-            System.out.println(j+" "+leaderboard[j].getNickname()+" with "+leaderboard[j].getPoints());
-        }*/
         setLeaderboard(leaderboard);
 
         /*// *** CREATE LEADERBOARD ***
