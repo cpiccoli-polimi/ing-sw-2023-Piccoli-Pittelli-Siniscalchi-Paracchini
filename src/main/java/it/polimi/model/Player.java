@@ -123,7 +123,6 @@ public class Player implements Serializable {
         int p=0;
         // Get bookshelf, personalGoal and actual points from Player
         Bookshelf bookshelf = this.getBookshelf();
-        for(int i=0;i<5;i++) System.out.println(bookshelf.showBookshelf(i));
         // Scan through every row and columns: if two cells match, add one point
         for (int row = 0; row < getBookshelf().getShelf().length; row++) {
             for (int col = 0; col < getBookshelf().getShelf()[0].length; col++) {

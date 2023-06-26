@@ -388,17 +388,13 @@ public class Game extends Observable<GameView>{
             this.setDone(true);
         }
         updateBoard();
-        System.out.println("LUNGHEZZA DECK: "+board.getCommonGoals().length);
         for(i=0;i<board.getCommonGoals().length;i++) {
             for (int j = 0; j < board.getCommonGoals().length; j++) {
                 if (currentPlayer.getCommonGoalsCompleted()[j] == board.getCommonGoals()[i].getGoalID()) {
                     b = false; //Già completato
                 }
             }
-            System.out.println("b vale: "+b);
-            System.out.println("ID COMMON GOAL: "+board.getCommonGoals()[i].getGoalID());
-            if(b && board.getCommonGoals()[i].check(bookshelf.getShelf())){
-                System.out.println("DENTRO IF");
+            if(b==true && board.getCommonGoals()[i].check(bookshelf.getShelf())){
                 currentPlayer.setCommonGoalsCompleted(currentPlayer.getCommonGoalsCompleted(),board.getCommonGoals()[i].getGoalID());
                 updateCommonGoals(board.getCommonGoals()[i]);
             }
