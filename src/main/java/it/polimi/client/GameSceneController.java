@@ -292,10 +292,10 @@ public class GameSceneController{
         leaderboardPaneShape.setArcWidth(30);
         leaderboardPaneShape.setArcHeight(30);
         leaderboardTextPane.setShape(leaderboardPaneShape);
+        leaderboardTextPane.setVisible(false);
 
         leaderboardText.setText("");
         leaderboardText.setFont(new Font("Arial Bold", 15));
-        leaderboardText.setVisible(false);
     }
 
     public void showBoardItems(LivingRoomBoard board){
@@ -519,10 +519,11 @@ public class GameSceneController{
         int i = 1;
         for(Player player : leaderboard){
             leaderboardString = leaderboardString + i + ". " + player.getNickname() + " with " + player.getPoints() + "points\n";
+            i += 1;
         }
 
         leaderboardText.setText(leaderboardString);
-        leaderboardText.setVisible(true);
+        leaderboardTextPane.setVisible(true);
     }
 
 }
