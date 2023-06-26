@@ -499,19 +499,18 @@ public class Game extends Observable<GameView>{
         }
 
         Player [] leaderboard=new Player[getTable().length];
-        for(int j=0;j<getTable().length;j++){
-            for(int k=0;k<getTable().length;k++){
-                if(table[j].getPoints()<table[k].getPoints()){
-                    if(j<k) {
-                        count++;
-                    }
+        for(int i = 0; i< playersNumber; i++){
+            leaderboard[i] = table[i];
+        }
+
+        for(int i = 0; i < playersNumber - 1; i++){
+            for(int j = 0; j < playersNumber; j++){
+                if(leaderboard[j].getPoints() < leaderboard[i].getPoints() || (leaderboard[j].getPoints() == leaderboard[i].getPoints() && leaderboard[j].getPosition() < leaderboard[i].getPosition())){
+                    Player tmpPlayer = leaderboard[j];
+                    leaderboard[j] = leaderboard[i];
+                    leaderboard[i] = tmpPlayer;
                 }
             }
-            leaderboard[count]=table[j];
-            count=0;
-        }
-        for(int j=0;j<getTable().length;j++){
-            System.out.println(j+" "+leaderboard[j].getNickname());
         }
         setLeaderboard(leaderboard);
 
