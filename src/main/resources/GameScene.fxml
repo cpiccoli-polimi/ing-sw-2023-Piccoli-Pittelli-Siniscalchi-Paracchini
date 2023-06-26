@@ -144,7 +144,6 @@
                               <Text fx:id="opponent2Text" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                            </children>
                         </TextFlow>
-                        <ImageView fx:id="opponent2BookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                         <GridPane fx:id="opponent2BookshelfItemsPane">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -162,6 +161,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
+                        <ImageView fx:id="opponent2BookshelfImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="opponent2FirstChairToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="opponent2EndGameToken" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
