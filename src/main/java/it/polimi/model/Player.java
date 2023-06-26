@@ -69,20 +69,6 @@ public class Player implements Serializable {
         System.out.println(newGoal+"completed");
     }
 
-    /*public void setCommonGoalsCompleted (int [] commonGoalsCompleted, int newGoals)throws AllCommonGoalsCompletedException, CommonGoalAlreadyCompletedException {
-        if(commonGoalsCompleted[commonGoalsCompleted.length-1]!=-1){
-            throw new AllCommonGoalsCompletedException();
-        }
-        int i=0;
-        while(i<commonGoalsCompleted.length && commonGoalsCompleted[i]!=-1){
-            if(commonGoalsCompleted[i]==newGoals){
-                throw new CommonGoalAlreadyCompletedException();
-            }
-            i++;
-        }
-        commonGoalsCompleted[i]=newGoals;
-    }*/
-
     public ObjectCard[] getChosenObjects() {return chosenObjects;}
     public void setChosenObjects(ObjectCard [] oggettoScelto){
         System.out.println("Giocatore"+position);
@@ -172,7 +158,7 @@ public class Player implements Serializable {
                 break;
             }
         }
-        System.out.println("Punti"+count);
+        System.out.println("PersonalGoal Tiles Matched: "+count);
     }
 
     public void countAdjacentItemsPoints() {
