@@ -351,17 +351,19 @@ public class GameSceneController{
             goalPath = new String("/GraphicalResources/CommonGoalCards/commonGoal");
             goalPath = goalPath + String.valueOf(goal.getGoalID()) + ".jpg";
 
-            pointPath = new String("/GraphicalResources/ScoringTokens/scoringToken");
-            pointPath = pointPath + String.valueOf(goal.getPoints().get(0).getValue().getI()) + ".jpg";
-
             goalImage.setFitWidth(goalPane.getPrefWidth());
             goalImage.setFitHeight(goalPane.getPrefHeight());
             goalImage.setImage(new Image(goalPath, goalImage.getFitWidth(), goalImage.getFitHeight(), true, false));
 
-            pointImage.setFitWidth(goalPane.getPrefWidth()*0.45);
-            pointImage.setFitHeight(goalPane.getPrefHeight()*0.45);
-            pointImage.setImage(new Image(pointPath, pointImage.getFitWidth(), pointImage.getFitHeight(), true, false));
-            pointImage.setRotate(-8);
+            if(goal.getPoints().size() > 0){
+                pointPath = new String("/GraphicalResources/ScoringTokens/scoringToken");
+                pointPath = pointPath + String.valueOf(goal.getPoints().get(0).getValue().getI()) + ".jpg";
+
+                pointImage.setFitWidth(goalPane.getPrefWidth()*0.45);
+                pointImage.setFitHeight(goalPane.getPrefHeight()*0.45);
+                pointImage.setImage(new Image(pointPath, pointImage.getFitWidth(), pointImage.getFitHeight(), true, false));
+                pointImage.setRotate(-8);
+            }
         }
     }
     public void showPlayer(Player player){
@@ -487,16 +489,27 @@ public class GameSceneController{
                     itemImage.setFitWidth(((itemsPane.getPrefWidth() - (itemsPane.getHgap() * (itemsPane.getColumnCount() - 1))) / itemsPane.getColumnCount())*1.01);
                     itemImage.setFitHeight(((itemsPane.getPrefHeight() - (itemsPane.getVgap() * (itemsPane.getRowCount() - 1))) / itemsPane.getRowCount())*1.01);
                     itemImage.setImage(new Image(itemPath, itemImage.getFitWidth(), itemImage.getFitHeight(), true, false));
-                    itemsPane.add(itemImage, i, j);
+                    itemsPane.add(itemImage, j, i);
                 }
             }
         }
 
     }
     public void showMessage(String message){
+        char squareCharacter = 9632;
+
+        if(message.startsWith("Choose up to 3")){
+            message = message + "\nTo choose an object card you have to click on it" +
+                    "\nClick the confirm button on the right when you have chosen all the cards you want to remove from the board";
+        }
+        else if(message.startsWith("In which bookshelf column")){
+            message = message + "\nTo choose a column you have to click on it" +
+                    "\nClick the confirm button on the right when you have chosen the column";
+        }
+
         messageText.setText(message);
     }
-    public void showLeaderboard(Player[] leaderboard, TextFlow leaderboardTextPane){
+    public void showLeaderboard(Player[] leaderboard){
 
         BoxBlur blurBox = new BoxBlur(12, 12, 1);
         gamePane.setEffect(blurBox);
@@ -509,7 +522,7 @@ public class GameSceneController{
         }
 
         leaderboardText.setText(leaderboardString);
-
+        leaderboardText.setVisible(true);
     }
 
 }

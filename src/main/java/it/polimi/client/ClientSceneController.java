@@ -1,16 +1,25 @@
 package it.polimi.client;
 
 import it.polimi.model.GameView;
+import it.polimi.model.ObjectCard;
 import it.polimi.model.Player;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.Socket;
@@ -30,6 +39,7 @@ public class ClientSceneController {
     WelcomeSceneController welcomeSceneController;
     GameSceneController gameSceneController;
     Stage stage;
+    Pane activePane;
     @FXML
     StackPane clientPane;
 
@@ -52,29 +62,18 @@ public class ClientSceneController {
                             if(((String)inputObject).startsWith("YOURPLAYERIS:")){
                                 myPlayerName = new String(((String)inputObject).substring(13));
                             }
-                            else if(((String)inputObject).equals("Welcome\nWhat is your name?")){
-                                showWelcomeScene();
-                                showMessage((String)inputObject);
-                            }
                             else{
-                                showMessage((String) inputObject);
+                                if(((String)inputObject).equals("Welcome\nWhat is your name?")){
+                                    showWelcomeScene();
+                                }
+                                showMessage((String)inputObject);
                             }
                         }
                         else if(inputObject instanceof GameView){
-
-                            showGameScene((GameView) inputObject);
-                            /*if (((GameView) inputObject).getLeaderboard()[0] == null) {
-                            }
-                            else{
-                                System.out.println("LEADERBOARD:");
-                                int i = 1;
-                                for(Player player : ((GameView) inputObject).getLeaderboard()){
-                                    System.out.println(i + ": " + player.getNickname() + " with " + player.getPoints() + "points");
-                                }
-                            }*/
+                            showGameScene((GameView) inputObject, ((GameView) inputObject).getLeaderboard()[0] != null);
                         }
                         else if(inputObject instanceof Exception){
-                            System.out.println(((Exception) inputObject).getMessage());
+                            showMessage(((Exception) inputObject).getMessage());
                         }
                     }
                 }
@@ -95,8 +94,7 @@ public class ClientSceneController {
         clientPane.setMaxWidth(clientPane.getMinWidth());
         clientPane.setPrefHeight(clientPane.getMinHeight());
         clientPane.setBackground(new Background(new BackgroundImage(new Image("/GraphicalResources/Miscellaneous/parquetBackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, false))));
-        welcomeSceneController = null;
-        gameSceneController = null;
+        activePane = clientPane;
     }
     public void showWelcomeScene(){
 
@@ -106,17 +104,12 @@ public class ClientSceneController {
                     try {
                         fxmlLoader = new FXMLLoader(getClass().getResource("/WelcomeScene.fxml"));
                         root = fxmlLoader.load();
-                        if(gameSceneController == null){
-                            stage = (Stage) clientPane.getScene().getWindow();
-                        }
-                        else{
-                            stage = (Stage) gameSceneController.scenePane.getScene().getWindow();
-                        }
+                        stage = (Stage) activePane.getScene().getWindow();
                         scene = new Scene(root, clientPane.getPrefWidth(), clientPane.getPrefHeight());
                         stage.setScene(scene);
                         welcomeSceneController = fxmlLoader.getController();
                         welcomeSceneController.showScene(scene.getWidth(), scene.getHeight());
-                        gameSceneController = null;
+                        activePane = welcomeSceneController.welcomePane;
                         stage.show();
 
                         welcomeSceneController.confirmButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -137,62 +130,239 @@ public class ClientSceneController {
             });
 
     }
-    public void showGameScene(GameView gameView){
+    public void showGameScene(GameView gameView, boolean showLeaderboard){
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 try {
                     fxmlLoader = new FXMLLoader(getClass().getResource("/GameScene.fxml"));
                     root = fxmlLoader.load();
-                    if(welcomeSceneController == null){
-                        stage = (Stage) clientPane.getScene().getWindow();
-                    }
-                    else{
-                        stage = (Stage) welcomeSceneController.welcomePane.getScene().getWindow();
-                    }
+                    stage = (Stage) activePane.getScene().getWindow();
                     scene = new Scene(root, clientPane.getPrefWidth(), clientPane.getPrefHeight());
                     stage.setScene(scene);
                     gameSceneController = fxmlLoader.getController();
                     gameSceneController.showScene(scene.getWidth(), scene.getHeight());
-                    welcomeSceneController = null;
+                    activePane = gameSceneController.scenePane;
 
-                    if(myPlayer == null){
-                        for(Player player : gameView.getTable()){
-                            if(myPlayerName.equals(player.getNickname())){
-                                myPlayer = player;
-                            }
+                    for(Player player : gameView.getTable()){
+                        if(myPlayerName.equals(player.getNickname())){
+                            myPlayer = player;
                         }
                     }
+
                     gameSceneController.showBoardItems(gameView.getBoard());
                     gameSceneController.showPersonalGoal(myPlayer.getPersonalGoal());
                     gameSceneController.showCommonGoals(gameView.getBoard().getCommonGoals());
                     gameSceneController.showPlayer(myPlayer);
-                    int i = 0;
+                    int tmpCounter = 0;
                     for(Player opponent : gameView.getTable()){
                         if(myPlayer.getNickname().equals(opponent.getNickname()) == false){
-                            gameSceneController.showOpponent(opponent, (StackPane) gameSceneController.opponentsPane.getChildren().get(i));
-                            i++;
+                            gameSceneController.showOpponent(opponent, (StackPane) gameSceneController.opponentsPane.getChildren().get(tmpCounter));
+                            tmpCounter++;
                         }
                     }
-                    while(i < 3){
-                        gameSceneController.opponentsPane.getChildren().get(i).setVisible(false);
-                        i++;
+                    while(tmpCounter < 3){
+                        gameSceneController.opponentsPane.getChildren().get(tmpCounter).setVisible(false);
+                        tmpCounter++;
                     }
 
                     if(myPlayer.getPosition() == gameView.getCurrPlayer()){
-                        showMessage(gameView.getTurnPlayerMessage());
 
-                        gameSceneController.confirmButton.setOnAction(new EventHandler<ActionEvent>() {
-                            @Override
-                            public void handle(ActionEvent actionEvent) {
-                                //System.out.println("è il tuo turno");
+                        if(gameView.getTurnPlayerMessage().startsWith("Choose up to 3")){
+                            showMessage(gameView.getTurnPlayerMessage());
+
+                            for(Node child : gameSceneController.boardItemsPane.getChildren()){
+
+                                if(((ToggleButton)child).isDisable() != true){
+
+                                    ((ToggleButton)child).setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent actionEvent) {
+                                            if(((ToggleButton)child).isSelected()){
+                                                ((ToggleButton)child).setBorder(new Border(new BorderStroke(Color.SADDLEBROWN, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
+                                            }
+                                            else{
+                                                ((ToggleButton)child).setBorder(null);
+                                            }
+                                        }
+                                    });
+                                }
                             }
-                        });
+                            gameSceneController.confirmButton.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent actionEvent) {
+                                    String message = new String("");
+                                    for(int i = 0; i < gameSceneController.boardItemsPane.getRowCount(); i++){
+                                        for(int j =0; j < gameSceneController.boardItemsPane.getColumnCount(); j++){
+                                            if(((ToggleButton)gameSceneController.boardItemsPane.getChildren().get((i * gameSceneController.boardItemsPane.getRowCount())+ j)).isSelected()){
+                                                int h = i;
+                                                int k = j;
+                                                h += 1;
+                                                k += 1;
+                                                message = message + h + "," + k + " ";
+
+                                            }
+                                        }
+                                    }
+                                    socketOut.println(message);
+                                    socketOut.flush();
+                                }
+                            });
+                        }
+                        else if(gameView.getTurnPlayerMessage().startsWith("In which bookshelf column")){
+                            showMessage(gameView.getTurnPlayerMessage());
+
+                            ToggleGroup toggleGroup = new ToggleGroup();
+
+                            toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+                                public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+                                    if (toggleGroup.getSelectedToggle() != null) {
+                                        ((ToggleButton)new_toggle).setBorder(new Border(new BorderStroke(Color.LIGHTGREEN, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderStroke.MEDIUM)));
+                                        if(old_toggle != null){
+                                            ((ToggleButton)old_toggle).setBorder(null);
+                                        }
+                                    }
+                                }
+                            });
+
+                            for(int i = 0; i < gameSceneController.myBookshelfItemsPane.getColumnCount(); i++){
+                                ToggleButton button = new ToggleButton();
+
+                                button.setPrefWidth((gameSceneController.columnSelectionPane.getPrefWidth() - gameSceneController.columnSelectionPane.getSpacing()*(gameSceneController.myBookshelfItemsPane.getColumnCount()-1))/gameSceneController.myBookshelfItemsPane.getColumnCount());
+                                button.setPrefHeight(gameSceneController.columnSelectionPane.getPrefHeight());
+                                button.setMinWidth(button.getPrefWidth());
+                                button.setMinHeight(button.getPrefHeight());
+                                button.setMaxWidth(button.getPrefWidth());
+                                button.setMaxHeight(button.getPrefHeight());
+                                button.setText(null);
+                                button.setBackground(null);
+
+                                button.setToggleGroup(toggleGroup);
+
+                                gameSceneController.columnSelectionPane.getChildren().add(button);
+                            }
+                            gameSceneController.confirmButton.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent actionEvent) {
+                                    String message = new String("");
+                                    for(Node child : gameSceneController.columnSelectionPane.getChildren()){
+                                        if(((ToggleButton)child).isSelected()){
+                                            int h = gameSceneController.columnSelectionPane.getChildren().indexOf(child);
+                                            h += 1;
+                                            message = message + h;
+                                        }
+                                    }
+                                    socketOut.println(message);
+                                    socketOut.flush();
+                                }
+                            });
+                        }
+                        else if(gameView.getTurnPlayerMessage().startsWith("In which order")){
+
+                            String newTurnMessage = new String("These are the cards you have removed from the board");
+                            newTurnMessage = newTurnMessage + gameView.getTurnPlayerMessage();
+                            newTurnMessage = newTurnMessage + "\nTo choose an order, use the MenuButtons on the right" +
+                                    "\nClick the confirm button on the right when you have chosen the desired insertion order";
+                            showMessage(newTurnMessage);
+
+                            gameSceneController.messageTextPane.setPrefWidth(gameSceneController.messageTextPane.getPrefWidth() - ((gameSceneController.messageTextPane.getPrefHeight() + gameSceneController.separator.getPrefWidth()) *  myPlayer.getChosenObjects().length));
+                            gameSceneController.messageTextPane.setMinWidth(gameSceneController.messageTextPane.getPrefWidth());
+                            gameSceneController.messageTextPane.setMaxWidth(gameSceneController.messageTextPane.getPrefWidth());
+
+                            int i = 0;
+                            for(ObjectCard card : myPlayer.getChosenObjects()){
+
+
+                                Separator separator = new Separator(Orientation.HORIZONTAL);
+                                separator.setPrefWidth(gameSceneController.separator.getPrefWidth());
+                                separator.setPrefHeight(gameSceneController.separator.getPrefHeight());
+                                separator.setMinWidth(separator.getPrefWidth());
+                                separator.setMinHeight(separator.getPrefHeight());
+                                separator.setMaxWidth(separator.getPrefWidth());
+                                separator.setMaxHeight(separator.getPrefHeight());
+                                separator.setVisible(false);
+
+                                i += 1;
+                                gameSceneController.messagePane.getChildren().add(i, separator);
+
+                                FlowPane pane = new FlowPane(Orientation.VERTICAL);
+                                pane.setPrefWidth(gameSceneController.messageTextPane.getPrefHeight());
+                                pane.setPrefHeight(gameSceneController.messageTextPane.getPrefHeight());
+                                pane.setMinWidth(pane.getPrefWidth());
+                                pane.setMinHeight(pane.getPrefHeight());
+                                pane.setMaxWidth(pane.getPrefWidth());
+                                pane.setMaxHeight(pane.getPrefHeight());
+
+                                i += 1;
+                                gameSceneController.messagePane.getChildren().add(i, pane);
+
+                                String cardPath = new String("/GraphicalResources/ItemTiles/");
+                                cardPath = cardPath + card.getType().toString().toLowerCase() + ".png";
+
+                                ImageView cardImage = new ImageView();
+                                cardImage.setFitHeight(pane.getPrefHeight() * 0.79);
+                                cardImage.setFitWidth(cardImage.getFitHeight());
+                                cardImage.setImage(new Image(cardPath, cardImage.getFitWidth(), cardImage.getFitHeight(), true, false));
+
+                                ToggleGroup toggleGroup = new ToggleGroup();
+
+                                HBox buttonPane = new HBox();
+                                buttonPane.setPrefWidth(pane.getPrefHeight() * 0.79);
+                                buttonPane.setPrefHeight(pane.getPrefHeight() * 0.19);
+                                buttonPane.setMinWidth(buttonPane.getPrefWidth());
+                                buttonPane.setMinHeight(buttonPane.getPrefHeight());
+                                buttonPane.setMaxWidth(buttonPane.getPrefWidth());
+                                buttonPane.setMaxHeight(buttonPane.getPrefHeight());
+                                buttonPane.setSpacing(buttonPane.getPrefWidth()*0.10);
+
+                                for(int j = 1; j < myPlayer.getChosenObjects().length + 1; j++){
+                                    RadioButton button = new RadioButton(String.valueOf(j));
+                                    button.setPrefWidth((buttonPane.getPrefWidth() - (buttonPane.getSpacing() * (myPlayer.getChosenObjects().length - 1))) / myPlayer.getChosenObjects().length);
+                                    button.setPrefHeight(buttonPane.getPrefHeight());
+                                    button.setMinWidth(button.getPrefWidth());
+                                    button.setMinHeight(button.getPrefHeight());
+                                    button.setMaxWidth(button.getPrefWidth());
+                                    button.setMaxHeight(button.getPrefHeight());
+                                    button.setToggleGroup(toggleGroup);
+
+                                    buttonPane.getChildren().add(button);
+                                }
+
+                                pane.getChildren().add(cardImage);
+                                pane.getChildren().add(buttonPane);
+                                pane.setMargin(cardImage, new Insets(0, 0, pane.getPrefHeight() * 0.01, 0));
+
+                            }
+
+                            gameSceneController.confirmButton.setOnAction(new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent actionEvent) {
+                                    String message = new String("");
+
+                                    for(int i = 1; i < myPlayer.getChosenObjects().length + 1; i++) {
+                                        FlowPane pane = (FlowPane) gameSceneController.messagePane.getChildren().get(2 * i);
+                                        HBox buttonPane = (HBox) pane.getChildren().get(1);
+                                        for(Node child : buttonPane.getChildren()){
+                                            if(((RadioButton)child).isSelected()){
+                                                message = message + ((RadioButton)child).getText() + " ";
+                                            }
+                                        }
+                                    }
+
+                                    socketOut.println(message);
+                                    socketOut.flush();
+                                }
+                            });
+                        }
                     }
                     else{
                         showMessage(gameView.getOtherPlayersMessage());
 
                         gameSceneController.confirmButton.setOnAction(null);
+                    }
+
+                    if(showLeaderboard == true){
+                        gameSceneController.showLeaderboard(gameView.getLeaderboard());
                     }
 
                     stage.show();
@@ -207,10 +377,10 @@ public class ClientSceneController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                if(welcomeSceneController != null){
+                if(activePane == welcomeSceneController.welcomePane){
                     welcomeSceneController.showMessage(message + "\n");
                 }
-                else if(gameSceneController != null){
+                else if(activePane == gameSceneController.scenePane){
                     gameSceneController.showMessage(message);
                 }
             }
@@ -229,5 +399,4 @@ public class ClientSceneController {
             throw new RuntimeException(e);
         }
     }
-
 }

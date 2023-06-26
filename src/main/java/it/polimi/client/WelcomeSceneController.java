@@ -100,6 +100,10 @@ public class WelcomeSceneController{
     }
 
     public void showMessage(String message){
+        if(message.startsWith("Waiting for the others")){
+            playerTextField.setVisible(false);
+            confirmButton.setVisible(false);
+        }
         messageText.setText(message);
     }
     public String getMessage(){
