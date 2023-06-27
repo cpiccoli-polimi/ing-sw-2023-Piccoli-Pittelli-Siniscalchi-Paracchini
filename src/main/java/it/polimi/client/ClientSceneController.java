@@ -117,17 +117,6 @@ public class ClientSceneController {
                         stage = (Stage) activePane.getScene().getWindow();
                         scene = new Scene(root, clientPane.getPrefWidth(), clientPane.getPrefHeight());
 
-                        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-                            @Override
-                            public void handle(KeyEvent event) {
-                                String message = new String(welcomeSceneController.getMessage());
-                                if(event.getCode().equals(KeyCode.ENTER)) {
-                                    socketOut.println(message);
-                                    socketOut.flush();
-                                }
-                            }
-                        });
-
                         stage.setScene(scene);
                         welcomeSceneController = fxmlLoader.getController();
                         welcomeSceneController.showScene(scene.getWidth(), scene.getHeight());
@@ -145,6 +134,16 @@ public class ClientSceneController {
                             }
                         });
 
+                        welcomeSceneController.playerTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                            @Override
+                            public void handle(KeyEvent event) {
+                                String message = new String(welcomeSceneController.getMessage());
+                                if(event.getCode().equals(KeyCode.ENTER)) {
+                                    socketOut.println(message);
+                                    socketOut.flush();
+                                }
+                            }
+                        });
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
