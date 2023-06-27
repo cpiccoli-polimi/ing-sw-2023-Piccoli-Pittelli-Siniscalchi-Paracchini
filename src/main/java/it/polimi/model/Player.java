@@ -32,11 +32,6 @@ public class Player implements Serializable {
         this.personalGoal=null;
         this.bookshelf=new Bookshelf();
 
-        for(int i = 0; i < getBookshelf().shelf.length; i++){
-            for(int j = 0; j < getBookshelf().shelf[i].length - 1; j++){
-                bookshelf.setShelf(new ObjectCard(1, i, j));
-            }
-        }
     }
 
 
