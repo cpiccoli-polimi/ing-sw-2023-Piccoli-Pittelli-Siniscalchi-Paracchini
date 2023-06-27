@@ -7,14 +7,8 @@ public class CommonGoalsNumberExceptionTest {
 
     @Test
     public void testDefaultConstructor() {
+        String errorMessage = "Wrong common goals number";
         CommonGoalsNumberException exception = new CommonGoalsNumberException();
-        assertNull(exception.getMessage());
-    }
-
-    @Test
-    public void testMessageConstructor() {
-        String errorMessage = "Test String";
-        CommonGoalsNumberException exception = new CommonGoalsNumberException(errorMessage);
         assertEquals(errorMessage, exception.getMessage());
     }
 }

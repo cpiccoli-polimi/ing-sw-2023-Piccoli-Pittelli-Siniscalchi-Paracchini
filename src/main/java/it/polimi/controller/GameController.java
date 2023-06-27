@@ -19,7 +19,7 @@ public class GameController implements Observer<PlayerChoice> {
 
     private synchronized void handleMessage(PlayerChoice message){
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){
-            message.getView().reportError(new NotYourTurnException("Now it's not your turn\nWait your turn"));
+            message.getView().reportError(new NotYourTurnException());
         }
         else {
             boolean b = false;
@@ -27,15 +27,17 @@ public class GameController implements Observer<PlayerChoice> {
             try {
                 String[] input = mes.split(":");
                 if(input.length == 1){
-                    message.getView().reportError(new EmptyMessageException("You can't send an empty message\nPlease retry"));
+                    message.getView().reportError(new EmptyMessageException());
                 }
                 else if (Objects.equals(input[0], "OBJECTCARDSCHOICE")) {//TODO checkMessageCorrectness
                     int j = 0;
                     ObjectCard[] chosenObjectCards = null;
                     try {
                         chosenObjectCards = convert(input[1]);
-                    } catch (EmptyTileException | NumberFormatException | CoordinateException e) {
+                    } catch (EmptyTileException | CoordinateException e) {
                         message.getView().reportError(e);
+                    } catch (NumberFormatException e){
+                        e = new NumberFormatException("You wrote the object cards coordinates in an incorrect format");
                     }
                     if (chosenObjectCards != null) {
                         try {
@@ -60,6 +62,7 @@ public class GameController implements Observer<PlayerChoice> {
                     try {
                         chosenColumn = convertColumn(input[1]);
                     } catch (NumberFormatException e) {
+                        e = new NumberFormatException("You wrote the column number in an incorrect format");
                         message.getView().reportError(e);
                     }
                     if (chosenColumn >= 0) {
@@ -86,7 +89,11 @@ public class GameController implements Observer<PlayerChoice> {
                     boolean c = false;
                     try {
                         chosenInsertionOrder = convertOrder(input[1]);
-                    } catch (NumberFormatException | OrderException e) {
+                    } catch (OrderException e) {
+                        message.getView().reportError(e);
+                    }
+                    catch(NumberFormatException e){
+                        e = new NumberFormatException("You wrote the insertion order in an incorrect format");
                         message.getView().reportError(e);
                     }
                     try {
@@ -112,7 +119,7 @@ public class GameController implements Observer<PlayerChoice> {
             }
         }
     }
-    public int [] convertOrder(String s)throws IntFormatException, OrderException {
+    public int [] convertOrder(String s)throws NumberFormatException, OrderException {
         String [] space;
         space= s.split(" ");
         int [] chosenInsertionOrder;
@@ -122,11 +129,11 @@ public class GameController implements Observer<PlayerChoice> {
         }
         return chosenInsertionOrder;
     }
-    public int convertColumn(String s) throws IntFormatException{
+    public int convertColumn(String s) throws NumberFormatException{
         int chosenColumn = Integer.parseInt(s) - 1;
         return chosenColumn;
     }
-    public ObjectCard [] convert(String s) throws EmptyTileException, IntFormatException, CoordinateException {
+    public ObjectCard [] convert(String s) throws EmptyTileException, NumberFormatException, CoordinateException {
         String [] space;
         String [] comma;
         ObjectCard [] chosenObjectCards;
@@ -138,7 +145,7 @@ public class GameController implements Observer<PlayerChoice> {
             comma=space[i].split(",");
 
             if(comma.length!=2){
-                throw new CoordinateException("Errore nelle coordinate");
+                throw new CoordinateException();
             }
 
             output[j] = comma[0];
@@ -180,7 +187,7 @@ public class GameController implements Observer<PlayerChoice> {
         }
         Player currentPlayer = model.getTable()[i];
         if(chosenInsertionOrder.length!=currentPlayer.getChosenObjects().length){
-            throw new DifferentLengthException("You have to order "+currentPlayer.getChosenObjects().length+" objects");
+            throw new DifferentLengthException();
         }
         int [] order=new int[chosenInsertionOrder.length];
         for(int k=0;k<chosenInsertionOrder.length;k++){
@@ -189,7 +196,7 @@ public class GameController implements Observer<PlayerChoice> {
         for(int k=0;k<chosenInsertionOrder.length;k++) {
             for (int o = 0; o < chosenInsertionOrder.length; o++) {
                 if (chosenInsertionOrder[k] > chosenInsertionOrder.length || chosenInsertionOrder[k]<=0) {
-                    throw new OrderException(chosenInsertionOrder[k] + " is not a valid number");
+                    throw new OrderException("Number " + chosenInsertionOrder[k] + " is not a valid insertion number");
                 }
                 if(chosenInsertionOrder[k]==order[o]){
                     order[o]=-1;
@@ -198,7 +205,7 @@ public class GameController implements Observer<PlayerChoice> {
         }
         for(int o=0;o<chosenInsertionOrder.length;o++){
             if(order[o]!=-1){
-                throw new OrderException("You have to choose different order for each object");
+                throw new OrderException("You have to choose a different insertion number for each object");
             }
         }
         return true;
@@ -217,18 +224,18 @@ public class GameController implements Observer<PlayerChoice> {
         }
         Player currentPlayer = model.getTable()[i];
         if (currentPlayer.getBookshelf().getMaxDrawableObjects() < pickedObject.length) {
-            throw new MaxDrawableObjectsException("Troppi oggetti selezionati"); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
+            throw new MaxDrawableObjectsException(); //il giocatore non ha lo spazio per poter inserire "pickedObject.lenght" tessere
         }
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
             if (model.getBoard().getTiles()[x][y].getFreeSides() == 0) {
-                throw new NoFreeSidesException("Gli oggetti devono avere almeno un lato libero");
+                throw new NoFreeSidesException();
             }
         }
         for (i = 1; i < pickedObject.length; i++) { // suppongo che gli venga passato un array con solo e soltanto le tessere scelte
             if (sortX.contains(pickedObject[i].getXCoordinate()) && sortY.contains(pickedObject[i].getYCoordinate())) {
-                throw new AlreadyPickedException("Hai selezionato lo stesso oggetto");
+                throw new AlreadyPickedException();
             } else {
                 if (!sortY.contains(pickedObject[i].getYCoordinate())) {
                     sortY.add(pickedObject[i].getYCoordinate());
@@ -244,18 +251,18 @@ public class GameController implements Observer<PlayerChoice> {
                 for (int j = 0; j < sortY.size(); j++) {
                     p = sortY.get(j);
                     if (!sortY.contains(p - 1) && !sortY.contains(p + 1)) {
-                        throw new NoAdjacentException("Oggetti non adiacenti");
+                        throw new NoAdjacentException();
                     }
                 }
             } else if (sortY.size() == 1 && sortX.size() == pickedObject.length) {// le tessere sono state scelte su una linea verticale
                 for (int k = 0; k < sortX.size(); k++) {
                     p = sortX.get(k);
                     if (!sortX.contains(p - 1) && !sortX.contains(p + 1)) {
-                        throw new NoAdjacentException("Oggetti non adiacenti");
+                        throw new NoAdjacentException();
                     }
                 }
             } else {
-                throw new NoStraightLineException("Gli oggetti devono essere in linea retta");
+                throw new NoStraightLineException();
             }
         }
 
@@ -288,8 +295,8 @@ public class GameController implements Observer<PlayerChoice> {
         }
         Player currentPlayer = model.getTable()[i];
 
-        if(column<0 || column>currentPlayer.getBookshelf().getShelf()[0].length){
-            throw new OutOfBookshelfException("Fuori dalla libreria");
+        if(column<0 || column>=currentPlayer.getBookshelf().getShelf()[0].length){
+            throw new OutOfBookshelfException("The column you have selected doesn't exists");
         }
         // Get chosen column and counter of empty slot for checking
         //int column = table[currentPlayer].getChosenColumn();
@@ -305,7 +312,7 @@ public class GameController implements Observer<PlayerChoice> {
             }
         }
         // Set a error trigger for insufficient space 
-        if (nullCounter < size) { throw new OutOfBookshelfException("Fuori dalla bookshelf"); }
+        if (nullCounter < size) { throw new OutOfBookshelfException("The column you have selected doesn't have enough empty cells for all the object cards you chose"); }
         return true;
 
     }

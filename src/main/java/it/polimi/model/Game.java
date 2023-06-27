@@ -47,13 +47,13 @@ public class Game extends Observable<GameView>{
             this.playersNumber = playersNumber;
         }
         else{
-            throw new PlayersNumberException("Wrong players number");
+            throw new PlayersNumberException();
         }
         if(commonGoalsNumber == 1 || commonGoalsNumber == 2){
             this.commonGoalsNumber = commonGoalsNumber;
         }
         else{
-            throw new CommonGoalsNumberException("Wrong common goals number");
+            throw new CommonGoalsNumberException();
         }
         this.table = new Player[playersNumber];
         this.board = new LivingRoomBoard(commonGoalsNumber);
