@@ -36,6 +36,7 @@ public class CardsBag {
         }
     }
 
+    public int getSize(){ return cards.size();}
     public int getCard(){
         return cards.remove(0);
     }
