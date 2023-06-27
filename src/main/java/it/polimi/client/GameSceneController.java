@@ -196,7 +196,7 @@ public class GameSceneController{
         myText.setFont(new Font("Arial Bold", 20));
 
         myBookshelfItemsPane.setPrefWidth(myPane.getPrefWidth()*0.75);
-        myBookshelfItemsPane.setPrefHeight(myPane.getPrefHeight()*0.78);
+        myBookshelfItemsPane.setPrefHeight(myPane.getPrefHeight()*0.77);
         myBookshelfItemsPane.setMinWidth(myBookshelfItemsPane.getPrefWidth());
         myBookshelfItemsPane.setMinHeight(myBookshelfItemsPane.getPrefHeight());
         myBookshelfItemsPane.setMaxWidth(myBookshelfItemsPane.getPrefWidth());
@@ -208,10 +208,9 @@ public class GameSceneController{
         myBookshelfImage.setFitWidth(myPane.getPrefWidth());
         myBookshelfImage.setFitHeight(myPane.getPrefHeight()*0.95);
         myBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", myBookshelfImage.getFitWidth(), myBookshelfImage.getFitHeight(), true, false));
-        myBookshelfImage.setScaleY(1.01);
 
-        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.75);
-        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.78);
+        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.74);
+        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.77);
         columnSelectionPane.setMinWidth(columnSelectionPane.getPrefWidth());
         columnSelectionPane.setMinHeight(columnSelectionPane.getPrefHeight());
         columnSelectionPane.setMaxWidth(columnSelectionPane.getPrefWidth());
@@ -458,7 +457,6 @@ public class GameSceneController{
         opponentBookshelfImage.setFitWidth(opponentPane.getPrefWidth());
         opponentBookshelfImage.setFitHeight(opponentPane.getPrefHeight()*0.90);
         opponentBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", opponentBookshelfImage.getFitWidth(), opponentBookshelfImage.getFitHeight(), true, false));
-        opponentBookshelfImage.setScaleY(1.0);
 
         opponentFirstChairToken.setFitWidth(opponentPane.getPrefWidth()*0.15);
         opponentFirstChairToken.setFitHeight(opponentPane.getPrefHeight()*0.15);
