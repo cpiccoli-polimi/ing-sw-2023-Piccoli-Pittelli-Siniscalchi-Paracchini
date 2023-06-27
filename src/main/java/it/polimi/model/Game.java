@@ -420,7 +420,7 @@ public class Game extends Observable<GameView>{
         }
     }
 
-    private void updateBoard() {
+    public void updateBoard() {
         LivingRoomBoard board = this.getBoard();
         Tile[][] tiles = board.getTiles();
         boolean free = true;

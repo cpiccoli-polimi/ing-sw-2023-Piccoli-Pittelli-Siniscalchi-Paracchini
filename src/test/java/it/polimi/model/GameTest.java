@@ -859,6 +859,40 @@ class GameTest {
     }
 
     @Test
+    public void repopulateBoardTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        Game game = new Game(4,1);
+        LivingRoomBoard board = game.getBoard();
+        Tile[][] tiles = board.getTiles();
+        // Simulate each tile with 4 free sides to force board repopulation
+        for(int i = 0; i < tiles.length; i++) {
+            for(int j = 0; j < tiles[i].length; j++) {
+                if(game.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
+                    tiles[i][j].setFreeSides(4);
+                }
+            }
+        }
+        game.updateBoard();
+        //Test 5 casual tiles to check if the board has been populated
+        assertNotEquals(null,game.getBoard().getTiles()[1][3]);
+        assertNotEquals(null,game.getBoard().getTiles()[2][3]);
+        assertNotEquals(null,game.getBoard().getTiles()[3][4]);
+        assertNotEquals(null,game.getBoard().getTiles()[4][1]);
+        assertNotEquals(null,game.getBoard().getTiles()[5][5]);
+        //Test if those 5 casual tiles have less than 4 free sides
+        boolean freeSides1 = (game.getBoard().getTiles()[1][3].getFreeSides() == 4);
+        assertFalse(freeSides1);
+        boolean freeSides2 = (game.getBoard().getTiles()[2][3].getFreeSides() == 4);
+        assertFalse(freeSides2);
+        boolean freeSides3 = (game.getBoard().getTiles()[3][4].getFreeSides() == 4);
+        assertFalse(freeSides3);
+        boolean freeSides4 = (game.getBoard().getTiles()[4][1].getFreeSides() == 4);
+        assertFalse(freeSides4);
+        boolean freeSides5 = (game.getBoard().getTiles()[5][5].getFreeSides() == 4);
+        assertFalse(freeSides5);
+
+    }
+
+    @Test
     public void insertInOrderTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
         Game game = new Game(4,1);
         Player player1 = new Player("1",1);
