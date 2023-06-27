@@ -851,11 +851,14 @@ class GameTest {
         game.setTable(player3,2);
         game.setTable(player4,3);
         game.setCurrentPlayer(1);
+        List<PointCard> points = new ArrayList<>();
+        points.add(new PointCard(Value.eight, RomanNumeral.II));
+        points.add(new PointCard(Value.four, RomanNumeral.II));
         CommonGoalCard1 cm1 = new CommonGoalCard1(4);
+        cm1.setPoints(points);
         game.setupCommonGoals();
         game.updateCommonGoals(cm1);
-        assertEquals(2,game.getTable()[1].getPoints());
-        //TODO: da modificare
+        assertEquals(8,game.getTable()[0].getPoints());
     }
 
     @Test
