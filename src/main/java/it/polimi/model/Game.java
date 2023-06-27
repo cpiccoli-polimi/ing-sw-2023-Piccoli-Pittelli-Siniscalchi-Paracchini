@@ -273,9 +273,6 @@ public class Game extends Observable<GameView>{
             }
         }
     }
-    public int getId(){
-        return id;
-    }
     public boolean getDone() {
         return done;
     }
