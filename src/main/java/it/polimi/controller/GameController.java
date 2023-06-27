@@ -17,7 +17,7 @@ public class GameController implements Observer<PlayerChoice> {
         handleMessage(message);
     }
 
-    private synchronized void handleMessage(PlayerChoice message){
+    protected synchronized void handleMessage(PlayerChoice message){
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){
             message.getView().reportError(new NotYourTurnException());
         }
@@ -65,25 +65,22 @@ public class GameController implements Observer<PlayerChoice> {
                         e = new NumberFormatException("You wrote the column number in an incorrect format");
                         message.getView().reportError(e);
                     }
-                    if (chosenColumn >= 0) {
-                        try {
-                            b = checkChosenColumn(chosenColumn);
-                        } catch (OutOfBookshelfException e) {
-                            message.getView().reportError(e);
-                        }
-                        if (b == true) {
-                            int i = 0;
-                            while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
-                                i += 1;
-                            }
-                            Player currentPlayer = model.getTable()[i];
-                            currentPlayer.setChosenColumn(chosenColumn);
-                            String turnPlayerMessage = "In which order do you want to insert the cards in that bookshelf column?";
-                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
-                            model.handleTurn(turnPlayerMessage, otherPlayersMessage);
-                        }
+                    try {
+                        b = checkChosenColumn(chosenColumn);
+                    } catch (OutOfBookshelfException e) {
+                        message.getView().reportError(e);
                     }
-
+                    if (b == true) {
+                        int i = 0;
+                        while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
+                            i += 1;
+                        }
+                        Player currentPlayer = model.getTable()[i];
+                        currentPlayer.setChosenColumn(chosenColumn);
+                        String turnPlayerMessage = "In which order do you want to insert the cards in that bookshelf column?";
+                        String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
+                        model.handleTurn(turnPlayerMessage, otherPlayersMessage);
+                    }
                 } else if (Objects.equals(input[0], "INSERTIONORDERCHOICE")) {
                     int[] chosenInsertionOrder = null;
                     boolean c = false;
@@ -294,7 +291,6 @@ public class GameController implements Observer<PlayerChoice> {
             i += 1;
         }
         Player currentPlayer = model.getTable()[i];
-
         if(column<0 || column>=currentPlayer.getBookshelf().getShelf()[0].length){
             throw new OutOfBookshelfException("The column you have selected doesn't exists");
         }
