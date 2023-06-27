@@ -140,7 +140,7 @@ public class Server {
             }
             Player currentPlayer = model.getTable()[i];
             String turnPlayerMessage = new String("Choose up to 3 object cards from the board that you want to put in a column of your own library");
-            String otherPlayersMessage = new String("Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn");
+            String otherPlayersMessage = new String("Now it's " + currentPlayer.getNickname() + "'s turn\nWait your turn");
             for(Player player : model.getTable()){
                 clientConnections.get(player).asyncSend(new GameView(model, turnPlayerMessage, otherPlayersMessage));
             }

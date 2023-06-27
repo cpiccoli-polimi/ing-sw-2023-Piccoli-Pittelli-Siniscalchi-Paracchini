@@ -1,15 +1,9 @@
 package it.polimi.client;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
@@ -20,11 +14,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.Stack;
 
 public class WelcomeSceneController{
 
@@ -53,10 +42,8 @@ public class WelcomeSceneController{
         welcomePane.setBackground(new Background(new BackgroundImage(new Image("/GraphicalResources/Miscellaneous/parquetBackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, false))));
         welcomePane.setAlignment(titleImage, Pos.TOP_CENTER);
         welcomePane.setAlignment(messageTextPane, Pos.CENTER);
-        welcomePane.setAlignment(playerTextField, Pos.CENTER);
         welcomePane.setMargin(titleImage, new Insets(welcomePane.getPrefHeight()*0.10, 0, 0, 0));
         welcomePane.setMargin(messageTextPane, new Insets(0, 0, welcomePane.getPrefHeight()*0.30, 0));
-        welcomePane.setMargin(playerTextField, new Insets(0, 0, welcomePane.getPrefHeight()*0.20, 0));
 
         titleImage.setFitWidth(welcomePane.getPrefWidth()*0.50);
         titleImage.setFitHeight(welcomePane.getPrefHeight()*0.20);
@@ -90,13 +77,23 @@ public class WelcomeSceneController{
         separator.setOrientation(Orientation.HORIZONTAL);
         separator.setVisible(false);
 
-        confirmButton.setPrefWidth(welcomePane.getPrefWidth()*0.04);
-        confirmButton.setPrefHeight(welcomePane.getPrefHeight()*0.025);
+        confirmButton.setPrefWidth(welcomePane.getPrefWidth()*0.02);
+        confirmButton.setPrefHeight(confirmButton.getPrefWidth());
         confirmButton.setMinWidth(confirmButton.getPrefWidth());
         confirmButton.setMinHeight(confirmButton.getPrefHeight());
         confirmButton.setMaxWidth(confirmButton.getPrefWidth());
         confirmButton.setMaxHeight(confirmButton.getPrefHeight());
-        confirmButton.setText("confirm");
+        confirmButton.setText(null);
+        confirmButton.setBackground(null);
+        confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+
+        confirmButton.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+            if (pressed) {
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+            } else {
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+            }
+        });
     }
 
     public void showMessage(String message){

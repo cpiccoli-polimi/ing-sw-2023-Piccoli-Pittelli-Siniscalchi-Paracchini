@@ -417,11 +417,11 @@ public class Game extends Observable<GameView>{
         }
         else{
             String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
-            String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn";
+            String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn\nWait your turn";
             handleTurn(turnPlayerMessage, otherPlayersMessage);
         }
         /*String turnPlayerMessage = "Choose up to 3 object cards from the board that you want to put in a column of your own library";;
-        String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn. Wait your turn";
+        String otherPlayersMessage = "Now it's " + currentPlayer.getNickname() + "'s turn\nWait your turn";
         handleTurn(turnPlayerMessage, otherPlayersMessage);*/
     }
 

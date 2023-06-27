@@ -1,11 +1,8 @@
 package it.polimi.client;
 
 import it.polimi.model.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.*;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -237,7 +234,7 @@ public class GameSceneController{
         messagePane.setMaxHeight(messagePane.getPrefHeight());
         messagePane.setOrientation(Orientation.HORIZONTAL);
 
-        messageTextPane.setPrefWidth(messagePane.getPrefWidth()*0.93);
+        messageTextPane.setPrefWidth(messagePane.getPrefWidth()*0.95);
         messageTextPane.setPrefHeight(messagePane.getPrefHeight());
         messageTextPane.setMinWidth(messageTextPane.getPrefWidth());
         messageTextPane.setMinHeight(messageTextPane.getPrefHeight());
@@ -245,7 +242,7 @@ public class GameSceneController{
         messageTextPane.setMaxHeight(messageTextPane.getPrefHeight());
         messageTextPane.setBackground(new Background(new BackgroundFill(Color.CORNSILK, null, null)));
         messageTextPane.setTextAlignment(TextAlignment.LEFT);
-        messageTextPane.setPadding(new Insets(messageTextPane.getPrefHeight()*0.20));
+        messageTextPane.setPadding(new Insets(0, messageTextPane.getPrefWidth()*0.0075, 0, messageTextPane.getPrefWidth()*0.0075));
 
         Rectangle messagePaneShape = new Rectangle(messageTextPane.getPrefWidth(), messageTextPane.getPrefHeight());
         messagePaneShape.setArcWidth(30);
@@ -264,13 +261,23 @@ public class GameSceneController{
         separator.setOrientation(Orientation.HORIZONTAL);
         separator.setVisible(false);
 
-        confirmButton.setPrefWidth(messagePane.getPrefWidth()*0.05);
-        confirmButton.setPrefHeight(messagePane.getPrefHeight()*0.90);
+        confirmButton.setPrefWidth(confirmButton.getPrefHeight());
+        confirmButton.setPrefHeight(messageTextPane.getPrefHeight() * 0.50);
         confirmButton.setMinWidth(confirmButton.getPrefWidth());
         confirmButton.setMinHeight(confirmButton.getPrefHeight());
         confirmButton.setMaxWidth(confirmButton.getPrefWidth());
         confirmButton.setMaxHeight(confirmButton.getPrefHeight());
-        confirmButton.setText("confirm");
+        confirmButton.setText(null);
+        confirmButton.setBackground(null);
+        confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+
+        confirmButton.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+            if (pressed) {
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+            } else {
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+            }
+        });
 
         Rectangle confirmButtonShape = new Rectangle(confirmButton.getPrefWidth(), confirmButton.getPrefHeight());
         confirmButtonShape.setArcWidth(30);
@@ -499,14 +506,20 @@ public class GameSceneController{
         char squareCharacter = 9632;
 
         if(message.startsWith("Choose up to 3")){
+            message = "\n" + message;
             message = message + "\nTo choose an object card you have to click on it" +
-                    "\nClick the confirm button on the right when you have chosen all the cards you want to remove from the board";
+                    "\nClick the confirm button on the right when you have chosen all the cards you want to remove from the board\n";
         }
         else if(message.startsWith("In which bookshelf column")){
+            message = "\n" + message;
             message = message + "\nTo choose a column you have to click on it" +
-                    "\nClick the confirm button on the right when you have chosen the column";
+                    "\nClick the confirm button on the right when you have chosen the column\n";
+        }
+        else{
+            message = "\n" + message + "\n";
         }
 
+        messageText.setFont(new Font("Arial", (messageTextPane.getPrefHeight() / (message.lines().count() + 2))));
         messageText.setText(message);
     }
     public void showLeaderboard(Player[] leaderboard){

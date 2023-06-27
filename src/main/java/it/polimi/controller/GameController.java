@@ -19,7 +19,7 @@ public class GameController implements Observer<PlayerChoice> {
 
     private synchronized void handleMessage(PlayerChoice message){
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){
-            message.getView().reportError(new NotYourTurnException("Now it's not your turn. Wait your turn"));
+            message.getView().reportError(new NotYourTurnException("Now it's not your turn\nWait your turn"));
         }
         else {
             boolean b = false;
@@ -47,7 +47,7 @@ public class GameController implements Observer<PlayerChoice> {
                         if (b == true) {
                             savePickedObject(chosenObjectCards);
                             String turnPlayerMessage = "In which bookshelf column do you want to insert those cards?";
-                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn. Wait your turn";
+                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
                             model.handleTurn(turnPlayerMessage, otherPlayersMessage);
                         } else {
                             System.out.println("Oggetti non salvati");
@@ -76,7 +76,7 @@ public class GameController implements Observer<PlayerChoice> {
                             Player currentPlayer = model.getTable()[i];
                             currentPlayer.setChosenColumn(chosenColumn);
                             String turnPlayerMessage = "In which order do you want to insert the cards in that bookshelf column?";
-                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn. Wait your turn";
+                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
                             model.handleTurn(turnPlayerMessage, otherPlayersMessage);
                         }
                     }
