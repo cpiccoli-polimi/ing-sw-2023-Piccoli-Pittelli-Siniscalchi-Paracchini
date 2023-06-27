@@ -34,6 +34,11 @@ public class Server {
         this.serverSocket = new ServerSocket(PORT);
     };
     public void deregisterConnection(ClientConnection c){
+        for(String nickname : waitingConnection.keySet()){
+            if(waitingConnection.get(nickname) == c){
+                waitingConnection.remove(nickname);
+            }
+        }
         for(Player player : clientConnections.keySet()){
             if(clientConnections.get(player) == c){
                 clientConnections.remove(player);
@@ -47,9 +52,14 @@ public class Server {
             ClientConnection connection = waitingConnection.get(keys.get(i));
             connection.asyncSend("Connected user: " + keys.get(i));
         }*/
-        while(waitingConnection.containsKey(nickname) == true){
+        while(waitingConnection.containsKey(nickname) == true || nickname.isBlank()){
             try{
-                c.asyncSend("A player with your same nickname is already present in this game. Please try submitting a different nickname");
+                if(waitingConnection.containsKey(nickname) == true){
+                    c.asyncSend("A player with your same nickname is already present in this game\nPlease try submitting a different nickname");
+                }
+                else if(nickname.isBlank()){
+                    c.asyncSend("A player nickname can't be blank\nPlease try submitting a nickname");
+                }
                 Scanner in = new Scanner(socket.getInputStream());
                 nickname = in.nextLine();
             }
