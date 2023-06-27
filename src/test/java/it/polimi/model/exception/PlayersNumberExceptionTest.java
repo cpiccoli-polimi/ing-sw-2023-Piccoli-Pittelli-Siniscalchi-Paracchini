@@ -7,14 +7,8 @@ public class PlayersNumberExceptionTest {
 
     @Test
     public void testDefaultConstructor() {
+        String errorMessage = "Wrong players number";
         PlayersNumberException exception = new PlayersNumberException();
-        assertNull(exception.getMessage());
-    }
-
-    @Test
-    public void testMessageConstructor() {
-        String errorMessage = "Test String";
-        PlayersNumberException exception = new PlayersNumberException(errorMessage);
         assertEquals(errorMessage, exception.getMessage());
     }
 }

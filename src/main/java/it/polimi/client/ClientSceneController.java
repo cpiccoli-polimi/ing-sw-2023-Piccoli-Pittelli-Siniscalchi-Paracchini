@@ -1,5 +1,6 @@
 package it.polimi.client;
 
+import it.polimi.controller.exception.NotYourTurnException;
 import it.polimi.model.GameView;
 import it.polimi.model.ObjectCard;
 import it.polimi.model.Player;
@@ -78,7 +79,11 @@ public class ClientSceneController {
                             showGameScene((GameView) inputObject, ((GameView) inputObject).getLeaderboard()[0] != null);
                         }
                         else if(inputObject instanceof Exception){
-                            showMessage(((Exception) inputObject).getMessage());
+                            String exceptionMessage = new String(((Exception) inputObject).getMessage());
+                            if(inputObject instanceof NotYourTurnException == false){
+                                exceptionMessage = exceptionMessage + "\nPlease retry";
+                            }
+                            showMessage(exceptionMessage);
                         }
                     }
                 }
