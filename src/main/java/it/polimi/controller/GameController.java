@@ -26,7 +26,10 @@ public class GameController implements Observer<PlayerChoice> {
             String mes = message.getMessage();
             try {
                 String[] input = mes.split(":");
-                if (Objects.equals(input[0], "OBJECTCARDSCHOICE")) {//TODO checkMessageCorrectness
+                if(input.length == 1){
+                    message.getView().reportError(new EmptyMessageException("You can't send an empty message\nPlease retry"));
+                }
+                else if (Objects.equals(input[0], "OBJECTCARDSCHOICE")) {//TODO checkMessageCorrectness
                     int j = 0;
                     ObjectCard[] chosenObjectCards = null;
                     try {
