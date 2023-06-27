@@ -10,8 +10,8 @@ public class CommonGoalCard5 extends CommonGoalCard {
     public boolean check(ObjectCard[][] bookshelf) {
         boolean flag = false;
         int count = 0;
-        int maxrow = bookshelf.length;
-        int maxcol = bookshelf[0].length;
+        int maxrow = bookshelf.length-1;
+        int maxcol = bookshelf[0].length-1;
         // Create an array to track already counted object
         // Array has [xCoordinate][yCoordinate] of counted tiles
         // It is initialized to -1 in every cell
