@@ -384,6 +384,9 @@ public class Game extends Observable<GameView>{
         Bookshelf bookshelf = currentPlayer.getBookshelf();
         if(bookshelf.isFull()){
             this.setDone(true);
+            if(endGamePoints > 0){
+                currentPlayer.setHasFinished(true);
+            }
             currentPlayer.setPoints(currentPlayer.getPoints()+endGamePoints);
             endGamePoints=0;
         }

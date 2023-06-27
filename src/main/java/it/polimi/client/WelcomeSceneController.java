@@ -85,13 +85,13 @@ public class WelcomeSceneController{
         confirmButton.setMaxHeight(confirmButton.getPrefHeight());
         confirmButton.setText(null);
         confirmButton.setBackground(null);
-        confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+        confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, true)));
 
         confirmButton.pressedProperty().addListener((observable, wasPressed, pressed) -> {
             if (pressed) {
-                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, true)));
             } else {
-                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, true)));
             }
         });
     }
