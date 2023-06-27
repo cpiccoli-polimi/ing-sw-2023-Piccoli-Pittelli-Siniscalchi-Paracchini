@@ -268,13 +268,13 @@ public class GameSceneController{
         confirmButton.setMaxHeight(confirmButton.getPrefHeight());
         confirmButton.setText(null);
         confirmButton.setBackground(null);
-        confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+        confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, true)));
 
         confirmButton.pressedProperty().addListener((observable, wasPressed, pressed) -> {
             if (pressed) {
-                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, true)));
             } else {
-                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, true)));
             }
         });
 
@@ -397,9 +397,11 @@ public class GameSceneController{
 
         if(player.getHasFinished() == true){
             endGameToken.setVisible(true);
+            this.endGameToken.setVisible(false);
         }
         else{
             endGameToken.setVisible(false);
+            this.endGameToken.setVisible(true);
         }
 
     }
@@ -476,9 +478,11 @@ public class GameSceneController{
 
         if(opponent.getHasFinished() == true){
             opponentEndGameToken.setVisible(true);
+            this.endGameToken.setVisible(false);
         }
         else{
             opponentEndGameToken.setVisible(false);
+            this.endGameToken.setVisible(true);
         }
 
     }

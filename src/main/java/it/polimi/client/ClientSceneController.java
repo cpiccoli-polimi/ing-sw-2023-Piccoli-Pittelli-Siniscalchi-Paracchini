@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +21,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.Socket;
@@ -292,6 +295,7 @@ public class ClientSceneController {
                                 pane.setMinHeight(pane.getPrefHeight());
                                 pane.setMaxWidth(pane.getPrefWidth());
                                 pane.setMaxHeight(pane.getPrefHeight());
+                                pane.setAlignment(Pos.CENTER);
 
                                 i += 1;
                                 gameSceneController.messagePane.getChildren().add(i, pane);
@@ -300,29 +304,37 @@ public class ClientSceneController {
                                 cardPath = cardPath + card.getType().toString().toLowerCase() + ".png";
 
                                 ImageView cardImage = new ImageView();
-                                cardImage.setFitHeight(pane.getPrefHeight() * 0.79);
+                                cardImage.setFitHeight(pane.getPrefHeight() * 0.73);
                                 cardImage.setFitWidth(cardImage.getFitHeight());
                                 cardImage.setImage(new Image(cardPath, cardImage.getFitWidth(), cardImage.getFitHeight(), true, false));
 
                                 ToggleGroup toggleGroup = new ToggleGroup();
 
                                 HBox buttonPane = new HBox();
-                                buttonPane.setPrefWidth(pane.getPrefHeight() * 0.79);
-                                buttonPane.setPrefHeight(pane.getPrefHeight() * 0.19);
+                                buttonPane.setPrefWidth(pane.getPrefWidth());
+                                buttonPane.setPrefHeight(pane.getPrefHeight() * 0.25);
                                 buttonPane.setMinWidth(buttonPane.getPrefWidth());
                                 buttonPane.setMinHeight(buttonPane.getPrefHeight());
                                 buttonPane.setMaxWidth(buttonPane.getPrefWidth());
                                 buttonPane.setMaxHeight(buttonPane.getPrefHeight());
-                                buttonPane.setSpacing(buttonPane.getPrefWidth()*0.10);
+                                buttonPane.setSpacing(buttonPane.getPrefWidth()*0.05);
 
                                 for(int j = 1; j < myPlayer.getChosenObjects().length + 1; j++){
-                                    RadioButton button = new RadioButton(String.valueOf(j));
-                                    button.setPrefWidth((buttonPane.getPrefWidth() - (buttonPane.getSpacing() * (myPlayer.getChosenObjects().length - 1))) / myPlayer.getChosenObjects().length);
+                                    ToggleButton button = new ToggleButton(String.valueOf(j));
+                                    button.setPrefWidth((cardImage.getFitWidth() - (buttonPane.getSpacing() * (myPlayer.getChosenObjects().length - 1)) ) / myPlayer.getChosenObjects().length);
                                     button.setPrefHeight(buttonPane.getPrefHeight());
                                     button.setMinWidth(button.getPrefWidth());
                                     button.setMinHeight(button.getPrefHeight());
                                     button.setMaxWidth(button.getPrefWidth());
                                     button.setMaxHeight(button.getPrefHeight());
+                                    button.setTextAlignment(TextAlignment.CENTER);
+
+                                    if(button.getPrefHeight() > button.getPrefWidth()){
+                                        button.setFont(new Font("Arial", button.getPrefWidth() * 0.50));
+                                    }
+                                    else{
+                                        button.setFont(new Font("Arial", button.getPrefHeight() * 0.50));
+                                    }
                                     button.setToggleGroup(toggleGroup);
 
                                     buttonPane.getChildren().add(button);
@@ -343,8 +355,8 @@ public class ClientSceneController {
                                         FlowPane pane = (FlowPane) gameSceneController.messagePane.getChildren().get(2 * i);
                                         HBox buttonPane = (HBox) pane.getChildren().get(1);
                                         for(Node child : buttonPane.getChildren()){
-                                            if(((RadioButton)child).isSelected()){
-                                                message = message + ((RadioButton)child).getText() + " ";
+                                            if(((ToggleButton)child).isSelected()){
+                                                message = message + ((ToggleButton)child).getText() + " ";
                                             }
                                         }
                                     }
