@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -109,6 +111,18 @@ public class ClientSceneController {
                         root = fxmlLoader.load();
                         stage = (Stage) activePane.getScene().getWindow();
                         scene = new Scene(root, clientPane.getPrefWidth(), clientPane.getPrefHeight());
+
+                        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                            @Override
+                            public void handle(KeyEvent event) {
+                                String message = new String(welcomeSceneController.getMessage());
+                                if(event.getCode().equals(KeyCode.ENTER)) {
+                                    socketOut.println(message);
+                                    socketOut.flush();
+                                }
+                            }
+                        });
+
                         stage.setScene(scene);
                         welcomeSceneController = fxmlLoader.getController();
                         welcomeSceneController.showScene(scene.getWidth(), scene.getHeight());
