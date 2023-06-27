@@ -35,10 +35,10 @@ public class WelcomeSceneController{
     public void showScene(double sceneWidth, double sceneHeight) {
         welcomePane.setPrefWidth(sceneWidth);
         welcomePane.setPrefHeight(sceneHeight);
-        welcomePane.setMinWidth(welcomePane.getPrefWidth());
+        /*welcomePane.setMinWidth(welcomePane.getPrefWidth());
         welcomePane.setMinHeight(welcomePane.getPrefHeight());
         welcomePane.setMaxWidth(welcomePane.getPrefWidth());
-        welcomePane.setMaxHeight(welcomePane.getPrefHeight());
+        welcomePane.setMaxHeight(welcomePane.getPrefHeight());*/
         welcomePane.setBackground(new Background(new BackgroundImage(new Image("/GraphicalResources/Miscellaneous/parquetBackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, false))));
         welcomePane.setAlignment(titleImage, Pos.TOP_CENTER);
         welcomePane.setAlignment(messageTextPane, Pos.CENTER);
@@ -52,9 +52,9 @@ public class WelcomeSceneController{
 
         messageTextPane.setPrefWidth(welcomePane.getPrefWidth()*0.50);
         messageTextPane.setPrefHeight(welcomePane.getPrefHeight()*0.025);
-        messageTextPane.setMinWidth(messageTextPane.getPrefWidth());
+        /*messageTextPane.setMinWidth(messageTextPane.getPrefWidth());
         messageTextPane.setMinHeight(messageTextPane.getPrefHeight());
-        messageTextPane.setMaxWidth(messageTextPane.getPrefWidth());
+        messageTextPane.setMaxWidth(messageTextPane.getPrefWidth());*/
         messageTextPane.setMaxHeight(messageTextPane.getPrefHeight());
         messageTextPane.setTextAlignment(TextAlignment.CENTER);
 
@@ -63,26 +63,26 @@ public class WelcomeSceneController{
 
         playerTextField.setPrefWidth(welcomePane.getPrefWidth()*0.20);
         playerTextField.setPrefHeight(welcomePane.getPrefHeight()*0.025);
-        playerTextField.setMinWidth(playerTextField.getPrefWidth());
+        /*playerTextField.setMinWidth(playerTextField.getPrefWidth());
         playerTextField.setMinHeight(playerTextField.getPrefHeight());
         playerTextField.setMaxWidth(playerTextField.getPrefWidth());
-        playerTextField.setMaxHeight(playerTextField.getPrefHeight());
+        playerTextField.setMaxHeight(playerTextField.getPrefHeight());*/
 
         separator.setPrefWidth(welcomePane.getPrefWidth()*0.005);
         separator.setPrefHeight(welcomePane.getPrefHeight()*0.025);
-        separator.setMinWidth(separator.getPrefWidth());
+        /*separator.setMinWidth(separator.getPrefWidth());
         separator.setMinHeight(separator.getPrefHeight());
         separator.setMaxWidth(separator.getPrefWidth());
-        separator.setMaxHeight(separator.getPrefHeight());
+        separator.setMaxHeight(separator.getPrefHeight());*/
         separator.setOrientation(Orientation.HORIZONTAL);
         separator.setVisible(false);
 
         confirmButton.setPrefWidth(welcomePane.getPrefWidth()*0.02);
         confirmButton.setPrefHeight(confirmButton.getPrefWidth());
-        confirmButton.setMinWidth(confirmButton.getPrefWidth());
+        /*confirmButton.setMinWidth(confirmButton.getPrefWidth());
         confirmButton.setMinHeight(confirmButton.getPrefHeight());
         confirmButton.setMaxWidth(confirmButton.getPrefWidth());
-        confirmButton.setMaxHeight(confirmButton.getPrefHeight());
+        confirmButton.setMaxHeight(confirmButton.getPrefHeight());*/
         confirmButton.setText(null);
         confirmButton.setBackground(null);
         confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, true)));
