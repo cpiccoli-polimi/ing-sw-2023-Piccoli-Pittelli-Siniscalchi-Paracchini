@@ -173,7 +173,7 @@ public class GameController implements Observer<PlayerChoice> {
         model.setupPersonalGoals();
         model.setupFirstPlayer();
     }
-    private boolean checkOrder(int [] chosenInsertionOrder) throws DifferentLengthException, OrderException{
+    protected boolean checkOrder(int [] chosenInsertionOrder) throws DifferentLengthException, OrderException{
         int i = 0;
         while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
             i += 1;
@@ -203,7 +203,7 @@ public class GameController implements Observer<PlayerChoice> {
         }
         return true;
     }
-    private boolean checkPickedObject(ObjectCard [] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
+    protected boolean checkPickedObject(ObjectCard[] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
         int x;
         int y;
         int i = 0;
@@ -281,7 +281,7 @@ public class GameController implements Observer<PlayerChoice> {
     }
 
 
-    private boolean checkChosenColumn(int column) throws OutOfBookshelfException {
+    protected boolean checkChosenColumn(int column) throws OutOfBookshelfException {
         int i = 0;
         while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
             i += 1;

@@ -47,6 +47,7 @@ public class Player implements Serializable {
     }
     public void setPoints(int points){
         this.points=points;
+        System.out.println(getNickname()+": "+points);
     }
 
     public boolean getIsFirst(){ return isFirst;}
@@ -163,6 +164,7 @@ public class Player implements Serializable {
     }
 
     public void countAdjacentItemsPoints() {
+        int p=0;
         // Get bookshelf
         ObjectCard[][] shelf = bookshelf.getShelf();
         // Create hashmap to track which types has already been counted
@@ -313,16 +315,24 @@ public class Player implements Serializable {
         for (int adjacentPoints : countedTypes.values()) {
             // Add points based on how many adjacent points had been made
             if(adjacentPoints == 3){
-                points += 2;
+                p=getPoints();
+                setPoints(p+2);
+                //points += 2;
             }
             else if(adjacentPoints == 4){
-                points += 3;
+                p=getPoints();
+                setPoints(p+3);
+                //points += 3;
             }
             else if(adjacentPoints == 5){
-                points += 5;
+                p=getPoints();
+                setPoints(p+5);
+                //points += 5;
             }
             else if(adjacentPoints >= 6){
-                points += 8;
+                p=getPoints();
+                setPoints(p+8);
+                //points += 8;
             }
         }
     }

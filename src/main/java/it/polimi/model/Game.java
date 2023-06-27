@@ -390,7 +390,11 @@ public class Game extends Observable<GameView>{
             currentPlayer.setPoints(currentPlayer.getPoints()+endGamePoints);
             endGamePoints=0;
         }
-        updateBoard();
+        if(this.getBag().getSize()!=0) {
+            updateBoard();
+        }
+
+
         for(i=0;i<board.getCommonGoals().length;i++) {
             for (int j = 0; j < board.getCommonGoals().length; j++) {
                 if (currentPlayer.getCommonGoalsCompleted()[j] == board.getCommonGoals()[i].getGoalID()) {
@@ -404,6 +408,19 @@ public class Game extends Observable<GameView>{
             }
             b = true;
         }
+        boolean flag=false;
+        for(int k=0;k<getBoard().getTiles().length;k++){
+            for(int j=0;j<getBoard().getTiles()[0].length;j++){
+                if(getBoard().getTiles()[k][j]!=null){
+                    flag=true;
+                }
+            }
+        }
+        if (flag == false) {
+            DeclareWinner();
+            handleTurn("","");
+        }
+
         nextTurn();
         i = 0;
         while(this.table[i].getPosition() != this.currentPlayer){
@@ -412,7 +429,6 @@ public class Game extends Observable<GameView>{
         currentPlayer = this.table[i];
 
         if(getDone() == true && currentPlayer.getIsFirst() == true){
-            System.out.println("DAJE");
             DeclareWinner();
             handleTurn("", "");
         }
@@ -423,7 +439,7 @@ public class Game extends Observable<GameView>{
         }
     }
 
-    private void updateBoard() {
+    public void updateBoard() {
         LivingRoomBoard board = this.getBoard();
         Tile[][] tiles = board.getTiles();
         boolean free = true;
@@ -438,7 +454,6 @@ public class Game extends Observable<GameView>{
                 }
             }
         }
-        System.out.println(free);
         // Repopulate the board
         if (free) {
             CardsBag bag = this.getBag();
@@ -447,9 +462,11 @@ public class Game extends Observable<GameView>{
                 for(int j = 0; j < tiles[i].length; j++){
                     if(tiles[i][j].getMinPlayers() <= this.getPlayersNumber()){
                         if(tiles[i][j].getObject()==null) {
-                            cardId = bag.getCard();
-                            ObjectCard drawnCard = new ObjectCard(cardId, i, j);
-                            board.placeObject(drawnCard, i, j);
+                            if(bag.getSize()!=0) {
+                                cardId = bag.getCard();
+                                ObjectCard drawnCard = new ObjectCard(cardId, i, j);
+                                board.placeObject(drawnCard, i, j);
+                            }
                         }
                     }
                 }
