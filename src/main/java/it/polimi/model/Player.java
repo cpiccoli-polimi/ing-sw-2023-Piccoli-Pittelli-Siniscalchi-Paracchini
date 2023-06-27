@@ -184,6 +184,7 @@ public class Player implements Serializable {
             for (int col = 0; col < shelf[row].length; col++) {
                 ObjectCard currentCard = shelf[row][col];
                 boolean currentCardCounted = false;
+                boolean currentCardContiguous = false;
                 if(currentCard != null) {
                     Type currentType = currentCard.getType();
                     // If currentType has not been counted yet, we start counting from 0
@@ -248,7 +249,6 @@ public class Player implements Serializable {
                         countedTypes.put(currentType, adjacentCount);
                     } else {
                         // If actual type has already been counted, restart from previous count
-                        // In case there are separated groups of adjacent cards from the same type
                         int previousCount = countedTypes.get(currentType);
 
                         // Restart from previous count
@@ -258,6 +258,8 @@ public class Player implements Serializable {
                                 if (j >= 0 && j < shelf.length && k >= 0 && k < shelf[row].length && !(j == row && k == col)) {
                                     ObjectCard adjacentCard = shelf[j][k];
                                     boolean adjacentCardCounted = false;
+                                    boolean adjacentCardContiguous = false;
+                                    currentCardContiguous = false;
 
                                     if (adjacentCard != null && (k == col || j == row)) {
                                         if (adjacentCard.getType().equals(currentType)) {
@@ -266,10 +268,17 @@ public class Player implements Serializable {
                                                 // This combination of [row][col] is in the array
                                                 if(countedCoordinates[crow][0] == row && countedCoordinates[crow][1] == col){
                                                     currentCardCounted = true;
-                                                    break;
+                                                }
+                                                if(countedCoordinates[crow][0] == row && countedCoordinates[crow][1] == col + 1 ||
+                                                    countedCoordinates[crow][0] == row && countedCoordinates[crow][1] == col - 1 ||
+                                                    countedCoordinates[crow][0] == row + 1 && countedCoordinates[crow][1] == col ||
+                                                    countedCoordinates[crow][0] == row - 1 && countedCoordinates[crow][1] == col){
+                                                    currentCardContiguous = true;
                                                 }
                                             }
-                                            if(!currentCardCounted){
+                                            //Add only if currentCard is contiguous to previous group
+                                            //and if it was not already counted
+                                            if(!currentCardCounted && currentCardContiguous){
                                                 for (int i = 0; i < countedCoordinates.length; i++) {
                                                     if (countedCoordinates[i][0] == -1) {
                                                         countedCoordinates[i][0] = currentCard.getXCoordinate();
@@ -285,10 +294,15 @@ public class Player implements Serializable {
                                                 // This combination of [row][col] is in the array
                                                 if(countedCoordinates[crow][0] == j && countedCoordinates[crow][1] == k){
                                                     adjacentCardCounted = true;
-                                                    break;
+                                                }
+                                                if(countedCoordinates[crow][0] == j && countedCoordinates[crow][1] == k + 1 ||
+                                                    countedCoordinates[crow][0] == j && countedCoordinates[crow][1] == k - 1 ||
+                                                    countedCoordinates[crow][0] == j + 1 && countedCoordinates[crow][1] == k ||
+                                                    countedCoordinates[crow][0] == j - 1 && countedCoordinates[crow][1] == k){
+                                                    adjacentCardContiguous = true;
                                                 }
                                             }
-                                            if(!adjacentCardCounted){
+                                            if(!adjacentCardCounted && adjacentCardContiguous){
                                                 for (int i = 0; i < countedCoordinates.length; i++) {
                                                     if (countedCoordinates[i][0] == -1) {
                                                         countedCoordinates[i][0] = adjacentCard.getXCoordinate();
@@ -317,22 +331,18 @@ public class Player implements Serializable {
             if(adjacentPoints == 3){
                 p=getPoints();
                 setPoints(p+2);
-                //points += 2;
             }
             else if(adjacentPoints == 4){
                 p=getPoints();
                 setPoints(p+3);
-                //points += 3;
             }
             else if(adjacentPoints == 5){
                 p=getPoints();
                 setPoints(p+5);
-                //points += 5;
             }
             else if(adjacentPoints >= 6){
                 p=getPoints();
                 setPoints(p+8);
-                //points += 8;
             }
         }
     }

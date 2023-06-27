@@ -851,11 +851,14 @@ class GameTest {
         game.setTable(player3,2);
         game.setTable(player4,3);
         game.setCurrentPlayer(1);
+        List<PointCard> points = new ArrayList<>();
+        points.add(new PointCard(Value.eight, RomanNumeral.II));
+        points.add(new PointCard(Value.four, RomanNumeral.II));
         CommonGoalCard1 cm1 = new CommonGoalCard1(4);
+        cm1.setPoints(points);
         game.setupCommonGoals();
         game.updateCommonGoals(cm1);
-        assertEquals(2,game.getTable()[1].getPoints());
-        //TODO: da modificare
+        assertEquals(8,game.getTable()[0].getPoints());
     }
 
     @Test
@@ -988,5 +991,34 @@ class GameTest {
         assertEquals(player2,game.getLeaderboard()[1]);
         assertEquals(player4,game.getLeaderboard()[2]);
         assertEquals(player1,game.getLeaderboard()[3]);
+    }
+
+    @Test
+    public void declareWinnerEqualPointsTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        //Assert the player with highest points wins
+        //Assert if equal points between two player let the player far from the first get the best placement
+        Game game = new Game(4,1);
+        Player player1 = new Player("1",1);
+        player1.setPosition(1);
+        player1.setPoints(8);
+        Player player2 = new Player("2",1);
+        player2.setPosition(2);
+        player2.setPoints(8);
+        Player player3 = new Player("3",1);
+        player3.setPosition(3);
+        player3.setPoints(10);
+        Player player4 = new Player("4",1);
+        player4.setPosition(4);
+        player4.setPoints(2);
+        game.setTable(player1,0);
+        game.setTable(player2,1);
+        game.setTable(player3,2);
+        game.setTable(player4,3);
+        //Call declareWinner method
+        game.DeclareWinner();
+        assertEquals(player3,game.getLeaderboard()[0]);
+        assertEquals(player1,game.getLeaderboard()[1]);
+        assertEquals(player2,game.getLeaderboard()[2]);
+        assertEquals(player4,game.getLeaderboard()[3]);
     }
 }
