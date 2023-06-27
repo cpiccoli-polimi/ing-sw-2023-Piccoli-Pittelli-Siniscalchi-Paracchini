@@ -136,7 +136,7 @@ public class GameController implements Observer<PlayerChoice> {
         int [] outputInt=new int[space.length*2];
         for(int i=0; i<space.length;i++){
             comma=space[i].split(",");
-            System.out.println(comma.length);
+
             if(comma.length!=2){
                 throw new CoordinateException("Errore nelle coordinate");
             }
@@ -261,7 +261,7 @@ public class GameController implements Observer<PlayerChoice> {
 
         return true;
     }
-    private void savePickedObject(ObjectCard [] pickedObject){
+    protected void savePickedObject(ObjectCard [] pickedObject){
         int x=-1;
         int y=-1;
         int i = 0;
