@@ -74,7 +74,6 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
         }
 
         // Initialize Map
-        // TODO: Check if correct
         points =  Map.ofEntries(
                 Map.entry(1, 1),
                 Map.entry(2, 2),

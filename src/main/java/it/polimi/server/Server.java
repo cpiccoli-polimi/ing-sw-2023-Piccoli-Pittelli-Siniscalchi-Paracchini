@@ -43,10 +43,6 @@ public class Server {
     }
     public synchronized void lobby(ClientConnection c, String nickname, Socket socket){
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
-        /*for(int i = 0; i < keys.size(); i++){
-            ClientConnection connection = waitingConnection.get(keys.get(i));
-            connection.asyncSend("Connected user: " + keys.get(i));
-        }*/
         while(waitingConnection.containsKey(nickname) == true){
             try{
                 c.asyncSend("A player with your same nickname is already present in this game. Please try submitting a different nickname");
