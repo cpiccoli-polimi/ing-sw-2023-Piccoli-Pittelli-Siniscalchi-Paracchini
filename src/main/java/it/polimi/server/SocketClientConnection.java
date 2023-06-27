@@ -146,11 +146,6 @@ public class SocketClientConnection extends Observable<String> implements Client
                     }
                     notify(message);
                 }
-                /*if(isActive()){
-                    message = "LEADERBOARD:";
-                    notify(message);
-                    //this.active = false;
-                }*/
             }
         }
         catch(IOException | NoSuchElementException e){
