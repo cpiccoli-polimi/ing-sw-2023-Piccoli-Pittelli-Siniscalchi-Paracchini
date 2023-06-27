@@ -1,11 +1,8 @@
 package it.polimi.client;
 
 import it.polimi.model.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.*;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -199,7 +196,7 @@ public class GameSceneController{
         myText.setFont(new Font("Arial Bold", 20));
 
         myBookshelfItemsPane.setPrefWidth(myPane.getPrefWidth()*0.75);
-        myBookshelfItemsPane.setPrefHeight(myPane.getPrefHeight()*0.78);
+        myBookshelfItemsPane.setPrefHeight(myPane.getPrefHeight()*0.77);
         myBookshelfItemsPane.setMinWidth(myBookshelfItemsPane.getPrefWidth());
         myBookshelfItemsPane.setMinHeight(myBookshelfItemsPane.getPrefHeight());
         myBookshelfItemsPane.setMaxWidth(myBookshelfItemsPane.getPrefWidth());
@@ -211,10 +208,9 @@ public class GameSceneController{
         myBookshelfImage.setFitWidth(myPane.getPrefWidth());
         myBookshelfImage.setFitHeight(myPane.getPrefHeight()*0.95);
         myBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", myBookshelfImage.getFitWidth(), myBookshelfImage.getFitHeight(), true, false));
-        myBookshelfImage.setScaleY(1.01);
 
-        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.75);
-        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.78);
+        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.74);
+        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.77);
         columnSelectionPane.setMinWidth(columnSelectionPane.getPrefWidth());
         columnSelectionPane.setMinHeight(columnSelectionPane.getPrefHeight());
         columnSelectionPane.setMaxWidth(columnSelectionPane.getPrefWidth());
@@ -237,7 +233,7 @@ public class GameSceneController{
         messagePane.setMaxHeight(messagePane.getPrefHeight());
         messagePane.setOrientation(Orientation.HORIZONTAL);
 
-        messageTextPane.setPrefWidth(messagePane.getPrefWidth()*0.93);
+        messageTextPane.setPrefWidth(messagePane.getPrefWidth()*0.95);
         messageTextPane.setPrefHeight(messagePane.getPrefHeight());
         messageTextPane.setMinWidth(messageTextPane.getPrefWidth());
         messageTextPane.setMinHeight(messageTextPane.getPrefHeight());
@@ -245,7 +241,7 @@ public class GameSceneController{
         messageTextPane.setMaxHeight(messageTextPane.getPrefHeight());
         messageTextPane.setBackground(new Background(new BackgroundFill(Color.CORNSILK, null, null)));
         messageTextPane.setTextAlignment(TextAlignment.LEFT);
-        messageTextPane.setPadding(new Insets(messageTextPane.getPrefHeight()*0.20));
+        messageTextPane.setPadding(new Insets(0, messageTextPane.getPrefWidth()*0.0075, 0, messageTextPane.getPrefWidth()*0.0075));
 
         Rectangle messagePaneShape = new Rectangle(messageTextPane.getPrefWidth(), messageTextPane.getPrefHeight());
         messagePaneShape.setArcWidth(30);
@@ -264,13 +260,23 @@ public class GameSceneController{
         separator.setOrientation(Orientation.HORIZONTAL);
         separator.setVisible(false);
 
-        confirmButton.setPrefWidth(messagePane.getPrefWidth()*0.05);
-        confirmButton.setPrefHeight(messagePane.getPrefHeight()*0.90);
+        confirmButton.setPrefWidth(confirmButton.getPrefHeight());
+        confirmButton.setPrefHeight(messageTextPane.getPrefHeight() * 0.50);
         confirmButton.setMinWidth(confirmButton.getPrefWidth());
         confirmButton.setMinHeight(confirmButton.getPrefHeight());
         confirmButton.setMaxWidth(confirmButton.getPrefWidth());
         confirmButton.setMaxHeight(confirmButton.getPrefHeight());
-        confirmButton.setText("confirm");
+        confirmButton.setText(null);
+        confirmButton.setBackground(null);
+        confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+
+        confirmButton.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+            if (pressed) {
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+            } else {
+                confirmButton.setGraphic(new ImageView(new Image("/GraphicalResources/Miscellaneous/sendIconNotPressed.png", confirmButton.getPrefWidth(), confirmButton.getPrefHeight(), true, false)));
+            }
+        });
 
         Rectangle confirmButtonShape = new Rectangle(confirmButton.getPrefWidth(), confirmButton.getPrefHeight());
         confirmButtonShape.setArcWidth(30);
@@ -292,10 +298,10 @@ public class GameSceneController{
         leaderboardPaneShape.setArcWidth(30);
         leaderboardPaneShape.setArcHeight(30);
         leaderboardTextPane.setShape(leaderboardPaneShape);
+        leaderboardTextPane.setVisible(false);
 
         leaderboardText.setText("");
         leaderboardText.setFont(new Font("Arial Bold", 15));
-        leaderboardText.setVisible(false);
     }
 
     public void showBoardItems(LivingRoomBoard board){
@@ -451,7 +457,6 @@ public class GameSceneController{
         opponentBookshelfImage.setFitWidth(opponentPane.getPrefWidth());
         opponentBookshelfImage.setFitHeight(opponentPane.getPrefHeight()*0.90);
         opponentBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", opponentBookshelfImage.getFitWidth(), opponentBookshelfImage.getFitHeight(), true, false));
-        opponentBookshelfImage.setScaleY(1.0);
 
         opponentFirstChairToken.setFitWidth(opponentPane.getPrefWidth()*0.15);
         opponentFirstChairToken.setFitHeight(opponentPane.getPrefHeight()*0.15);
@@ -499,14 +504,20 @@ public class GameSceneController{
         char squareCharacter = 9632;
 
         if(message.startsWith("Choose up to 3")){
+            message = "\n" + message;
             message = message + "\nTo choose an object card you have to click on it" +
-                    "\nClick the confirm button on the right when you have chosen all the cards you want to remove from the board";
+                    "\nClick the confirm button on the right when you have chosen all the cards you want to remove from the board\n";
         }
         else if(message.startsWith("In which bookshelf column")){
+            message = "\n" + message;
             message = message + "\nTo choose a column you have to click on it" +
-                    "\nClick the confirm button on the right when you have chosen the column";
+                    "\nClick the confirm button on the right when you have chosen the column\n";
+        }
+        else{
+            message = "\n" + message + "\n";
         }
 
+        messageText.setFont(new Font("Arial", (messageTextPane.getPrefHeight() / (message.lines().count() + 2))));
         messageText.setText(message);
     }
     public void showLeaderboard(Player[] leaderboard){
@@ -519,10 +530,11 @@ public class GameSceneController{
         int i = 1;
         for(Player player : leaderboard){
             leaderboardString = leaderboardString + i + ". " + player.getNickname() + " with " + player.getPoints() + "points\n";
+            i += 1;
         }
 
         leaderboardText.setText(leaderboardString);
-        leaderboardText.setVisible(true);
+        leaderboardTextPane.setVisible(true);
     }
 
 }

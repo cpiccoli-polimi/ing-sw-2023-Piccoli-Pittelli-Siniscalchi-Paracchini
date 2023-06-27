@@ -18,7 +18,7 @@ public class RemoteView extends View {
 
     @Override
     public void update(GameView message) {
-        System.out.println("received: "+message);
+        System.out.println("Received: "+message);
         try{
             clientConnection.asyncSend(message);
         }catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e){
@@ -31,7 +31,7 @@ public class RemoteView extends View {
     private class MessageReceiver implements Observer<String> {
         @Override
         public void update(String message){
-            System.out.println("received: "+message);
+            System.out.println("Received: "+message);
             try{
                 handleMove(message);
             }catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e){

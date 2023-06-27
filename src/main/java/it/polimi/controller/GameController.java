@@ -19,14 +19,17 @@ public class GameController implements Observer<PlayerChoice> {
 
     private synchronized void handleMessage(PlayerChoice message){
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){
-            message.getView().reportError(new NotYourTurnException("Now it's not your turn. Wait your turn"));
+            message.getView().reportError(new NotYourTurnException("Now it's not your turn\nWait your turn"));
         }
         else {
             boolean b = false;
             String mes = message.getMessage();
             try {
                 String[] input = mes.split(":");
-                if (Objects.equals(input[0], "OBJECTCARDSCHOICE")) {//TODO checkMessageCorrectness
+                if(input.length == 1){
+                    message.getView().reportError(new EmptyMessageException("You can't send an empty message\nPlease retry"));
+                }
+                else if (Objects.equals(input[0], "OBJECTCARDSCHOICE")) {//TODO checkMessageCorrectness
                     int j = 0;
                     ObjectCard[] chosenObjectCards = null;
                     try {
@@ -44,15 +47,15 @@ public class GameController implements Observer<PlayerChoice> {
                         if (b == true) {
                             savePickedObject(chosenObjectCards);
                             String turnPlayerMessage = "In which bookshelf column do you want to insert those cards?";
-                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn. Wait your turn";
+                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
                             model.handleTurn(turnPlayerMessage, otherPlayersMessage);
                         } else {
-                            System.out.println("Oggetti non salvati");
+                            System.out.println("Objects not saved");
                         }
                     } else {
-                        System.out.println("Oggetto vuoto");
+                        System.out.println("Empty objects");
                     }
-                } else if (Objects.equals(input[0], "BOOKSHELFCOLUMNCHOICE")) {//TODO checkMessageCorrectness
+                } else if (Objects.equals(input[0], "BOOKSHELFCOLUMNCHOICE")) {
                     int chosenColumn = -5;
                     try {
                         chosenColumn = convertColumn(input[1]);
@@ -73,12 +76,12 @@ public class GameController implements Observer<PlayerChoice> {
                             Player currentPlayer = model.getTable()[i];
                             currentPlayer.setChosenColumn(chosenColumn);
                             String turnPlayerMessage = "In which order do you want to insert the cards in that bookshelf column?";
-                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn. Wait your turn";
+                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
                             model.handleTurn(turnPlayerMessage, otherPlayersMessage);
                         }
                     }
 
-                } else if (Objects.equals(input[0], "INSERTIONORDERCHOICE")) {//TODO checkMessageCorrectness
+                } else if (Objects.equals(input[0], "INSERTIONORDERCHOICE")) {
                     int[] chosenInsertionOrder = null;
                     boolean c = false;
                     try {
@@ -97,22 +100,13 @@ public class GameController implements Observer<PlayerChoice> {
                             i += 1;
                         }
                         Player currentPlayer = model.getTable()[i];
-                        //System.out.println(currentPlayer.getNickname());
-                        //System.out.println(currentPlayer.getChosenColumn());
                         model.insertInOrder(chosenInsertionOrder);
                         model.endTurnChecks();
                     } else {
-                        System.out.println("Ordine non salvato");
+                        System.out.println("Order not saved");
                     }
 
-                }/* else if (Objects.equals(input[0], "LEADERBOARD")) {
-                    System.out.println("leaderboard");
-                    model.DeclareWinner();
-                    System.out.println("il giocatore è: " + model.getCurrentPlayer());
-                    model.handleTurn("","");
-                } else if (Objects.equals(input[0], "LEADERBOARD1")) {
-                    model.handleTurn("", "");
-                }*/
+                }
             }catch (IndexOutOfBoundsException e){
                 message.getView().reportError(e);
             }

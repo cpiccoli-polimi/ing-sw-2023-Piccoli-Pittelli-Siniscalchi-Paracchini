@@ -815,4 +815,178 @@ class GameTest {
             fail();
         }
     }
+    @Test
+    public void nextTurnTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        Game game = new Game(4,1);
+        Player player1 = new Player("1",1);
+        player1.setPosition(1);
+        Player player2 = new Player("2",1);
+        player2.setPosition(2);
+        Player player3 = new Player("3",1);
+        player3.setPosition(3);
+        Player player4 = new Player("4",1);
+        player4.setPosition(4);
+        game.setTable(player1,0);
+        game.setTable(player2,1);
+        game.setTable(player3,2);
+        game.setTable(player4,3);
+        game.setCurrentPlayer(1);
+        game.nextTurn();
+        assertEquals(2,game.getCurrentPlayer());
+    }
+
+    @Test
+    public void updateCommonGoalsTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        Game game = new Game(4,1);
+        Player player1 = new Player("1",1);
+        player1.setPosition(1);
+        Player player2 = new Player("2",1);
+        player2.setPosition(2);
+        Player player3 = new Player("3",1);
+        player3.setPosition(3);
+        Player player4 = new Player("4",1);
+        player4.setPosition(4);
+        game.setTable(player1,0);
+        game.setTable(player2,1);
+        game.setTable(player3,2);
+        game.setTable(player4,3);
+        game.setCurrentPlayer(1);
+        CommonGoalCard1 cm1 = new CommonGoalCard1(4);
+        game.setupCommonGoals();
+        game.updateCommonGoals(cm1);
+        assertEquals(2,game.getTable()[1].getPoints());
+        //TODO: da modificare
+    }
+
+    @Test
+    public void repopulateBoardTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        Game game = new Game(4,1);
+        LivingRoomBoard board = game.getBoard();
+        Tile[][] tiles = board.getTiles();
+        // Simulate each tile with 4 free sides to force board repopulation
+        for(int i = 0; i < tiles.length; i++) {
+            for(int j = 0; j < tiles[i].length; j++) {
+                if(game.getPlayersNumber() >= tiles[i][j].getMinPlayers()){
+                    tiles[i][j].setFreeSides(4);
+                }
+            }
+        }
+        game.updateBoard();
+        //Test 5 casual tiles to check if the board has been populated
+        assertNotEquals(null,game.getBoard().getTiles()[1][3]);
+        assertNotEquals(null,game.getBoard().getTiles()[2][3]);
+        assertNotEquals(null,game.getBoard().getTiles()[3][4]);
+        assertNotEquals(null,game.getBoard().getTiles()[4][1]);
+        assertNotEquals(null,game.getBoard().getTiles()[5][5]);
+        //Test if those 5 casual tiles have less than 4 free sides
+        boolean freeSides1 = (game.getBoard().getTiles()[1][3].getFreeSides() == 4);
+        assertFalse(freeSides1);
+        boolean freeSides2 = (game.getBoard().getTiles()[2][3].getFreeSides() == 4);
+        assertFalse(freeSides2);
+        boolean freeSides3 = (game.getBoard().getTiles()[3][4].getFreeSides() == 4);
+        assertFalse(freeSides3);
+        boolean freeSides4 = (game.getBoard().getTiles()[4][1].getFreeSides() == 4);
+        assertFalse(freeSides4);
+        boolean freeSides5 = (game.getBoard().getTiles()[5][5].getFreeSides() == 4);
+        assertFalse(freeSides5);
+
+    }
+
+    @Test
+    public void insertInOrderTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        Game game = new Game(4,1);
+        Player player1 = new Player("1",1);
+        player1.setPosition(1);
+        Player player2 = new Player("2",1);
+        player2.setPosition(2);
+        Player player3 = new Player("3",1);
+        player3.setPosition(3);
+        Player player4 = new Player("4",1);
+        player4.setPosition(4);
+        game.setTable(player1,0);
+        game.setTable(player2,1);
+        game.setTable(player3,2);
+        game.setTable(player4,3);
+        // Set player 2 as actual player
+        game.setCurrentPlayer(2);
+        //Set chosen column
+        player2.setChosenColumn(2);
+        //Set chosen objects
+        ObjectCard[] choice = new ObjectCard[3];
+        choice[0] = new ObjectCard(1,0,1);
+        choice[1] = new ObjectCard(1,0,2);
+        choice[2] = new ObjectCard(1,0,3);
+        player2.setChosenObjects(choice);
+        //Create order array to insert in order
+        int[] order = new int[3];
+        order[0] = 1;
+        order[1] = 2;
+        order[2] = 3;
+        //Call insertInOrder method
+        game.insertInOrder(order);
+        //Check the tiles were inserted in order
+        assertEquals(choice[0],player2.getBookshelf().getShelf()[5][2]);
+        assertEquals(choice[1],player2.getBookshelf().getShelf()[4][2]);
+        assertEquals(choice[2],player2.getBookshelf().getShelf()[3][2]);
+    }
+
+    @Test
+    public void firstToFinishTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        //Assert the first player to finish has 1 extra point
+        Game game = new Game(4,1);
+        Player player1 = new Player("1",1);
+        player1.setPosition(1);
+        Player player2 = new Player("2",1);
+        player2.setPosition(2);
+        Player player3 = new Player("3",1);
+        player3.setPosition(3);
+        Player player4 = new Player("4",1);
+        player4.setPosition(4);
+        game.setTable(player1,0);
+        game.setTable(player2,1);
+        game.setTable(player3,2);
+        game.setTable(player4,3);
+        //Set player 1 as current player
+        game.setCurrentPlayer(1);
+        //Set player 1 bookshelf to be full
+        player1.getBookshelf().setMaxDrawableObjects(0);
+        //Set common goal of the game
+        CommonGoalCard[] drawn = new CommonGoalCard[1];
+        drawn[0] = new CommonGoalCard1(4);
+        game.getBoard().setCommonGoals(drawn);
+        //Set done to true and player 1 as first player
+        game.setDone(true);
+        player1.setIsFirst(true);
+        //Call endTurnChecks method
+        game.endTurnChecks();
+        assertEquals(1,player1.getPoints());
+    }
+
+    @Test
+    public void declareWinnerTest() throws FileNotFoundException, PlayersNumberException, CommonGoalsNumberException {
+        //Assert the player with highest points wins
+        Game game = new Game(4,1);
+        Player player1 = new Player("1",1);
+        player1.setPosition(1);
+        player1.setPoints(2);
+        Player player2 = new Player("2",1);
+        player2.setPosition(2);
+        player2.setPoints(8);
+        Player player3 = new Player("3",1);
+        player3.setPosition(3);
+        player3.setPoints(10);
+        Player player4 = new Player("4",1);
+        player4.setPosition(4);
+        player4.setPoints(3);
+        game.setTable(player1,0);
+        game.setTable(player2,1);
+        game.setTable(player3,2);
+        game.setTable(player4,3);
+        //Call declareWinner method
+        game.DeclareWinner();
+        assertEquals(player3,game.getLeaderboard()[0]);
+        assertEquals(player2,game.getLeaderboard()[1]);
+        assertEquals(player4,game.getLeaderboard()[2]);
+        assertEquals(player1,game.getLeaderboard()[3]);
+    }
 }

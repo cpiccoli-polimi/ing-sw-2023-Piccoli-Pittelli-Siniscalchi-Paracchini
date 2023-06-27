@@ -99,4 +99,159 @@ class PlayerTest {
         playerTest.countAdjacentItemsPoints();
         assertEquals(0, playerTest.getPoints());
     }
+
+    @Test
+    public void CountPersonalGoalPointsNoGoal() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(1);
+        gigi.setPersonalGoal(personalGoal);
+        Bookshelf bookshelf = new Bookshelf();
+        gigi.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+
+        //No PersonalGoal tiles matched
+        gigi.countPersonalGoalsPoints();
+        assertEquals(0, gigi.getPoints());
+    }
+
+    @Test
+    public void CountPersonalGoalPointsOneGoal() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(1);
+        gigi.setPersonalGoal(personalGoal);
+        Bookshelf bookshelf = new Bookshelf();
+        gigi.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+
+        //One PersonalGoal tile matched
+        shelf[0][0]=new PublicObjectCard(47,0,0);
+        gigi.getBookshelf().setShelf(new ObjectCard(47,0,0));
+        gigi.countPersonalGoalsPoints();
+        assertEquals(1, gigi.getPoints());
+    }
+
+    @Test
+    public void CountPersonalGoalPointsTwoGoals() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(1);
+        gigi.setPersonalGoal(personalGoal);
+        Bookshelf bookshelf = new Bookshelf();
+        gigi.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+
+        //Two PersonalGoal tiles matched
+        shelf[0][0]=new PublicObjectCard(47,0,0);
+        gigi.getBookshelf().setShelf(new ObjectCard(47,0,0));
+        shelf[0][2]=new PublicObjectCard(90,0,2);
+        gigi.getBookshelf().setShelf(new ObjectCard(90,0,2));
+        gigi.countPersonalGoalsPoints();
+        assertEquals(2, gigi.getPoints());
+    }
+
+    @Test
+    public void CountPersonalGoalPointsThreeGoals() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(1);
+        gigi.setPersonalGoal(personalGoal);
+        Bookshelf bookshelf = new Bookshelf();
+        gigi.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+
+        //Three Personal Goal tiles matched
+        shelf[0][0]=new PublicObjectCard(47,0,0);
+        gigi.getBookshelf().setShelf(new ObjectCard(47,0,0));
+        shelf[0][2]=new PublicObjectCard(90,0,2);
+        gigi.getBookshelf().setShelf(new ObjectCard(90,0,2));
+        shelf[1][4]=new PublicObjectCard(1,1,4);
+        gigi.getBookshelf().setShelf(new ObjectCard(1,1,4));
+        gigi.countPersonalGoalsPoints();
+        assertEquals(4, gigi.getPoints());
+    }
+
+    @Test
+    public void CountPersonalGoalPointsFourGoals() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(1);
+        gigi.setPersonalGoal(personalGoal);
+        Bookshelf bookshelf = new Bookshelf();
+        gigi.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+
+        //Four PersonalGoal tiles matched
+        shelf[0][0]=new PublicObjectCard(47,0,0);
+        gigi.getBookshelf().setShelf(new ObjectCard(47,0,0));
+        shelf[0][2]=new PublicObjectCard(90,0,2);
+        gigi.getBookshelf().setShelf(new ObjectCard(90,0,2));
+        shelf[1][4]=new PublicObjectCard(1,1,4);
+        gigi.getBookshelf().setShelf(new ObjectCard(1,1,4));
+        shelf[2][3]=new PublicObjectCard(68,2,3);
+        gigi.getBookshelf().setShelf(new ObjectCard(69,2,3));
+        gigi.countPersonalGoalsPoints();
+        assertEquals(6, gigi.getPoints());
+    }
+
+    @Test
+    public void CountPersonalGoalPointsFiveGoals() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(1);
+        gigi.setPersonalGoal(personalGoal);
+        Bookshelf bookshelf = new Bookshelf();
+        gigi.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+
+        //Five PersonalGoal tiles matched
+        shelf[0][0]=new PublicObjectCard(47,0,0);
+        gigi.getBookshelf().setShelf(new ObjectCard(47,0,0));
+        shelf[0][2]=new PublicObjectCard(90,0,2);
+        gigi.getBookshelf().setShelf(new ObjectCard(90,0,2));
+        shelf[1][4]=new PublicObjectCard(1,1,4);
+        gigi.getBookshelf().setShelf(new ObjectCard(1,1,4));
+        shelf[2][3]=new PublicObjectCard(68,2,3);
+        gigi.getBookshelf().setShelf(new ObjectCard(69,2,3));
+        shelf[3][1]=new PublicObjectCard(112,3,1);
+        gigi.getBookshelf().setShelf(new ObjectCard(112,3,1));
+        gigi.countPersonalGoalsPoints();
+        assertEquals(9, gigi.getPoints());
+    }
+
+    @Test
+    public void CountPersonalGoalPointsSixGoals() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(1);
+        gigi.setPersonalGoal(personalGoal);
+        Bookshelf bookshelf = new Bookshelf();
+        gigi.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+
+        //Six PersonalGoal tiles matched
+        shelf[0][0]=new PublicObjectCard(47,0,0);
+        gigi.getBookshelf().setShelf(new ObjectCard(47,0,0));
+        shelf[0][2]=new PublicObjectCard(90,0,2);
+        gigi.getBookshelf().setShelf(new ObjectCard(90,0,2));
+        shelf[1][4]=new PublicObjectCard(1,1,4);
+        gigi.getBookshelf().setShelf(new ObjectCard(1,1,4));
+        shelf[2][3]=new PublicObjectCard(68,2,3);
+        gigi.getBookshelf().setShelf(new ObjectCard(69,2,3));
+        shelf[3][1]=new PublicObjectCard(112,3,1);
+        gigi.getBookshelf().setShelf(new ObjectCard(112,3,1));
+        shelf[5][2]=new PublicObjectCard(23,5,2);
+        gigi.getBookshelf().setShelf(new ObjectCard(23,5,2));
+        gigi.countPersonalGoalsPoints();
+        assertEquals(12, gigi.getPoints());
+    }
+
+    @Test
+    public void TestSetPersonalGoal() {
+        Player gigi = new Player("Gigi",2);
+        PersonalGoalCard personalGoal = new PersonalGoalCard(2);
+        gigi.setPersonalGoal(personalGoal);
+        assertEquals(personalGoal, gigi.getPersonalGoal());
+    }
 }
