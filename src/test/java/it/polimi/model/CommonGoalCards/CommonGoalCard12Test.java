@@ -74,7 +74,7 @@ class CommonGoalCard12Test {
         //One extra tile in wrong position
         bookshelf[3][4]=new PublicObjectCard(1,3,4);
 
-        assertTrue(cm12fail.check(bookshelf));
+        assertFalse(cm12fail.check(bookshelf));
     }
 
     @Test
@@ -135,7 +135,7 @@ class CommonGoalCard12Test {
         //One extra tile in wrong position
         bookshelf[4][4]=new PublicObjectCard(1,4,4);
 
-        assertTrue(cm12bisFail.check(bookshelf));
+        assertFalse(cm12bisFail.check(bookshelf));
     }
 
     @Test
@@ -205,7 +205,7 @@ class CommonGoalCard12Test {
         //One extra tile in wrong position
         bookshelf[2][1]=new PublicObjectCard(1,2,1);
 
-        assertTrue(cm12trisFail.check(bookshelf));
+        assertFalse(cm12trisFail.check(bookshelf));
     }
     @Test
     void CommonGoal12SatisfiedTestRightToLeftLower() {
@@ -265,7 +265,7 @@ class CommonGoalCard12Test {
         //One extra tile in wrong position
         bookshelf[2][2]=new PublicObjectCard(1,2,2);
 
-        assertTrue(cm12quater.check(bookshelf));
+        assertFalse(cm12quater.check(bookshelf));
     }
 
     @Test
@@ -443,7 +443,7 @@ class CommonGoalCard12Test {
     }
 
     @Test
-    void oneMissingRightToLeft() {
+    void oneMissingCardRightToLeft() {
         PublicObjectCard[][] bookshelf;
         bookshelf= new PublicObjectCard[6][5];
         CommonGoalCard12 cm12tris=new CommonGoalCard12(4);
