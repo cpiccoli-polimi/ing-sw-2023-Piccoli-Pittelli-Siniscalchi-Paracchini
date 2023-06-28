@@ -40,8 +40,8 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
     }
     @Override
-    public synchronized void closeConnection(){
-        send("Connection closed");
+    public synchronized void closeConnection(String closingMessage){
+        send(closingMessage);
         try{
             socket.close();
         }
@@ -50,10 +50,12 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
         active = false;
     }
-    private void close(){
-        closeConnection();
+    protected void close(String closingMessage){
+        closeConnection(closingMessage);
         System.out.println("Deregistering client...");
-        server.deregisterConnection(this);
+        if(closingMessage.startsWith("Closed")){
+            server.deregisterConnection(this);
+        }
         System.out.println("Done");
     }
     @Override
@@ -152,7 +154,7 @@ public class SocketClientConnection extends Observable<String> implements Client
             System.err.println("Error " + e.getMessage());
         }
         finally{
-            close();
+            close("Closed connection");
         }
     }
     public void setModel(Game model) {
