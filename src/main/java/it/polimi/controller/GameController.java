@@ -169,9 +169,9 @@ public class GameController implements Observer<PlayerChoice> {
         return chosenObjectCards;
 
     }
-    private Game GetModel() {
+    /*private Game GetModel() {
         return this.model;
-    }
+    }*/
     public void setup(){
         model.setupBoardObjects();
         model.setupCommonGoals();
@@ -313,7 +313,7 @@ public class GameController implements Observer<PlayerChoice> {
         return true;
 
     }
-    private void isDone() {
+    /*private void isDone() {
         // Get the current players
         int i = 0;
         while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
@@ -324,6 +324,6 @@ public class GameController implements Observer<PlayerChoice> {
         if (currentPlayer.getBookshelf().isFull() == true) {
             model.setDone(true);
         }
-    }
+    }*/
 }
 

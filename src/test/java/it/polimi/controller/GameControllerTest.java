@@ -34,7 +34,7 @@ class GameControllerTest {
         model.getBoard().setCommonGoals(cmc);
         ClientConnection clientConnection=new ClientConnection() {
             @Override
-            public void closeConnection() {
+            public void closeConnection(String closingMessage) {
 
             }
 
@@ -69,7 +69,7 @@ class GameControllerTest {
         model.getBoard().setCommonGoals(cmc);
         ClientConnection clientConnection=new ClientConnection() {
             @Override
-            public void closeConnection() {
+            public void closeConnection(String s) {
 
             }
 
@@ -141,7 +141,7 @@ class GameControllerTest {
         model.getBoard().setCommonGoals(cmc);
         ClientConnection clientConnection=new ClientConnection() {
             @Override
-            public void closeConnection() {
+            public void closeConnection(String s) {
 
             }
 
@@ -156,57 +156,58 @@ class GameControllerTest {
             }
         };
         View view=new RemoteView(player1,clientConnection);
+        View view2=new RemoteView(player2,clientConnection);
         PlayerChoice message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:1,4",view);
-        PlayerChoice message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:1,4",view);
+        PlayerChoice message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:1,4",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
 
 
         player1.getBookshelf().setMaxDrawableObjects(1);
         player2.getBookshelf().setMaxDrawableObjects(1);
-        message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:2,5",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5",view);
+        message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:2,5 2,6",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5 2,6",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         player1.getBookshelf().setMaxDrawableObjects(3);
         player2.getBookshelf().setMaxDrawableObjects(3);
 
         message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:r,4",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:r,4",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:r,4",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:2,5,4",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5,4",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5,4",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:2,5 2,5",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5 2,5",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5 2,5",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:4,3 6,3",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:4,3 6,3",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:4,3 6,3",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:2,4 2,5 3,4",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,4 2,5 3,4",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,4 2,5 3,4",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
 
 
         message=new PlayerChoice(player1,"OBJECTCARDSCHOICE:2,5",view);
-        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5",view);
+        message2=new PlayerChoice(player2,"OBJECTCARDSCHOICE:2,5",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         message=new PlayerChoice(player1,"BOOKSHELFCOLUMNCHOICE:-1",view);
-        message2=new PlayerChoice(player2,"BOOKSHELFCOLUMNCHOICE:-1",view);
+        message2=new PlayerChoice(player2,"BOOKSHELFCOLUMNCHOICE:-1",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
         message=new PlayerChoice(player1,"BOOKSHELFCOLUMNCHOICE:r",view);
-        message2=new PlayerChoice(player2,"BOOKSHELFCOLUMNCHOICE:r",view);
+        message2=new PlayerChoice(player2,"BOOKSHELFCOLUMNCHOICE:r",view2);
         gameController.handleMessage(message);
         gameController.handleMessage(message2);
 
@@ -432,14 +433,14 @@ class GameControllerTest {
             objectCard1 = model.getBoard().getTiles()[1][3].getObject();
             objectCard2 = model.getBoard().getTiles()[1][4].getObject();
             player1.getBookshelf().setMaxDrawableObjects(1);
-            player1.getBookshelf().setMaxDrawableObjects(1);
+            player2.getBookshelf().setMaxDrawableObjects(1);
             objectCards = new ObjectCard[]{objectCard1, objectCard2};
             gameController.checkPickedObject(objectCards);
         }catch (MaxDrawableObjectsException e){
             assertTrue(true);
         }
         player1.getBookshelf().setMaxDrawableObjects(3);
-        player1.getBookshelf().setMaxDrawableObjects(3);
+        player2.getBookshelf().setMaxDrawableObjects(3);
 
         //NoFreeSidesException
         try {
