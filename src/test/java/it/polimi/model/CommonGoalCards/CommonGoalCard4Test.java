@@ -126,4 +126,36 @@ class CommonGoalCard4Test {
 
         assertFalse(cm4.check(bookshelf));
     }
+
+    @Test
+    void missingRowTest(){
+        PublicObjectCard[][] bookshelf;
+        bookshelf= new PublicObjectCard[6][5];
+        CommonGoalCard4 cm4=new CommonGoalCard4(4);
+        bookshelf= new PublicObjectCard[6][5];
+
+        // -- 3 rows of 5 cards each, all different type --
+        //ROW 1 (with one missing card)
+        bookshelf[0][0]=new PublicObjectCard(1,0,0);
+        bookshelf[0][1]=new PublicObjectCard(23,0,1);
+        bookshelf[0][2]=new PublicObjectCard(23,0,2);
+        bookshelf[0][3]=new PublicObjectCard(68,0,3);
+        bookshelf[0][4]=new PublicObjectCard(68,0,4);
+
+        //ROW 2
+        bookshelf[1][0]=new PublicObjectCard(1,1,0);
+        bookshelf[1][1]=new PublicObjectCard(43,1,1);
+        bookshelf[1][2]=new PublicObjectCard(43,1,2);
+        bookshelf[1][3]=new PublicObjectCard(68,1,3);
+        bookshelf[1][4]=new PublicObjectCard(68,1,4);
+
+        //ROW 3
+        bookshelf[4][0]=new PublicObjectCard(1,4,0);
+        bookshelf[4][1]=new PublicObjectCard(1,4,1);
+        bookshelf[4][2]=new PublicObjectCard(1,4,2);
+        bookshelf[4][3]=new PublicObjectCard(1,4,3);
+        bookshelf[4][4]=new PublicObjectCard(1,4,4);
+
+        assertFalse(cm4.check(bookshelf));
+    }
 }

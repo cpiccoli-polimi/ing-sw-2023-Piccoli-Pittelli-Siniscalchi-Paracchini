@@ -325,7 +325,7 @@ class CommonGoalCard12Test {
 
         assertFalse(cm12bis.check(bookshelf));
     }
-
+    @Test
     void oneMissingColumnTestRightToLeft() {
         PublicObjectCard[][] bookshelf;
         bookshelf= new PublicObjectCard[6][5];
