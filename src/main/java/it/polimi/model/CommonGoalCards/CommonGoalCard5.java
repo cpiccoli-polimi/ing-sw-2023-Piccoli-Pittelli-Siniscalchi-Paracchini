@@ -124,16 +124,18 @@ public class CommonGoalCard5 extends CommonGoalCard {
         for(int r=0;r< bookshelf.length;r++){
             for(int c=0;c<bookshelf[0].length;c++){
                 List<ObjectCard> objectList= new ArrayList<>();
-                if(bookshelfCopy[r][c]!=null){
+                if(bookshelfCopy[r][c]!=null) {
                     objectList.add(bookshelfCopy[r][c]);
-                }
-                for(int r2=0;r2<bookshelf.length;r2++) {
-                    for (int c2 = 0; c2 < bookshelf[0].length; c2++) {
-                        if (bookshelfCopy[r2][c2] != null && bookshelfCopy[r2][c2].getType() != null) {
-                            if (bookshelfCopy[r2][c2].getType() == objectList.get(0).getType()
-                                    && ((c2>0 && objectList.contains(bookshelfCopy[r2][c2 - 1])) || (r2>0 && objectList.contains(bookshelfCopy[r2 - 1][c2])))
-                                    && !objectList.contains(bookshelfCopy[r2][c2])) {
-                                objectList.add(bookshelfCopy[r2][c2]);
+                    for (int r2 = 0; r2 < bookshelf.length; r2++) {
+                        for (int c2 = 0; c2 < bookshelf[0].length; c2++) {
+                            if (bookshelfCopy[r2][c2] != null && bookshelfCopy[r2][c2].getType() != null) {
+                                if (bookshelfCopy[r2][c2].getType() == objectList.get(0).getType()) {
+                                    if ((c2 > 0 && objectList.contains(bookshelfCopy[r2][c2 - 1])) || (r2 > 0 && objectList.contains(bookshelfCopy[r2 - 1][c2]))) {
+                                        if (!objectList.contains(bookshelfCopy[r2][c2])) {
+                                            objectList.add(bookshelfCopy[r2][c2]);
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -146,6 +148,6 @@ public class CommonGoalCard5 extends CommonGoalCard {
             }
         }
 
-        return count > 1;
+        return count >= 4;
     }
 }
