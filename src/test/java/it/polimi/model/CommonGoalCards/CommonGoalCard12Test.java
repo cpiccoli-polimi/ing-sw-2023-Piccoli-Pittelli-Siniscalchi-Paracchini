@@ -490,7 +490,6 @@ class CommonGoalCard12Test {
         bookshelf[4][3]=new PublicObjectCard(1,4,3);
         bookshelf[5][3]=new PublicObjectCard(112,5,3);
 
-        bookshelf[1][4]=new PublicObjectCard(23,1,4);
         bookshelf[2][4]=new PublicObjectCard(23,2,4);
         bookshelf[3][4]=new PublicObjectCard(90,3,4);
         bookshelf[4][4]=new PublicObjectCard(90,4,4);
