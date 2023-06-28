@@ -157,6 +157,37 @@ class PlayerTest {
         playerTest.countAdjacentItemsPoints();
         assertEquals(5, playerTest.getPoints());
     }
+    @Test
+    public void TestAdjacentItemsPoints7() {
+        Player playerTest = new Player("Gigi",2);
+        Bookshelf bookshelf = new Bookshelf();
+        playerTest.setBookshelf(bookshelf);
+        PublicObjectCard [][] shelf;
+        shelf= new PublicObjectCard[6][5];
+        //Six cards with same type adjacent -> 2 points
+        shelf[0][0]=new PublicObjectCard(1,0,0);
+        bookshelf.setShelf(shelf[0][0]);
+        shelf[0][1]=new PublicObjectCard(1,0,1);
+        bookshelf.setShelf(shelf[0][1]);
+        shelf[1][0]=new PublicObjectCard(1,1,0);
+        bookshelf.setShelf(shelf[1][0]);
+
+        //Five cards with same type above adjacent but separated from the previous group -> 5 points
+        shelf[3][0]=new PublicObjectCard(1,3,0);
+        bookshelf.setShelf(shelf[3][0]);
+        shelf[3][1]=new PublicObjectCard(1,3,1);
+        bookshelf.setShelf(shelf[3][1]);
+        shelf[3][2]=new PublicObjectCard(1,3,2);
+        bookshelf.setShelf(shelf[3][2]);
+        shelf[4][0]=new PublicObjectCard(1,4,0);
+        bookshelf.setShelf(shelf[4][0]);
+        shelf[5][0]=new PublicObjectCard(1,5,0);
+        bookshelf.setShelf(shelf[5][0]);
+
+        //Points are counted for each group -> 7 points in total
+        playerTest.countAdjacentItemsPoints();
+        assertEquals(7, playerTest.getPoints());
+    }
 
     @Test
     public void CountPersonalGoalPointsNoGoal() {

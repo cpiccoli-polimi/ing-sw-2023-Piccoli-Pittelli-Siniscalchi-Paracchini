@@ -8,6 +8,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class CommonGoalCard2Test {
 
     @Test
+    void EmptyBookshelf(){
+        PublicObjectCard [][] bookshelf;
+        bookshelf= new PublicObjectCard[6][5];
+        CommonGoalCard2 cm2=new CommonGoalCard2(4);
+        assertFalse(cm2.check(bookshelf));
+    }
+
+    @Test
     void CommonGoal2SatisfiedTest1() {
         PublicObjectCard[][] bookshelf;
         bookshelf = new PublicObjectCard[6][5];
