@@ -137,8 +137,8 @@ public class ClientSceneController {
                         welcomeSceneController.playerTextField.setOnKeyPressed(new EventHandler<KeyEvent>() {
                             @Override
                             public void handle(KeyEvent event) {
-                                String message = new String(welcomeSceneController.getMessage());
                                 if(event.getCode().equals(KeyCode.ENTER)) {
+                                    String message = new String(welcomeSceneController.getMessage());
                                     socketOut.println(message);
                                     socketOut.flush();
                                 }
