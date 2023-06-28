@@ -283,7 +283,7 @@ public class ClientSceneController {
                             String newTurnMessage = new String("These are the cards you have removed from the board");
                             newTurnMessage = newTurnMessage + gameView.getTurnPlayerMessage();
                             newTurnMessage = newTurnMessage + "\nTo choose an order, use the MenuButtons on the right" +
-                                    "\nClick the confirm button on the right when you have chosen the desired insertion order";
+                                    "\nClick the send button on the right when you have chosen the desired insertion order";
                             showMessage(newTurnMessage);
 
                             gameSceneController.messageTextPane.setPrefWidth(gameSceneController.messageTextPane.getPrefWidth() - ((gameSceneController.messageTextPane.getPrefHeight() + gameSceneController.separator.getPrefWidth()) *  myPlayer.getChosenObjects().length));
