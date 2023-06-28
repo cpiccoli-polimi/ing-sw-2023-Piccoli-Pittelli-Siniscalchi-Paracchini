@@ -45,7 +45,7 @@ public class CommonGoalCard12 extends CommonGoalCard {
             if (bookshelf[1][0].getType() != null) {
                 for (int i = 0; i < bookshelf.length - 1; i++) {
                     if (bookshelf[i + 1][i] != null && bookshelf[i][i] != null) {
-                        if (bookshelf[i + 1][i].getType() == null && bookshelf[i][i].getType() != null) {
+                        if (bookshelf[i + 1][i].getType() == null || bookshelf[i][i].getType() != null) {
                             flag = false;
                         }
                     }
