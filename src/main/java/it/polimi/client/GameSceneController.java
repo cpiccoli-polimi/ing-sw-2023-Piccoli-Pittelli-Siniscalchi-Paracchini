@@ -209,8 +209,8 @@ public class GameSceneController{
         myBookshelfImage.setFitHeight(myPane.getPrefHeight()*0.95);
         myBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", myBookshelfImage.getFitWidth(), myBookshelfImage.getFitHeight(), true, false));
 
-        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.74);
-        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.77);
+        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.73);
+        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.78);
         columnSelectionPane.setMinWidth(columnSelectionPane.getPrefWidth());
         columnSelectionPane.setMinHeight(columnSelectionPane.getPrefHeight());
         columnSelectionPane.setMaxWidth(columnSelectionPane.getPrefWidth());
@@ -233,7 +233,7 @@ public class GameSceneController{
         messagePane.setMaxHeight(messagePane.getPrefHeight());
         messagePane.setOrientation(Orientation.HORIZONTAL);
 
-        messageTextPane.setPrefWidth(messagePane.getPrefWidth()*0.95);
+        messageTextPane.setPrefWidth(messagePane.getPrefWidth()*0.92);
         messageTextPane.setPrefHeight(messagePane.getPrefHeight());
         /*messageTextPane.setMinWidth(messageTextPane.getPrefWidth());
         messageTextPane.setMinHeight(messageTextPane.getPrefHeight());
@@ -251,12 +251,12 @@ public class GameSceneController{
         messageText.setText("");
         messageText.setFont(new Font("Arial Bold", 15));
 
-        separator.setPrefWidth(messagePane.getPrefWidth()*0.01);
+        separator.setPrefWidth(messagePane.getPrefWidth()*0.005);
         separator.setPrefHeight(messagePane.getPrefHeight()*0.025);
-        separator.setMinWidth(separator.getPrefWidth());
+        /*separator.setMinWidth(separator.getPrefWidth());
         separator.setMinHeight(separator.getPrefHeight());
         separator.setMaxWidth(separator.getPrefWidth());
-        separator.setMaxHeight(separator.getPrefHeight());
+        separator.setMaxHeight(separator.getPrefHeight());*/
         separator.setOrientation(Orientation.HORIZONTAL);
         separator.setVisible(false);
 
@@ -495,9 +495,10 @@ public class GameSceneController{
                     itemPath = itemPath + bookshelf.getShelf()[i][j].getType().toString().toLowerCase() + ".png";
 
                     ImageView itemImage = new ImageView();
-                    itemImage.setFitWidth(((itemsPane.getPrefWidth() - (itemsPane.getHgap() * (itemsPane.getColumnCount() - 1))) / itemsPane.getColumnCount())*1.01);
+                    itemImage.setFitWidth(((itemsPane.getPrefWidth()*1.04 - (itemsPane.getHgap() * (itemsPane.getColumnCount() - 1))) / itemsPane.getColumnCount())*1.01);
                     itemImage.setFitHeight(((itemsPane.getPrefHeight() - (itemsPane.getVgap() * (itemsPane.getRowCount() - 1))) / itemsPane.getRowCount())*1.01);
                     itemImage.setImage(new Image(itemPath, itemImage.getFitWidth(), itemImage.getFitHeight(), true, false));
+
                     itemsPane.add(itemImage, j, i);
                 }
             }
