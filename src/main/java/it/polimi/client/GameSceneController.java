@@ -286,9 +286,9 @@ public class GameSceneController{
         leaderboardTextPane.setPrefWidth(sceneWidth*0.25);
         leaderboardTextPane.setPrefHeight(sceneHeight*0.50);
         /*leaderboardTextPane.setMinWidth(leaderboardTextPane.getPrefWidth());
-        leaderboardTextPane.setMinHeight(leaderboardTextPane.getPrefHeight());
+        leaderboardTextPane.setMinHeight(leaderboardTextPane.getPrefHeight());*/
         leaderboardTextPane.setMaxWidth(leaderboardTextPane.getPrefWidth());
-        leaderboardTextPane.setMaxHeight(leaderboardTextPane.getPrefHeight());*/
+        leaderboardTextPane.setMaxHeight(leaderboardTextPane.getPrefHeight());
         leaderboardTextPane.setBackground(new Background(new BackgroundFill(Color.CORNSILK, null, null)));
         leaderboardTextPane.setTextAlignment(TextAlignment.CENTER);
         leaderboardTextPane.setPadding(new Insets(leaderboardTextPane.getPrefHeight()*0.10));
@@ -510,12 +510,12 @@ public class GameSceneController{
         if(message.startsWith("Choose up to 3")){
             message = "\n" + message;
             message = message + "\nTo choose an object card you have to click on it" +
-                    "\nClick the confirm button on the right when you have chosen all the cards you want to remove from the board\n";
+                    "\nClick the send button on the right when you have chosen all the cards you want to remove from the board\n";
         }
         else if(message.startsWith("In which bookshelf column")){
             message = "\n" + message;
             message = message + "\nTo choose a column you have to click on it" +
-                    "\nClick the confirm button on the right when you have chosen the column\n";
+                    "\nClick the send button on the right when you have chosen the column\n";
         }
         else{
             message = "\n" + message + "\n";

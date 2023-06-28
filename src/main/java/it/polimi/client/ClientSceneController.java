@@ -283,7 +283,7 @@ public class ClientSceneController {
                             String newTurnMessage = new String("These are the cards you have removed from the board");
                             newTurnMessage = newTurnMessage + gameView.getTurnPlayerMessage();
                             newTurnMessage = newTurnMessage + "\nTo choose an order, use the MenuButtons on the right" +
-                                    "\nClick the confirm button on the right when you have chosen the desired insertion order";
+                                    "\nClick the send button on the right when you have chosen the desired insertion order";
                             showMessage(newTurnMessage);
 
                             gameSceneController.messageTextPane.setPrefWidth(gameSceneController.messageTextPane.getPrefWidth() - ((gameSceneController.messageTextPane.getPrefHeight() + gameSceneController.separator.getPrefWidth()) *  myPlayer.getChosenObjects().length));
@@ -297,10 +297,10 @@ public class ClientSceneController {
                                 Separator separator = new Separator(Orientation.HORIZONTAL);
                                 separator.setPrefWidth(gameSceneController.separator.getPrefWidth());
                                 separator.setPrefHeight(gameSceneController.separator.getPrefHeight());
-                                separator.setMinWidth(separator.getPrefWidth());
+                                /*separator.setMinWidth(separator.getPrefWidth());
                                 separator.setMinHeight(separator.getPrefHeight());
                                 separator.setMaxWidth(separator.getPrefWidth());
-                                separator.setMaxHeight(separator.getPrefHeight());
+                                separator.setMaxHeight(separator.getPrefHeight());*/
                                 separator.setVisible(false);
 
                                 i += 1;
@@ -331,10 +331,10 @@ public class ClientSceneController {
                                 HBox buttonPane = new HBox();
                                 buttonPane.setPrefWidth(pane.getPrefWidth());
                                 buttonPane.setPrefHeight(pane.getPrefHeight() * 0.25);
-                                buttonPane.setMinWidth(buttonPane.getPrefWidth());
+                                /*buttonPane.setMinWidth(buttonPane.getPrefWidth());
                                 buttonPane.setMinHeight(buttonPane.getPrefHeight());
                                 buttonPane.setMaxWidth(buttonPane.getPrefWidth());
-                                buttonPane.setMaxHeight(buttonPane.getPrefHeight());
+                                buttonPane.setMaxHeight(buttonPane.getPrefHeight());*/
                                 buttonPane.setSpacing(buttonPane.getPrefWidth()*0.05);
 
                                 for(int j = 1; j < myPlayer.getChosenObjects().length + 1; j++){

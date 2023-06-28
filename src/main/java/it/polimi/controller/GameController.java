@@ -34,58 +34,74 @@ public class GameController implements Observer<PlayerChoice> {
                     ObjectCard[] chosenObjectCards = null;
                     try {
                         chosenObjectCards = convert(input[1]);
+                        if (chosenObjectCards != null) {
+                            try {
+                                b = checkPickedObject(chosenObjectCards);
+                            } catch (MaxDrawableObjectsException | NoAdjacentException | NoFreeSidesException |
+                                     AlreadyPickedException | NoStraightLineException e) {
+                                message.getView().reportError(e);
+                            }
+                            if (b == true) {
+                                savePickedObject(chosenObjectCards);
+                                String turnPlayerMessage = "In which bookshelf column do you want to insert those cards?";
+                                String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
+                                model.handleTurn(turnPlayerMessage, otherPlayersMessage);
+                            } else {
+                                System.out.println("Objects not saved");
+                            }
+                        } else {
+                            System.out.println("Empty objects");
+                        }
                     } catch (EmptyTileException | CoordinateException e) {
                         message.getView().reportError(e);
                     } catch (NumberFormatException e){
                         e = new NumberFormatException("You wrote the object cards coordinates in an incorrect format");
                     }
-                    if (chosenObjectCards != null) {
-                        try {
-                            b = checkPickedObject(chosenObjectCards);
-                        } catch (MaxDrawableObjectsException | NoAdjacentException | NoFreeSidesException |
-                                 AlreadyPickedException | NoStraightLineException e) {
-                            message.getView().reportError(e);
-                        }
-                        if (b == true) {
-                            savePickedObject(chosenObjectCards);
-                            String turnPlayerMessage = "In which bookshelf column do you want to insert those cards?";
-                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
-                            model.handleTurn(turnPlayerMessage, otherPlayersMessage);
-                        } else {
-                            System.out.println("Objects not saved");
-                        }
-                    } else {
-                        System.out.println("Empty objects");
-                    }
                 } else if (Objects.equals(input[0], "BOOKSHELFCOLUMNCHOICE")) {
                     int chosenColumn = -5;
                     try {
                         chosenColumn = convertColumn(input[1]);
+                        try {
+                            b = checkChosenColumn(chosenColumn);
+                        } catch (OutOfBookshelfException e) {
+                            message.getView().reportError(e);
+                        }
+                        if (b == true) {
+                            int i = 0;
+                            while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
+                                i += 1;
+                            }
+                            Player currentPlayer = model.getTable()[i];
+                            currentPlayer.setChosenColumn(chosenColumn);
+                            String turnPlayerMessage = "In which order do you want to insert the cards in that bookshelf column?";
+                            String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
+                            model.handleTurn(turnPlayerMessage, otherPlayersMessage);
+                        }
                     } catch (NumberFormatException e) {
                         e = new NumberFormatException("You wrote the column number in an incorrect format");
                         message.getView().reportError(e);
-                    }
-                    try {
-                        b = checkChosenColumn(chosenColumn);
-                    } catch (OutOfBookshelfException e) {
-                        message.getView().reportError(e);
-                    }
-                    if (b == true) {
-                        int i = 0;
-                        while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
-                            i += 1;
-                        }
-                        Player currentPlayer = model.getTable()[i];
-                        currentPlayer.setChosenColumn(chosenColumn);
-                        String turnPlayerMessage = "In which order do you want to insert the cards in that bookshelf column?";
-                        String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
-                        model.handleTurn(turnPlayerMessage, otherPlayersMessage);
                     }
                 } else if (Objects.equals(input[0], "INSERTIONORDERCHOICE")) {
                     int[] chosenInsertionOrder = null;
                     boolean c = false;
                     try {
                         chosenInsertionOrder = convertOrder(input[1]);
+                        try {
+                            c = checkOrder(chosenInsertionOrder);
+                        } catch (DifferentLengthException | OrderException e) {
+                            message.getView().reportError(e);
+                        }
+                        if (c == true) {
+                            int i = 0;
+                            while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
+                                i += 1;
+                            }
+                            Player currentPlayer = model.getTable()[i];
+                            model.insertInOrder(chosenInsertionOrder);
+                            model.endTurnChecks();
+                        } else {
+                            System.out.println("Order not saved");
+                        }
                     } catch (OrderException e) {
                         message.getView().reportError(e);
                     }
@@ -93,22 +109,7 @@ public class GameController implements Observer<PlayerChoice> {
                         e = new NumberFormatException("You wrote the insertion order in an incorrect format");
                         message.getView().reportError(e);
                     }
-                    try {
-                        c = checkOrder(chosenInsertionOrder);
-                    } catch (DifferentLengthException | OrderException e) {
-                        message.getView().reportError(e);
-                    }
-                    if (c == true) {
-                        int i = 0;
-                        while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
-                            i += 1;
-                        }
-                        Player currentPlayer = model.getTable()[i];
-                        model.insertInOrder(chosenInsertionOrder);
-                        model.endTurnChecks();
-                    } else {
-                        System.out.println("Order not saved");
-                    }
+
 
                 }
             }catch (IndexOutOfBoundsException e){

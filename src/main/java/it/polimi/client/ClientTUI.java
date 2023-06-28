@@ -53,7 +53,7 @@ public class ClientTUI{
             String stringToPrecede = new String("These are the object cards you have removed from the board: ");
             int i = 1;
             for(ObjectCard card : chosenObjects){
-                stringToPrecede = stringToPrecede + i + " " + card.getType().getColor() + squareCharacter + Type.RESET + ", ";
+                stringToPrecede = stringToPrecede + i + " " + card.getType().getColor() + squareCharacter + Type.RESET + "   ";
                 i += 1;
             }
             stringToPrecede = stringToPrecede + "\n";
@@ -80,49 +80,53 @@ public class ClientTUI{
                             }
                         }
                         else if(inputObject instanceof GameView){
-                            if (((GameView) inputObject).getLeaderboard()[0] == null){
-
-                                for(Player player : ((GameView) inputObject).getTable()){
-                                    if(myPlayerName.equals(player.getNickname())){
-                                        myPlayer = player;
-                                    }
-                                }
-                                System.out.println("GAME BOARD:");
-                                ((GameView) inputObject).getBoard().showBoard(((GameView) inputObject).getTable().length);
-                                int j = 0;
-                                for(int i = 0; i < ((GameView) inputObject).getBoard().getCommonGoals().length; i++){
-                                    j += 1;
-                                    System.out.println("Common goal " + j + ": " + ((GameView) inputObject).getBoard().getCommonGoals()[i].getGoalDescription());
-                                }
-                                for(Player player : ((GameView) inputObject).getTable()){
-                                    System.out.print(player.getNickname() + "'s BOOKSHELF: \t ");
-                                }
-                                System.out.println("YOUR PERSONAL GOAL:");
-                                System.out.println();
-                                for(int i = 0; i < ((GameView) inputObject).getTable()[0].getBookshelf().getShelf().length; i++){
-                                    for(Player player : ((GameView) inputObject).getTable()){
-                                        System.out.print(player.getBookshelf().showBookshelf(i));
-                                        for(char character : player.getNickname().toCharArray()){
-                                            System.out.print(" ");
-                                        }
-                                        System.out.print("    \t ");
-                                    }
-                                    System.out.print(myPlayer.getPersonalGoal().getGoal().showBookshelf(i));
-                                    System.out.println();
-                                }
-                                if(myPlayer.getPosition() == ((GameView) inputObject).getCurrPlayer()){
-                                    printTurnMessage(((GameView) inputObject).getTurnPlayerMessage(), myPlayer.getChosenObjects());
-                                }
-                                else{
-                                    System.out.println(((GameView) inputObject).getOtherPlayersMessage());
+                            for(Player player : ((GameView) inputObject).getTable()){
+                                if(myPlayerName.equals(player.getNickname())){
+                                    myPlayer = player;
                                 }
                             }
+                            System.out.println("GAME BOARD:");
+                            ((GameView) inputObject).getBoard().showBoard(((GameView) inputObject).getTable().length);
+                            int j = 0;
+                            for(int i = 0; i < ((GameView) inputObject).getBoard().getCommonGoals().length; i++){
+                                j += 1;
+                                if(((GameView) inputObject).getBoard().getCommonGoals()[i].getPoints().isEmpty()){
+                                    System.out.println("Common goal " + j + ": " + ((GameView) inputObject).getBoard().getCommonGoals()[i].getGoalDescription() + "(0 points will be assigned to the next who achieves the described pattern)");
+
+                                }
+                                else{
+                                    System.out.println("Common goal " + j + ": " + ((GameView) inputObject).getBoard().getCommonGoals()[i].getGoalDescription() + "("+ ((GameView) inputObject).getBoard().getCommonGoals()[i].getPoints().get(0).getValue() +" points will be assigned to the next who achieves the described pattern)");
+                                }
+                            }
+                            for(Player player : ((GameView) inputObject).getTable()){
+                                System.out.print(player.getNickname() + "'s BOOKSHELF:    \t ");
+                            }
+                            System.out.println("YOUR PERSONAL GOAL:");
+                            System.out.println();
+                            for(int i = 0; i < ((GameView) inputObject).getTable()[0].getBookshelf().getShelf().length; i++){
+                                for(Player player : ((GameView) inputObject).getTable()){
+                                    System.out.print(player.getBookshelf().showBookshelf(i));
+                                    for(char character : player.getNickname().toCharArray()){
+                                        System.out.print(" ");
+                                    }
+                                    System.out.print("    \t ");
+                                }
+                                System.out.print(myPlayer.getPersonalGoal().getGoal().showBookshelf(i));
+                                System.out.println();
+                            }
+                            if(myPlayer.getPosition() == ((GameView) inputObject).getCurrPlayer()){
+                                printTurnMessage(((GameView) inputObject).getTurnPlayerMessage(), myPlayer.getChosenObjects());
+                            }
                             else{
-                                System.out.println("LEADERBOARD:");
+                                System.out.println(((GameView) inputObject).getOtherPlayersMessage());
+                            }
+                            if (((GameView) inputObject).getLeaderboard()[0] != null){
+                                System.out.println("The game has ended\nThis is the LEADERBOARD:");
                                 int i = 1;
                                 for(Player player : ((GameView) inputObject).getLeaderboard()){
                                     System.out.println(i + ": " + player.getNickname() + " with " + player.getPoints() + "points");
                                 }
+                                System.out.println("\n\n\nIf you want to play another game, relaunch the app");
                             }
                         }
                         else if(inputObject instanceof Exception){

@@ -24,7 +24,7 @@ public class Server {
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private Map<String, ClientConnection> waitingConnection = new HashMap<>();
     private Map<Player, ClientConnection> clientConnections = new HashMap<>();
-    private Map<Player, RemoteView> playerRemoteViews = new HashMap<>();
+    private List<Game> activeGamesList = new ArrayList<>();
 
     Game model = null;
     GameController controller;
@@ -39,10 +39,24 @@ public class Server {
                 waitingConnection.remove(nickname);
             }
         }
-        for(Player player : clientConnections.keySet()){
-            if(clientConnections.get(player) == c){
-                clientConnections.remove(player);
-                playerRemoteViews.remove(player);
+        for(Game game : activeGamesList){
+            boolean flag = false;
+            String disconnectedNickname = new String("");
+            for(Player player : game.getTable()){
+                if(clientConnections.get(player) == c){
+                    flag = true;
+                    disconnectedNickname = new String(player.getNickname());
+                    clientConnections.remove(player);
+                }
+            }
+            if(flag == true){
+                for(Player player : game.getTable()){
+                    String closingMessage = new String("\nYou are being disconnected because the game can't continue since " + disconnectedNickname + " left the game" +
+                            "\nIf you want to play another game, relaunch the app");
+                    ((SocketClientConnection)clientConnections.get(player)).close(closingMessage);
+                    clientConnections.remove(player);
+                }
+                activeGamesList.remove(game);
             }
         }
     }
@@ -125,7 +139,7 @@ public class Server {
                 playerView.addObserver(controller);
                 model.addObserver(playerView);
                 clientConnections.put(player, connection);
-                playerRemoteViews.put(player, playerView);
+                activeGamesList.add(model);
                 i++;
             }
             controller.setup();

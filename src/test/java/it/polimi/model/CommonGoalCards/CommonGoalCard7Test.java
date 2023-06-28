@@ -1,6 +1,5 @@
 package it.polimi.model.CommonGoalCards;
 
-import it.polimi.model.ObjectCard;
 import it.polimi.model.PublicObjectCard;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,6 @@ class CommonGoalCard7Test {
         bookshelf= new PublicObjectCard[6][5];
         CommonGoalCard7 cm7=new CommonGoalCard7(4);
         // -- 2 squares of 4 tiles with same type --
-        //bookshelf.setShelf(new ObjectCard(1,i,j))
         //SQUARE 1
         bookshelf[0][0]=new PublicObjectCard(1,0,0);
         bookshelf[1][0]=new PublicObjectCard(1,1,0);

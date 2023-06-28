@@ -23,9 +23,11 @@ public class CommonGoalCard12 extends CommonGoalCard {
         if(!flag){return flag;}
 
         // Not empty bookshelf case
+        int lastColumn = bookshelf[0].length - 1;
+        // Left to Right
         if(bookshelf[0][0] != null) {
             if (bookshelf[0][0].getType() != null) {
-                for (int i = 0; i < bookshelf.length - 1 && flag; i++) {
+                for (int i = 0; i < bookshelf.length - 1; i++) {
                     if(bookshelf[i][i] != null) {
                         if (bookshelf[i][i].getType() == null) {
                             flag = false;
@@ -41,24 +43,25 @@ public class CommonGoalCard12 extends CommonGoalCard {
         }
         else if (bookshelf[1][0] != null){
             if (bookshelf[1][0].getType() != null) {
-                for (int i = 0; i < bookshelf.length - 1 && flag; i++) {
+                for (int i = 0; i < bookshelf.length - 1; i++) {
                     if (bookshelf[i + 1][i] != null && bookshelf[i][i] != null) {
-                        if (bookshelf[i + 1][i].getType() == null && bookshelf[i][i].getType() != null) {
+                        if (bookshelf[i + 1][i].getType() == null || bookshelf[i][i].getType() != null) {
                             flag = false;
                         }
                     }
                 }
             }
         }
-        else if (bookshelf[0][bookshelf[0].length-1] != null){
-            if (bookshelf[0][bookshelf[0].length-1].getType() != null) {
-                for (int i = 0; i < bookshelf.length - 1 && flag; i++) {
-                    if(bookshelf[i][bookshelf[i].length - 1 - i] != null) {
-                        if (bookshelf[i][bookshelf[i].length - 1 - i].getType() == null) {
+        // Right to Left
+        else if (bookshelf[0][lastColumn] != null){
+            if (bookshelf[0][lastColumn].getType() != null) {
+                for (int i = 0; i < bookshelf.length - 1; i++) {
+                    if(bookshelf[i][lastColumn - i] != null) {
+                        if (bookshelf[i][lastColumn - i].getType() == null) {
                             flag = false;
                         }
-                        if (i - 1 >= 0 && bookshelf[i - 1][bookshelf.length - 1 - i] != null) {
-                            if (bookshelf[i - 1][bookshelf.length - 1 - i].getType() != null) {
+                        if (i - 1 >= 0 && bookshelf[i - 1][lastColumn - i] != null) {
+                            if (bookshelf[i - 1][lastColumn - i].getType() != null) {
                                 flag = false;
                             }
                         }
@@ -66,11 +69,11 @@ public class CommonGoalCard12 extends CommonGoalCard {
                 }
             }
         }
-        else if(bookshelf[1][bookshelf[4].length-1] != null){
-            if (bookshelf[1][bookshelf[4].length-1].getType() != null) {
-                for (int i = 0; i < bookshelf.length - 1 && flag; i++) {
-                    if (bookshelf[i + 1][bookshelf[i].length - 1 - i] != null && bookshelf[i][bookshelf.length - 1 - i] != null) {
-                        if (bookshelf[i + 1][bookshelf.length - 1 - i].getType() == null && bookshelf[i][bookshelf.length - 1 - i].getType() != null) {
+        else if(bookshelf[1][lastColumn] != null){
+            if (bookshelf[1][lastColumn].getType() != null) {
+                for (int i = 0; i < lastColumn; i++) {
+                    if (bookshelf[i + 1][lastColumn - i] != null && bookshelf[i][lastColumn - i] != null) {
+                        if (bookshelf[i + 1][lastColumn - i].getType() == null && bookshelf[i][lastColumn - i].getType() != null) {
                             flag = false;
                         }
                     }
