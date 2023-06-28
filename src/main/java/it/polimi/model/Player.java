@@ -1,8 +1,8 @@
 package it.polimi.model;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Serializable {
     static final long serialVersionUID = 1L;
@@ -164,187 +164,58 @@ public class Player implements Serializable {
     }
 
     public void countAdjacentItemsPoints() {
-        int p=0;
+        int points=0;
         // Get bookshelf
         ObjectCard[][] shelf = bookshelf.getShelf();
-        // Create hashmap to track which types has already been counted
-        Map<Type, Integer> countedTypes = new HashMap<>();
-        // Create an array to track already counted object
-        // Array has [xCoordinate][yCoordinate] of counted tiles
-        // It is initialized to -1 in every cell
-        int tileCount = shelf.length + shelf[0].length;
-        int[][] countedCoordinates = new int[tileCount][2];
-        for(int j=0;j<tileCount;j++){
-            countedCoordinates[j][0] = -1;
-            countedCoordinates[j][1] = -1;
+        ObjectCard [][] bookshelfCopy=new ObjectCard[shelf.length][shelf[0].length];
+        for(int i=0;i <shelf.length;i++){
+            for(int j=0;j<shelf[0].length;j++){
+                bookshelfCopy[i][j]=shelf[i][j];
+            }
         }
 
-        // Cycle through every row and column
-        for (int row = 0; row < shelf.length; row++) {
-            for (int col = 0; col < shelf[row].length; col++) {
-                ObjectCard currentCard = shelf[row][col];
-                boolean currentCardCounted = false;
-                boolean currentCardContiguous = false;
-                if(currentCard != null) {
-                    Type currentType = currentCard.getType();
-                    // If currentType has not been counted yet, we start counting from 0
-                    if (!countedTypes.containsKey(currentType)) {
-                        int adjacentCount = 0; // Counter for adjacent cards
-
-                        // Cycle through every row and column adjacent to the actual card
-                        for (int j = row - 1; j <= row + 1; j++) {
-                            for (int k = col - 1; k <= col + 1; k++) {
-                                // If adjacent slot is not empty and it is not actual card, add to count (if types match)
-                                if (j >= 0 && j < shelf.length && k >= 0 && k < shelf[row].length && !(j == row && k == col)) {
-                                    ObjectCard adjacentCard = shelf[j][k];
-                                    boolean adjacentCardCounted = false;
-
-                                    if(adjacentCard != null && (k == col || j == row)) {
-                                        if (adjacentCard.getType().equals(currentType)) {
-                                            // Insert currentCard coordinates (if not already inserted)
-                                            for (int crow = 0; crow < countedCoordinates.length && !currentCardCounted; crow++) {
-                                                // This combination of [row][col] is in the array
-                                                if (countedCoordinates[crow][0] == row && countedCoordinates[crow][1] == col) {
-                                                    currentCardCounted = true;
-                                                    break;
-                                                }
-                                            }
-                                            if (!currentCardCounted) {
-                                                for (int i = 0; i < countedCoordinates.length; i++) {
-                                                    if (countedCoordinates[i][0] == -1) {
-                                                        countedCoordinates[i][0] = currentCard.getXCoordinate();
-                                                        countedCoordinates[i][1] = currentCard.getYCoordinate();
-                                                        currentCardCounted = true;
-                                                        adjacentCount++;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            // Insert adjacentCard coordinates and (if not already inserted) add points
-                                            for (int crow = 0; crow < countedCoordinates.length && !adjacentCardCounted; crow++) {
-                                                // This combination of [row][col] is in the array
-                                                if (countedCoordinates[crow][0] == j && countedCoordinates[crow][1] == k) {
-                                                    adjacentCardCounted = true;
-                                                    break;
-                                                }
-                                            }
-                                            if (!adjacentCardCounted) {
-                                                for (int i = 0; i < countedCoordinates.length; i++) {
-                                                    if (countedCoordinates[i][0] == -1) {
-                                                        countedCoordinates[i][0] = adjacentCard.getXCoordinate();
-                                                        countedCoordinates[i][1] = adjacentCard.getYCoordinate();
-                                                        adjacentCardCounted = true;
-                                                        adjacentCount++;
-                                                        break;
-                                                    }
-                                                }
-                                            }
+        for(int r=0; r<shelf.length; r++){
+            for(int c=0;c<shelf[0].length;c++){
+                List<ObjectCard> objectList= new ArrayList<>();
+                if(bookshelfCopy[r][c]!=null) {
+                    objectList.add(bookshelfCopy[r][c]);
+                    for (int r2 = 0; r2 < shelf.length; r2++) {
+                        for (int c2 = 0; c2 < shelf[0].length; c2++) {
+                            if (bookshelfCopy[r2][c2] != null && bookshelfCopy[r2][c2].getType() != null) {
+                                if (bookshelfCopy[r2][c2].getType() == objectList.get(0).getType()) {
+                                    if ((c2 > 0 && objectList.contains(bookshelfCopy[r2][c2 - 1])) || (r2 > 0 && objectList.contains(bookshelfCopy[r2 - 1][c2]))) {
+                                        if (!objectList.contains(bookshelfCopy[r2][c2])) {
+                                            objectList.add(bookshelfCopy[r2][c2]);
                                         }
                                     }
                                 }
                             }
                         }
-
-                        // Add actual type to counted types map
-                        countedTypes.put(currentType, adjacentCount);
-                    } else {
-                        // If actual type has already been counted, restart from previous count
-                        int previousCount = countedTypes.get(currentType);
-
-                        // Restart from previous count
-                        int adjacentCount = previousCount;
-                        for (int j = row - 1; j <= row + 1; j++) {
-                            for (int k = col - 1; k <= col + 1; k++) {
-                                if (j >= 0 && j < shelf.length && k >= 0 && k < shelf[row].length && !(j == row && k == col)) {
-                                    ObjectCard adjacentCard = shelf[j][k];
-                                    boolean adjacentCardCounted = false;
-                                    boolean adjacentCardContiguous = false;
-                                    currentCardContiguous = false;
-
-                                    if (adjacentCard != null && (k == col || j == row)) {
-                                        if (adjacentCard.getType().equals(currentType)) {
-                                            // Insert currentCard coordinates (if not already inserted)
-                                            for(int crow=0;crow<countedCoordinates.length;crow++){
-                                                // This combination of [row][col] is in the array
-                                                if(countedCoordinates[crow][0] == row && countedCoordinates[crow][1] == col){
-                                                    currentCardCounted = true;
-                                                }
-                                                if(countedCoordinates[crow][0] == row && countedCoordinates[crow][1] == col + 1 ||
-                                                    countedCoordinates[crow][0] == row && countedCoordinates[crow][1] == col - 1 ||
-                                                    countedCoordinates[crow][0] == row + 1 && countedCoordinates[crow][1] == col ||
-                                                    countedCoordinates[crow][0] == row - 1 && countedCoordinates[crow][1] == col){
-                                                    currentCardContiguous = true;
-                                                }
-                                            }
-                                            //Add only if currentCard is contiguous to previous group
-                                            //and if it was not already counted
-                                            if(!currentCardCounted && currentCardContiguous){
-                                                for (int i = 0; i < countedCoordinates.length; i++) {
-                                                    if (countedCoordinates[i][0] == -1) {
-                                                        countedCoordinates[i][0] = currentCard.getXCoordinate();
-                                                        countedCoordinates[i][1] = currentCard.getYCoordinate();
-                                                        currentCardCounted = true;
-                                                        adjacentCount++;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            // Insert adjacentCard coordinates and (if not already inserted) add points
-                                            for(int crow=0;crow<countedCoordinates.length;crow++){
-                                                // This combination of [row][col] is in the array
-                                                if(countedCoordinates[crow][0] == j && countedCoordinates[crow][1] == k){
-                                                    adjacentCardCounted = true;
-                                                }
-                                                if(countedCoordinates[crow][0] == j && countedCoordinates[crow][1] == k + 1 ||
-                                                    countedCoordinates[crow][0] == j && countedCoordinates[crow][1] == k - 1 ||
-                                                    countedCoordinates[crow][0] == j + 1 && countedCoordinates[crow][1] == k ||
-                                                    countedCoordinates[crow][0] == j - 1 && countedCoordinates[crow][1] == k){
-                                                    adjacentCardContiguous = true;
-                                                }
-                                            }
-                                            if(!adjacentCardCounted && adjacentCardContiguous){
-                                                for (int i = 0; i < countedCoordinates.length; i++) {
-                                                    if (countedCoordinates[i][0] == -1) {
-                                                        countedCoordinates[i][0] = adjacentCard.getXCoordinate();
-                                                        countedCoordinates[i][1] = adjacentCard.getYCoordinate();
-                                                        adjacentCardCounted = true;
-                                                        adjacentCount++;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        // Update current type count
-                        countedTypes.put(currentType, adjacentCount);
                     }
                 }
-            }
-        }
-        // Sum all types counting and put them into points attribute
-        for (int adjacentPoints : countedTypes.values()) {
-            // Add points based on how many adjacent points had been made
-            if(adjacentPoints == 3){
-                p=getPoints();
-                setPoints(p+2);
-            }
-            else if(adjacentPoints == 4){
-                p=getPoints();
-                setPoints(p+3);
-            }
-            else if(adjacentPoints == 5){
-                p=getPoints();
-                setPoints(p+5);
-            }
-            else if(adjacentPoints >= 6){
-                p=getPoints();
-                setPoints(p+8);
+                for(int k=0;k<objectList.size();k++){
+                    bookshelfCopy[objectList.get(k).getXCoordinate()][objectList.get(k).getYCoordinate()]=null;
+                }
+                    // Add points based on how many adjacent points had been made
+                    if(objectList.size() == 3) {
+                        points = getPoints();
+                        setPoints(points + 2);
+                    }
+                    else if(objectList.size() == 4) {
+                        points = getPoints();
+                        setPoints(points + 3);
+                    }
+                    else if(objectList.size() == 5) {
+                        points = getPoints();
+                        setPoints(points + 5);
+                    }
+                    else if(objectList.size() >= 6){
+                        points = getPoints();
+                        setPoints(points+8);
+                    }
+                objectList.clear();
             }
         }
     }
-
 }
+

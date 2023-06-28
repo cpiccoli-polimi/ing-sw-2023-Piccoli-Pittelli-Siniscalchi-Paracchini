@@ -123,9 +123,9 @@ class PlayerTest {
         shelf[3][2]=new PublicObjectCard(1,3,2);
         bookshelf.setShelf(shelf[3][2]);
 
-        //Points are counted only one time -> 2 points in total
+        //Points are counted for each group -> 4 points in total
         playerTest.countAdjacentItemsPoints();
-        assertEquals(2, playerTest.getPoints());
+        assertEquals(4, playerTest.getPoints());
     }
 
     @Test
@@ -153,9 +153,9 @@ class PlayerTest {
         shelf[4][0]=new PublicObjectCard(1,4,0);
         bookshelf.setShelf(shelf[4][0]);
 
-        //Points are counted only one time -> 2 points in total
+        //Points are counted for each group -> 5 points in total
         playerTest.countAdjacentItemsPoints();
-        assertEquals(3, playerTest.getPoints());
+        assertEquals(5, playerTest.getPoints());
     }
 
     @Test
