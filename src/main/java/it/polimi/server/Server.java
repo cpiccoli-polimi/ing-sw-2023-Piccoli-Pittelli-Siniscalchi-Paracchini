@@ -70,7 +70,6 @@ public class Server {
                 }
                 Scanner in = new Scanner(socket.getInputStream());
                 nickname = in.nextLine();
-                System.out.println("Nickname Set");
             }
             catch(IOException e){
                 throw new RuntimeException(e);
@@ -90,9 +89,7 @@ public class Server {
                 message = in.nextLine();
                 try {
                     playersNumber = Integer.valueOf(message);
-                    System.out.println("Players Number Set");
                 } catch (NumberFormatException e) {
-                    System.err.println("Error " + e.getStackTrace());
                     playersNumber = 0;
                 }
                 while(playersNumber < 2 || playersNumber > 4){
@@ -100,9 +97,7 @@ public class Server {
                     message = in.nextLine();
                     try {
                         playersNumber = Integer.valueOf(message);
-                        System.out.println("Players Number Set");
                     } catch (NumberFormatException e) {
-                        System.err.println("Error " + e.getStackTrace());
                         playersNumber = 0;
                     }
                 }
@@ -111,7 +106,6 @@ public class Server {
                 message = in.nextLine();
                 try {
                     commonGoalsNumber = Integer.valueOf(message);
-                    System.out.println("Common Goals Number Set");
                 } catch (NumberFormatException e) {
                     commonGoalsNumber = 0;
                 }
@@ -120,21 +114,14 @@ public class Server {
                     message = in.nextLine();
                     try {
                         commonGoalsNumber = Integer.valueOf(message);
-                        System.out.println("Common Goals Number Set");
                     } catch (NumberFormatException e) {
-                        System.err.println("Error " + e.getStackTrace());
                         commonGoalsNumber = 0;
                     }
                 }
-                System.out.println("Creating Game");
                 model = new Game(playersNumber, commonGoalsNumber);
-                System.out.println("Game created");
                 ((SocketClientConnection)c).setModel(model);
-                System.out.println("Game set");
             }
             catch(IOException | PlayersNumberException | CommonGoalsNumberException e){
-                System.out.println(e.getMessage());
-                System.err.println("Error " + e.getStackTrace());
                 throw new RuntimeException(e);
             }
         }
@@ -142,12 +129,9 @@ public class Server {
         keys = new ArrayList<>(waitingConnection.keySet());
         if(waitingConnection.size() == playersNumber){
             controller = new GameController(model);
-            System.out.println("Controller created");
             int i = 0;
             for(ClientConnection connection : waitingConnection.values()) {
-                System.out.println("Setting Table");
                 model.setTable(new Player(keys.get(i), model.getCommonGoalsNumber()), i);
-                System.out.println("Table set");
                 Player player = model.getTable()[i];
                 RemoteView playerView = new RemoteView(player, connection);
                 playerView.addObserver(controller);
@@ -186,7 +170,6 @@ public class Server {
             }
             catch(IOException e){
                 System.out.println("Connection error!");
-                System.err.println("Error " + e.getStackTrace());
             }
         }
     }
