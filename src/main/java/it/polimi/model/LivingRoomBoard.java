@@ -1,14 +1,10 @@
 package it.polimi.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Serializable;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * LivingRoomBoard class represents the living room board
@@ -33,12 +29,12 @@ public class LivingRoomBoard implements Serializable {
     protected LivingRoomBoard(int commonGoalsNumber) throws FileNotFoundException {
         this.tile = new Tile[9][9];
 
-        Gson gson = new Gson();
-        File tilesJsonFile = new File("src/main/resources/Tiles.json");
         try {
-            FileReader tilesJsonFileReader = new FileReader(tilesJsonFile);
-            JsonArray tiles = gson.fromJson( tilesJsonFileReader, JsonArray.class);
-            for(JsonElement tileJsonElement:tiles){
+            InputStream stream = PersonalGoalCard.class.getResourceAsStream("/jsonFiles/Tiles.json");
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+            JsonElement obj = JsonParser.parseReader(jsonReader);
+            JsonArray jsonArray = obj.getAsJsonArray();
+            for(JsonElement tileJsonElement : jsonArray){
                 JsonObject tileJsonObject = tileJsonElement.getAsJsonObject();
                 int row = tileJsonObject.get("row").getAsInt();
                 int column = tileJsonObject.get("column").getAsInt();
@@ -46,8 +42,8 @@ public class LivingRoomBoard implements Serializable {
 
                 this.tile[row][column] = new Tile(minPlayers);
             }
-
-        } catch (FileNotFoundException e) {
+        }
+        catch(NullPointerException e){
             throw e;
         }
 

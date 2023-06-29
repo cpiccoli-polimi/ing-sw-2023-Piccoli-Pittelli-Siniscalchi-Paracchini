@@ -112,7 +112,7 @@ public class ClientSceneController {
                 @Override
                 public void run() {
                     try {
-                        fxmlLoader = new FXMLLoader(getClass().getResource("/WelcomeScene.fxml"));
+                        fxmlLoader = new FXMLLoader(getClass().getResource("/ScenesFXMLs/WelcomeScene.fxml"));
                         root = fxmlLoader.load();
                         stage = (Stage) activePane.getScene().getWindow();
                         scene = new Scene(root, clientPane.getPrefWidth(), clientPane.getPrefHeight());
@@ -156,7 +156,7 @@ public class ClientSceneController {
             @Override
             public void run() {
                 try {
-                    fxmlLoader = new FXMLLoader(getClass().getResource("/GameScene.fxml"));
+                    fxmlLoader = new FXMLLoader(getClass().getResource("/ScenesFXMLs/GameScene.fxml"));
                     root = fxmlLoader.load();
                     stage = (Stage) activePane.getScene().getWindow();
                     scene = new Scene(root, clientPane.getPrefWidth(), clientPane.getPrefHeight());

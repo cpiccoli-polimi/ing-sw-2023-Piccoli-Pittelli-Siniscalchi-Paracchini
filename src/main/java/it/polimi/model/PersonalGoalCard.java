@@ -36,7 +36,7 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
         this.id = id;
 
         // Read file from JSON file and copy it into Personal Goal Card
-        InputStream stream = PersonalGoalCard.class.getResourceAsStream("/PersonalGoalCards.json");
+        InputStream stream = PersonalGoalCard.class.getResourceAsStream("/jsonFiles/PersonalGoalCards.json");
         if (stream == null) throw new NullPointerException();
         JsonReader jsonReader = new JsonReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
         JsonElement obj = JsonParser.parseReader(jsonReader);

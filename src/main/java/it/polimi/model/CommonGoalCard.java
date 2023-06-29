@@ -1,12 +1,10 @@
 package it.polimi.model;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Serializable;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,14 +31,15 @@ public abstract class CommonGoalCard extends GoalCard implements Serializable {
         this.points = new ArrayList<>();
 
         try {
-            Gson gson = new Gson();
-            File commonGoalsDescriptionFile = new File("src/main/resources/CommonGoals.json");
-            FileReader commonGoalsDescriptionFileReader = new FileReader(commonGoalsDescriptionFile);
-            JsonObject commonGoalsDescriptions = gson.fromJson( commonGoalsDescriptionFileReader, JsonObject.class);
+            InputStream stream = PersonalGoalCard.class.getResourceAsStream("/jsonFiles/CommonGoals.json");
+            JsonReader jsonReader = new JsonReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+            JsonElement obj = JsonParser.parseReader(jsonReader);
+            JsonObject commonGoalsDescriptions = obj.getAsJsonObject();
             this.goalDescription = commonGoalsDescriptions.get(String.valueOf(goalId)).getAsString();
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        }
+        catch(NullPointerException e){
+            System.out.println("5");
+            throw e;
         }
     }
     /**

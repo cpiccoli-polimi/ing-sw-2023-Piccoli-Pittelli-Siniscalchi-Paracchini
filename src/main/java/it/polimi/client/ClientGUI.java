@@ -27,7 +27,7 @@ public class ClientGUI extends Application{
         stage.getIcons().add(new Image("/GraphicalResources/Miscellaneous/icon.png"));
         stage.setResizable(false);
 
-        fxmlLoader = new FXMLLoader(getClass().getResource("/ClientScene.fxml"));
+        fxmlLoader = new FXMLLoader(getClass().getResource("/ScenesFXMLs/ClientScene.fxml"));
         root = fxmlLoader.load();
         screenDimensions = Screen.getPrimary().getVisualBounds();
         clientScene = new Scene(root, screenDimensions.getWidth()*0.90, screenDimensions.getHeight()*0.90);
