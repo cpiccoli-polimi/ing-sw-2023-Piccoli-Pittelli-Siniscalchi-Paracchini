@@ -23,10 +23,9 @@ Realizzare in Java il gioco [My Shelfie by Cranio Creations](https://www.google.
 - [x] **Partite multiple**: Il server può gestire più partite contemporaneamente.
 
 ### Come eseguire il gioco
-È presente un file .jar chiamato MyShelfie.jar
-Posizionarsi nella stessa cartella del file con il terminale e poi eseguire il comando
+È presente un file .jar chiamato MyShelfie.jar: posizionarsi nella stessa cartella del file con il terminale e poi eseguire il comando
 ```
-java -jar MyShelfie.jar
+java -jar MyShelfieApp.jar
 ```
 Dopo aver avviato il jar è possibile:
 - Premere 1 per avviare il Server
