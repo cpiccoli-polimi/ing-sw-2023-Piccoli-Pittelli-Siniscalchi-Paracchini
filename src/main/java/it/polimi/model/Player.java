@@ -193,9 +193,20 @@ public class Player implements Serializable {
                         }
                     }
                 }
-                for(int k=0;k<objectList.size();k++){
-                    bookshelfCopy[objectList.get(k).getXCoordinate()][objectList.get(k).getYCoordinate()]=null;
+                for(int i=0;i< shelf.length;i++){
+                    for(int j=0;j<shelf[0].length;j++){
+                        for(int k=0;k<objectList.size();k++){
+                            if(bookshelfCopy[i][j]!=null){
+                                if(bookshelfCopy[i][j].getId()==objectList.get(k).getId()){
+                                    bookshelfCopy[i][j]=null;
+                                }
+                            }
+                        }
+                    }
                 }
+                /*for(int k=0;k<objectList.size();k++){
+                    bookshelfCopy[objectList.get(k).getXCoordinate()][objectList.get(k).getYCoordinate()]=null;
+                }*/
                     // Add points based on how many adjacent points had been made
                     if(objectList.size() == 3) {
                         points = getPoints();

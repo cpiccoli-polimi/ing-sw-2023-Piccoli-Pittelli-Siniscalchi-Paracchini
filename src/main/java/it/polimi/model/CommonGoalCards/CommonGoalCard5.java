@@ -140,9 +140,20 @@ public class CommonGoalCard5 extends CommonGoalCard {
                         }
                     }
                 }
-                for(int k=0;k<objectList.size();k++){
-                    bookshelfCopy[objectList.get(k).getXCoordinate()][objectList.get(k).getYCoordinate()]=null;
+                for(int i=0;i< bookshelf.length;i++){
+                    for(int j=0;j<bookshelf[i].length;j++){
+                        for(int k=0;k<objectList.size();k++){
+                            if(bookshelfCopy[i][j]!=null){
+                                if(bookshelfCopy[i][j].getId()==objectList.get(k).getId()){
+                                    bookshelfCopy[i][j]=null;
+                                }
+                            }
+                        }
+                    }
                 }
+                /*for(int k=0;k<objectList.size();k++){
+                    bookshelfCopy[objectList.get(k).getXCoordinate()][objectList.get(k).getYCoordinate()]=null;
+                }*/
                 if(objectList.size()>=4) count++;
                 objectList.clear();
             }
