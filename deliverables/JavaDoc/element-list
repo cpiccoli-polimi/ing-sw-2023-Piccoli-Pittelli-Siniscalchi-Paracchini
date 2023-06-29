@@ -1,0 +1,10 @@
+it.polimi
+it.polimi.client
+it.polimi.controller
+it.polimi.controller.exception
+it.polimi.model
+it.polimi.model.CommonGoalCards
+it.polimi.model.exception
+it.polimi.observer
+it.polimi.server
+it.polimi.view
