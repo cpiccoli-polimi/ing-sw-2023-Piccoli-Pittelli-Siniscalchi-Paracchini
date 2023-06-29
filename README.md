@@ -13,7 +13,7 @@ Realizzare in Java il gioco [My Shelfie by Cranio Creations](https://www.google.
 ![immagine_gioco](https://cf.geekdo-images.com/sv0EgmPdxJeioJU3Pzcg3g__original/img/7pQTKAID9037N71FeOndX3y23HM=/0x0/filters:format(jpeg)/pic7005100.jpg)
 
 ### Diagrammi UML
-- Consultabili [qui](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/tree/main/UML)
+- Consultabili [qui](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/tree/main/deliverables/UML)
 
 ### Funzionalità Implementate
 - [x] **Regole Complete**
