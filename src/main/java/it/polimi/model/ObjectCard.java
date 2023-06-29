@@ -2,6 +2,12 @@ package it.polimi.model;
 
 import java.io.Serializable;
 
+/**
+ * ObjectCard class represents the cards
+ * placed in the tiles on the LivingRoomBoard
+ *
+ * @see java.io.Serializable
+ */
 public class ObjectCard implements Serializable {
     static final long serialVersionUID = 1L;
     private int id;
@@ -9,6 +15,13 @@ public class ObjectCard implements Serializable {
     private int xCoordinate;
     private int yCoordinate;
 
+    /**
+     * Creates the ObjectCard setting the type based on its id
+     *
+     * @param id the identifier of the card (defines the type)
+     * @param xCoordinate its x coordinate
+     * @param yCoordinate its y coordinate
+     */
     protected ObjectCard(int id, int xCoordinate, int yCoordinate) {
         this.id = id;
         this.xCoordinate = xCoordinate;
@@ -26,32 +39,40 @@ public class ObjectCard implements Serializable {
             this.type = Type.Frames;
         }else if (id >= 112 && id <= 132) {
             this.type = Type.Games;
-
         }
     }
 
+    /**
+     * Returns the id of the card
+     *
+     * @return id
+     */
     public int getId() {
         return id;
     }
-
+    /**
+     * Returns the type of the card
+     *
+     * @return type
+     */
     public Type getType() {
         return type;
     }
-
+    /**
+     * Returns the x coordinate of the card
+     *
+     * @return xCoordinate
+     */
     public int getXCoordinate() {
         return xCoordinate;
     }
-
-    public void setXCoordinate(int xCoordinate) {
-        this.xCoordinate = xCoordinate;
-    }
-
+    /**
+     * Returns the y coordinate of the card
+     *
+     * @return yCoordinate
+     */
     public int getYCoordinate() {
         return yCoordinate;
-    }
-
-    public void setYCoordinate(int yCoordinate) {
-        this.yCoordinate = yCoordinate;
     }
 
     @Override

@@ -2,6 +2,13 @@ package it.polimi.model;
 
 import java.io.Serializable;
 
+/**
+ * GameView class is meant to copy necessary attributes from
+ * game class and make it final, to pass through the network
+ * only "final" attributes and serialize them
+ *
+ * @see java.io.Serializable
+ */
 public class GameView implements Serializable{
     static final long serialVersionUID = 1L;
     private final String turnPlayerMessage;
@@ -10,6 +17,13 @@ public class GameView implements Serializable{
     private final Player[] leaderboard;
     private final LivingRoomBoard board;
     private final int currPlayer;
+    /**
+     * Builds GameView copying attributes from Game
+     *
+     * @param game the Game that needs to be serialized
+     * @param turnPlayerMessage the string to show to the current player
+     * @param otherPlayersMessage the string to show to the other players
+     */
     public GameView(Game game, String turnPlayerMessage, String otherPlayersMessage) {
         this.table=game.getTable();
         this.turnPlayerMessage = turnPlayerMessage;
@@ -19,24 +33,40 @@ public class GameView implements Serializable{
         this.leaderboard=game.getLeaderboard();
     }
 
+    /**
+     * Returns the string shown to the current player
+     */
     public String getTurnPlayerMessage() {
         return this.turnPlayerMessage;
     }
+    /**
+     * Returns the string shown to the other players
+     */
     public String getOtherPlayersMessage(){
         return this.otherPlayersMessage;
     }
-
+    /**
+     * Returns the table containing the players
+     * participating in this game
+     */
     public Player[] getTable () {
         return table;
     }
-
+    /**
+     * Returns the leaderboard
+     */
     public Player[] getLeaderboard(){
         return leaderboard;
     }
-
+    /**
+     * Returns the board
+     */
     public LivingRoomBoard getBoard(){
         return board;
     }
+    /**
+     * Returns the current player
+     */
     public int getCurrPlayer(){
         return currPlayer;
     }

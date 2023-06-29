@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Player class represents the single player
+ *
+ * @see java.io.Serializable
+ */
 public class Player implements Serializable {
     static final long serialVersionUID = 1L;
     private String nickname;
@@ -17,6 +22,13 @@ public class Player implements Serializable {
     private Bookshelf bookshelf;
     private int chosenColumn;
 
+    /**
+     * Creates the player setting its attributes to default values
+     * nickname from input and commonGoalsNumber from the game
+     *
+     * @param nickname
+     * @param commonGoalsNumber
+     */
     public Player(String nickname, int commonGoalsNumber){
         this.nickname=nickname;
         this.points=0;
@@ -34,34 +46,85 @@ public class Player implements Serializable {
 
     }
 
-
+    /**
+     * Returns player's nickname
+     *
+     * @return nickname
+     */
     public String getNickname(){
         return nickname;
     }
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
+    /**
+     * Returns player's points
+     *
+     * @return points
+     */
     public int getPoints(){
         return points;
     }
+    /**
+     * Sets player's points
+     *
+     * @param points
+     */
     public void setPoints(int points){
         this.points=points;
         System.out.println(getNickname()+": "+points);
     }
-
+    /**
+     * Checks if the player is the first to play
+     *
+     * @return true if the player is first, else false
+     */
     public boolean getIsFirst(){ return isFirst;}
+    /**
+     * Sets the player to be the first to play
+     *
+     * @param isFirst
+     */
     public void setIsFirst(boolean isFirst){ this.isFirst=isFirst; }
+    /**
+     * Returns the relative position of the player
+     *
+     * @return position
+     */
     public int getPosition() {
         return position;
     }
+    /**
+     * Sets the relative position of the player
+     *
+     * @param position
+     */
     public void setPosition(int position){this.position=position;}
-
+    /**
+     * Checks if the player has finished the game
+     * (its bookshelf is full)
+     *
+     * @return true if has finished, else false
+     */
     public boolean getHasFinished(){return hasFinished;}
-
+    /**
+     * Sets to true the hasFinished parameter when
+     * player's bookshelf is full
+     *
+     * @param hasFinished
+     */
     public void setHasFinished(boolean hasFinished){ this.hasFinished=hasFinished;}
-
+    /**
+     * Returns an array containing how many common goals
+     * the player has completed
+     *
+     * @return commonGoalsCompleted
+     */
     public int[] getCommonGoalsCompleted() { return commonGoalsCompleted;}
+    /**
+     * Sets the array containing how many common goals
+     * the player has completed
+     *
+     * @param commonGoalsCompleted
+     * @param newGoal
+     */
     public void setCommonGoalsCompleted(int[] commonGoalsCompleted, int newGoal){
         int i=0;
         while(this.commonGoalsCompleted[i]!=-1){
@@ -70,42 +133,82 @@ public class Player implements Serializable {
         this.commonGoalsCompleted[i]=newGoal;
         System.out.println(newGoal+" completed");
     }
-
+    /**
+     * Returns an array containing the objects chosen
+     * from the LivingRoomBoard by the player
+     *
+     * @return chosenOjects
+     */
     public ObjectCard[] getChosenObjects() {return chosenObjects;}
-    public void setChosenObjects(ObjectCard [] oggettoScelto){
+    /**
+     * Sets the objects chosen from the LivingRoomBoard
+     * by the player in the ChosenObjects attribute
+     *
+     * @param chosenObjects
+     */
+    public void setChosenObjects(ObjectCard [] chosenObjects){
         System.out.println("Player "+position);
-        chosenObjects= new ObjectCard[oggettoScelto.length];
-        System.out.println(oggettoScelto[0].getType());
-        System.arraycopy(oggettoScelto, 0, this.chosenObjects, 0, oggettoScelto.length);
+        this.chosenObjects = new ObjectCard[chosenObjects.length];
+        System.out.println(chosenObjects[0].getType());
+        System.arraycopy(chosenObjects, 0, this.chosenObjects, 0, chosenObjects.length);
         System.out.println("Copied object "+getChosenObjects()[0].getType());
 
     }
-
-
+    /**
+     * Returns player's personal goal
+     *
+     * @return personalGoal
+     */
     public PersonalGoalCard getPersonalGoal() {
         return personalGoal;
     }
-
+    /**
+     * Sets player's personal goal
+     *
+     * @param personalGoal
+     */
     public void setPersonalGoal(PersonalGoalCard personalGoal) {
         this.personalGoal = personalGoal;
     }
-
+    /**
+     * Returns player's bookshelf
+     *
+     * @return bookshelf
+     */
     public Bookshelf getBookshelf() {
         return bookshelf;
     }
-
+    /**
+     * Sets player's bookshelf
+     *
+     * @param bookshelf
+     */
     public void setBookshelf(Bookshelf bookshelf) {
         this.bookshelf = bookshelf;
     }
-
+    /**
+     * Returns player's chosen column in
+     * which to place the objects picked from
+     * the LivingRoomBoard
+     *
+     * @return chosenColumn
+     */
     public int getChosenColumn() {
         return chosenColumn;
     }
-
+    /**
+     * Sets player's chosen column
+     *
+     * @param chosenColumn
+     */
     public void setChosenColumn(int chosenColumn) {
         this.chosenColumn = chosenColumn;
     }
-
+    /**
+     * Counts personal goal points based on how many
+     * tiles in personal bookshelf match personal
+     * goal card positions and gives him points
+     */
     public void countPersonalGoalsPoints() {
         int count=0;
         int p=0;
@@ -162,7 +265,11 @@ public class Player implements Serializable {
         }
         System.out.println("PersonalGoal Tiles Matched: "+count);
     }
-
+    /**
+     * Counts how many points the player has achieved
+     * by placing adjacent tiles with the same type
+     * in his bookshelf
+     */
     public void countAdjacentItemsPoints() {
         int points=0;
         // Get bookshelf

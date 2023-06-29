@@ -15,6 +15,10 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.util.Collections.shuffle;
 
+/**
+ * Game class contains the actual game, identified by an id
+ * and containing all the necessary items to play
+ */
 public class Game extends Observable<GameView>{
 
     private int id;
@@ -30,6 +34,14 @@ public class Game extends Observable<GameView>{
     private int currentPlayer;
     private Player[] leaderboard;
 
+
+    /**
+     * Creates the Game, setting all the parameters
+     *
+     * @param playersNumber how many player will play this game
+     * @param commonGoalsNumber with how many commonGoals this game
+     *                          will be played
+     */
     public Game(int playersNumber, int commonGoalsNumber) throws PlayersNumberException, CommonGoalsNumberException, FileNotFoundException {
         LocalTime clock = LocalTime.now();
         int hours = clock.getHour();
@@ -92,8 +104,6 @@ public class Game extends Observable<GameView>{
         clockString += nanoseconds;
         seed = parseLong(clockString);
         generator = new Random(seed);
-        //this.commonGoalsDeck=new ArrayList<CommonGoalCard>(); // AGGIUNTO
-        //commonGoalsDeck.add(0,new CommonGoalCard3(playersNumber)); //AGGIUNTO
         shuffle(list, generator);
         this.commonGoalsDeck = new ArrayList<>();
         int i = 0;
@@ -142,6 +152,13 @@ public class Game extends Observable<GameView>{
         this.currentPlayer = 0;
         this.leaderboard = new Player[playersNumber];
     }
+    /**
+     * Sets the LivingRoomBoard at the start of the game,
+     * placing the cards on the tiles to fullfil the board
+     * based on how many players will play and setting for
+     * each tile the correct number of free sides in their
+     * attribute
+     */
     public void setupBoardObjects(){
         Tile[][] tiles = board.getTiles();
         int cardId;
@@ -186,6 +203,12 @@ public class Game extends Observable<GameView>{
             }
         }
     }
+    /**
+     * Picks the commonGoals from the deck, initialize
+     * them with the correct amount of points based on
+     * how many players will play the game and sets
+     * the equivalent attribute of the board in the game
+     */
     public void setupCommonGoals(){
         CommonGoalCard[] drawnCommonGoals = new CommonGoalCard[commonGoalsNumber];
 
@@ -236,11 +259,19 @@ public class Game extends Observable<GameView>{
 
         board.setCommonGoals(drawnCommonGoals);
     }
+    /**
+     * Picks one random personal goal for each player
+     * and sets it the player's equivalent attribute
+     */
     public void setupPersonalGoals(){
         for(int i = 0; i < playersNumber; i++){
             table[i].setPersonalGoal(personalGoalsDeck.remove(0));
         }
     }
+    /**
+     * Casually decides who is the first player to play
+     * and sets the relative position of the other players
+     */
     public void setupFirstPlayer(){
         LocalTime clock = LocalTime.now();
         int hours = clock.getHour();
@@ -273,54 +304,147 @@ public class Game extends Observable<GameView>{
             }
         }
     }
+    /**
+     * Checks if the game has ended
+     *
+     * @return done if the game has ended, else true
+     */
     public boolean getDone() {
         return done;
     }
+    /**
+     * Sets done if the game has ended
+     *
+     * @param done
+     */
     public void setDone(boolean done) {
         this.done = done;
     }
+    /**
+     * Returns the max amount of drawable objects from the bookshelf
+     * @return maxDrawableObjects the amount of objects that can be picked up
+     *                           from the LivingRoomBoard
+     */
+
+    /**
+     * Returns how many bonus points will be assigned to the player
+     * completing its bookshelf first
+     *
+     * @return endGamePoints
+     */
     public int getEndGamePoints() {
         return endGamePoints;
     }
+    /**
+     * Returns the number of players in the game
+     *
+     * @return playersNumber
+     */
     public int getPlayersNumber(){
         return playersNumber;
     }
+
+    /**
+     * Returns the number of commonGoalsNumber with which
+     * the game is played
+     *
+     * @return commonGoalsNumber
+     */
     public int getCommonGoalsNumber(){
         return commonGoalsNumber;
     }
+    /**
+     * Returns a table containing all the players in the game
+     *
+     * @return table
+     */
     public Player[] getTable() {
         return table;
     }
+
+    /**
+     * Sets the passed player and its position in the array
+     *
+     * @param player the player with all its attributes
+     * @param position its relative position from the first player
+     */
     public void setTable(Player player, int position) {
         this.table[position] = player;
     }
+    /**
+     * Returns the LivingRoomBoard in the actual state
+     *
+     * @return board
+     */
     public LivingRoomBoard getBoard() {
         return board;
     }
+    /**
+     * Returns the card bag in the actual state
+     *
+     * @return bag
+     */
     public CardsBag getBag() {
         return bag;
     }
+    /**
+     * Returns the deck of PersonalGoals
+     * (as in the physical game)
+     *
+     * @return personalGoalsDeck
+     */
     public List<PersonalGoalCard> getPersonalGoalsDeck() {
         return personalGoalsDeck;
     }
+
+    /**
+     * Returns the deck of CommonGoals
+     * (as in the physical game)
+     *
+     * @return commonGoalsDeck
+     */
     public List<CommonGoalCard> getCommonGoalsDeck() {
         return commonGoalsDeck;
     }
 
+    /**
+     * Returns player currently playing
+     *
+     * @return currentPlayer its position in the array
+     */
     public int getCurrentPlayer() {
         return currentPlayer;
     }
-
+    /**
+     * Sets the player currently playing
+     *
+     * @param array_position its position in the array
+     */
     public void setCurrentPlayer(int array_position) {
         this.currentPlayer = array_position;
     }
+    /**
+     * Returns leaderboard ordering the players
+     * based on their points gained during the game
+     *
+     * @return leaderboard the array of players in order
+     */
     public Player[] getLeaderboard(){
         return leaderboard;
     }
+    /**
+     * Sets the leaderboard
+     * @return maxDrawableObjects the amount of objects that can be picked up
+     *                           from the LivingRoomBoard
+     */
     public void setLeaderboard(Player [] leaderboard) {
         this.leaderboard = leaderboard;
     }
 
+    /**
+     * Changes the currentPlayer to the next player
+     * following the order
+     */
     public void nextTurn() {
         int i = 0;
         while(this.table[i].getPosition() != this.currentPlayer){
@@ -333,6 +457,12 @@ public class Game extends Observable<GameView>{
             this.currentPlayer += 1;
         }
     }
+    /**
+     * If the currentPlayer satisfy the common goal,
+     * this method adds to the player the equivalent points
+     *
+     * @param commonGoal the goal satisfied
+     */
     public void updateCommonGoals(CommonGoalCard commonGoal){
         int i = 0;
         int points;
@@ -345,11 +475,23 @@ public class Game extends Observable<GameView>{
             this.table[i].setPoints(points);
         }
     }
-
+    /**
+     * Method to handle actual turn
+     *
+     * @param turnPlayerMessage message to display to the current player
+     * @param otherPlayersMessage message to display to the other players
+     */
     public void handleTurn(String turnPlayerMessage, String otherPlayersMessage) {
         notify(new GameView(this, turnPlayerMessage, otherPlayersMessage));
 
     }
+    /**
+     * Method to insert the picked tiles in the bookshelf
+     * in the desidered order
+     *
+     * @param order the array containing the order to
+     *              insert the tiles in the board
+     */
     public void insertInOrder(int [] order){
         int i = 0;
         while(this.table[i].getPosition() != this.currentPlayer){
@@ -370,7 +512,11 @@ public class Game extends Observable<GameView>{
         }
         bookshelf.updateMaxDrawableObjects();
     }
-
+    /**
+     * At the end of each turn checks if the LivingRoomBoard is empty,
+     * if the bookshelf is full (and so the game is finished), if any
+     * goal is satisfied
+     */
     public void endTurnChecks()  {
         int i = 0;
         while(this.table[i].getPosition() != this.currentPlayer){
@@ -436,6 +582,10 @@ public class Game extends Observable<GameView>{
         }
     }
 
+    /**
+     * Called if the LivingRoomBoard needs to be repopulated, it
+     * places tiles in every free spot
+     */
     public void updateBoard() {
         LivingRoomBoard board = this.getBoard();
         Tile[][] tiles = board.getTiles();
@@ -499,6 +649,9 @@ public class Game extends Observable<GameView>{
         }
     }
 
+    /**
+     * Declare the winner and calculate the leaderboard
+     */
     public void DeclareWinner() {
         int count=0;
         Player[] table = getTable();

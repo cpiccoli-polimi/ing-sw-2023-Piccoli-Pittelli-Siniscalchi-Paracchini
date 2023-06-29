@@ -1,5 +1,9 @@
 package it.polimi.model;
 
+/**
+ * Value class is used to set the
+ * value of PointCard
+ */
 public enum Value {
     two(2),
     four(4),

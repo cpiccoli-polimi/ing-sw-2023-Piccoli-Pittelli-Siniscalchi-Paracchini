@@ -64,7 +64,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>it.polimi.Main</mainClass> <!-- Inserisci il percorso corretto della tua classe Main -->
+              <mainClass>it.polimi.Main</mainClass>
             </manifest>
           </archive>
         </configuration>

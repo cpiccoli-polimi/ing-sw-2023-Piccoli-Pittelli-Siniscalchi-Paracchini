@@ -10,12 +10,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The abstract class CommonGoalCard provides all the
+ * behaviour that are common between the 12 common goal cards
+ *
+ * @see java.io.Serializable
+ */
 public abstract class CommonGoalCard extends GoalCard implements Serializable {
     static final long serialVersionUID = 1L;
     protected int goalID;
     protected List<PointCard> points;
     private String goalDescription;
 
+    /**
+     * Creates the CommonGoalCard setting the points and its description,
+     * retrieving it from a json file
+     *
+     * @param goalId the identifier of the Goal
+     */
     public CommonGoalCard(int goalId){
         this.goalID = goalId;
         this.points = new ArrayList<>();
@@ -31,19 +43,43 @@ public abstract class CommonGoalCard extends GoalCard implements Serializable {
             throw new RuntimeException(e);
         }
     }
+    /**
+     * Returns the goalID of the card
+     *
+     * @return this.goalID the id
+     */
     public int getGoalID(){
         return this.goalID;
     }
+    /**
+     * Sets the points gained completing this goalCard,
+     * based on the number of players in the game
+     *
+     * @param points the list containing the points gained
+     */
     protected void setPoints(List<PointCard> points){
         this.points.addAll(points);
     }
+    /**
+     * Returns the lists containing the point gained
+     * completing this goalCard
+     *
+     * @return this.points
+     */
     public List<PointCard> getPoints(){ return this.points;}
-    protected void setGoalDescription(String goalDescription){
-        this.goalDescription = goalDescription;
-    }
+    /**
+     * Returns the description of this goal as a string
+     *
+     * @return this.goalDescription
+     */
     public String getGoalDescription(){
         return this.goalDescription;
     }
+    /**
+     * Checks if this goal is satisfied (overrided by the 12 subclasses)
+     *
+     * @return false
+     */
     public boolean check(ObjectCard[][] bookshelf){return false;}
     @Override
     public boolean equals(Object object) {

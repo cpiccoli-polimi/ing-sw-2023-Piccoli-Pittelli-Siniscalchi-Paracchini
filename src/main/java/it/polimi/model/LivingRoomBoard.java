@@ -10,11 +10,26 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Serializable;
 
+/**
+ * LivingRoomBoard class represents the living room board
+ * on which the game is played
+ *
+ * @see java.io.Serializable
+ */
 public class LivingRoomBoard implements Serializable {
     static final long serialVersionUID = 1L;
     private CommonGoalCard[] commonGoals;
     private Tile[][] tile;
 
+    /**
+     * Creates the LivingRoomBoard retrieving its
+     * attributes from a json file
+     *
+     * @param commonGoalsNumber the number of common goals used
+     *                          in this game
+     * @throws FileNotFoundException if the json containing the description
+     *                               of the LivingRoomBoard is not found
+     */
     protected LivingRoomBoard(int commonGoalsNumber) throws FileNotFoundException {
         this.tile = new Tile[9][9];
 
@@ -38,30 +53,60 @@ public class LivingRoomBoard implements Serializable {
 
         commonGoals = new CommonGoalCard[commonGoalsNumber];
     }
-
+    /**
+     * Returns the array containing the commonGoals
+     *
+     * @return commonGoals
+     */
     public CommonGoalCard[] getCommonGoals() {
         return commonGoals;
     }
-
+    /**
+     * Sets the common goals in the order casually chosen
+     * and copied into the argument array
+     *
+     * @param drawnCommonGoals
+     */
     public void setCommonGoals(CommonGoalCard[] drawnCommonGoals) {
         System.arraycopy(drawnCommonGoals, 0, this.commonGoals, 0, drawnCommonGoals.length);
     }
-
+    /**
+     * Get all the tiles in the leaderboard
+     *
+     * @return tile the 2D array containing the tiles
+     */
     public Tile[][] getTiles() {
         return tile;
     }
-
+    /**
+     * Places the chosen object card in the chosen
+     * x and y coordinates
+     *
+     * @param object chosen ObjectCard
+     * @param xCoordinate chosen x coordinate
+     * @param yCoordinate chosen y coordinate
+     */
     public void placeObject(ObjectCard object, int xCoordinate, int yCoordinate) {
         tile[xCoordinate][yCoordinate].setObject(object);
     }
-
+    /**
+     * Removes the objectCard contained in the
+     * selected x and y coordinates
+     *
+     * @param xCoordinate
+     * @param yCoordinate
+     */
     public ObjectCard removeObject(int xCoordinate, int yCoordinate) {
         ObjectCard object = tile[xCoordinate][yCoordinate].getObject();
         tile[xCoordinate][yCoordinate].setObject(null);
 
         return object;
     }
-
+    /**
+     * Show the LivingRoomBoard on the CLI
+     *
+     * @param playersNumber players in the game
+     */
     public void showBoard( int playersNumber){
         char squareCharacter = 9632;
         Tile[][] tiles = this.getTiles();
@@ -112,6 +157,13 @@ public class LivingRoomBoard implements Serializable {
         }
     }
 
+    /**
+     * Used when an ObjectCard is picked from the
+     * LivingRoomBoard updating the "freeSides"
+     * attribute of the tiles around the picked one
+     *
+     * @param pickedObject
+     */
     public void updateFreeSides(ObjectCard [] pickedObject){
         int x, y, fs;
         Tile tile;

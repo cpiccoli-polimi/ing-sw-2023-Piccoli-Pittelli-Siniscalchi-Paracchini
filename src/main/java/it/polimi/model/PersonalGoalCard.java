@@ -13,13 +13,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-
+/**
+ * PersonalGoalCard class represents the personal goal
+ * card in the physical game
+ *
+ * @see java.io.Serializable
+ */
 public class PersonalGoalCard extends GoalCard implements Serializable {
     static final long serialVersionUID = 1L;
     private Bookshelf goal;
     private Map<Integer,Integer> points;
 
     private int id;
+    /**
+     * Creates the personal goal card copying its
+     * attributes from a json file based on its id
+     *
+     * @param id the id of the PersonalGoalCard
+     */
     public PersonalGoalCard(int id){
 
         this.id = id;
@@ -83,10 +94,20 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
         );
     }
 
+    /**
+     * Returns the goal as a bookshelf filled with the
+     * correct tiles in the correct spot to give points
+     *
+     * @return goal
+     */
     public Bookshelf getGoal(){
         return goal;
     }
-
+    /**
+     * Return the id of the card
+     *
+     * @return id
+     */
     public int getId(){
         return this.id;
     }
