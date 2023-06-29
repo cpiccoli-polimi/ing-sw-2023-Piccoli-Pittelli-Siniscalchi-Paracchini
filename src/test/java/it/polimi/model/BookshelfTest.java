@@ -1,9 +1,6 @@
 package it.polimi.model;
 
 import org.junit.jupiter.api.Test;
-
-import java.awt.print.Book;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookshelfTest {

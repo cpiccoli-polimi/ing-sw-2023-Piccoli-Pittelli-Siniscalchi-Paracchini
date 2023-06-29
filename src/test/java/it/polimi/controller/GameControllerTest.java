@@ -9,13 +9,10 @@ import it.polimi.observer.Observer;
 import it.polimi.server.ClientConnection;
 import it.polimi.view.RemoteView;
 import it.polimi.view.View;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
 
 import java.io.FileNotFoundException;
 
-import static java.lang.Integer.parseInt;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameControllerTest {

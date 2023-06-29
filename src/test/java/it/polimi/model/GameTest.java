@@ -1,20 +1,16 @@
 package it.polimi.model;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 import it.polimi.model.CommonGoalCards.*;
 import it.polimi.model.exception.CommonGoalsNumberException;
 import it.polimi.model.exception.PlayersNumberException;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 import static java.lang.Long.parseLong;
 import static org.junit.jupiter.api.Assertions.*;

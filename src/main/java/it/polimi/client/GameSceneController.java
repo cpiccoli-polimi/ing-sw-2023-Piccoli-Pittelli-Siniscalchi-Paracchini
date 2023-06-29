@@ -133,7 +133,7 @@ public class GameSceneController{
         commonGoalsPane.setVgap(goalsPane.getPrefHeight()*0.01);
 
         commonGoal1Pane.setPrefWidth(commonGoalsPane.getPrefWidth());
-        commonGoal1Pane.setPrefHeight(commonGoalsPane.getPrefHeight()*0.5);/
+        commonGoal1Pane.setPrefHeight(commonGoalsPane.getPrefHeight()*0.5);
         commonGoal1Pane.setMargin(pointsCommonGoal1, (new Insets(0,0,commonGoal1Pane.getPrefHeight()*0.10,commonGoal1Pane.getPrefWidth()*0.35)));
 
         commonGoal2Pane.setPrefWidth(commonGoalsPane.getPrefWidth());
@@ -173,13 +173,13 @@ public class GameSceneController{
         myBookshelfImage.setFitHeight(myPane.getPrefHeight()*0.95);
         myBookshelfImage.setImage(new Image("/GraphicalResources/Boards/bookshelf.png", myBookshelfImage.getFitWidth(), myBookshelfImage.getFitHeight(), true, false));
 
-        columnSelectionPane.setPrefWidth(myPane.getPrefWidth()*0.73);
-        columnSelectionPane.setPrefHeight(myPane.getPrefHeight()*0.78);
+        columnSelectionPane.setPrefWidth(myBookshelfItemsPane.getPrefWidth()*0.99);
+        columnSelectionPane.setPrefHeight(myBookshelfItemsPane.getPrefHeight());
         columnSelectionPane.setMinWidth(columnSelectionPane.getPrefWidth());
         columnSelectionPane.setMinHeight(columnSelectionPane.getPrefHeight());
         columnSelectionPane.setMaxWidth(columnSelectionPane.getPrefWidth());
         columnSelectionPane.setMaxHeight(columnSelectionPane.getPrefHeight());
-        columnSelectionPane.setSpacing(myPane.getPrefWidth()*0.03);
+        columnSelectionPane.setSpacing(myBookshelfItemsPane.getHgap());
 
         opponentsPane.setPrefWidth(sceneWidth*0.17);
         opponentsPane.setPrefHeight(sceneHeight*0.84);
