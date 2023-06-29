@@ -13,6 +13,10 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * This class is used when the client plays
+ * through the CLI (TUI)
+ */
 public class ClientTUI{
 
     private String ip;
@@ -21,22 +25,61 @@ public class ClientTUI{
     private String myPlayerName;
     Player myPlayer = null;
 
+    /**
+     * Creates the ClientTUI with passed parameters
+     *
+     * @param ip the ip of the server to connect to
+     * @param port the port of the server to connect to
+     */
     public ClientTUI(String ip, int port){
         this.ip = ip;
         this.port = port;
     }
+
+    /**
+     * Gets the IP of the server this
+     * client is connected to
+     *
+     * @return ip
+     */
     protected String getIP(){
         return this.ip;
     }
+
+    /**
+     * Returns the port of the server this
+     * client is connected to
+     *
+     * @return port
+     */
     protected int getPort(){
         return this.port;
     }
+
+    /**
+     * Returns if the client is active or not
+     *
+     * @return true if it is active, else false
+     */
     public boolean isActive(){
         return active;
     }
+
+    /**
+     * Sets 'active' parameters on client
+     *
+     * @param active
+     */
     public synchronized void setActive(boolean active){
         this.active = active;
     }
+
+    /**
+     * Prints on the CLI messages during the turn
+     *
+     * @param message the message to be shown
+     * @param chosenObjects array of objects picked by the player
+     */
     public void printTurnMessage(String message, ObjectCard[] chosenObjects){
         char squareCharacter = 9632;
 
@@ -64,6 +107,15 @@ public class ClientTUI{
         }
         System.out.println(message);
     }
+
+    /**
+     * A method continuously listening to input,
+     * checks if it is a string, a GameView or an exception,
+     * if it is a GameView board and bookshelf are shown
+     *
+     * @param socketIn
+     * @return
+     */
     public Thread asyncReadFromSocket(ObjectInputStream socketIn){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -146,6 +198,15 @@ public class ClientTUI{
         t.start();
         return t;
     }
+
+    /**
+     * A method continuously listening to input,
+     * it sends the input to socketClientConnection
+     *
+     * @param stdin
+     * @param socketOut
+     * @return
+     */
     public Thread asyncWriteToSocket(Scanner stdin, PrintWriter socketOut){
         Thread t = new Thread(new Runnable() {
             @Override
