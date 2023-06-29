@@ -297,10 +297,6 @@ public class ClientSceneController {
                                 Separator separator = new Separator(Orientation.HORIZONTAL);
                                 separator.setPrefWidth(gameSceneController.separator.getPrefWidth());
                                 separator.setPrefHeight(gameSceneController.separator.getPrefHeight());
-                                /*separator.setMinWidth(separator.getPrefWidth());
-                                separator.setMinHeight(separator.getPrefHeight());
-                                separator.setMaxWidth(separator.getPrefWidth());
-                                separator.setMaxHeight(separator.getPrefHeight());*/
                                 separator.setVisible(false);
 
                                 i += 1;
@@ -331,10 +327,6 @@ public class ClientSceneController {
                                 HBox buttonPane = new HBox();
                                 buttonPane.setPrefWidth(pane.getPrefWidth());
                                 buttonPane.setPrefHeight(pane.getPrefHeight() * 0.25);
-                                /*buttonPane.setMinWidth(buttonPane.getPrefWidth());
-                                buttonPane.setMinHeight(buttonPane.getPrefHeight());
-                                buttonPane.setMaxWidth(buttonPane.getPrefWidth());
-                                buttonPane.setMaxHeight(buttonPane.getPrefHeight());*/
                                 buttonPane.setSpacing(buttonPane.getPrefWidth()*0.05);
 
                                 for(int j = 1; j < myPlayer.getChosenObjects().length + 1; j++){
