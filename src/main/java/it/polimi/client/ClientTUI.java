@@ -180,8 +180,10 @@ public class ClientTUI{
         }
         catch(InterruptedException | NoSuchElementException e){
             System.out.println("Connection closed from the client side");
+            System.err.println("Error " + e.getStackTrace());
         }
         finally{
+            System.out.println("Client chiama close");
             stdin.close();
             socketIn.close();
             socketOut.close();

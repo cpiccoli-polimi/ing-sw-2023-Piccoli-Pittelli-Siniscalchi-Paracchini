@@ -37,18 +37,25 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
         catch (IOException e){
             System.err.println(e.getMessage());
+            System.err.println("Error " + e.getStackTrace());
         }
     }
     @Override
     public synchronized void closeConnection(String closingMessage){
         send(closingMessage);
         try{
+            wait(3000);
             socket.close();
+            System.out.println("Socket closed for timeout");
         }
         catch(IOException e){
             System.err.println("Error when closing socket");
+            System.err.println("Error " + e.getStackTrace());
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
         active = false;
+        System.out.println("Active = false");
     }
     protected void close(String closingMessage){
         closeConnection(closingMessage);
@@ -98,7 +105,10 @@ public class SocketClientConnection extends Observable<String> implements Client
             send("Welcome\nWhat is your name?");
             String message = in.nextLine();
             nickname = message;
+            System.out.println("Nickname set");
+            System.out.println("Creating lobby");
             server.lobby(this, nickname, socket);
+            System.out.println("Lobby created");
             while(isActive()){
                 while(model.getDone() == false){
                     message = in.nextLine();
@@ -152,8 +162,10 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
         catch(IOException | NoSuchElementException e){
             System.err.println("Error " + e.getMessage());
+            System.err.println("Error " + e.getStackTrace());
         }
         finally{
+            System.out.println("'Finally' called on SocketClientConnection");
             close("Closed connection");
         }
     }
