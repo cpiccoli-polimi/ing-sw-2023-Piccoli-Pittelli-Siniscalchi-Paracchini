@@ -43,10 +43,13 @@ public class SocketClientConnection extends Observable<String> implements Client
     public synchronized void closeConnection(String closingMessage){
         send(closingMessage);
         try{
+            wait(3000);
             socket.close();
         }
         catch(IOException e){
             System.err.println("Error when closing socket");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
         active = false;
     }
