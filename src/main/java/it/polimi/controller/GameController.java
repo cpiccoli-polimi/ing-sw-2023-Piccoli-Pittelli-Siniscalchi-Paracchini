@@ -30,7 +30,6 @@ public class GameController implements Observer<PlayerChoice> {
                     message.getView().reportError(new EmptyMessageException());
                 }
                 else if (Objects.equals(input[0], "OBJECTCARDSCHOICE")) {//TODO checkMessageCorrectness
-                    int j = 0;
                     ObjectCard[] chosenObjectCards = null;
                     try {
                         chosenObjectCards = convert(input[1]);
@@ -41,7 +40,7 @@ public class GameController implements Observer<PlayerChoice> {
                                      AlreadyPickedException | NoStraightLineException e) {
                                 message.getView().reportError(e);
                             }
-                            if (b == true) {
+                            if (b) {
                                 savePickedObject(chosenObjectCards);
                                 String turnPlayerMessage = "In which bookshelf column do you want to insert those cards?";
                                 String otherPlayersMessage = "Now it's " + message.getPlayer().getNickname() + "'s turn\nWait your turn";
@@ -66,7 +65,7 @@ public class GameController implements Observer<PlayerChoice> {
                         } catch (OutOfBookshelfException e) {
                             message.getView().reportError(e);
                         }
-                        if (b == true) {
+                        if (b) {
                             int i = 0;
                             while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
                                 i += 1;
@@ -91,7 +90,7 @@ public class GameController implements Observer<PlayerChoice> {
                         } catch (DifferentLengthException | OrderException e) {
                             message.getView().reportError(e);
                         }
-                        if (c == true) {
+                        if (c) {
                             int i = 0;
                             while (model.getTable()[i].getPosition() != model.getCurrentPlayer()) {
                                 i += 1;
@@ -267,8 +266,7 @@ public class GameController implements Observer<PlayerChoice> {
         return true;
     }
     protected void savePickedObject(ObjectCard [] pickedObject){
-        int x=-1;
-        int y=-1;
+        int x, y;
         int i = 0;
         while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
             i += 1;

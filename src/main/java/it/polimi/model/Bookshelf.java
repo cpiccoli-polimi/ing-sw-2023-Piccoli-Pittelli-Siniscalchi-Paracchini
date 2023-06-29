@@ -47,7 +47,7 @@ public class Bookshelf implements Serializable {
         return result;
     }
     public void setShelf(ObjectCard card,int column){
-        int i=0;
+        int i;
         for(i=0; i< shelf.length;i++){
             if(shelf[i][column]!=null){
                 break;

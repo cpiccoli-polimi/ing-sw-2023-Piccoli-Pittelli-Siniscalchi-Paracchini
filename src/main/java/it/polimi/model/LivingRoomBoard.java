@@ -113,10 +113,8 @@ public class LivingRoomBoard implements Serializable {
     }
 
     public void updateFreeSides(ObjectCard [] pickedObject){
-        int x=-1;
-        int y=-1;
-        int fs=-1;
-        Tile tile=null;
+        int x, y, fs;
+        Tile tile;
         for (ObjectCard objectCard : pickedObject) {
             x = objectCard.getXCoordinate();
             y = objectCard.getYCoordinate();
