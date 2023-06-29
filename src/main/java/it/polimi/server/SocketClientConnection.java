@@ -37,6 +37,7 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
         catch (IOException e){
             System.err.println(e.getMessage());
+            System.err.println("Error " + e.getStackTrace());
         }
     }
     @Override
@@ -48,6 +49,7 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
         catch(IOException e){
             System.err.println("Error when closing socket");
+            System.err.println("Error " + e.getStackTrace());
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -155,8 +157,10 @@ public class SocketClientConnection extends Observable<String> implements Client
         }
         catch(IOException | NoSuchElementException e){
             System.err.println("Error " + e.getMessage());
+            System.err.println("Error " + e.getStackTrace());
         }
         finally{
+            System.out.println("'Finally' called on SocketClientConnection");
             close("Closed connection");
         }
     }
