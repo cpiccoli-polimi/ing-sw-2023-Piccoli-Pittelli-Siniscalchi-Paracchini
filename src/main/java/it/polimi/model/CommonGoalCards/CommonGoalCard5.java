@@ -1,9 +1,7 @@
 package it.polimi.model.CommonGoalCards;
 
-import it.polimi.model.Bookshelf;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
-import it.polimi.model.Type;
 
 import java.util.ArrayList;
 import java.util.List;

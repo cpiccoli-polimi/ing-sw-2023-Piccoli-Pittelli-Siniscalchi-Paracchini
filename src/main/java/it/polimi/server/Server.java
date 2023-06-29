@@ -8,11 +8,9 @@ import it.polimi.model.exception.CommonGoalsNumberException;
 import it.polimi.model.exception.PlayersNumberException;
 import it.polimi.view.RemoteView;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.Remote;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
