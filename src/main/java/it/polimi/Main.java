@@ -6,6 +6,11 @@ import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.exit;
 
+/**
+ * Main class is the class that runs as soon
+ * as the program runs, lets the user decide
+ * to run the server or the client
+ */
 public class Main {
         public static void main(String args[]) throws IOException {
             Scanner in = new Scanner(System.in);

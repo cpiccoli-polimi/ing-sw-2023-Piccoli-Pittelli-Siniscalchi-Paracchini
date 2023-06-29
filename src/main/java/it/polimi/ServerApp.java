@@ -4,6 +4,10 @@ import it.polimi.server.Server;
 
 import java.io.IOException;
 
+/**
+ * ServerApp is the class that runs on
+ * server side during the game
+ */
 public class ServerApp {
     public static void main(String[] args){
         Server server;

@@ -5,7 +5,12 @@ import it.polimi.model.*;
 import it.polimi.observer.Observer;
 import java.util.*;
 
-
+/**
+ * GameController is the class that acts as
+ * controller in the MVC pattern
+ *
+ * @see it.polimi.observer.Observer
+ */
 public class GameController implements Observer<PlayerChoice> {
     public final Game model;
     public GameController(Game model){
@@ -168,9 +173,6 @@ public class GameController implements Observer<PlayerChoice> {
         return chosenObjectCards;
 
     }
-    /*private Game GetModel() {
-        return this.model;
-    }*/
     public void setup(){
         model.setupBoardObjects();
         model.setupCommonGoals();
@@ -311,17 +313,5 @@ public class GameController implements Observer<PlayerChoice> {
         return true;
 
     }
-    /*private void isDone() {
-        // Get the current players
-        int i = 0;
-        while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
-            i += 1;
-        }
-        Player currentPlayer = model.getTable()[i];
-        // Check if the bookshelf is full and end game
-        if (currentPlayer.getBookshelf().isFull() == true) {
-            model.setDone(true);
-        }
-    }*/
 }
 

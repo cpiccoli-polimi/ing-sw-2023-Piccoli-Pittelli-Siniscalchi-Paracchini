@@ -5,6 +5,10 @@ import it.polimi.client.ClientTUI;
 
 import java.io.IOException;
 
+/**
+ * ClientApp class is the one that runs on client
+ * side during the game
+ */
 public class ClientApp {
     public static void main(String[] args){
 
