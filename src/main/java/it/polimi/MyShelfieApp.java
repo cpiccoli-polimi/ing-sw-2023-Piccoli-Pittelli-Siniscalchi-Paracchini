@@ -11,7 +11,7 @@ import static java.lang.System.exit;
  * as the program runs, lets the user decide
  * to run the server or the client
  */
-public class Main {
+public class MyShelfieApp {
         public static void main(String args[]) throws IOException {
             Scanner in = new Scanner(System.in);
             System.out.println("Press 1 for Server, 2 for Client");
