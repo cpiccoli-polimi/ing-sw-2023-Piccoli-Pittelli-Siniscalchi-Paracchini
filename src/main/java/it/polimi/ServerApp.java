@@ -7,6 +7,8 @@ import java.io.IOException;
 /**
  * ServerApp is the class that runs on
  * server side during the game
+ *
+ * @author Nicola Siniscalchi
  */
 public class ServerApp {
     public static void main(String[] args){

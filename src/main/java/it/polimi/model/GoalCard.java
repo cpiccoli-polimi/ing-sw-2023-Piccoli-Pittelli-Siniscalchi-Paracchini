@@ -8,6 +8,7 @@ import java.io.Serializable;
  * goal cards
  *
  * @see java.io.Serializable
+ * @author Christian Piccoli
  */
 public abstract class GoalCard implements Serializable {
     static final long serialVersionUID = 1L;

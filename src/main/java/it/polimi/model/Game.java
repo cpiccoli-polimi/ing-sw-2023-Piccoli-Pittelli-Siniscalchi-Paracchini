@@ -18,6 +18,8 @@ import static java.util.Collections.shuffle;
 /**
  * Game class contains the actual game, identified by an id
  * and containing all the necessary items to play
+ *
+ * @author Nicola Siniscalchi
  */
 public class Game extends Observable<GameView>{
 
@@ -334,36 +336,28 @@ public class Game extends Observable<GameView>{
      */
 
     /**
-     * Returns how many bonus points will be assigned to the player
+     * @return how many bonus points will be assigned to the player
      * completing its bookshelf first
-     *
-     * @return endGamePoints
      */
     public int getEndGamePoints() {
         return endGamePoints;
     }
     /**
-     * Returns the number of players in the game
-     *
-     * @return playersNumber
+     * @return the number of players in the game
      */
     public int getPlayersNumber(){
         return playersNumber;
     }
 
     /**
-     * Returns the number of commonGoalsNumber with which
+     * @return the number of commonGoalsNumber with which
      * the game is played
-     *
-     * @return commonGoalsNumber
      */
     public int getCommonGoalsNumber(){
         return commonGoalsNumber;
     }
     /**
-     * Returns a table containing all the players in the game
-     *
-     * @return table
+     * @return a table containing all the players in the game
      */
     public Player[] getTable() {
         return table;
@@ -379,45 +373,35 @@ public class Game extends Observable<GameView>{
         this.table[position] = player;
     }
     /**
-     * Returns the LivingRoomBoard in the actual state
-     *
-     * @return board
+     * @return the LivingRoomBoard in the actual state
      */
     public LivingRoomBoard getBoard() {
         return board;
     }
     /**
-     * Returns the card bag in the actual state
-     *
-     * @return bag
+     * @return the cards bag in the actual state
      */
     public CardsBag getBag() {
         return bag;
     }
     /**
-     * Returns the deck of PersonalGoals
-     * (as in the physical game)
-     *
-     * @return personalGoalsDeck
+     * @return the deck of PersonalGoals
+     *         (as in the physical game)
      */
     public List<PersonalGoalCard> getPersonalGoalsDeck() {
         return personalGoalsDeck;
     }
 
     /**
-     * Returns the deck of CommonGoals
-     * (as in the physical game)
-     *
-     * @return commonGoalsDeck
+     * @return the deck of CommonGoals
+     *         (as in the physical game)
      */
     public List<CommonGoalCard> getCommonGoalsDeck() {
         return commonGoalsDeck;
     }
 
     /**
-     * Returns player currently playing
-     *
-     * @return currentPlayer its position in the array
+     * @return the position in the array of the player currently playing
      */
     public int getCurrentPlayer() {
         return currentPlayer;
@@ -431,10 +415,9 @@ public class Game extends Observable<GameView>{
         this.currentPlayer = array_position;
     }
     /**
-     * Returns leaderboard ordering the players
-     * based on their points gained during the game
-     *
-     * @return the array of players in order
+     * @return leaderboard array ordered by the
+     *         points gained by each player
+     *         during the game
      */
     public Player[] getLeaderboard(){
         return leaderboard;

@@ -37,16 +37,12 @@ public class Bookshelf implements Serializable {
      */
     public void setMaxDrawableObjects(int maxDrawableObjects) {this.maxDrawableObjects = maxDrawableObjects;}
     /**
-     * Returns the max amount of drawable objects from the bookshelf
-     *
-     * @return maxDrawableObjects the amount of objects that can be picked up
-     *                           from the LivingRoomBoard
+     * @return the amount of objects that can be picked up
+     *         from the LivingRoomBoard
      */
     public int getMaxDrawableObjects(){return maxDrawableObjects;}
     /**
-     * Returns the array with all the tiles
-     *
-     * @return shelf
+     * @return the array containing all the tiles
      */
     public ObjectCard[][] getShelf(){return shelf;}
     /**
@@ -108,7 +104,7 @@ public class Bookshelf implements Serializable {
      * in terminal (used in TUI)
      *
      * @param row chosen row
-     * @return returnString its representation as a string
+     * @return visual representation of the row as a string
      */
     public String showBookshelf(int row){
         String returnString = "";

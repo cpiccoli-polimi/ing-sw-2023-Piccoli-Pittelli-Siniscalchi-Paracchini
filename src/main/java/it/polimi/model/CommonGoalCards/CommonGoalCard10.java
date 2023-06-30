@@ -3,6 +3,13 @@ package it.polimi.model.CommonGoalCards;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
 
+/**
+ * Common goal card 10: Five tiles of the same
+ *                      type forming an X
+ *
+ * @author Nicola Siniscalchi
+ * @author Christian Piccoli
+ */
 public class CommonGoalCard10 extends CommonGoalCard {
     public CommonGoalCard10(int playersNumber) {
         super(10);

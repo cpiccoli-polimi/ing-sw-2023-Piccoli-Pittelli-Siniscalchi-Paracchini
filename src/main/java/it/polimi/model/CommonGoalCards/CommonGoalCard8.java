@@ -7,6 +7,15 @@ import it.polimi.model.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Common goal card 8: Two lines each formed by 5
+ *                     different types of tiles.
+ *                     One line can show the same or a
+ *                     different combination of the other line
+ *
+ * @author Nicola Siniscalchi
+ * @author Christian Piccoli
+ */
 public class CommonGoalCard8 extends CommonGoalCard {
     public CommonGoalCard8(int playersNumber) {
         super(8);

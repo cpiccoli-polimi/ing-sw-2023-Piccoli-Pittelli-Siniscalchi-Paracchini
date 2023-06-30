@@ -3,6 +3,10 @@ package it.polimi.observer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Lorenzo Pittelli
+ * @param <T> the thread
+ */
 public class Observable <T> {
 
     private final List<Observer<T>> observers = new ArrayList<>();

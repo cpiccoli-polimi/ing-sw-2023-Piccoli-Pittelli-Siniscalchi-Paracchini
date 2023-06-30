@@ -15,8 +15,12 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * Handles server side activities
+ *
+ * @author Nicola Siniscalchi
+ */
 public class Server {
-
     private int PORT = 12345;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
@@ -28,9 +32,20 @@ public class Server {
     GameController controller;
     int playersNumber;
     int commonGoalsNumber;
+
+    /**
+     * Creates a new ServerSocket on defined port
+     *
+     * @throws IOException
+     */
     public Server() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
     };
+    /**
+     * Disconnect client(s) from the server
+     *
+     * @param c ClientConnection interface
+     */
     public void deregisterConnection(ClientConnection c){
         for(String nickname : waitingConnection.keySet()){
             if(waitingConnection.get(nickname) == c){
@@ -58,6 +73,15 @@ public class Server {
             }
         }
     }
+
+    /**
+     * Create the lobby when the first player has created
+     * the game
+     *
+     * @param c ClientConnection interface
+     * @param nickname Nickname of first player
+     * @param socket Socket on which to connect
+     */
     public synchronized void lobby(ClientConnection c, String nickname, Socket socket){
         List<String> keys = new ArrayList<>(waitingConnection.keySet());
         while(waitingConnection.containsKey(nickname) == true || nickname.isBlank()){
@@ -157,6 +181,10 @@ public class Server {
             model = null;
         }
     }
+
+    /**
+     * Runs the server (called by Main through ServerApp)
+     */
     public void run(){
         int connections = 0;
         System.out.println("Server is running");
@@ -174,6 +202,9 @@ public class Server {
         }
     }
 
+    /**
+     * @return the model of the game
+     */
     public Game getModel(){
         return model;
     }

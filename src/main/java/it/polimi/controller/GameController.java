@@ -10,6 +10,8 @@ import java.util.*;
  * controller in the MVC pattern
  *
  * @see it.polimi.observer.Observer
+ * @author Nicola Siniscalchi
+ * @author Lorenzo Pittelli
  */
 public class GameController implements Observer<PlayerChoice> {
     public final Game model;
@@ -17,11 +19,24 @@ public class GameController implements Observer<PlayerChoice> {
         this.model=model;
     }
 
+    /**
+     * Allows GameController to receive PlayerChoice notified
+     * from MessageReceiver of RemoteView
+     *
+     * @param message player's choice
+     */
     @Override
     public void update(PlayerChoice message) {
         handleMessage(message);
     }
 
+    /**
+     * Checks on player's choices notified to GameController,
+     * based on those it calls specific Game methods to allow
+     * game prosecution and proceed to next turn
+     *
+     * @param message player's choice
+     */
     protected synchronized void handleMessage(PlayerChoice message){
         if(model.getCurrentPlayer()!=message.getPlayer().getPosition()){
             message.getView().reportError(new NotYourTurnException());
@@ -121,6 +136,17 @@ public class GameController implements Observer<PlayerChoice> {
             }
         }
     }
+
+    /**
+     * Converts order of insert received from the player into
+     * an int array that can be used from handleMessage method
+     *
+     * @param s string containing order of insertion
+     * @return an array of int containing order of insertion
+     * @throws NumberFormatException if the string does not contain
+     *                               correctly formatted numbers
+     * @throws OrderException if the order is wrong
+     */
     public int [] convertOrder(String s)throws NumberFormatException, OrderException {
         String [] space;
         space= s.split(" ");
@@ -131,10 +157,32 @@ public class GameController implements Observer<PlayerChoice> {
         }
         return chosenInsertionOrder;
     }
+    /**
+     * Converts column where to insert received from the player
+     * into an int that can be used from handleMessage method
+     *
+     * @param s string containing the number of column chosen
+     * @return chosenColumn integer reference
+     * @throws NumberFormatException if the string does not contain
+     *                               correctly formatted number
+     */
     public int convertColumn(String s) throws NumberFormatException{
         int chosenColumn = Integer.parseInt(s) - 1;
         return chosenColumn;
     }
+
+    /**
+     * Converts the coordinates of chosen objects received
+     * from the player into an ObjectCard array that can be
+     * used from handleMessage
+     *
+     * @param s string containing x/y coordinates of
+     *          chosen objects
+     * @return
+     * @throws EmptyTileException
+     * @throws NumberFormatException
+     * @throws CoordinateException
+     */
     public ObjectCard [] convert(String s) throws EmptyTileException, NumberFormatException, CoordinateException {
         String [] space;
         String [] comma;
@@ -173,12 +221,31 @@ public class GameController implements Observer<PlayerChoice> {
         return chosenObjectCards;
 
     }
+
+    /**
+     * Calls Game method to setup the game,
+     * like the board, the common goal(s),
+     * the personal goal(s) and chooses
+     * the first player to start
+     */
     public void setup(){
         model.setupBoardObjects();
         model.setupCommonGoals();
         model.setupPersonalGoals();
         model.setupFirstPlayer();
     }
+
+    /**
+     * Checks if the order chosen by the player
+     * is correct and satisfy the rules of the
+     * game
+     *
+     * @param chosenInsertionOrder player's chosen order
+     *                             of insertion
+     * @return true if is correct, false else
+     * @throws DifferentLengthException
+     * @throws OrderException
+     */
     protected boolean checkOrder(int [] chosenInsertionOrder) throws DifferentLengthException, OrderException{
         int i = 0;
         while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
@@ -209,6 +276,28 @@ public class GameController implements Observer<PlayerChoice> {
         }
         return true;
     }
+
+    /**
+     * Checks if player's chosen object can
+     * be taken, are correct and satisfy
+     * game's rules
+     *
+     * @param pickedObject player's chosen object
+     * @return true if can be picked, false else
+     * @throws MaxDrawableObjectsException if can't be taken because
+     *                                     of not available free spots
+     *                                     in player's bookshelf
+     * @throws NoFreeSidesException if can't be taken because
+     *                              does not have at least 1
+     *                              free side
+     * @throws AlreadyPickedException if can't be picked because
+     *                                was already picked
+     * @throws NoStraightLineException if can't be picked because
+     *                                 are not placed on a straight
+     *                                 line on the board
+     * @throws NoAdjacentException if can't be picked because
+     *                             are not adjacent
+     */
     protected boolean checkPickedObject(ObjectCard[] pickedObject) throws MaxDrawableObjectsException, NoFreeSidesException, AlreadyPickedException, NoStraightLineException, NoAdjacentException {
         int x;
         int y;
@@ -267,6 +356,14 @@ public class GameController implements Observer<PlayerChoice> {
 
         return true;
     }
+
+    /**
+     * Removes chosen objects from the board
+     * and saves them into current player's
+     * chosenObject attribute
+     *
+     * @param pickedObject player's chosen objects
+     */
     protected void savePickedObject(ObjectCard [] pickedObject){
         int x, y;
         int i = 0;
@@ -281,11 +378,17 @@ public class GameController implements Observer<PlayerChoice> {
             model.getBoard().removeObject(x, y);
         }
         currentPlayer.setChosenObjects(pickedObject);
-        //model.getBoard().removeObject(chosenObjectCards[i].getXCoordinate(),chosenObjectCards[i].getYCoordinate());
-        //model.getTable()[message.getPlayer().getPosition()].setChosenObjects(chosenObjectCards);
     }
 
-
+    /**
+     * Check if chosen column can be used and
+     * is correct based on game's rules
+     *
+     * @param column chosen column
+     * @return true if can be used, false else
+     * @throws OutOfBookshelfException if the chosen column is
+     *                                 out of bookshelf bounds
+     */
     protected boolean checkChosenColumn(int column) throws OutOfBookshelfException {
         int i = 0;
         while(model.getTable()[i].getPosition() != model.getCurrentPlayer()){
@@ -296,12 +399,10 @@ public class GameController implements Observer<PlayerChoice> {
             throw new OutOfBookshelfException("The column you have selected doesn't exists");
         }
         // Get chosen column and counter of empty slot for checking
-        //int column = table[currentPlayer].getChosenColumn();
         int nullCounter = 0;
         // Get current player's bookshelf and chosen object size
         ObjectCard[][] bookshelf = currentPlayer.getBookshelf().getShelf();
         int size = currentPlayer.getChosenObjects().length;
-        //System.out.println(size);
         // Count empty slots
         for (int row = 0; row < bookshelf.length; row++) {
             if (bookshelf[row][column] == null) {

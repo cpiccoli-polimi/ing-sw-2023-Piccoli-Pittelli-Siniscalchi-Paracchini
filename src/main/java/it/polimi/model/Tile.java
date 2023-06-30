@@ -8,6 +8,7 @@ import java.io.Serializable;
  * an ObjectCard
  *
  * @see java.io.Serializable
+ * @author Lorenzo Paracchini
  */
 public class Tile implements Serializable {
     static final long serialVersionUID = 1L;
@@ -27,19 +28,15 @@ public class Tile implements Serializable {
         object = null;
     }
     /**
-     * Returns the minimum number of player
-     * required to use that tile
-     *
-     * @return minPlayers
+     * @return the minimum number of player
+     *         required to use that tile
      */
     public int getMinPlayers(){
         return minPlayers;
     }
     /**
-     * Returns how many free sides does
-     * that tile have
-     *
-     * @return freeSides
+     * @return how many free sides does
+     *         that tile have
      */
     public int getFreeSides(){
         return freeSides;
@@ -54,10 +51,8 @@ public class Tile implements Serializable {
         this.freeSides = freeSides;
     }
     /**
-     * Returns the ObjectCard placed
-     * on that tile
-     *
-     * @return object
+     * @return the ObjectCard placed
+     *         on that tile
      */
     public ObjectCard getObject() {
         return object;

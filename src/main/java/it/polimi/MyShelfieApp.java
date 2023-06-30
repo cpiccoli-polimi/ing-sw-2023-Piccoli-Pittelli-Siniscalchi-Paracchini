@@ -10,6 +10,8 @@ import static java.lang.System.exit;
  * Main class is the class that runs as soon
  * as the program runs, lets the user decide
  * to run the server or the client
+ *
+ * @author Christian Piccoli
  */
 public class MyShelfieApp {
         public static void main(String args[]) throws IOException {

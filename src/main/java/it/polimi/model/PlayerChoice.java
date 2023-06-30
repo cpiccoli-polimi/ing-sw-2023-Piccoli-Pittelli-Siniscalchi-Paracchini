@@ -6,6 +6,8 @@ import it.polimi.view.View;
  * PlayerChoice class is meant to transform to
  * final passed parameters, to pass through the network
  * only "final" attributes and serialize them
+ *
+ * @author Lorenzo Pittelli
  */
 public class PlayerChoice {
     private final Player player;
@@ -25,21 +27,15 @@ public class PlayerChoice {
         this.view=view;
     }
     /**
-     * Returns the message
-     *
-     * @return message
+     * @return the message
      */
     public String getMessage(){return message;}
     /**
-     * Returns the player
-     *
-     * @return player
+     * @return the player
      */
     public Player getPlayer(){return player;}
     /**
-     * Returns the view
-     *
-     * @return view
+     * @return the view
      */
     public View getView(){return  view;}
 }

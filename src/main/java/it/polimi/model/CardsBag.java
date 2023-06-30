@@ -12,12 +12,15 @@ import static java.util.Collections.shuffle;
  * CardsBag class represents the physical bag
  * in the game, containing all the tiles that
  * are then placed on the LivingRoomBoard
+ *
+ * @author Christian Piccoli
+ * @author Lorenzo Paracchini
  */
 public class CardsBag {
     private List<Integer> cards;
 
     /**
-     * Creates the istance of CardsBag, setting
+     * Creates the instance of CardsBag, setting
      * its attributes
      */
     protected CardsBag() {
@@ -46,15 +49,13 @@ public class CardsBag {
     }
 
     /**
-     * Returns the size of CardsBag
-     *
-     * @return cards.size the remaining tiles inside
+     * @return the size of CardsBag, meaning
+     *         the number of tiles still inside
      */
     public int getSize(){ return cards.size();}
     /**
-     * Returns a card from the bag
-     *
-     * @return the reference to the card
+     * @return the reference to a card
+     *         from the bag
      */
     public int getCard(){
         return cards.remove(0);

@@ -5,6 +5,8 @@ import java.io.Serializable;
 /**
  * PointCard reflects the actual PointCard in
  * the game, with a roman numeral on the back
+ *
+ * @author Christian Piccoli
  */
 public class PointCard implements Serializable {
     static final long serialVersionUID = 1L;
@@ -22,17 +24,13 @@ public class PointCard implements Serializable {
         this.backNumber = backNumber;
     }
     /**
-     * Returns the value
-     *
-     * @return value
+     * @return the value
      */
     public Value getValue(){
         return value;
     }
     /**
-     * Returns the back number
-     *
-     * @return backNumber
+     * @return the back number
      */
     public RomanNumeral getBackNumber(){
         return backNumber;

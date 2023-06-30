@@ -4,6 +4,8 @@ package it.polimi.model;
  * Type's class is used to associate each
  * type to a specific color and allow to refer to
  * each type with his name
+ *
+ * @author Nicola Siniscalchi
  */
 public enum Type {
     Cats("\u001B[32m"),
@@ -20,6 +22,10 @@ public enum Type {
     Type(String color) {
         this.color = color;
     }
+
+    /**
+     * @return the color associated to this type
+     */
     public String getColor(){
         return color;
     }

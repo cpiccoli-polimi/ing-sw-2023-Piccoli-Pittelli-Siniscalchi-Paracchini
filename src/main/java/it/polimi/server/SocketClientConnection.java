@@ -12,6 +12,9 @@ import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * @author Nicola Siniscalchi
+ */
 public class SocketClientConnection extends Observable<String> implements ClientConnection, Runnable {
 
     private Socket socket;

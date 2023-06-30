@@ -7,6 +7,16 @@ import it.polimi.model.CommonGoalCard;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Common goal card 4: Four lines each formed by 5 tiles of
+ *                     maximum three different types.
+ *                     One line can show the same or a
+ *                     different combination of another line
+ *
+ * @author Lorenzo Paracchini
+ * @author Christian Piccoli
+ * @author Nicola Siniscalchi
+ */
 public class CommonGoalCard4 extends CommonGoalCard {
 
     public CommonGoalCard4(int playersNumber) {

@@ -9,6 +9,7 @@ import it.polimi.observer.*;
  * of the MVC pattern
  *
  * @see it.polimi.observer.Observer
+ * @author Lorenzo Pittelli
  */
 public abstract class View extends Observable<PlayerChoice> implements Observer<GameView> {
     private Player player;

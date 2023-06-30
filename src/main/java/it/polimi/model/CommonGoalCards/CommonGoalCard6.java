@@ -3,6 +3,13 @@ package it.polimi.model.CommonGoalCards;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
 
+/**
+ * Common goal card 6: Two columns each formed
+ *                     by 6 different types of tiles
+ *
+ * @author Lorenzo Paracchini
+ * @author Christian Piccoli
+ */
 public class CommonGoalCard6 extends CommonGoalCard {
 
     public CommonGoalCard6(int playersNumber) {

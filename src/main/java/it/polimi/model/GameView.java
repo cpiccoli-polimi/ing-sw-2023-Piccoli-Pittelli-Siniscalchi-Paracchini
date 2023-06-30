@@ -8,6 +8,8 @@ import java.io.Serializable;
  * only "final" attributes and serialize them
  *
  * @see java.io.Serializable
+ * @author Lorenzo Pittelli
+ * @author Nicola Siniscalchi
  */
 public class GameView implements Serializable{
     static final long serialVersionUID = 1L;
@@ -34,38 +36,38 @@ public class GameView implements Serializable{
     }
 
     /**
-     * Returns the string shown to the current player
+     * @return the string shown to the current player
      */
     public String getTurnPlayerMessage() {
         return this.turnPlayerMessage;
     }
     /**
-     * Returns the string shown to the other players
+     * @return the string shown to the other players
      */
     public String getOtherPlayersMessage(){
         return this.otherPlayersMessage;
     }
     /**
-     * Returns the table containing the players
-     * participating in this game
+     * @return the table containing the players
+     *         participating in this game
      */
     public Player[] getTable () {
         return table;
     }
     /**
-     * Returns the leaderboard
+     * @return the leaderboard
      */
     public Player[] getLeaderboard(){
         return leaderboard;
     }
     /**
-     * Returns the board
+     * @return the board
      */
     public LivingRoomBoard getBoard(){
         return board;
     }
     /**
-     * Returns the current player
+     * @return the current player
      */
     public int getCurrPlayer(){
         return currPlayer;

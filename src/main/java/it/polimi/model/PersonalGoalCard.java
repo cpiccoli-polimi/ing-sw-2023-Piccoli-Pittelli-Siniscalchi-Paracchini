@@ -18,6 +18,8 @@ import java.nio.charset.StandardCharsets;
  * card in the physical game
  *
  * @see java.io.Serializable
+ * @author Christian Piccoli
+ * @author Nicola Siniscalchi
  */
 public class PersonalGoalCard extends GoalCard implements Serializable {
     static final long serialVersionUID = 1L;
@@ -95,18 +97,15 @@ public class PersonalGoalCard extends GoalCard implements Serializable {
     }
 
     /**
-     * Returns the goal as a bookshelf filled with the
-     * correct tiles in the correct spot to give points
-     *
-     * @return goal
+     * @return the goal as a bookshelf filled with the
+     *         correct tiles in the correct spot
+     *         to give points
      */
     public Bookshelf getGoal(){
         return goal;
     }
     /**
-     * Return the id of the card
-     *
-     * @return id
+     * @return the id of the card
      */
     public int getId(){
         return this.id;

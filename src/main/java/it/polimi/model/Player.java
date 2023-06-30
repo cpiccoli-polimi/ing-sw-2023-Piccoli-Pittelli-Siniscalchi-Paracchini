@@ -8,6 +8,9 @@ import java.util.List;
  * Player class represents the single player
  *
  * @see java.io.Serializable
+ * @author Lorenzo Pittelli
+ * @author Christian Piccoli
+ * @author Nicola Siniscalchi
  */
 public class Player implements Serializable {
     static final long serialVersionUID = 1L;
@@ -47,17 +50,13 @@ public class Player implements Serializable {
     }
 
     /**
-     * Returns player's nickname
-     *
-     * @return nickname
+     * @return player's nickname
      */
     public String getNickname(){
         return nickname;
     }
     /**
-     * Returns player's points
-     *
-     * @return points
+     * @return player's points
      */
     public int getPoints(){
         return points;
@@ -84,9 +83,7 @@ public class Player implements Serializable {
      */
     public void setIsFirst(boolean isFirst){ this.isFirst=isFirst; }
     /**
-     * Returns the relative position of the player
-     *
-     * @return position
+     * @return the relative position of the player
      */
     public int getPosition() {
         return position;
@@ -112,10 +109,8 @@ public class Player implements Serializable {
      */
     public void setHasFinished(boolean hasFinished){ this.hasFinished=hasFinished;}
     /**
-     * Returns an array containing how many common goals
-     * the player has completed
-     *
-     * @return commonGoalsCompleted
+     * @return an array containing how many common goals
+     *         the player has completed
      */
     public int[] getCommonGoalsCompleted() { return commonGoalsCompleted;}
     /**
@@ -134,10 +129,8 @@ public class Player implements Serializable {
         System.out.println(newGoal+" completed");
     }
     /**
-     * Returns an array containing the objects chosen
-     * from the LivingRoomBoard by the player
-     *
-     * @return chosenOjects
+     * @return an array containing the objects chosen
+     *         from the LivingRoomBoard by the player
      */
     public ObjectCard[] getChosenObjects() {return chosenObjects;}
     /**
@@ -155,9 +148,7 @@ public class Player implements Serializable {
 
     }
     /**
-     * Returns player's personal goal
-     *
-     * @return personalGoal
+     * @return player's personal goal
      */
     public PersonalGoalCard getPersonalGoal() {
         return personalGoal;
@@ -171,9 +162,7 @@ public class Player implements Serializable {
         this.personalGoal = personalGoal;
     }
     /**
-     * Returns player's bookshelf
-     *
-     * @return bookshelf
+     * @return player's bookshelf
      */
     public Bookshelf getBookshelf() {
         return bookshelf;
@@ -187,11 +176,9 @@ public class Player implements Serializable {
         this.bookshelf = bookshelf;
     }
     /**
-     * Returns player's chosen column in
-     * which to place the objects picked from
-     * the LivingRoomBoard
-     *
-     * @return chosenColumn
+     * @return player's chosen column in which
+     *         to place the objects picked from
+     *         the LivingRoomBoard
      */
     public int getChosenColumn() {
         return chosenColumn;
@@ -311,9 +298,6 @@ public class Player implements Serializable {
                         }
                     }
                 }
-                /*for(int k=0;k<objectList.size();k++){
-                    bookshelfCopy[objectList.get(k).getXCoordinate()][objectList.get(k).getYCoordinate()]=null;
-                }*/
                     // Add points based on how many adjacent points had been made
                     if(objectList.size() == 3) {
                         points = getPoints();

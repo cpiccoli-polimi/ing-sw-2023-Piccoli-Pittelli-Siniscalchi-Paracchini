@@ -3,6 +3,12 @@ package it.polimi.model.CommonGoalCards;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
 
+/**
+ * Common goal card 2: Five tiles of the same type forming a diagonal
+ *
+ * @author Christian Piccoli
+ * @author Lorenzo Paracchini
+ */
 public class CommonGoalCard2 extends CommonGoalCard {
 
     public CommonGoalCard2(int playersNumber) {

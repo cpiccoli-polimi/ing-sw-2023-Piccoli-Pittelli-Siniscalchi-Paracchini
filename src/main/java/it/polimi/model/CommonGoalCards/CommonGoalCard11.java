@@ -6,6 +6,13 @@ import it.polimi.model.Type;
 
 import java.util.Arrays;
 
+/**
+ * Common goal card 11: Eight tiles of the same type.
+ *                      There’s no restriction about
+ *                      the position of these tiles
+ *
+ * @author Lorenzo Pittelli
+ */
 public class CommonGoalCard11 extends CommonGoalCard {
     public CommonGoalCard11(int playersNumber) {
         super(11);

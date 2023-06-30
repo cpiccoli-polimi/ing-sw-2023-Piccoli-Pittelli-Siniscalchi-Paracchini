@@ -7,6 +7,14 @@ import it.polimi.model.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Common goal card 9: Three columns each formed by 6
+ *                     tiles of maximum three different types.
+ *                     One column can show the same or a
+ *                     different combination of another column
+ *
+ * @author Lorenzo Pittelli
+ */
 public class CommonGoalCard9 extends CommonGoalCard {
     public CommonGoalCard9(int playersNumber) {
         super(9);

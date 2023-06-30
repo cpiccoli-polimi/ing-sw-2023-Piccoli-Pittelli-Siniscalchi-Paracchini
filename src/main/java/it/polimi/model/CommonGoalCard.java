@@ -13,6 +13,7 @@ import java.util.List;
  * behaviour that are common between the 12 common goal cards
  *
  * @see java.io.Serializable
+ * @author Nicola Siniscalchi
  */
 public abstract class CommonGoalCard extends GoalCard implements Serializable {
     static final long serialVersionUID = 1L;
@@ -43,9 +44,7 @@ public abstract class CommonGoalCard extends GoalCard implements Serializable {
         }
     }
     /**
-     * Returns the goalID of the card
-     *
-     * @return this.goalID the id
+     * @return the goalID of the card
      */
     public int getGoalID(){
         return this.goalID;
@@ -60,16 +59,12 @@ public abstract class CommonGoalCard extends GoalCard implements Serializable {
         this.points.addAll(points);
     }
     /**
-     * Returns the lists containing the point gained
-     * completing this goalCard
-     *
-     * @return this.points
+     * @return the lists containing the point gained
+     *         completing this goalCard
      */
     public List<PointCard> getPoints(){ return this.points;}
     /**
-     * Returns the description of this goal as a string
-     *
-     * @return this.goalDescription
+     * @return the description of this goal as a string
      */
     public String getGoalDescription(){
         return this.goalDescription;

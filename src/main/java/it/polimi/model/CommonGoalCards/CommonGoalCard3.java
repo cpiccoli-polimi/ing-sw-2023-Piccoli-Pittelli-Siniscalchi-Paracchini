@@ -3,6 +3,13 @@ package it.polimi.model.CommonGoalCards;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
 
+/**
+ * Common Goal Card 3: Four tiles of the same type
+ *                     in the four corners of the bookshelf
+ *
+ * @author Christian Piccoli
+ * @author Lorenzo Pittelli
+ */
 public class CommonGoalCard3 extends CommonGoalCard {
     public CommonGoalCard3(int playersNumber) {
         super(3);

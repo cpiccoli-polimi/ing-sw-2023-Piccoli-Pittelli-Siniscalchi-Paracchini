@@ -7,6 +7,8 @@ import java.io.Serializable;
  * placed in the tiles on the LivingRoomBoard
  *
  * @see java.io.Serializable
+ * @author Nicola Siniscalchi
+ * @author Lorenzo Paracchini
  */
 public class ObjectCard implements Serializable {
     static final long serialVersionUID = 1L;
@@ -43,33 +45,25 @@ public class ObjectCard implements Serializable {
     }
 
     /**
-     * Returns the id of the card
-     *
-     * @return id
+     * @return the id of the card
      */
     public int getId() {
         return id;
     }
     /**
-     * Returns the type of the card
-     *
-     * @return type
+     * @return the type of the card
      */
     public Type getType() {
         return type;
     }
     /**
-     * Returns the x coordinate of the card
-     *
-     * @return xCoordinate
+     * @return the x coordinate of the card
      */
     public int getXCoordinate() {
         return xCoordinate;
     }
     /**
-     * Returns the y coordinate of the card
-     *
-     * @return yCoordinate
+     * @return the y coordinate of the card
      */
     public int getYCoordinate() {
         return yCoordinate;

@@ -3,6 +3,14 @@ package it.polimi.model.CommonGoalCards;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
 
+/**
+ * Common goal card 7: Two groups each containing 4
+ *                     tiles of the same type in a 2x2 square.
+ *                     The tiles of one square can be different
+ *                     from those of the other square
+ *
+ * @author Lorenzo Pittelli
+ */
 public class CommonGoalCard7 extends CommonGoalCard {
 
     public CommonGoalCard7(int playersNumber) {

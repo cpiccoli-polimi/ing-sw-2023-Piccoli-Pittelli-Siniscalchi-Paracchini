@@ -11,6 +11,9 @@ import java.nio.charset.StandardCharsets;
  * on which the game is played
  *
  * @see java.io.Serializable
+ * @author Lorenzo Pittelli
+ * @author Lorenzo Paracchini
+ * @author Nicola Siniscalchi
  */
 public class LivingRoomBoard implements Serializable {
     static final long serialVersionUID = 1L;
@@ -50,9 +53,7 @@ public class LivingRoomBoard implements Serializable {
         commonGoals = new CommonGoalCard[commonGoalsNumber];
     }
     /**
-     * Returns the array containing the commonGoals
-     *
-     * @return commonGoals
+     * @return the array containing the commonGoals
      */
     public CommonGoalCard[] getCommonGoals() {
         return commonGoals;
@@ -67,9 +68,7 @@ public class LivingRoomBoard implements Serializable {
         System.arraycopy(drawnCommonGoals, 0, this.commonGoals, 0, drawnCommonGoals.length);
     }
     /**
-     * Get all the tiles in the leaderboard
-     *
-     * @return tile the 2D array containing the tiles
+     * @return the 2D array containing the tiles
      */
     public Tile[][] getTiles() {
         return tile;
@@ -99,7 +98,7 @@ public class LivingRoomBoard implements Serializable {
         return object;
     }
     /**
-     * Show the LivingRoomBoard on the CLI
+     * Shows the LivingRoomBoard on the CLI
      *
      * @param playersNumber players in the game
      */

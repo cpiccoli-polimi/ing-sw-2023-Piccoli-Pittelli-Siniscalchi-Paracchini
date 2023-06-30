@@ -3,6 +3,14 @@ package it.polimi.model.CommonGoalCards;
 import it.polimi.model.CommonGoalCard;
 import it.polimi.model.ObjectCard;
 
+/**
+ * Common goal card 12: Five columns of increasing or decreasing height.
+ *                      Starting from the first column on the left or on
+ *                      the right, each next column must be made of exactly
+ *                      one more tile. Tiles can be of any type
+ *
+ * @author Nicola Siniscalchi
+ */
 public class CommonGoalCard12 extends CommonGoalCard {
     public CommonGoalCard12(int playersNumber) {
         super(12);
