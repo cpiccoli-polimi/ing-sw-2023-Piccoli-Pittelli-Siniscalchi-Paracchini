@@ -23,7 +23,7 @@ Realizzare in Java il gioco [My Shelfie by Cranio Creations](https://www.google.
 - [x] **Partite multiple**: Il server può gestire più partite contemporaneamente.
 
 ### Come eseguire il gioco
-È presente un file .jar chiamato MyShelfie.jar: posizionarsi nella stessa cartella del file con il terminale e poi eseguire il comando
+È presente un file .jar chiamato softeng-gc17.jar: posizionarsi nella stessa cartella del file con il terminale e poi eseguire il comando
 ```
 java -jar MyShelfie.jar
 ```
@@ -74,7 +74,7 @@ To realize in Java the game [My Shelfie by Cranio Creations](https://www.google.
 ### How to run the game
 There is a .jar file called MyShelfie.jar: go to the same folder as the file with the terminal and then run the command
 ```
-java -jar MyShelfie.jar
+java -jar softeng-gc17.jar
 ```
 After starting the jar you can:
 - Press 1 to start the Server
