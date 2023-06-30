@@ -81,17 +81,29 @@ public class GameSceneController{
 
         scenePane.setPrefWidth(sceneWidth);
         scenePane.setPrefHeight(sceneHeight);
+        scenePane.setMinWidth(scenePane.getPrefWidth());
+        scenePane.setMinHeight(scenePane.getPrefWidth());
+        scenePane.setMaxWidth(scenePane.getPrefWidth());
+        scenePane.setMaxHeight(scenePane.getPrefHeight());
         scenePane.setBackground(new Background(new BackgroundImage(new Image("/GraphicalResources/Miscellaneous/parquetBackground.jpg"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, true, true, true, false))));
         scenePane.setAlignment(leaderboardTextPane, Pos.CENTER);
 
         gamePane.setPrefWidth(scenePane.getPrefWidth());
         gamePane.setPrefHeight(scenePane.getPrefHeight());
+        gamePane.setMinWidth(gamePane.getPrefWidth());
+        gamePane.setMinHeight(gamePane.getPrefHeight());
+        gamePane.setMaxWidth(gamePane.getPrefWidth());
+        gamePane.setMaxHeight(gamePane.getPrefHeight());
         gamePane.setPadding(new Insets(gamePane.getPrefHeight()*0.03, gamePane.getPrefWidth()*0.03, gamePane.getPrefHeight()*0.03, gamePane.getPrefWidth()*0.03));
         gamePane.setHgap(sceneWidth*0.01);
         gamePane.setVgap(sceneHeight*0.01);
 
         tablePane.setPrefWidth(sceneWidth*0.30);
         tablePane.setPrefHeight(sceneHeight*0.84);
+        tablePane.setMinWidth(tablePane.getPrefWidth());
+        tablePane.setMinHeight(tablePane.getPrefHeight());
+        tablePane.setMaxWidth(tablePane.getPrefWidth());
+        tablePane.setMaxHeight(tablePane.getPrefHeight());
         tablePane.setMargin(goalsPane, new Insets(tablePane.getPrefHeight()*0.01, 0, 0, 0));
 
         boardPane.setPrefWidth(tablePane.getPrefWidth());
@@ -125,23 +137,43 @@ public class GameSceneController{
 
         goalsPane.setPrefWidth(tablePane.getPrefWidth());
         goalsPane.setPrefHeight(tablePane.getPrefHeight()*0.34);
+        goalsPane.setMinWidth(goalsPane.getPrefWidth());
+        goalsPane.setMinHeight(goalsPane.getPrefHeight());
+        goalsPane.setMaxWidth(goalsPane.getPrefWidth());
+        goalsPane.setMaxHeight(goalsPane.getPrefHeight());
         goalsPane.setMargin(personalGoal, new Insets(0,0,0,goalsPane.getPrefWidth()*0.05));
 
         commonGoalsPane.setPrefWidth(goalsPane.getPrefWidth()*0.50);
         commonGoalsPane.setPrefHeight(goalsPane.getPrefHeight()*0.99);
+        commonGoalsPane.setMinWidth(commonGoalsPane.getPrefWidth());
+        commonGoalsPane.setMinHeight(commonGoalsPane.getPrefHeight());
+        commonGoalsPane.setMaxWidth(commonGoalsPane.getPrefWidth());
+        commonGoalsPane.setMaxHeight(commonGoalsPane.getPrefHeight());
         commonGoalsPane.setAlignment(Pos.CENTER);
         commonGoalsPane.setVgap(goalsPane.getPrefHeight()*0.01);
 
         commonGoal1Pane.setPrefWidth(commonGoalsPane.getPrefWidth());
         commonGoal1Pane.setPrefHeight(commonGoalsPane.getPrefHeight()*0.5);
+        commonGoal1Pane.setMinWidth(commonGoal1Pane.getPrefWidth());
+        commonGoal1Pane.setMinHeight(commonGoal1Pane.getPrefHeight());
+        commonGoal1Pane.setMaxWidth(commonGoal1Pane.getPrefWidth());
+        commonGoal1Pane.setMaxHeight(commonGoal1Pane.getPrefHeight());
         commonGoal1Pane.setMargin(pointsCommonGoal1, (new Insets(0,0,commonGoal1Pane.getPrefHeight()*0.10,commonGoal1Pane.getPrefWidth()*0.35)));
 
         commonGoal2Pane.setPrefWidth(commonGoalsPane.getPrefWidth());
         commonGoal2Pane.setPrefHeight(commonGoalsPane.getPrefHeight()*0.5);
+        commonGoal2Pane.setMinWidth(commonGoal2Pane.getPrefWidth());
+        commonGoal2Pane.setMinHeight(commonGoal2Pane.getPrefHeight());
+        commonGoal2Pane.setMaxWidth(commonGoal2Pane.getPrefWidth());
+        commonGoal2Pane.setMaxHeight(commonGoal2Pane.getPrefHeight());
         commonGoal2Pane.setMargin(pointsCommonGoal2, (new Insets(0,0,commonGoal2Pane.getPrefHeight()*0.10,commonGoal2Pane.getPrefWidth()*0.35)));
 
         myPane.setPrefWidth(sceneWidth*0.44);
         myPane.setPrefHeight(sceneHeight*0.84);
+        myPane.setMinWidth(myPane.getPrefWidth());
+        myPane.setMinHeight(myPane.getPrefHeight());
+        myPane.setMaxWidth(myPane.getPrefWidth());
+        myPane.setMaxHeight(myPane.getPrefHeight());
         myPane.setAlignment(myTextPane, Pos.TOP_CENTER);
         myPane.setAlignment(myBookshelfImage, Pos.BOTTOM_CENTER);
         myPane.setAlignment(myBookshelfItemsPane, Pos.CENTER);
