@@ -26,7 +26,7 @@ public class ClientApp {
                     client.run();
                 }
                 catch(IOException e){
-                    System.err.println(e.getMessage());
+                    System.err.println("We have some problems connecting to the server " + ip + ", please check if you entered a valid ip address");
                 }
             }
             else if(args[1].equals("--client-type:gui")){
