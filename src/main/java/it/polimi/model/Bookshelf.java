@@ -7,6 +7,10 @@ import java.util.List;
 
 /**
  * The bookshelf class represents personal bookshelf of each player
+ *
+ * @author Christian Piccoli
+ * @author Lorenzo Pittelli
+ * @author Nicola Siniscalchi
  */
 public class Bookshelf implements Serializable {
     static final long serialVersionUID = 1L;

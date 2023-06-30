@@ -12,6 +12,10 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * ClientGUI defines the behaviour of the Client
+ * when user choose GUI to play
+ */
 public class ClientGUI extends Application{
 
     FXMLLoader fxmlLoader;
@@ -20,6 +24,13 @@ public class ClientGUI extends Application{
     Scene clientScene;
     ClientSceneController clientSceneController;
 
+    /**
+     * Start method initialize GUI scene setting all
+     * its parameters and importing the necessary resources
+     *
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
 

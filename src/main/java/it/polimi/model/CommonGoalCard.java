@@ -77,6 +77,7 @@ public abstract class CommonGoalCard extends GoalCard implements Serializable {
     /**
      * Checks if this goal is satisfied (overrided by the 12 subclasses)
      *
+     * @param bookshelf the bookshelf to be checked
      * @return false
      */
     public boolean check(ObjectCard[][] bookshelf){return false;}

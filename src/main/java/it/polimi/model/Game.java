@@ -41,6 +41,13 @@ public class Game extends Observable<GameView>{
      * @param playersNumber how many player will play this game
      * @param commonGoalsNumber with how many commonGoals this game
      *                          will be played
+     * @throws PlayersNumberException when playersNumber is less than 2 or
+     *                                more than 4
+     * @throws CommonGoalsNumberException when commonGoalsNumber is less than
+     *                                    1 or more than 2
+     * @throws FileNotFoundException if a file is not found when building
+     *                               parts of the game (like LivingRoomBoard
+     *                               which is built from a json)
      */
     public Game(int playersNumber, int commonGoalsNumber) throws PlayersNumberException, CommonGoalsNumberException, FileNotFoundException {
         LocalTime clock = LocalTime.now();
@@ -307,7 +314,7 @@ public class Game extends Observable<GameView>{
     /**
      * Checks if the game has ended
      *
-     * @return done if the game has ended, else true
+     * @return true if the game has ended, else false
      */
     public boolean getDone() {
         return done;
@@ -427,15 +434,14 @@ public class Game extends Observable<GameView>{
      * Returns leaderboard ordering the players
      * based on their points gained during the game
      *
-     * @return leaderboard the array of players in order
+     * @return the array of players in order
      */
     public Player[] getLeaderboard(){
         return leaderboard;
     }
     /**
      * Sets the leaderboard
-     * @return maxDrawableObjects the amount of objects that can be picked up
-     *                           from the LivingRoomBoard
+     * @param leaderboard the leaderboard array to set
      */
     public void setLeaderboard(Player [] leaderboard) {
         this.leaderboard = leaderboard;
