@@ -49,7 +49,7 @@ public class Server {
             }
             if(flag == true){
                 for(Player player : game.getTable()){
-                    String closingMessage = new String("\nYou are being disconnected because the game can't continue since " + disconnectedNickname + " left the game" +
+                    String closingMessage = new String("You are being disconnected because the game can't continue since " + disconnectedNickname + " left the game" +
                             "\nIf you want to play another game, relaunch the app");
                     ((SocketClientConnection)clientConnections.get(player)).close(closingMessage);
                     clientConnections.remove(player);
