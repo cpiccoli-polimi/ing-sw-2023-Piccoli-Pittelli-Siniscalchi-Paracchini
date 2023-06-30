@@ -110,17 +110,17 @@ class PlayerTest {
         //Six cards with same type adjacent -> 2 points
         shelf[0][0]=new PublicObjectCard(1,0,0);
         bookshelf.setShelf(shelf[0][0]);
-        shelf[0][1]=new PublicObjectCard(1,0,1);
+        shelf[0][1]=new PublicObjectCard(2,0,1);
         bookshelf.setShelf(shelf[0][1]);
-        shelf[1][0]=new PublicObjectCard(1,1,0);
+        shelf[1][0]=new PublicObjectCard(3,1,0);
         bookshelf.setShelf(shelf[1][0]);
 
         //Three cards with same type above adjacent but separated from the previous group -> 2 points
-        shelf[3][0]=new PublicObjectCard(1,3,0);
+        shelf[3][0]=new PublicObjectCard(4,3,0);
         bookshelf.setShelf(shelf[3][0]);
-        shelf[3][1]=new PublicObjectCard(1,3,1);
+        shelf[3][1]=new PublicObjectCard(5,3,1);
         bookshelf.setShelf(shelf[3][1]);
-        shelf[3][2]=new PublicObjectCard(1,3,2);
+        shelf[3][2]=new PublicObjectCard(6,3,2);
         bookshelf.setShelf(shelf[3][2]);
 
         //Points are counted for each group -> 4 points in total
@@ -138,19 +138,19 @@ class PlayerTest {
         //Six cards with same type adjacent -> 2 points
         shelf[0][0]=new PublicObjectCard(1,0,0);
         bookshelf.setShelf(shelf[0][0]);
-        shelf[0][1]=new PublicObjectCard(1,0,1);
+        shelf[0][1]=new PublicObjectCard(2,0,1);
         bookshelf.setShelf(shelf[0][1]);
-        shelf[1][0]=new PublicObjectCard(1,1,0);
+        shelf[1][0]=new PublicObjectCard(3,1,0);
         bookshelf.setShelf(shelf[1][0]);
 
         //Four cards with same type above adjacent but separated from the previous group -> 3 points
-        shelf[3][0]=new PublicObjectCard(1,3,0);
+        shelf[3][0]=new PublicObjectCard(4,3,0);
         bookshelf.setShelf(shelf[3][0]);
-        shelf[3][1]=new PublicObjectCard(1,3,1);
+        shelf[3][1]=new PublicObjectCard(5,3,1);
         bookshelf.setShelf(shelf[3][1]);
-        shelf[3][2]=new PublicObjectCard(1,3,2);
+        shelf[3][2]=new PublicObjectCard(6,3,2);
         bookshelf.setShelf(shelf[3][2]);
-        shelf[4][0]=new PublicObjectCard(1,4,0);
+        shelf[4][0]=new PublicObjectCard(7,4,0);
         bookshelf.setShelf(shelf[4][0]);
 
         //Points are counted for each group -> 5 points in total
@@ -167,21 +167,21 @@ class PlayerTest {
         //Six cards with same type adjacent -> 2 points
         shelf[0][0]=new PublicObjectCard(1,0,0);
         bookshelf.setShelf(shelf[0][0]);
-        shelf[0][1]=new PublicObjectCard(1,0,1);
+        shelf[0][1]=new PublicObjectCard(2,0,1);
         bookshelf.setShelf(shelf[0][1]);
-        shelf[1][0]=new PublicObjectCard(1,1,0);
+        shelf[1][0]=new PublicObjectCard(3,1,0);
         bookshelf.setShelf(shelf[1][0]);
 
         //Five cards with same type above adjacent but separated from the previous group -> 5 points
-        shelf[3][0]=new PublicObjectCard(1,3,0);
+        shelf[3][0]=new PublicObjectCard(4,3,0);
         bookshelf.setShelf(shelf[3][0]);
-        shelf[3][1]=new PublicObjectCard(1,3,1);
+        shelf[3][1]=new PublicObjectCard(5,3,1);
         bookshelf.setShelf(shelf[3][1]);
-        shelf[3][2]=new PublicObjectCard(1,3,2);
+        shelf[3][2]=new PublicObjectCard(6,3,2);
         bookshelf.setShelf(shelf[3][2]);
-        shelf[4][0]=new PublicObjectCard(1,4,0);
+        shelf[4][0]=new PublicObjectCard(7,4,0);
         bookshelf.setShelf(shelf[4][0]);
-        shelf[5][0]=new PublicObjectCard(1,5,0);
+        shelf[5][0]=new PublicObjectCard(8,5,0);
         bookshelf.setShelf(shelf[5][0]);
 
         //Points are counted for each group -> 7 points in total
