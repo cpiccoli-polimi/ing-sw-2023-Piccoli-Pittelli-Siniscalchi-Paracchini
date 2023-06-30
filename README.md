@@ -33,6 +33,8 @@ Dopo aver avviato il jar è possibile:
   - Inserire l'IP del Server
   - Premere 1 per giocare attraverso la CLI (TUI)
   - Premere 2 per giocare attraverso la GUI
+
+**Nota**: per eseguire il jar è richiesto Java SE 19 o successivo
   
 ## Copertura dei Test
 ### Panoramica Copertura
@@ -82,7 +84,8 @@ After starting the jar you can:
   - Enter the IP of the Server
   - Press 1 to play through the CLI (TUI)
   - Press 2 to play through the GUI
-  
+
+**Note**: to run the jar it is required Java SE 19 or latest  
 ## Test Coverage
 ### Coverage Overview
 <img width="779" alt="Screenshot 2023-06-29 alle 18 56 09" src="https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/assets/125984660/70d1b7a8-fdfa-4064-a06e-df01a13c8c48">
