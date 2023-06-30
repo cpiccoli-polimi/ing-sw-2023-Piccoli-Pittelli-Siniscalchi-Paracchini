@@ -16,31 +16,44 @@ import static java.lang.System.exit;
 public class MyShelfieApp {
         public static void main(String args[]) throws IOException {
             Scanner in = new Scanner(System.in);
-            System.out.println("Press 1 for Server, 2 for Client");
-            int selection = parseInt(in.nextLine());
-            
+            System.out.println("Type 1 to start the Server, 2 to start a Client");
+            int selection = 0;
+            try{
+                selection = parseInt(in.nextLine());
+            } catch(NumberFormatException e){
+                System.err.println("You have to insert a number!");
+                System.exit(1);
+            }
+
             if (selection == 1) {
                 ServerApp.main(null);
             } else if (selection == 2) {
-                System.out.println("Enter IP Address of the Server");
+                System.out.println("Enter the IP Address of the Server");
                 String IPAddress = in.nextLine();
                 String[] arguments = new String[2];
                 arguments[0] = "--server-ip:" + IPAddress;
                 System.out.println("Press 1 for Textual UI, 2 for Graphical UI");
-                int UI_Selection = parseInt(in.nextLine());
-                if(UI_Selection == 1){
-                    arguments[1] = "--client-type:tui";
+                int UI_Selection;
+                try{
+                    UI_Selection = parseInt(in.nextLine());
+                    if(UI_Selection == 1){
+                        arguments[1] = "--client-type:tui";
+                    }
+                    else if(UI_Selection == 2){
+                        arguments[1] = "--client-type:gui";
+                    }
+                    else{
+                        System.out.println("The number you type must be 1 or 2");
+                        exit(0);
+                    }
+                    ClientApp.main(arguments);
+                } catch(NumberFormatException e){
+                    System.err.println("You have to insert a number!");
+                    System.exit(1);
                 }
-                else if(UI_Selection == 2){
-                    arguments[1] = "--client-type:gui";
-                }
-                else{
-                    System.out.println("ERROR");
-                    exit(0);
-                }
-                ClientApp.main(arguments);
             } else {
-                System.out.println("ERROR");
+                System.out.println("The number you type must be 1 or 2");
+                exit(0);
             }
         }
 
