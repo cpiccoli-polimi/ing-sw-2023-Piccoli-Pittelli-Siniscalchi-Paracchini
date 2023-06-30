@@ -14,11 +14,11 @@ public abstract class GoalCard implements Serializable {
     private Object goal;
     private Object points;
     /**
-     * Returns the goal
+     * @return the goal of this card
      */
     public Object getGoal(){return goal;}
     /**
-     * Returns the points of the goal card
+     * @return the points of this card
      */
     public Object getPoints(){return points;}
 }
