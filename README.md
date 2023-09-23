@@ -38,13 +38,13 @@ Dopo aver avviato il jar è possibile:
   
 ## Copertura dei Test
 ### Panoramica Copertura
-<img width="779" alt="Screenshot 2023-06-29 alle 18 56 09" src="https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/assets/125984660/70d1b7a8-fdfa-4064-a06e-df01a13c8c48">
+![Panoramica Copertura](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/blob/7846aefd8bff29c428822c5dad8ab67d6705ded2/deliverables/Overview%20Coverage.png)
 
 ### Copertura Model
-<img width="779" alt="Screenshot 2023-06-29 alle 18 56 31" src="https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/assets/125984660/8b7bf16d-2551-47e3-b790-5b6391d00672">
+![Copertura Model](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/blob/7846aefd8bff29c428822c5dad8ab67d6705ded2/deliverables/Model%20Coverage.png)
 
 ### Copertura Controller
-<img width="779" alt="Screenshot 2023-06-29 alle 18 56 49" src="https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/assets/125984660/8796a99b-bd44-4f53-a60b-b5e680a4135b">
+![Copertura Controller](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/blob/7846aefd8bff29c428822c5dad8ab67d6705ded2/deliverables/Controller%20Coverage.png)
 
 ### Note
 My Shelfie è un gioco da tavolo sviluppato ed edito da Cranio Creations Srl. I contenuti grafici di questo progetto riconducibili al prodotto editoriale da tavolo sono utilizzati previa approvazione di Cranio Creations Srl a solo scopo didattico. È vietata la distribuzione, la copia o la riproduzione dei contenuti e immagini in qualsiasi forma al di fuori del progetto, così come la redistribuzione e la pubblicazione dei contenuti e immagini a fini diversi da quello sopracitato. È inoltre vietato l'utilizzo commerciale di suddetti contenuti.
@@ -91,13 +91,13 @@ After starting the jar you can:
 **Note**: to run the jar it is required Java SE 19 or latest  
 ## Test Coverage
 ### Coverage Overview
-<img width="779" alt="Screenshot 2023-06-29 alle 18 56 09" src="https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/assets/125984660/70d1b7a8-fdfa-4064-a06e-df01a13c8c48">
+![Coverage Overview](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/blob/7846aefd8bff29c428822c5dad8ab67d6705ded2/deliverables/Overview%20Coverage.png)
 
 ### Model coverage
-<img width="779" alt="Screenshot 2023-06-29 alle 18 56 31" src="https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/assets/125984660/8b7bf16d-2551-47e3-b790-5b6391d00672">
+![Model Coverage](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/blob/7846aefd8bff29c428822c5dad8ab67d6705ded2/deliverables/Model%20Coverage.png)
 
 ### Controller coverage
-<img width="779" alt="Screenshot 2023-06-29 alle 18 56 49" src="https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/assets/125984660/8796a99b-bd44-4f53-a60b-b5e680a4135b">
+![Controller Coverage](https://github.com/cpiccoli-polimi/ing-sw-2023-Piccoli-Pittelli-Siniscalchi-Paracchini/blob/7846aefd8bff29c428822c5dad8ab67d6705ded2/deliverables/Controller%20Coverage.png)
 
 ### Notes
 My Shelfie is a board game developed and published by Cranio Creations Srl. The graphic content of this project attributable to the tabletop publishing product is used with the prior approval of Cranio Creations Srl for educational purposes only. Distribution, copying, or reproduction of the content and images in any form outside of the project, as well as redistribution and publication of the content and images for purposes other than the aforementioned is prohibited. Commercial use of said content is also prohibited.
